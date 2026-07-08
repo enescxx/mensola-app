@@ -18,28 +18,33 @@ export default function MovieCardFooter({
                     <Text style={styles.badgeText}>{interactions.rating}</Text>
                 </View>
             )}
-            {interactions.likes &&
-                (!isProfile ? (
-                    <View style={styles.badge}>
-                        <Ionicons name="heart" size={12} color="#FF8000" />
+            {typeof interactions?.likes === "number" &&
+            interactions.likes > 0 ? (
+                <View style={styles.badge}>
+                    <Ionicons name="heart" size={12} color="#FF8000" />
+                    {!isProfile && (
                         <Text style={styles.badgeText}>
                             {interactions.likes}
                         </Text>
-                    </View>
-                ) : (
-                    <Ionicons name="heart" size={12} color="#FF8000" />
-                ))}
-            {interactions.reviews &&
-                (!isProfile ? (
-                    <View style={styles.badge}>
-                        <Entypo name="text" size={12} color="#FF8000" />
+                    )}
+                </View>
+            ) : interactions?.likes === true ? (
+                <Ionicons name="heart" size={12} color="#FF8000" />
+            ) : null}
+
+            {typeof interactions?.reviews === "number" &&
+            interactions.reviews > 0 ? (
+                <View style={styles.badge}>
+                    <Entypo name="text" size={12} color="#FF8000" />
+                    {!isProfile && (
                         <Text style={styles.badgeText}>
                             {interactions.reviews}
                         </Text>
-                    </View>
-                ) : (
-                    <Entypo name="text" size={12} color="#FF8000" />
-                ))}
+                    )}
+                </View>
+            ) : interactions?.reviews === true ? (
+                <Entypo name="text" size={12} color="#FF8000" />
+            ) : null}
         </View>
     );
 }

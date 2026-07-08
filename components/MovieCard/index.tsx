@@ -18,7 +18,12 @@ export default function MovieCard({
                 style={styles.poster}
                 accessibilityLabel={title}
             />
-            <MovieCardFooter interactions={interactions} variant={variant} />
+            {interactions && (
+                <MovieCardFooter
+                    interactions={interactions}
+                    variant={variant}
+                />
+            )}
         </View>
     );
 }
