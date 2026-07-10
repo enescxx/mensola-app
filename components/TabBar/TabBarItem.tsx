@@ -17,6 +17,7 @@ function TabBarItem({ routeName, onPress, isFocused }: ITabBarItemProps) {
             style={
                 isFocused ? styles.activeTabButton : styles.inactiveTabButton
             }
+            testID={`tab-button-${routeName}`}
         >
             <View style={styles.iconContainer}>
                 <Ionicons

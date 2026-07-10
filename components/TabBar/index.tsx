@@ -6,11 +6,7 @@ import { TABS_CONFIG } from "../../constants/tabs";
 import TabBarItem from "./TabBarItem";
 import { styles } from "./styles";
 
-export default function TabBar({
-    state,
-    descriptors,
-    navigation
-}: BottomTabBarProps) {
+export default function TabBar({ state, navigation }: BottomTabBarProps) {
     const insets = useSafeAreaInsets();
 
     const dynamicBottomSpace = insets.bottom > 0 ? insets.bottom + 12 : 24;
