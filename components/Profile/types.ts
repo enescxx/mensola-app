@@ -13,6 +13,20 @@ interface StatData<T extends StatTypes> {
     label: (typeof StatLabels)[T];
 }
 
+interface IFavoriteMovie {
+    id: string;
+    title: string;
+    posterUrl: string;
+    year: number;
+}
+
+interface IFavoriteSong {
+    id: string;
+    title: string;
+    artist: string;
+    duration: string;
+}
+
 interface Profile {
     id: string;
     username: string;
@@ -20,6 +34,8 @@ interface Profile {
     bio?: string;
     profilePictureUrl?: string;
     stats: [StatData<StatTypes>, StatData<StatTypes>, StatData<StatTypes>];
+    favoriteFilms?: IFavoriteMovie[];
+    favoriteSongs?: IFavoriteSong[];
 }
 
 interface IProfileViewProps {
@@ -43,10 +59,16 @@ interface IProfileStatItemProps {
     onPress?: (type: StatTypes) => void;
 }
 
+interface IProfileBodyProps {
+    favoriteMovies?: IFavoriteMovie[];
+    favoriteSongs?: IFavoriteSong[];
+}
+
 export {
     StatTypes,
     IProfileViewProps,
     IProfileHeaderProps,
     IProfileStatsProps,
-    IProfileStatItemProps
+    IProfileStatItemProps,
+    IProfileBodyProps
 };

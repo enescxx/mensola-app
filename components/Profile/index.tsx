@@ -1,16 +1,21 @@
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import { ScrollView } from "react-native";
 
 import { styles } from "./styles";
 import { IProfileViewProps } from "./types";
 import ProfileHeader from "./ProfileHeader";
+import ProfileBody from "./ProfileBody";
 
 export default function ProfileView({
     userData,
     isOwnProfile = false
 }: IProfileViewProps) {
     return (
-        <View>
+        <ScrollView>
             <ProfileHeader userData={userData} />
-        </View>
+            <ProfileBody
+                favoriteMovies={userData.favoriteMovies}
+                favoriteSongs={userData.favoriteSongs}
+            />
+        </ScrollView>
     );
 }
