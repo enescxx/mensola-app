@@ -4,7 +4,10 @@ import DynamicList from "../DynamicList";
 import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
 
-export default function ProfileBody({ favoriteMovies, favoriteSongs }) {
+export default function ProfileBody({
+    favoriteMovies,
+    favoriteSongs
+}: IProfileBodyProps) {
     const seeAllFavoriteFilms = () => {};
     const seeAllFavoriteSongs = () => {};
 

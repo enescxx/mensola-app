@@ -1,10 +1,8 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#121212",
-        paddingTop: 20
+    scrollContent: {
+        paddingBottom: 100
     },
     headerContent: { paddingHorizontal: 20, gap: 12 },
     headerTopRow: {
@@ -52,7 +50,26 @@ const styles = StyleSheet.create({
     },
     statValue: { fontSize: 16, color: "#fff" },
     statLabel: { fontSize: 12, color: "#8c8c8c" },
-    userBio: { color: "#8c8c8c" }
+    userBio: { color: "#8c8c8c" },
+    profileFooter: { gap: 4, paddingHorizontal: 20, marginTop: 20 },
+    footerItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: "#1e1e1e",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#333333"
+    },
+    footerItemRightContainer: {
+        flexDirection: "row",
+        gap: 4,
+        alignItems: "center"
+    },
+    footerItemLabel: { color: "#fff" },
+    footerItemValue: { color: "#8c8c8c" }
 });
 
 export { styles };

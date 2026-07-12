@@ -38,6 +38,29 @@ interface Profile {
     favoriteSongs?: IFavoriteSong[];
 }
 
+type FooterItemTypes =
+    | "songLikes"
+    | "artistLikes"
+    | "movieLikes"
+    | "watchlist"
+    | "musicPlaylists"
+    | "movieLists";
+
+const FooterItemLabels: Record<FooterItemTypes, string> = {
+    songLikes: "Beğenilen Şarkılar",
+    artistLikes: "Beğenilen Sanatçılar",
+    movieLikes: "Beğenilen Filmler",
+    watchlist: "İzleme Listesi",
+    musicPlaylists: "Oluşturulan Playlistler",
+    movieLists: "Oluşturulan Film Listeleri"
+};
+
+interface IFooterItemProps {
+    type: FooterItemTypes;
+    value: number;
+    onPress: (type: FooterItemTypes) => void;
+}
+
 interface IProfileViewProps {
     userData: Profile;
     isOwnProfile: boolean;
@@ -66,9 +89,11 @@ interface IProfileBodyProps {
 
 export {
     StatTypes,
+    FooterItemLabels,
     IProfileViewProps,
     IProfileHeaderProps,
     IProfileStatsProps,
     IProfileStatItemProps,
-    IProfileBodyProps
+    IProfileBodyProps,
+    IFooterItemProps
 };
