@@ -2,12 +2,17 @@ import { IMovie } from "./movie";
 import { ITrack, IArtist, IPlaylist, IMovieList } from "./music";
 import { IComment } from "./comment";
 
-interface IUserStats {
-    moviesWatched?: number;
-    moviesWatchlist?: number;
-    songsLiked?: number;
-    followersCount?: number;
-    followingCount?: number;
+type StatTypes =
+    | "moviesWatched"
+    | "moviesWatchlist"
+    | "songsLiked"
+    | "playlistsCount"
+    | "followers"
+    | "following";
+
+interface IUserStatItem {
+    type: StatTypes;
+    value: number;
 }
 
 type InteractionTypes =
@@ -36,10 +41,10 @@ interface IUser {
     fullname?: string;
     profilePicture?: string;
     bio?: string;
-    stats?: IUserStats;
+    stats?: IUserStatItem[];
     favoriteMovies?: IMovie[];
     favoriteTracks?: ITrack[];
     interactions?: IUserInteraction[];
 }
 
-export { IUserStats, InteractionTypes, IUserInteraction, IUser };
+export { StatTypes, IUserStatItem, InteractionTypes, IUserInteraction, IUser };
