@@ -5,43 +5,64 @@ import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
 
 export default function ProfileBody({
+    interactions,
     favoriteMovies,
-    favoriteSongs
+    favoriteTracks
 }: IProfileBodyProps) {
     const seeAllFavoriteFilms = () => {};
     const seeAllFavoriteSongs = () => {};
 
+    const getInteractions = movieId => {
+        const found = interactions?.find(
+            i => i.targetId === movieId && i.targetType === "movie"
+        );
+
+        return {
+            likes: found?.isLiked ?? false,
+            rating: found?.rating ?? 0,
+            reviews: found?.comment ? true : false
+        };
+    };
+
     return (
         <>
-            <DynamicList
-                title="Favori Filmler"
-                data={favoriteMovies}
-                variant="horizontal"
-                onSeeAllPress={seeAllFavoriteFilms}
-                renderItem={({ item }) => (
-                    <MovieCard
-                        title={item.title}
-                        poster={item.poster}
-                        interactions={item.interactions}
-                        variant="profile"
-                    />
-                )}
-            />
-            <DynamicList
-                title="Favori Şarkılar"
-                data={favoriteSongs}
-                variant="horizontal"
-                onSeeAllPress={seeAllFavoriteSongs}
-                renderItem={({ item }) => (
-                    <MusicCard
-                        type="song"
-                        title={item.title}
-                        subtitle={item.artist}
-                        duration={item.duration}
-                        variant="profile"
-                    />
-                )}
-            />
+            {favoriteMovies && favoriteMovies.length > 0 ? (
+                <DynamicList
+                    title="Favori Filmler"
+                    data={favoriteMovies}
+                    variant="horizontal"
+                    onSeeAllPress={seeAllFavoriteFilms}
+                    renderItem={({ item }) => {
+                        return (
+                            <MovieCard
+                                title={item.title}
+                                poster={item.poster}
+                                interactions={getInteractions(item.id)}
+                                variant="profile"
+                            />
+                        );
+                    }}
+                />
+            ) : null}
+            {favoriteTracks && favoriteTracks.length > 0 ? (
+                <DynamicList
+                    title="Favori Şarkılar"
+                    data={favoriteTracks}
+                    variant="horizontal"
+                    onSeeAllPress={seeAllFavoriteSongs}
+                    renderItem={({ item }) => (
+                        <MusicCard
+                            type="song"
+                            title={item.title}
+                            subtitle={item.artists
+                                .map(artist => artist.name)
+                                .join(", ")}
+                            duration={item.duration}
+                            variant="profile"
+                        />
+                    )}
+                />
+            ) : null}
         </>
     );
 }

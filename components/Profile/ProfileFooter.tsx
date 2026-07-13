@@ -1,27 +1,18 @@
 import { View } from "react-native";
 
 import { styles } from "./styles";
+import { IProfileFooterProps } from "./types";
 import FooterItem from "./ProfileFooterItem";
 
-const FOOTER_ITEMS = [
-    { type: "songLikes", value: 23 },
-    { type: "artistLikes", value: 37 },
-    { type: "movieLikes", value: 14 },
-    { type: "watchlist", value: 17 },
-    { type: "musicPlaylists", value: 21 },
-    { type: "movieLists", value: 27 }
-];
-
-export default function ProfileFooter() {
+export default function ProfileFooter({ stats }: IProfileFooterProps) {
     const footerItemPress = type => {};
 
     return (
         <View style={styles.profileFooter}>
-            {FOOTER_ITEMS.map((item, index) => (
+            {stats?.map(item => (
                 <FooterItem
-                    key={index}
-                    type={item.type}
-                    value={item.value}
+                    key={item.type}
+                    statData={item}
                     onPress={() => footerItemPress(item.type)}
                 />
             ))}

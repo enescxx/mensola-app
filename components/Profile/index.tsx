@@ -10,14 +10,32 @@ export default function ProfileView({
     userData,
     isOwnProfile = false
 }: IProfileViewProps) {
+    const {
+        interactions,
+        favoriteMovies,
+        favoriteTracks,
+        stats,
+        ...headerData
+    } = userData;
+
+    const activeHeaderStats = ["moviesWatched", "followers", "following"];
+    const headerStats =
+        stats?.filter(s => activeHeaderStats.includes(s.type)) || [];
+
     return (
         <ScrollView contentContainerStyle={styles.scrollContent}>
-            <ProfileHeader userData={userData} />
-            <ProfileBody
-                favoriteMovies={userData.favoriteMovies}
-                favoriteSongs={userData.favoriteSongs}
+            <ProfileHeader
+                userData={{
+                    ...headerData,
+                    stats: headerStats
+                }}
             />
-            <ProfileFooter />
+            <ProfileBody
+                interactions={interactions}
+                favoriteMovies={favoriteMovies}
+                favoriteTracks={favoriteTracks}
+            />
+            <ProfileFooter stats={stats} />
         </ScrollView>
     );
 }

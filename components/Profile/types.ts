@@ -1,99 +1,66 @@
-type StatTypes = "movieNumber" | "playlistNumber" | "followers" | "following";
+import {
+    StatTypes,
+    IUserStatItem,
+    IUser,
+    IMovie,
+    ITrack,
+    IUserInteraction
+} from "../../types";
 
 const StatLabels: Record<StatTypes, string> = {
-    movieNumber: "Film",
-    playlistNumber: "Playlist",
     followers: "Takipçi",
-    following: "Takip"
-};
-
-interface StatData<T extends StatTypes> {
-    type: T;
-    value: string | number;
-    label: (typeof StatLabels)[T];
-}
-
-interface IFavoriteMovie {
-    id: string;
-    title: string;
-    posterUrl: string;
-    year: number;
-}
-
-interface IFavoriteSong {
-    id: string;
-    title: string;
-    artist: string;
-    duration: string;
-}
-
-interface Profile {
-    id: string;
-    username: string;
-    fullname?: string;
-    bio?: string;
-    profilePictureUrl?: string;
-    stats: [StatData<StatTypes>, StatData<StatTypes>, StatData<StatTypes>];
-    favoriteFilms?: IFavoriteMovie[];
-    favoriteSongs?: IFavoriteSong[];
-}
-
-type FooterItemTypes =
-    | "songLikes"
-    | "artistLikes"
-    | "movieLikes"
-    | "watchlist"
-    | "musicPlaylists"
-    | "movieLists";
-
-const FooterItemLabels: Record<FooterItemTypes, string> = {
-    songLikes: "Beğenilen Şarkılar",
-    artistLikes: "Beğenilen Sanatçılar",
-    movieLikes: "Beğenilen Filmler",
-    watchlist: "İzleme Listesi",
-    musicPlaylists: "Oluşturulan Playlistler",
+    following: "Takip",
+    moviesWatched: "İzlendi",
+    likedTracks: "Beğenilen Şarkılar",
+    likedArtists: "Beğenilen Sanatçılar",
+    likedMovies: "Beğenilen Filmler",
+    moviesWatchlist: "İzleme Listesi",
+    playlistsCount: "Oluşturulan Playlistler",
     movieLists: "Oluşturulan Film Listeleri"
 };
 
-interface IFooterItemProps {
-    type: FooterItemTypes;
-    value: number;
-    onPress: (type: FooterItemTypes) => void;
-}
-
-interface IProfileViewProps {
-    userData: Profile;
+interface IProfileViewPros {
+    userData: IUser;
     isOwnProfile: boolean;
 }
 
 interface IProfileHeaderProps {
     userData: Pick<
-        Profile,
-        "username" | "fullname" | "bio" | "profilePictureUrl" | "stats"
+        IUser,
+        "username" | "fullname" | "bio" | "profilePicture" | "stats"
     >;
 }
 
-interface IProfileStatsProps {
-    statsData: [StatData<StatTypes>, StatData<StatTypes>, StatData<StatTypes>];
+interface IHeaderStatsProps {
+    stats: [IUserStatItem, IUserStatItem, IUserStatItem];
 }
 
-interface IProfileStatItemProps {
-    data: StatData<StatTypes>;
-    onPress?: (type: StatTypes) => void;
+interface IHeaderStatItemProps {
+    statData: IUserStatItem;
+    onPress?: (type: StatType) => void;
 }
 
 interface IProfileBodyProps {
-    favoriteMovies?: IFavoriteMovie[];
-    favoriteSongs?: IFavoriteSong[];
+    interactions?: IUserInteraction[];
+    favoriteMovies?: IMovie[];
+    favoriteTracks?: ITrack[];
+}
+
+interface IProfileFooterProps {
+    stats: IUserStatItem[];
+}
+
+interface IFooterItemProps {
+    statData: IUserStatItem;
+    onPress?: (type: StatType) => void;
 }
 
 export {
-    StatTypes,
-    FooterItemLabels,
-    IProfileViewProps,
+    StatLabels,
+    IProfileViewPros,
     IProfileHeaderProps,
-    IProfileStatsProps,
-    IProfileStatItemProps,
+    IHeaderStatItemProps,
     IProfileBodyProps,
+    IProfileFooterProps,
     IFooterItemProps
 };

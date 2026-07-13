@@ -10,7 +10,7 @@ export default function ProfileHeader({ userData }: IProfileHeaderProps) {
             <View style={styles.headerTopRow}>
                 <View style={styles.imageWrapper}>
                     <Image
-                        source={{ uri: userData.profilePictureUrl }}
+                        source={{ uri: userData.profilePicture }}
                         style={styles.profilePicture}
                     />
                 </View>
@@ -25,7 +25,7 @@ export default function ProfileHeader({ userData }: IProfileHeaderProps) {
                             @{userData.username}
                         </Text>
                     </View>
-                    <ProfileStats statsData={userData.stats} />
+                    <ProfileStats stats={userData.stats} />
                 </View>
             </View>
             {userData.bio ? (

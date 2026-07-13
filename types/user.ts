@@ -3,12 +3,15 @@ import { ITrack, IArtist, IPlaylist, IMovieList } from "./music";
 import { IComment } from "./comment";
 
 type StatTypes =
-    | "moviesWatched"
-    | "moviesWatchlist"
-    | "songsLiked"
-    | "playlistsCount"
     | "followers"
-    | "following";
+    | "following"
+    | "moviesWatched"
+    | "likedTracks"
+    | "likedArtists"
+    | "likedMovies"
+    | "moviesWatchlist"
+    | "playlistsCount"
+    | "movieLists";
 
 interface IUserStatItem {
     type: StatTypes;

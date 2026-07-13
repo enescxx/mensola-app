@@ -12,12 +12,12 @@ export default function MovieCardFooter({
 
     return (
         <View style={styles.cardFooter}>
-            {interactions.rating && (
+            {interactions.rating ? (
                 <View style={styles.badge}>
                     <Ionicons name="star" size={12} color="#FF8000" />
                     <Text style={styles.badgeText}>{interactions.rating}</Text>
                 </View>
-            )}
+            ) : null}
             {typeof interactions?.likes === "number" &&
             interactions.likes > 0 ? (
                 <View style={styles.badge}>
