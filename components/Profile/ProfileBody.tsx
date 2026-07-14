@@ -44,15 +44,7 @@ export default function ProfileBody({
                     variant="horizontal"
                     onSeeAllPress={seeAllFavoriteSongs}
                     renderItem={({ item }) => (
-                        <MusicCard
-                            type="song"
-                            title={item.title}
-                            subtitle={item.artists
-                                .map(artist => artist.name)
-                                .join(", ")}
-                            duration={item.duration}
-                            variant="profile"
-                        />
+                        <MusicCard type="song" data={item} />
                     )}
                 />
             ) : null}
