@@ -1,5 +1,5 @@
 import { TouchableOpacity, Text, View } from "react-native";
-import Entypo from "@expo/vector-icons/Entypo";
+import { Entypo } from "@expo/vector-icons";
 
 import { styles } from "./styles";
 import { StatLabels, IFooterItemProps } from "./types";

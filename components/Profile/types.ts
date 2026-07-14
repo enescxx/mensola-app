@@ -19,7 +19,7 @@ const StatLabels: Record<StatTypes, string> = {
     movieLists: "Oluşturulan Film Listeleri"
 };
 
-interface IProfileViewPros {
+interface IProfileViewProps {
     userData: IUser;
     isOwnProfile: boolean;
 }
@@ -37,7 +37,7 @@ interface IHeaderStatsProps {
 
 interface IHeaderStatItemProps {
     statData: IUserStatItem;
-    onPress?: (type: StatType) => void;
+    onPress?: (type: StatTypes) => void;
 }
 
 interface IProfileBodyProps {
@@ -52,13 +52,14 @@ interface IProfileFooterProps {
 
 interface IFooterItemProps {
     statData: IUserStatItem;
-    onPress?: (type: StatType) => void;
+    onPress?: (type: StatTypes) => void;
 }
 
 export {
     StatLabels,
-    IProfileViewPros,
+    IProfileViewProps,
     IProfileHeaderProps,
+    IHeaderStatsProps,
     IHeaderStatItemProps,
     IProfileBodyProps,
     IProfileFooterProps,
