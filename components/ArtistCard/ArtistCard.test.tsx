@@ -4,9 +4,11 @@ import ArtistCard from "./index";
 import { IArtistCardProps } from "./types";
 
 const mockArtistProps: Omit<IArtistCardProps, "type"> = {
-    name: "Artist Name",
-    avatarUrl: "https://example.com/avatar.jpg",
-    followers: "1.5M",
+    artist: {
+        name: "Artist Name",
+        image: "https://example.com/artist.jpg",
+        followers: 1552
+    },
     onPress: jest.fn()
 };
 
@@ -24,7 +26,7 @@ describe("ArtistCard Component", () => {
     it("should display number of followers when provided", () => {
         const { getByText } = render(<ArtistCard {...mockArtistProps} />);
 
-        expect(getByText("1.5M followers")).toBeTruthy();
+        expect(getByText("1552 followers")).toBeTruthy();
     });
 
     it("should trigger onPress when the artist card is pressed", () => {
@@ -43,15 +45,21 @@ describe("ArtistCard Component", () => {
 
         const imageComponent = UNSAFE_getByType("Image");
         expect(imageComponent.props.source).toEqual({
-            uri: mockArtistProps.avatarUrl
+            uri: mockArtistProps.artist.image
         });
     });
 
     it("should not render followers text when followers is missing", () => {
         const { queryByText } = render(
-            <ArtistCard {...mockArtistProps} followers={undefined} />
+            <ArtistCard
+                {...mockArtistProps}
+                artist={{
+                    ...mockArtistProps.artist,
+                    followers: undefined
+                }}
+            />
         );
 
-        expect(queryByText("1.5M followers")).toBeNull();
+        expect(queryByText("1552 followers")).toBeNull();
     });
 });

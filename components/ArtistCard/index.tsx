@@ -3,12 +3,7 @@ import { Text, View, Image, TouchableOpacity } from "react-native";
 import { IArtistCardProps } from "./types";
 import { styles } from "./styles";
 
-export default function ArtistCard({
-    name,
-    avatarUrl,
-    followers,
-    onPress
-}: IArtistCardProps) {
+export default function ArtistCard({ artist, onPress }: IArtistCardProps) {
     return (
         <TouchableOpacity
             style={styles.card}
@@ -16,14 +11,17 @@ export default function ArtistCard({
             activeOpacity={0.7}
         >
             <View style={styles.avatarWrapper}>
-                <Image source={{ uri: avatarUrl }} style={styles.fullImage} />
+                <Image
+                    source={{ uri: artist?.image }}
+                    style={styles.fullImage}
+                />
             </View>
             <Text style={styles.mainTitle} numberOfLines={1}>
-                {name}
+                {artist.name}
             </Text>
-            {followers && (
+            {artist.followers && (
                 <Text style={styles.subTitle} numberOfLines={1}>
-                    {`${followers} followers`}
+                    {`${artist.followers} followers`}
                 </Text>
             )}
         </TouchableOpacity>
