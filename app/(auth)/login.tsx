@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
     KeyboardAvoidingView,
@@ -11,6 +10,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+
+import TextField from "../../components/TextField";
+import Button from "../../components/Button";
 
 export default function LoginScreen() {
     const router = useRouter();
@@ -42,36 +44,22 @@ export default function LoginScreen() {
                 </View>
 
                 <View style={styles.formContainer}>
-                    <Text style={styles.inputLabel}>E-posta</Text>
-                    <TextInput
-                        style={styles.input}
+                    <TextField
+                        label="E-posta"
+                        type="email"
                         placeholder="ornek@email.com"
-                        placeholderTextColor="#8c8c8c"
                         value={email}
                         onChangeText={setEmail}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
                     />
-
-                    <Text style={styles.inputLabel}>Şifre</Text>
-                    <TextInput
-                        style={styles.input}
+                    <TextField
+                        label="Şifre"
+                        type="password"
                         placeholder="••••••••"
-                        placeholderTextColor="#8c8c8c"
                         value={password}
                         onChangeText={setPassword}
-                        secureTextEntry
-                        autoCapitalize="none"
                     />
-
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={handleLogin}
-                    >
-                        <Text style={styles.buttonText}>Giriş Yap</Text>
-                    </TouchableOpacity>
+                    <Button label="Giriş Yap" onPress={handleLogin} />
                 </View>
-
                 <View style={styles.footerContainer}>
                     <Text style={styles.footerText}>Hesabınız yok mu? </Text>
                     <TouchableOpacity onPress={() => router.push("/signup")}>
@@ -99,31 +87,6 @@ const styles = StyleSheet.create({
     },
     subtitleText: { fontSize: 14, color: "#a0a0a0", marginTop: 8 },
     formContainer: { marginBottom: 24 },
-    inputLabel: {
-        color: "#ffffff",
-        fontSize: 14,
-        marginBottom: 8,
-        fontWeight: "600"
-    },
-    input: {
-        backgroundColor: "#1e1e1e",
-        color: "#ffffff",
-        borderRadius: 8,
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        fontSize: 16,
-        marginBottom: 20,
-        borderWidth: 1,
-        borderColor: "#333333"
-    },
-    button: {
-        backgroundColor: "#1DB954",
-        borderRadius: 8,
-        paddingVertical: 14,
-        alignItems: "center",
-        marginTop: 10
-    },
-    buttonText: { color: "#ffffff", fontSize: 16, fontWeight: "bold" },
     footerContainer: {
         flexDirection: "row",
         justifyContent: "center",
