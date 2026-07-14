@@ -12,17 +12,10 @@ export default function ProfileBody({
     const seeAllFavoriteFilms = () => {};
     const seeAllFavoriteSongs = () => {};
 
-    const getInteractions = movieId => {
-        const found = interactions?.find(
+    const getInteractions = movieId =>
+        interactions?.find(
             i => i.targetId === movieId && i.targetType === "movie"
         );
-
-        return {
-            likes: found?.isLiked ?? false,
-            rating: found?.rating ?? 0,
-            reviews: found?.comment ? true : false
-        };
-    };
 
     return (
         <>

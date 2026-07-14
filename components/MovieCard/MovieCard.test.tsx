@@ -9,8 +9,7 @@ describe("MovieCard Bileşeni Bütünsel Testleri", () => {
             poster: "https://example.com/posster.jpg",
             interactions: {
                 rating: "4.8",
-                likes: true,
-                reviews: false
+                isLiked: true
             }
         };
 
@@ -32,8 +31,8 @@ describe("MovieCard Bileşeni Bütünsel Testleri", () => {
             poster: "https://example.com/poster.jpg",
             interactions: {
                 rating: "4.8",
-                likes: 1500,
-                reviews: 240
+                totalLikes: 1500,
+                totalReviews: 240
             }
         };
 
@@ -67,8 +66,8 @@ describe("MovieCard Bileşeni Bütünsel Testleri", () => {
             poster: "https://example.com/poster.jpg",
             interactions: {
                 rating: "5.0",
-                likes: 0,
-                reviews: 0
+                totalReviews: 0,
+                totalReviews: 0
             }
         };
 

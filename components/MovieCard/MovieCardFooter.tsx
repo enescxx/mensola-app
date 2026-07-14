@@ -18,32 +18,31 @@ export default function MovieCardFooter({
                     <Text style={styles.badgeText}>{interactions.rating}</Text>
                 </View>
             ) : null}
-            {typeof interactions?.likes === "number" &&
-            interactions.likes > 0 ? (
+
+            {isProfile ? (
+                interactions.isLiked ? (
+                    <Ionicons name="heart" size={12} color="#FF8000" />
+                ) : null
+            ) : interactions.totalLikes && interactions.totalLikes > 0 ? (
                 <View style={styles.badge}>
                     <Ionicons name="heart" size={12} color="#FF8000" />
-                    {!isProfile && (
-                        <Text style={styles.badgeText}>
-                            {interactions.likes}
-                        </Text>
-                    )}
+                    <Text style={styles.badgeText}>
+                        {interactions.totalLikes}
+                    </Text>
                 </View>
-            ) : interactions?.likes === true ? (
-                <Ionicons name="heart" size={12} color="#FF8000" />
             ) : null}
 
-            {typeof interactions?.reviews === "number" &&
-            interactions.reviews > 0 ? (
+            {isProfile ? (
+                interactions.comment ? (
+                    <Entypo name="text" size={12} color="#FF8000" />
+                ) : null
+            ) : interactions.totalReviews && interactions.totalReviews > 0 ? (
                 <View style={styles.badge}>
                     <Entypo name="text" size={12} color="#FF8000" />
-                    {!isProfile && (
-                        <Text style={styles.badgeText}>
-                            {interactions.reviews}
-                        </Text>
-                    )}
+                    <Text style={styles.badgeText}>
+                        {interactions.totalReviews}
+                    </Text>
                 </View>
-            ) : interactions?.reviews === true ? (
-                <Entypo name="text" size={12} color="#FF8000" />
             ) : null}
         </View>
     );
