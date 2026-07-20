@@ -9,6 +9,7 @@ import {
     Alert
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
@@ -16,6 +17,8 @@ import Button from "../../components/Button";
 import { useLogin } from "../../hooks/auth/useLogin";
 
 export default function LoginScreen() {
+    const router = useRouter();
+
     const {
         email,
         setEmail,

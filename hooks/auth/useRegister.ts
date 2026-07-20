@@ -7,18 +7,20 @@ import { AuthService } from "../../services/auth.service";
 
 import { Alert } from "react-native";
 
-const useLogin = () => {
+const useRegister = () => {
     const { setUser } = useGlobalUser();
     const router = useRouter();
 
+    const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const handleLogin = async () => {
-        if (!email || !password) {
+    const handleRegister = async () => {
+        if (!username || !email || !password || !confirmPassword) {
             setError("Lütfen tüm alanları doldurun.");
             return;
         }
@@ -29,11 +31,25 @@ const useLogin = () => {
             return;
         }
 
+        if (password.length < 6) {
+            setError("Şifreniz en az 6 karakter olmalıdır.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError("Şifreler birbiriyle eşleşmiyor.");
+            return;
+        }
+
         setIsLoading(true);
         setError("");
 
         try {
-            const response = await AuthService.login({ email, password });
+            const response = await AuthService.register({
+                username,
+                email,
+                password
+            });
 
             const user = response.data.user;
             setUser(user);
@@ -46,12 +62,11 @@ const useLogin = () => {
 
             router.replace("/(tabs)/home");
         } catch (error) {
-            console.log(error);
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
                 setError(
                     apiErrorMessage ||
-                        "Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
+                        "Kayıt yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
                 );
             } else {
                 setError(
@@ -64,14 +79,18 @@ const useLogin = () => {
     };
 
     return {
+        username,
+        setUsername,
         email,
         setEmail,
         password,
         setPassword,
+        confirmPassword,
+        setConfirmPassword,
         isLoading,
         error,
-        handleLogin
+        handleRegister
     };
 };
 
-export { useLogin };
+export { useRegister };

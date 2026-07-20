@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -10,45 +10,33 @@ import {
     ScrollView
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import { useRouter } from "expo-router";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
+import { useRegister } from "../../hooks/auth/useRegister";
+
 export default function SignupScreen() {
     const router = useRouter();
+    const {
+        username,
+        setUsername,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        confirmPassword,
+        setConfirmPassword,
+        isLoading,
+        error,
+        handleRegister
+    } = useRegister();
 
-    const [username, setUsername] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");
-
-    const handleSignup = () => {
-        if (!username || !email || !password || !confirmPassword) {
-            Alert.alert("Hata", "Lütfen tüm alanları doldurun.");
-            return;
-        }
-
-        if (!email.includes("@")) {
-            Alert.alert("Hata", "Geçerli bir e-posta adresi girin.");
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            Alert.alert("Hata", "Şifreler birbiriyle eşleşmiyor.");
-            return;
-        }
-
-        if (password.length < 6) {
-            Alert.alert("Hata", "Şifre en az 6 karakter olmalıdır.");
-            return;
-        }
-
-        Alert.alert("Başarılı", "Hesabınız oluşturuldu!", [
-            { text: "Tamam", onPress: () => router.replace("/login") }
-        ]);
-    };
+    useEffect(() => {
+        if (isLoading) return;
+        if (error) return Alert.alert(error);
+    }, [isLoading, error]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -90,7 +78,10 @@ export default function SignupScreen() {
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
                         />
-                        <Button label="Hesap Oluştur" onPress={handleSignup} />
+                        <Button
+                            label="Hesap Oluştur"
+                            onPress={handleRegister}
+                        />
                     </View>
 
                     <View style={styles.footerContainer}>
