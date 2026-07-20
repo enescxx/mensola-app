@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -9,29 +9,27 @@ import {
     Alert
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
+import { useLogin } from "../../hooks/auth/useLogin";
+
 export default function LoginScreen() {
-    const router = useRouter();
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const {
+        email,
+        setEmail,
+        password,
+        setPassword,
+        isLoading,
+        error,
+        handleLogin
+    } = useLogin();
 
-    const handleLogin = () => {
-        if (!email || !password) {
-            Alert.alert("Hata", "Lütfen tüm alanları doldurun.");
-            return;
-        }
-
-        if (!email.includes("@")) {
-            Alert.alert("Hata", "Lütfen geçerli bir e-posta adresi girin.");
-            return;
-        }
-
-        router.replace("/(tabs)/home");
-    };
+    useEffect(() => {
+        if (isLoading) return;
+        if (error) return Alert.alert(error);
+    }, [isLoading, error]);
 
     return (
         <SafeAreaView style={styles.container}>
