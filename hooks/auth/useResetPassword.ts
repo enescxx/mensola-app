@@ -3,19 +3,19 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { AuthService } from "../../services/auth.service";
 
-const useVerifyResetToken = () => {
+const useResetPassword = () => {
     const router = useRouter();
 
-    const { email } = useLocalSearchParams<{ email: string }>();
+    const { ticket } = useLocalSearchParams<{ ticket: string }>();
 
-    const [code, setCode] = useState<string>("");
+    const [newPassword, setNewPassword] = useState<string>("");
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const handleVerifyToken = async () => {
-        if (!code || code.length < 6) {
-            setError("Lütfen geçerli bir doğrulama kodu giriniz.");
+    const handleResetPassword = async () => {
+        if (newPassword.length < 6) {
+            setError("Yeni şifreniz en az 6 karakter olmalıdır.");
             return;
         }
 
@@ -23,17 +23,12 @@ const useVerifyResetToken = () => {
         setError("");
 
         try {
-            const response = await AuthService.verifyResetToken({
-                email,
-                code
+            const response = await AuthService.resetPassword({
+                newPassword,
+                ticket
             });
 
-            const ticket = response.data.ticket;
-
-            router.replace({
-                pathname: "/(auth)/reset-password",
-                params: { ticket }
-            });
+            router.replace("/(auth)/login");
         } catch (error) {
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
@@ -52,12 +47,12 @@ const useVerifyResetToken = () => {
     };
 
     return {
-        code,
-        setCode,
+        newPassword,
+        setNewPassword,
         isLoading,
         error,
-        handleVerifyToken
+        handleResetPassword
     };
 };
 
-export { useVerifyResetToken };
+export { useResetPassword };

@@ -12,11 +12,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
-import { useForgotPassword } from "../../hooks/auth/useForgotPassword";
+import { useResetPassword } from "../../hooks/auth/useResetPassword";
 
-export default function ForgotPasswordScreen() {
-    const { email, setEmail, isLoading, error, handleForgotPassword } =
-        useForgotPassword();
+export default function ResetPasswordScreen() {
+    const {
+        newPassword,
+        setNewPassword,
+        isLoading,
+        error,
+        handleResetPassword
+    } = useResetPassword();
 
     useEffect(() => {
         if (isLoading) return;
@@ -35,13 +40,16 @@ export default function ForgotPasswordScreen() {
 
                 <View style={styles.formContainer}>
                     <TextField
-                        label="E-posta"
-                        type="email"
-                        placeholder="ornek@email.com"
-                        value={email}
-                        onChangeText={setEmail}
+                        label="Yeni Şifre"
+                        type="password"
+                        placeholder="••••••••"
+                        value={newPassword}
+                        onChangeText={setNewPassword}
                     />
-                    <Button label="Kod Gönder" onPress={handleForgotPassword} />
+                    <Button
+                        label="Şifreyi Sıfırla"
+                        onPress={handleResetPassword}
+                    />
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>
