@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -12,11 +12,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
-import { useForgotPassword } from "../../hooks/auth/useForgotPassword";
+import { useVerifyResetToken } from "../../hooks/auth/useVerifyResetToken";
 
-export default function ForgotPasswordScreen() {
-    const { email, setEmail, isLoading, error, handleForgotPassword } =
-        useForgotPassword();
+export default function VerifyResetTokenScreen() {
+    const { code, setCode, isLoading, error, handleVerifyToken } =
+        useVerifyResetToken();
 
     useEffect(() => {
         if (isLoading) return;
@@ -35,13 +35,12 @@ export default function ForgotPasswordScreen() {
 
                 <View style={styles.formContainer}>
                     <TextField
-                        label="E-posta"
-                        type="email"
-                        placeholder="ornek@email.com"
-                        value={email}
-                        onChangeText={setEmail}
+                        label="Doğrulama Kodu"
+                        type="number"
+                        value={code}
+                        onChangeText={setCode}
                     />
-                    <Button label="Kod Gönder" onPress={handleForgotPassword} />
+                    <Button label="Kodu Doğrula" onPress={handleVerifyToken} />
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>

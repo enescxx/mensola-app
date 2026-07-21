@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { useRouter } from "expo-router";
+import { useRouter ,useLocalSearchParams} from "expo-router";
+
 
 import { AuthService } from "../../services/auth.service";
 
-const useForgotPassword = () => {
+
+const useVerifyResetToken = () => {
     const router = useRouter();
 
-    const [email, setEmail] = useState<string>("");
+    const { email } = useLocalSearchParams<{ email: string }>();
+
+    const [code, setCode] = useState<string>("");
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const handleForgotPassword = async () => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email || !emailRegex.test(email)) {
-            setError("Lütfen geçerli bir e-posta adresi giriniz.");
+    const handleVerifyToken = async () => {
+        if (!code || code.length < 6) {
+            setError("Lütfen geçerli bir doğrulama kodu giriniz.");
             return;
         }
 
@@ -22,18 +25,23 @@ const useForgotPassword = () => {
         setError("");
 
         try {
-            const response = await AuthService.forgotPassword(email);
+            const response = await AuthService.verifyResetToken({
+                email,
+                code
+            });
+
+            const ticket = response.data.ticket;
 
             router.replace({
-                pathname: "/(auth)/verify-reset-token",
-                params: { email }
+                pathname: "/(auth)/reset-password",
+                params: { ticket }
             });
         } catch (error) {
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
                 setError(
                     apiErrorMessage ||
-                        "E-posta gönderilirken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
+                        "Doğrulama yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
                 );
             } else {
                 setError(
@@ -46,12 +54,12 @@ const useForgotPassword = () => {
     };
 
     return {
-        email,
-        setEmail,
+        code,
+        setCode,
         isLoading,
         error,
-        handleForgotPassword
+        handleVerifyToken
     };
 };
 
-export { useForgotPassword };
+export { useVerifyResetToken };

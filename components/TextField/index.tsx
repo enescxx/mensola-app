@@ -5,16 +5,9 @@ import { ITextFieldProps, TextFieldType } from "./types";
 
 const typePresets: Record<TextFieldType, Partial<ITextFieldProps>> = {
     text: {},
-    email: {
-        keyboardType: "email-address",
-        autoCapitalize: "none",
-        autoCorrect: false
-    },
-    password: {
-        secureTextEntry: true,
-        autoCapitalize: "none",
-        autoCorrect: false
-    }
+    email: { keyboardType: "email-address" },
+    password: { secureTextEntry: true },
+    number: { keyboardType: "number-pad" }
 };
 
 export default function TextField({
@@ -30,6 +23,8 @@ export default function TextField({
             <TextInput
                 style={styles.textField}
                 placeholderTextColor="#8c8c8c"
+                autoCapitalize="none"
+                autoCorrect={false}
                 {...presetProps}
                 {...rest}
             />
