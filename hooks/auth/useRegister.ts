@@ -5,8 +5,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useGlobalUser } from "../../context/AuthContext";
 import { AuthService } from "../../services/auth.service";
 
-import { Alert } from "react-native";
-
 const useRegister = () => {
     const { setUser } = useGlobalUser();
     const router = useRouter();

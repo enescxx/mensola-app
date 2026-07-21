@@ -1,28 +1,19 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useGlobalUser } from "../../context/AuthContext";
 import { AuthService } from "../../services/auth.service";
 
-const useLogin = () => {
-    const { setUser } = useGlobalUser();
+const useForgotPassword = () => {
     const router = useRouter();
 
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const handleLogin = async () => {
-        if (!email || !password) {
-            setError("Lütfen tüm alanları doldurun.");
-            return;
-        }
-
+    const handleForgotPassword = async () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
+        if (!email || !emailRegex.test(email)) {
             setError("Lütfen geçerli bir e-posta adresi giriniz.");
             return;
         }
@@ -31,24 +22,15 @@ const useLogin = () => {
         setError("");
 
         try {
-            const response = await AuthService.login({ email, password });
+            const response = await AuthService.forgotPassword(email);
 
-            const user = response.data.user;
-            setUser(user);
-
-            const accessToken = response.data.accessToken;
-            const refreshToken = response.data.refreshToken;
-
-            await AsyncStorage.setItem("token", accessToken);
-            await AsyncStorage.setItem("refreshToken", refreshToken);
-
-            router.replace("/(tabs)/home");
+            router.replace("/(auth)/verify-reset-token");
         } catch (error) {
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
                 setError(
                     apiErrorMessage ||
-                        "Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
+                        "E-posta gönderilirken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
                 );
             } else {
                 setError(
@@ -63,12 +45,10 @@ const useLogin = () => {
     return {
         email,
         setEmail,
-        password,
-        setPassword,
         isLoading,
         error,
-        handleLogin
+        handleForgotPassword
     };
 };
 
-export { useLogin };
+export { useForgotPassword };

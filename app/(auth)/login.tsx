@@ -60,6 +60,14 @@ export default function LoginScreen() {
                         onChangeText={setPassword}
                     />
                     <Button label="Giriş Yap" onPress={handleLogin} />
+                    <TouchableOpacity
+                        style={styles.forgotPasswordContainer}
+                        onPress={() => router.push("/forgot-password")}
+                    >
+                        <Text style={styles.forgotPasswordText}>
+                            Şifremi unuttum
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.footerContainer}>
                     <Text style={styles.footerText}>Hesabınız yok mu? </Text>
@@ -88,6 +96,12 @@ const styles = StyleSheet.create({
     },
     subtitleText: { fontSize: 14, color: "#a0a0a0", marginTop: 8 },
     formContainer: { marginBottom: 24 },
+    forgotPasswordContainer: {
+        marginTop: 4
+    },
+    forgotPasswordText: {
+        color: "#a0a0a0"
+    },
     footerContainer: {
         flexDirection: "row",
         justifyContent: "center",
