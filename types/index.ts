@@ -8,3 +8,12 @@ export {
     IUserInteraction,
     IUser
 } from "./user";
+export {
+    AuthanticatedUser,
+    AuthResponse,
+    LogoutResponse,
+    ForgotPasswordResponse,
+    VerifyResetCodeResponse,
+    ResetPasswordResponse
+} from "./auth";
+export { FavoriteMovieData, ProfileData, GetProfileResponse } from "./profile";

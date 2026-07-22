@@ -6,9 +6,10 @@ import { styles } from "./styles";
 import { IHeaderStatsProps } from "./types";
 import StatView from "./ProfileStatItem";
 
-export default function ProfileStats({ stats }: IHeaderStatsProps) {
-    const onStatPress = (type: StatTypes) => {};
-
+export default function ProfileStats({
+    stats,
+    onStatPress
+}: IHeaderStatsProps) {
     return (
         <View style={styles.statsContainer}>
             {stats?.map(stat => (

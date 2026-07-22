@@ -11,7 +11,7 @@ const TABS_CONFIG = {
         activeIcon: "notifications",
         inactiveIcon: "notifications-outline"
     },
-    profile: {
+    me: {
         activeIcon: "person",
         inactiveIcon: "person-outline"
     }

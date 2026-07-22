@@ -1,21 +1,20 @@
-import { IProfileBodyProps } from "./types";
-
 import DynamicList from "../DynamicList";
 import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
 
-export default function ProfileBody({
-    interactions,
-    favoriteMovies,
-    favoriteTracks
-}: IProfileBodyProps) {
-    const seeAllFavoriteFilms = () => {};
-    const seeAllFavoriteSongs = () => {};
+import { useProfileContext } from "../../context/ProfileContext";
 
-    const getInteractions = movieId =>
-        interactions?.find(
-            i => i.targetId === movieId && i.targetType === "movie"
-        );
+export default function ProfileBody() {
+    const { bodyData, handleSeeAllPress } = useProfileContext();
+    const { favoriteMovies, favoriteTracks } = bodyData;
+
+    const getInteractions = movie => {
+        return {
+            rating: movie.rating,
+            isLiked: movie.isLiked,
+            hasReview: movie.hasReview
+        };
+    };
 
     return (
         <>
@@ -24,13 +23,13 @@ export default function ProfileBody({
                     title="Favori Filmler"
                     data={favoriteMovies}
                     variant="horizontal"
-                    onSeeAllPress={seeAllFavoriteFilms}
+                    onSeeAllPress={() => handleSeeAllPress("movies")}
                     renderItem={({ item }) => {
                         return (
                             <MovieCard
                                 title={item.title}
                                 poster={item.poster}
-                                interactions={getInteractions(item.id)}
+                                interactions={getInteractions(item)}
                                 variant="profile"
                             />
                         );
@@ -42,7 +41,7 @@ export default function ProfileBody({
                     title="Favori Şarkılar"
                     data={favoriteTracks}
                     variant="horizontal"
-                    onSeeAllPress={seeAllFavoriteSongs}
+                    onSeeAllPress={() => handleSeeAllPress("tracks")}
                     renderItem={({ item }) => (
                         <MusicCard type="song" data={item} />
                     )}

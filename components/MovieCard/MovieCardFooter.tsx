@@ -33,7 +33,7 @@ export default function MovieCardFooter({
             ) : null}
 
             {isProfile ? (
-                interactions.comment ? (
+                interactions.hasReview ? (
                     <Entypo name="text" size={12} color="#FF8000" />
                 ) : null
             ) : interactions.totalReviews && interactions.totalReviews > 0 ? (

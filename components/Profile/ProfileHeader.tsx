@@ -1,35 +1,41 @@
 import { View, Image, TouchableOpacity, Text } from "react-native";
 
 import { styles } from "./styles";
-import { IProfileHeaderProps } from "./types";
 import ProfileStats from "./ProfileStats";
 
-export default function ProfileHeader({ userData }: IProfileHeaderProps) {
+import { useProfileContext } from "../../context/ProfileContext";
+
+export default function ProfileHeader() {
+    const { headerData, handleStatPress } = useProfileContext();
+
     return (
         <View style={styles.headerContent}>
             <View style={styles.headerTopRow}>
                 <View style={styles.imageWrapper}>
                     <Image
-                        source={{ uri: userData.profilePicture }}
+                        source={{ uri: headerData.avatar }}
                         style={styles.profilePicture}
                     />
                 </View>
                 <View style={styles.rightInfoContainer}>
                     <View style={styles.nameWrapper}>
-                        {userData.fullname ? (
+                        {headerData.fullname ? (
                             <Text style={styles.fullnameLabel}>
-                                {userData.fullname}
+                                {headerData.fullname}
                             </Text>
                         ) : null}
                         <Text style={styles.usernameLabel}>
-                            @{userData.username}
+                            @{headerData.username}
                         </Text>
                     </View>
-                    <ProfileStats stats={userData.stats} />
+                    <ProfileStats
+                        stats={headerData.stats}
+                        onStatPress={handleStatPress}
+                    />
                 </View>
             </View>
-            {userData.bio ? (
-                <Text style={styles.userBio}>{userData.bio}</Text>
+            {headerData.bio ? (
+                <Text style={styles.userBio}>{headerData.bio}</Text>
             ) : null}
         </View>
     );

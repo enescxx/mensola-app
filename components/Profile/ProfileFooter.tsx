@@ -1,10 +1,14 @@
 import { View } from "react-native";
 
 import { styles } from "./styles";
-import { IProfileFooterProps } from "./types";
 import FooterItem from "./ProfileFooterItem";
 
-export default function ProfileFooter({ stats }: IProfileFooterProps) {
+import { useProfileContext } from "../../context/ProfileContext";
+
+export default function ProfileFooter() {
+    const { footerData, handleStatPress } = useProfileContext();
+    const { stats } = footerData;
+
     const footerItemPress = type => {};
 
     return (
@@ -13,7 +17,7 @@ export default function ProfileFooter({ stats }: IProfileFooterProps) {
                 <FooterItem
                     key={item.type}
                     statData={item}
-                    onPress={() => footerItemPress(item.type)}
+                    onPress={handleStatPress}
                 />
             ))}
         </View>

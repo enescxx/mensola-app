@@ -1,53 +1,27 @@
-import {
-    StatTypes,
-    IUserStatItem,
-    IUser,
-    IMovie,
-    ITrack,
-    IUserInteraction
-} from "../../types";
+import { StatTypes, IUserStatItem, IUser, IMovie, ITrack } from "../../types";
 
 const StatLabels: Record<StatTypes, string> = {
-    followers: "Takipçi",
-    following: "Takip",
-    moviesWatched: "İzlendi",
-    likedTracks: "Beğenilen Şarkılar",
-    likedArtists: "Beğenilen Sanatçılar",
-    likedMovies: "Beğenilen Filmler",
-    moviesWatchlist: "İzleme Listesi",
-    playlistsCount: "Oluşturulan Playlistler",
-    movieLists: "Oluşturulan Film Listeleri"
+    movieListCount: "Oluşturulan Film Listeleri",
+    playlistCount: "Oluşturulan Playlistler",
+    watchlistMoviesCount: "İzleme Listesi",
+    watchedMoviesCount: "İzlendi",
+    likedMoviesCount: "Beğenilen Filmler",
+    likedTracksCount: "Beğenilen Şarkılar",
+    likedPlaylistsCount: "Beğenilen Playlistler",
+    likedMovieListsCount: "Beğenilen Film Listeleri",
+    likedAlbumsCount: "Beğenilen Albümler",
+    followerCount: "Takipçi",
+    followingCount: "Takip"
 };
-
-interface IProfileViewProps {
-    userData: IUser;
-    isOwnProfile: boolean;
-}
-
-interface IProfileHeaderProps {
-    userData: Pick<
-        IUser,
-        "username" | "fullname" | "bio" | "profilePicture" | "stats"
-    >;
-}
 
 interface IHeaderStatsProps {
     stats: [IUserStatItem, IUserStatItem, IUserStatItem];
+    onStatPress?: (type: StatTypes) => void;
 }
 
 interface IHeaderStatItemProps {
     statData: IUserStatItem;
     onPress?: (type: StatTypes) => void;
-}
-
-interface IProfileBodyProps {
-    interactions?: IUserInteraction[];
-    favoriteMovies?: IMovie[];
-    favoriteTracks?: ITrack[];
-}
-
-interface IProfileFooterProps {
-    stats: IUserStatItem[];
 }
 
 interface IFooterItemProps {
@@ -57,11 +31,7 @@ interface IFooterItemProps {
 
 export {
     StatLabels,
-    IProfileViewProps,
-    IProfileHeaderProps,
     IHeaderStatsProps,
     IHeaderStatItemProps,
-    IProfileBodyProps,
-    IProfileFooterProps,
     IFooterItemProps
 };

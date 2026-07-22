@@ -15,7 +15,7 @@ export default function TabsLayout() {
                 name="notifications"
                 options={{ title: "Bildirimler" }}
             />
-            <Tabs.Screen name="profile" options={{ title: "Profil" }} />
+            <Tabs.Screen name="me" options={{ title: "Profil" }} />
         </Tabs>
     );
 }

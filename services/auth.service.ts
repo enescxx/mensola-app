@@ -6,7 +6,7 @@ import {
     ForgotPasswordResponse,
     VerifyResetCodeResponse,
     ResetPasswordResponse
-} from "../types/auth";
+} from "../types";
 
 const AuthService = {
     login: async (credentials: Record<string, any>): Promise<AuthResponse> => {

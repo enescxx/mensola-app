@@ -1,9 +1,9 @@
 import { IUserInteraction } from "../../types";
 
-interface IMovieCardInteractions extends Pick<
-    IUserInteraction,
-    "rating" | "isLiked" | "comment"
-> {
+interface IMovieCardInteractions {
+    rating?: number;
+    isLiked?: boolean;
+    hasReview?: boolean;
     totalLikes?: number;
     totalReviews?: number;
 }

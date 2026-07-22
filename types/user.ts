@@ -3,15 +3,17 @@ import { ITrack, IArtist, IPlaylist, IMovieList } from "./music";
 import { IComment } from "./comment";
 
 type StatTypes =
-    | "followers"
-    | "following"
-    | "moviesWatched"
-    | "likedTracks"
-    | "likedArtists"
-    | "likedMovies"
-    | "moviesWatchlist"
-    | "playlistsCount"
-    | "movieLists";
+    | "movieListCount"
+    | "playlistCount"
+    | "watchlistMoviesCount"
+    | "watchedMoviesCount"
+    | "likedMoviesCount"
+    | "likedTracksCount"
+    | "likedPlaylistsCount"
+    | "likedMovieListsCount"
+    | "likedAlbumsCount"
+    | "followerCount"
+    | "followingCount";
 
 interface IUserStatItem {
     type: StatTypes;
@@ -42,7 +44,7 @@ interface IUser {
     id: string;
     username: string;
     fullname?: string;
-    profilePicture?: string;
+    avatar?: string;
     bio?: string;
     stats?: IUserStatItem[];
     favoriteMovies?: IMovie[];
