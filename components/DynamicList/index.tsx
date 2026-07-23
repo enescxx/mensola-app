@@ -9,7 +9,8 @@ export default function DynamicList<T>({
     renderItem,
     onSeeAllPress,
     variant = "horizontal",
-    ItemSeparatorComponent
+    ItemSeparatorComponent,
+    ...restProps
 }: IDynamicListProps<T>) {
     const isHorizontal = variant === "horizontal";
 
@@ -19,14 +20,17 @@ export default function DynamicList<T>({
 
     return (
         <View style={styles.container}>
-            <View style={styles.listHeader}>
-                <Text style={styles.listTitle}>{title}</Text>
-                {onSeeAllPress && (
-                    <TouchableOpacity onPress={onSeeAllPress}>
-                        <Text style={styles.seeAll}>Hepsini Gör</Text>
-                    </TouchableOpacity>
-                )}
-            </View>
+            {title ? (
+                <View style={styles.listHeader}>
+                    <Text style={styles.listTitle}>{title}</Text>
+                    {onSeeAllPress && (
+                        <TouchableOpacity onPress={onSeeAllPress}>
+                            <Text style={styles.seeAll}>Hepsini Gör</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
+            ) : null}
+
             <FlatList
                 data={data}
                 renderItem={renderItem}
@@ -41,6 +45,7 @@ export default function DynamicList<T>({
                         ? styles.horizontalContent
                         : styles.verticalContent
                 }
+                {...restProps}
             />
         </View>
     );

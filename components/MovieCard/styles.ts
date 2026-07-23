@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     movieCard: { width: 120 },
     poster: {
-        width: 120,
-        height: 180,
+        width: "100%",
+        aspectRatio: 2 / 3,
         borderRadius: 16,
         marginBottom: 8,
         backgroundColor: "#1e1e1e"

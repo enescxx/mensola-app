@@ -3,7 +3,12 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { IMusicCardProps } from "./types";
 import { styles } from "./styles";
 
-export default function MusicCard({ type, data, onPress }: IMusicCardProps) {
+export default function MusicCard({
+    type,
+    data,
+    onPress,
+    style
+}: IMusicCardProps) {
     function formatSecondsToMinutes(totalSeconds) {
         const minutes = Math.floor(totalSeconds / 60);
         const remainingSeconds = totalSeconds % 60;
@@ -55,7 +60,7 @@ export default function MusicCard({ type, data, onPress }: IMusicCardProps) {
 
     return (
         <TouchableOpacity
-            style={styles.card}
+            style={[styles.card, style]}
             onPress={onPress}
             activeOpacity={0.7}
         >

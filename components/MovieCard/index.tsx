@@ -9,10 +9,11 @@ export default function MovieCard({
     title,
     poster,
     interactions,
-    variant = "profile"
+    variant = "profile",
+    style
 }: IMovieCardProps) {
     return (
-        <View style={styles.movieCard}>
+        <View style={[styles.movieCard, style]}>
             <Image
                 source={{ uri: poster }}
                 style={styles.poster}

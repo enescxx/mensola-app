@@ -16,4 +16,9 @@ export {
     VerifyResetCodeResponse,
     ResetPasswordResponse
 } from "./auth";
-export { FavoriteMovieData, ProfileData, GetProfileResponse } from "./profile";
+export {
+    FavoriteMovieData,
+    ProfileData,
+    GetProfileResponse,
+    GetStatDetailsResponse
+} from "./profile";

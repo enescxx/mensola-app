@@ -87,8 +87,16 @@ export function ProfileProvider({ userId, children }) {
         stats: headerStats,
         isOwnProfile
     };
-    const bodyData = { favoriteMovies, favoriteTracks };
+    const bodyData = {
+        favoriteMovies: favoriteMovies?.slice(0, 3),
+        favoriteTracks: favoriteTracks?.slice(0, 3)
+    };
     const footerData = { stats };
+
+    const favorites = {
+        favoriteMovies,
+        favoriteTracks
+    };
 
     return (
         <ProfileContext.Provider
@@ -98,7 +106,8 @@ export function ProfileProvider({ userId, children }) {
                 footerData,
                 isOwnProfile,
                 handleStatPress,
-                handleSeeAllPress
+                handleSeeAllPress,
+                favorites
             }}
         >
             {children}

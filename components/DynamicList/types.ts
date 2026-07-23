@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FlatListProps } from "react-native";
 
-interface IDynamicListProps<T> {
-    title: string;
+interface IDynamicListProps<T> extends Partial<FlatListProps<T>> {
+    title?: string;
     data: T[];
     renderItem: ({ item }: { item: T }) => React.ReactElement;
     onSeeAllPress?: () => void;

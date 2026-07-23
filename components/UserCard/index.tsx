@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, Image, Text, } from "react-native";
+import { TouchableOpacity, View, Image, Text } from "react-native";
 
 import { styles } from "./styles";
 import { IUserCardProps, FollowState } from "./types";
