@@ -43,6 +43,12 @@ export default function StatDetailPage() {
         "favorite-movies"
     ].includes(statType);
 
+    useEffect(() => {
+        if (isError) {
+            Alert.alert("Hata", "Veriler yüklenirken bir sorun oluştu.");
+        }
+    }, [isError]);
+
     const numColumns = isMovieGrid ? 3 : 1;
     const columnWrapperStyle = isMovieGrid ? styles.rowWrapper : undefined;
 
@@ -156,12 +162,6 @@ export default function StatDetailPage() {
             </View>
         );
     }
-
-    useEffect(() => {
-        if (isError) {
-            Alert.alert("Hata", "Veriler yüklenirken bir sorun oluştu.");
-        }
-    }, [isError]);
 
     return (
         <SafeAreaView style={styles.container}>
