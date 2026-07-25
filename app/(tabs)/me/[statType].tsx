@@ -13,8 +13,7 @@ import UserCard from "../../../components/UserCard";
 import { useGlobalUser } from "../../../context/AuthContext";
 import { useProfileContext } from "../../../context/ProfileContext";
 
-import {STAT_TITLES} from "../../../constants/pageTitles"
-
+import { STAT_TITLES } from "../../../constants/pageTitles";
 
 export default function StatDetailPage() {
     const router = useRouter();

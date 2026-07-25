@@ -31,6 +31,7 @@ export default function PageHeader({
                                 onPress={() => navigation.goBack()}
                                 style={styles.backButton}
                                 activeOpacity={0.7}
+                                testID="back-button"
                             >
                                 <Ionicons
                                     name="chevron-back"
@@ -53,6 +54,7 @@ export default function PageHeader({
                                 <TouchableOpacity
                                     onPress={action.onPress}
                                     activeOpacity={0.7}
+                                    testID={`action-button-${action.id}`}
                                 >
                                     <Ionicons
                                         name={action.icon}
