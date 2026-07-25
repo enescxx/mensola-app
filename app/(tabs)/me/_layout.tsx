@@ -4,6 +4,8 @@ import { ProfileProvider } from "../../../context/ProfileContext";
 
 import { Text } from "react-native";
 
+import PageHeader from "../../../components/PageHeader";
+
 export default function RootLayout() {
     return (
         <ProfileProvider userId="me">
@@ -14,7 +16,7 @@ export default function RootLayout() {
                     name="[statType]"
                     options={{
                         headerShown: true,
-                        header: props => <Text>Page Title</Text>,
+                        header: props => <PageHeader {...props} />,
                         animation: "slide_from_right"
                     }}
                 />

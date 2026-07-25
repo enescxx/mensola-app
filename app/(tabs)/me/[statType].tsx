@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 
 import { StyleSheet, View, Text, Alert, ActivityIndicator } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, Stack } from "expo-router";
 
 import { useStatDetails } from "../../../hooks/profile/useStatDetails";
 
@@ -14,12 +13,17 @@ import UserCard from "../../../components/UserCard";
 import { useGlobalUser } from "../../../context/AuthContext";
 import { useProfileContext } from "../../../context/ProfileContext";
 
+import {STAT_TITLES} from "../../../constants/pageTitles"
+
+
 export default function StatDetailPage() {
     const router = useRouter();
 
     const { statType } = useLocalSearchParams<{ statType: string }>();
     const { user } = useGlobalUser();
-    const { favorites } = useProfileContext();
+    const { username, favorites } = useProfileContext();
+
+    const pageTitle = STAT_TITLES[statType] || "Detay";
 
     const initialFavData =
         statType === "favorite-movies"
@@ -164,18 +168,25 @@ export default function StatDetailPage() {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <DynamicList
-                data={data}
-                variant="vertical"
-                renderItem={renderItem}
-                onRefresh={refetch}
-                refreshing={isRefetching}
-                ItemSeparatorComponent={<View style={{ height: 8 }} />}
-                numColumns={numColumns}
-                columnWrapperStyle={columnWrapperStyle}
+        <>
+            <Stack.Screen
+                options={{
+                    title: pageTitle
+                }}
             />
-        </SafeAreaView>
+            <View style={styles.container}>
+                <DynamicList
+                    data={data}
+                    variant="vertical"
+                    renderItem={renderItem}
+                    onRefresh={refetch}
+                    refreshing={isRefetching}
+                    ItemSeparatorComponent={<View style={{ height: 8 }} />}
+                    numColumns={numColumns}
+                    columnWrapperStyle={columnWrapperStyle}
+                />
+            </View>
+        </>
     );
 }
 
