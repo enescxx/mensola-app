@@ -46,14 +46,9 @@ const useLogin = () => {
         } catch (error) {
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
-                setError(
-                    apiErrorMessage ||
-                        "Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
-                );
+                setError(apiErrorMessage || "Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
             } else {
-                setError(
-                    "Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz."
-                );
+                setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
         } finally {
             setIsLoading(false);
@@ -67,7 +62,7 @@ const useLogin = () => {
         setPassword,
         isLoading,
         error,
-        handleLogin
+        handleLogin,
     };
 };
 

@@ -1,24 +1,13 @@
 export { IMovie, IMovieListItem, IMovieList } from "./movie";
 export { ITrack, IPlaylistTrack, IPlaylist, IAlbum, IArtist } from "./music";
 export { IComment, CommentTargetType } from "./comment";
-export {
-    StatTypes,
-    IUserStatItem,
-    InteractionTypes,
-    IUserInteraction,
-    IUser
-} from "./user";
+export { StatTypes, IUserStatItem, InteractionTypes, IUserInteraction, IUser, FollowActionsResponse } from "./user";
 export {
     AuthanticatedUser,
     AuthResponse,
     LogoutResponse,
     ForgotPasswordResponse,
     VerifyResetCodeResponse,
-    ResetPasswordResponse
+    ResetPasswordResponse,
 } from "./auth";
-export {
-    FavoriteMovieData,
-    ProfileData,
-    GetProfileResponse,
-    GetStatDetailsResponse
-} from "./profile";
+export { FavoriteMovieData, ProfileData, GetProfileResponse, GetStatDetailsResponse } from "./profile";

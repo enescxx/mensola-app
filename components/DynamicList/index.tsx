@@ -14,9 +14,7 @@ export default function DynamicList<T>({
 }: IDynamicListProps<T>) {
     const isHorizontal = variant === "horizontal";
 
-    const renderDefaultSeparator = () => (
-        <View style={isHorizontal ? { width: 16 } : { height: 16 }} />
-    );
+    const renderDefaultSeparator = () => <View style={isHorizontal ? { width: 16 } : { height: 16 }} />;
 
     return (
         <View style={styles.container}>
@@ -37,14 +35,8 @@ export default function DynamicList<T>({
                 keyExtractor={(_, index) => index.toString()}
                 horizontal={isHorizontal}
                 showsHorizontalScrollIndicator={false}
-                ItemSeparatorComponent={
-                    ItemSeparatorComponent || renderDefaultSeparator
-                }
-                contentContainerStyle={
-                    isHorizontal
-                        ? styles.horizontalContent
-                        : styles.verticalContent
-                }
+                ItemSeparatorComponent={ItemSeparatorComponent || renderDefaultSeparator}
+                contentContainerStyle={isHorizontal ? styles.horizontalContent : styles.verticalContent}
                 {...restProps}
             />
         </View>
