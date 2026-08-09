@@ -20,6 +20,7 @@ interface IMovieCardProps {
     interactions?: IMovieCardInteractions;
     variant?: "profile" | "feed";
     style?: StyleProp<ViewStyle>;
+    onPress?: () => void;
 }
 
 export { IMovieCardFooterProps, IMovieCardProps };

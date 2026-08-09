@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { StyleSheet, View, Text, Alert, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, useRouter, Stack } from "expo-router";
@@ -14,13 +14,14 @@ import { useGlobalUser } from "../../../context/AuthContext";
 import { useProfileContext } from "../../../context/ProfileContext";
 
 import { STAT_TITLES } from "../../../constants/pageTitles";
+import { useFollow } from "@/hooks/user/useFollow";
 
 export default function StatDetailPage() {
     const router = useRouter();
 
     const { statType } = useLocalSearchParams<{ statType: string }>();
     const { user } = useGlobalUser();
-    const { username, favorites } = useProfileContext();
+    const { favorites } = useProfileContext();
 
     const pageTitle = STAT_TITLES[statType] || "Detay";
 
@@ -31,8 +32,10 @@ export default function StatDetailPage() {
               ? favorites?.favoriteTracks
               : undefined;
 
-    const { data, isLoading, isError, error, refetch, isRefetching } =
-        useStatDetails(statType, initialFavData);
+    const { data, isLoading, isError, refetch, isRefetching } = useStatDetails(statType, initialFavData);
+    const { followHandler, unfollowHandler, isLoading: followLoading, error: followError } = useFollow();
+
+    const [statData, setStatData] = useState(data);
 
     const isMovieGrid = [
         "watchlist",
@@ -43,7 +46,7 @@ export default function StatDetailPage() {
         "liked-playlists",
         "liked-albums",
         "favorite-tracks",
-        "favorite-movies"
+        "favorite-movies",
     ].includes(statType);
 
     useEffect(() => {
@@ -51,6 +54,16 @@ export default function StatDetailPage() {
             Alert.alert("Hata", "Veriler yüklenirken bir sorun oluştu.");
         }
     }, [isError]);
+
+    useEffect(() => {
+        if (followError) {
+            Alert.alert("Hata", followError);
+        }
+    }, [followError]);
+
+    useEffect(() => {
+        setStatData(data);
+    }, [data]);
 
     const numColumns = isMovieGrid ? 3 : 1;
     const columnWrapperStyle = isMovieGrid ? styles.rowWrapper : undefined;
@@ -61,15 +74,21 @@ export default function StatDetailPage() {
             case "liked-movie-lists":
                 return (
                     <DynamicList
-                        data={item.movies?.slice(0, 3)}
+                        data={item.previewMovies}
                         variant="horizontal"
-                        title={item.title}
-                        onSeeAllPress={() => {}}
+                        title={item.listTitle}
+                        onSeeAllPress={() => {
+                            router.push(`/movie-lists/${item.listId}`);
+                        }}
                         renderItem={({ item: movie }) => (
                             <MovieCard
+                                key={movie.id}
                                 title={movie.title}
                                 poster={movie.poster}
                                 interactions={movie.interactions}
+                                onPress={() => {
+                                    router.push(`/movies/${movie.id}`);
+                                }}
                             />
                         )}
                     />
@@ -87,12 +106,28 @@ export default function StatDetailPage() {
                     type = "album";
                 }
 
+                const handleMusicCardPress = () => {
+                    switch (type) {
+                        case "song":
+                            router.push(`/tracks/${item.id}`);
+                            break;
+                        case "playlist":
+                            router.push(`/playlists/${item.id}`);
+                            break;
+                        case "album":
+                            router.push(`/albums/${item.id}`);
+                            break;
+                    }
+                };
+
                 return (
                     <MusicCard
                         type={type}
                         data={item}
                         variant="row"
-                        onPress={() => {}}
+                        onPress={() => {
+                            handleMusicCardPress();
+                        }}
                         style={{ width: "31%" }}
                     />
                 );
@@ -100,11 +135,11 @@ export default function StatDetailPage() {
             case "watched":
             case "liked-movies":
             case "favorite-movies":
-                const getInteractions = movie => {
+                const getInteractions = (movie) => {
                     return {
                         rating: movie.rating,
                         isLiked: movie.isLiked,
-                        hasReview: movie.hasReview
+                        hasReview: movie.hasReview,
                     };
                 };
                 return (
@@ -113,10 +148,23 @@ export default function StatDetailPage() {
                         poster={item.poster}
                         interactions={getInteractions(item)}
                         style={{ width: "31%" }}
+                        onPress={() => {
+                            router.push(`/movies/${item.id}`);
+                        }}
                     />
                 );
             case "followers":
             case "following":
+                const toggleFollowStateInList = (targetUserId: string) => {
+                    setStatData((prevData) =>
+                        prevData?.map((userItem) =>
+                            userItem.id === targetUserId
+                                ? { ...userItem, isFollowing: !userItem.isFollowing }
+                                : userItem,
+                        ),
+                    );
+                };
+
                 const handleFollowPress = (userId, isFollowing) => {
                     if (isFollowing) {
                         Alert.alert(
@@ -126,22 +174,22 @@ export default function StatDetailPage() {
                                 {
                                     text: "Hayır",
                                     onPress: () => {},
-                                    style: "cancel"
+                                    style: "cancel",
                                 },
                                 {
                                     text: "Evet",
                                     onPress: () => {
-                                        /* unfollow func */
-                                    }
-                                }
-                            ]
+                                        unfollowHandler(userId, () => toggleFollowStateInList(userId));
+                                    },
+                                },
+                            ],
                         );
                     } else {
-                        /* follow func */
+                        followHandler(userId, () => toggleFollowStateInList(userId));
                     }
                 };
 
-                const handleCardPress = userId => {
+                const handleCardPress = (userId) => {
                     router.push(`/users/${userId}`);
                 };
 
@@ -170,12 +218,12 @@ export default function StatDetailPage() {
         <>
             <Stack.Screen
                 options={{
-                    title: pageTitle
+                    title: pageTitle,
                 }}
             />
             <View style={styles.container}>
                 <DynamicList
-                    data={data}
+                    data={statData}
                     variant="vertical"
                     renderItem={renderItem}
                     onRefresh={refetch}
@@ -183,6 +231,7 @@ export default function StatDetailPage() {
                     ItemSeparatorComponent={<View style={{ height: 8 }} />}
                     numColumns={numColumns}
                     columnWrapperStyle={columnWrapperStyle}
+                    ListEmptyComponent={<Text style={styles.emptyText}>Burada henüz bir şey yok.</Text>}
                 />
             </View>
         </>
@@ -194,10 +243,14 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         backgroundColor: "#121212",
-        paddingTop: 20
+        paddingTop: 20,
     },
     rowWrapper: {
         gap: "3.5%",
-        paddingHorizontal: "2%"
-    }
+        paddingHorizontal: "2%",
+    },
+    emptyText: {
+        color: "#8c8c8c",
+        alignSelf: "center",
+    },
 });

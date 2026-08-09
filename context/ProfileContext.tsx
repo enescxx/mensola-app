@@ -16,7 +16,7 @@ const StatDetailPaths: Record<StatTypes, string> = {
     likedMovieListsCount: "/liked-movie-lists",
     likedAlbumsCount: "/liked-albums",
     followerCount: "/followers",
-    followingCount: "/following"
+    followingCount: "/following",
 };
 
 const ProfileContext = createContext(null);
@@ -52,31 +52,16 @@ export function ProfileProvider({ userId, children }) {
     };
 
     const handleSeeAllPress = (type: "movies" | "tracks") => {
-        const path =
-            type === "movies" ? "/favorite-movies" : "/favorite-tracks";
+        const path = type === "movies" ? "/favorite-movies" : "/favorite-tracks";
         const basePath = isOwnProfile ? "/me" : `/users/${userId}`;
 
         router.push(`${basePath}${path}`);
     };
 
-    const {
-        id,
-        username,
-        fullname,
-        bio,
-        avatar,
-        favoriteMovies,
-        favoriteTracks,
-        stats
-    } = profile;
+    const { id, username, fullname, bio, avatar, favoriteMovies, favoriteTracks, stats } = profile;
 
-    const activeHeaderStats = [
-        "watchedMoviesCount",
-        "followerCount",
-        "followingCount"
-    ];
-    const headerStats =
-        stats?.filter(s => activeHeaderStats.includes(s.type)) || [];
+    const activeHeaderStats = ["watchedMoviesCount", "followerCount", "followingCount"];
+    const headerStats = stats?.filter((s) => activeHeaderStats.includes(s.type)) || [];
 
     const headerData = {
         id,
@@ -85,17 +70,17 @@ export function ProfileProvider({ userId, children }) {
         bio,
         avatar,
         stats: headerStats,
-        isOwnProfile
+        isOwnProfile,
     };
     const bodyData = {
         favoriteMovies: favoriteMovies?.slice(0, 3),
-        favoriteTracks: favoriteTracks?.slice(0, 3)
+        favoriteTracks: favoriteTracks?.slice(0, 3),
     };
     const footerData = { stats };
 
     const favorites = {
         favoriteMovies,
-        favoriteTracks
+        favoriteTracks,
     };
 
     return (
@@ -107,7 +92,7 @@ export function ProfileProvider({ userId, children }) {
                 isOwnProfile,
                 handleStatPress,
                 handleSeeAllPress,
-                favorites
+                favorites,
             }}
         >
             {children}
@@ -122,6 +107,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#121212",
         justifyContent: "center",
-        alignItems: "center"
-    }
+        alignItems: "center",
+    },
 });

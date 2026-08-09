@@ -5,4 +5,5 @@ export interface ApiResponse<T = any> {
         message: string;
         code?: string;
     };
+    message?: string;
 }

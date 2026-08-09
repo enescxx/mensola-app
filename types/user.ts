@@ -20,13 +20,7 @@ interface IUserStatItem {
     value: number;
 }
 
-type InteractionTypes =
-    | "movie"
-    | "tv"
-    | "song"
-    | "album"
-    | "playlist"
-    | "movieList";
+type InteractionTypes = "movie" | "tv" | "song" | "album" | "playlist" | "movieList";
 
 interface IUserInteraction {
     id: string;
@@ -52,4 +46,9 @@ interface IUser {
     interactions?: IUserInteraction[];
 }
 
-export { StatTypes, IUserStatItem, InteractionTypes, IUserInteraction, IUser };
+interface FollowActionsResponse {
+    userId: IUser["id"];
+    isFollowing: boolean;
+}
+
+export { StatTypes, IUserStatItem, InteractionTypes, IUserInteraction, IUser, FollowActionsResponse };

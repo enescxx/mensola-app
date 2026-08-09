@@ -4,41 +4,39 @@ import { GetProfileResponse, GetStatDetailsResponse } from "../types";
 
 const STAT_ENDPOINT_MAP: Record<string, string> = {
     "movie-lists": "/movies/lists",
-    playlists: "/playlists",
-    watchlist: "/movies/watchlists",
-    watched: "/mmovies/watched",
-    "liked-movies": "/movies/liked",
-    "liked-tracks": "/tracks/liked",
-    "liked-playlists": "/playlists/liked",
-    "liked-movie-lists": "/movies/lists/liked",
-    "liked-albums": "/albums/liked",
+    playlists: "/playlists", //
+    watchlist: "/movies/watchlist",
+    watched: "/movies/watched",
+    "liked-movies": "/movies/likes",
+    "liked-tracks": "/tracks/liked", //
+    "liked-playlists": "/playlists/likes", //
+    "liked-movie-lists": "/movies/lists/likes",
+    "liked-albums": "/albums/likes", //
     followers: "/users/followers",
     following: "/users/following",
     "favorite-movies": "/movies/favorites",
-    "favorites-tracks": "/tracks/favorites"
+    "favorites-tracks": "/tracks/favorites", //
 };
 
 const ProfileService = {
     getMe: async (): Promise<GetProfileResponse> => {
         return client.get<GetProfileResponse>("/users/me", {
-            auth: true
+            auth: true,
         });
     },
 
     getProfile: async (profileId: string): Promise<GetProfileResponse> => {
         return client.get<GetProfileResponse>(`/users/${profileId}`, {
-            auth: true
+            auth: true,
         });
     },
 
-    getStatDetails: async (
-        statType: string,
-        userId?: string
-    ): Promise<GetStatDetailsResponse> => {
+    getStatDetails: async (statType: string, userId?: string): Promise<GetStatDetailsResponse> => {
         return client.get<GetStatDetailsResponse>(STAT_ENDPOINT_MAP[statType], {
-            params: userId ? { userId } : {}
+            query: userId ? { userId } : {},
+            auth: true,
         });
-    }
+    },
 };
 
 export { ProfileService };
