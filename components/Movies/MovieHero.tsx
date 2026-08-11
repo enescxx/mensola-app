@@ -1,4 +1,5 @@
-import { ImageBackground, Text, View } from "react-native";
+import { useState, useEffect } from "react";
+import { Alert, ImageBackground, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "./styles";
 import MoviePoster from "./MoviePoster";
@@ -6,6 +7,7 @@ import Badge from "../Badge";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import ActionButton from "./ActionButton";
 import { MovieHeroProps } from "./types";
+import { useWatched } from "@/hooks/movie/useWatched";
 
 const formatReleaseYear = (releaseDate?: string | Date) => {
     if (!releaseDate) return "";
@@ -20,6 +22,49 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
     const interactionsCount = movie?.interactions?.length ?? 0;
     const hasCurrentUserInteraction =
         !!movie?.currentUserInteraction?.rating || !!movie?.currentUserInteraction?.isLiked;
+
+    const { markAsWatched, unmarkAsWatched, isLoading: isWatchedLoading } = useWatched(movie?.id);
+    const [isWatched, setIsWatched] = useState<boolean>(movie?.isWatched ?? false);
+
+    useEffect(() => {
+        if (movie?.isWatched !== undefined) {
+            setIsWatched(movie.isWatched);
+        }
+    }, [movie?.isWatched]);
+
+    const handleWatchedToggle = () => {
+        if (!movie?.id) return;
+
+        if (isWatched) {
+            Alert.alert(
+                "İzlenenlerden Kaldır",
+                "Bu filmi izlediklerinizden çıkarmak istediğinize emin misiniz?",
+                [
+                    {
+                        text: "Vazgeç",
+                        style: "cancel",
+                    },
+                    {
+                        text: "Kaldır",
+                        style: "destructive",
+                        onPress: async () => {
+                            try {
+                                await unmarkAsWatched(movie.id, () => {
+                                    setIsWatched(false);
+                                });
+                            } catch (e) {
+                                // Error handling managed by hook
+                            }
+                        },
+                    },
+                ]
+            );
+        } else {
+            markAsWatched(movie.id, () => {
+                setIsWatched(true);
+            });
+        }
+    };
 
     return (
         <View style={styles.heroBanner}>
@@ -56,7 +101,13 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                         ) : null}
                     </View>
                     <View style={styles.actionBar}>
-                        <ActionButton icon="checkmark" isActive={true} activeColor="#1DB95466" />
+                        <ActionButton
+                            icon="checkmark"
+                            isActive={isWatched}
+                            activeColor="#1DB95466"
+                            onPress={handleWatchedToggle}
+                            isLoading={isWatchedLoading}
+                        />
                         <ActionButton icon="add" isActive={true} activeColor="#38BDF866" />
                         <ActionButton
                             icon="heart"
@@ -74,3 +125,4 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
         </View>
     );
 }
+

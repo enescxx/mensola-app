@@ -5,6 +5,9 @@ interface IActionBtnProps {
     icon: keyof typeof Ionicons.glyphMap;
     isActive: boolean;
     activeColor: string;
+    onPress?: () => void;
+    disabled?: boolean;
+    isLoading?: boolean;
 }
 
 interface MovieDetailViewProps {

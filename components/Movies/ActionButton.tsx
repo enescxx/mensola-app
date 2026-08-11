@@ -1,12 +1,21 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { IActionBtnProps } from "./types";
 
-export default function ActionButton({ icon, isActive, activeColor }: IActionBtnProps) {
+export default function ActionButton({ icon, isActive, activeColor, onPress, disabled, isLoading }: IActionBtnProps) {
     return (
-        <TouchableOpacity style={[styles.actionBtn, isActive && { backgroundColor: activeColor }]} activeOpacity={0.7}>
-            <Ionicons name={icon} style={styles.actionBtnIcon} />
+        <TouchableOpacity
+            style={[styles.actionBtn, isActive && { backgroundColor: activeColor }]}
+            activeOpacity={0.7}
+            onPress={onPress}
+            disabled={disabled || isLoading}
+        >
+            {isLoading ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+            ) : (
+                <Ionicons name={icon} style={styles.actionBtnIcon} />
+            )}
         </TouchableOpacity>
-    )
+    );
 }

@@ -11,3 +11,5 @@ export {
     ResetPasswordResponse,
 } from "./auth";
 export { FavoriteMovieData, ProfileData, GetProfileResponse, GetStatDetailsResponse } from "./profile";
+export { ApiResponse } from "./api";
+
