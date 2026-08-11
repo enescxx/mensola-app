@@ -21,7 +21,7 @@ export default function StatDetailPage() {
 
     const { statType } = useLocalSearchParams<{ statType: string }>();
     const { user } = useGlobalUser();
-    const { favorites } = useProfileContext();
+    const { favorites, userId } = useProfileContext();
 
     const pageTitle = STAT_TITLES[statType] || "Detay";
 
@@ -32,7 +32,7 @@ export default function StatDetailPage() {
               ? favorites?.favoriteTracks
               : undefined;
 
-    const { data, isLoading, isError, refetch, isRefetching } = useStatDetails(statType, initialFavData);
+    const { data, isLoading, isError, refetch, isRefetching } = useStatDetails(statType, initialFavData, userId);
     const { followHandler, unfollowHandler, isLoading: followLoading, error: followError } = useFollow();
 
     const [statData, setStatData] = useState(data);

@@ -86,6 +86,7 @@ export function ProfileProvider({ userId, children }) {
     return (
         <ProfileContext.Provider
             value={{
+                userId,
                 headerData,
                 bodyData,
                 footerData,
