@@ -1,65 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import InteractionView from "../Inteaction";
+import { GetMovieInteractionsItem } from "../../types";
 
-const comments = [
-    {
-        id: "interaction-id-1",
-        isLiked: true,
-        rating: 9.5,
-        likeCount: 24,
-        replyCount: 8,
-        user: {
-            id: "user-id-1",
-            username: "username-1",
-            fullname: "User 1",
-            avatar: "avatar.jpg",
-        },
-        comment: {
-            id: "comment-id-1",
-            content: "Et sunt Lorem deserunt pariatur fugiat deserunt id aliquip quis nisi incididunt incididunt laboris.",
-            date: new Date(),
-        },
-    },
-    {
-        id: "interaction-id-2",
-        isLiked: true,
-        rating: 9.5,
-        likeCount: 13,
-        replyCount: 2,
-        user: {
-            id: "user-id-2",
-            username: "username-2",
-            fullname: "User 2",
-            avatar: "avatar.jpg",
-        },
-        comment: {
-            id: "comment-id-2",
-            content: "Et sunt Lorem deserunt pariatur fugiat deserunt id aliquip quis nisi incididunt incididunt laboris.",
-            date: new Date(),
-        },
-    },
-    {
-        id: "interaction-id-3",
-        isLiked: true,
-        rating: 9.5,
-        likeCount: 17,
-        replyCount: 5,
-        user: {
-            id: "user-id-3",
-            username: "username-3",
-            fullname: "User 3",
-            avatar: "avatar.jpg",
-        },
-        comment: {
-            id: "comment-id-3",
-            content: "Et sunt Lorem deserunt pariatur fugiat deserunt id aliquip quis nisi incididunt incididunt laboris.",
-            date: new Date(),
-        },
-    },
-];
+interface LatestCommentsProps {
+    interactions: GetMovieInteractionsItem[];
+}
 
-export default function LatestComments() {
+export default function LatestComments({ interactions }: LatestCommentsProps) {
     const router = useRouter();
     const { movieId } = useLocalSearchParams<{ movieId?: string }>();
 
@@ -68,6 +16,12 @@ export default function LatestComments() {
             router.push({ pathname: "/movie/[movieId]/interactions", params: { movieId } });
         }
     };
+
+    const commentInteractions = interactions.filter((item) => !!item.comment?.content);
+
+    if (commentInteractions.length === 0) {
+        return null;
+    }
 
     return (
         <View style={styles.container}>
@@ -78,9 +32,9 @@ export default function LatestComments() {
                 </TouchableOpacity>
             </View>
 
-            {comments.map((item) => (
+            {commentInteractions.map((item) => (
                 <View key={item.id} style={styles.commentItem}>
-                    <InteractionView data={item} />
+                    <InteractionView data={{ ...item, likeCount: 0, replyCount: 0 }} />
                 </View>
             ))}
         </View>

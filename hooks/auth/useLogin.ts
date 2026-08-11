@@ -42,8 +42,7 @@ const useLogin = () => {
             await AsyncStorage.setItem("token", accessToken);
             await AsyncStorage.setItem("refreshToken", refreshToken);
 
-            router.replace("/movies/movie-id");
-            //router.replace("/(tabs)/home");
+            router.replace("/(tabs)/home");
         } catch (error) {
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
