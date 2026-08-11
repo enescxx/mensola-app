@@ -26,4 +26,32 @@ interface MovieOverviewProps {
     movie: IMovieDetail | null;
 }
 
-export { IActionBtnProps, MovieDetailViewProps, MovieHeroProps, MovieOverviewProps };
+import { IMovieListOption } from "@/hooks/movie/useMovieLists";
+
+interface IAddToListBottomSheetProps {
+    isVisible: boolean;
+    onClose: () => void;
+    movieId?: string;
+    isWatchlisted?: boolean;
+    onStatusChange?: (status: { isWatchlisted: boolean; isInList: boolean }) => void;
+}
+
+interface IAddToListSheetItemProps {
+    item: IMovieListOption;
+    onToggle: (
+        id: string,
+        isWatchlist: boolean,
+        onStatusChange?: (status: { isWatchlisted: boolean; isInList: boolean }) => void
+    ) => void;
+    isLoading?: boolean;
+    onStatusChange?: (status: { isWatchlisted: boolean; isInList: boolean }) => void;
+}
+
+export {
+    IActionBtnProps,
+    MovieDetailViewProps,
+    MovieHeroProps,
+    MovieOverviewProps,
+    IAddToListBottomSheetProps,
+    IAddToListSheetItemProps,
+};

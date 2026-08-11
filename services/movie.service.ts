@@ -31,6 +31,37 @@ const MovieService = {
             auth: true,
         });
     },
+
+    addToWatchlist: async (movieId: string): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/movies/${movieId}/watchlist`, {}, {
+            auth: true,
+        });
+    },
+
+    removeFromWatchlist: async (movieId: string): Promise<ApiResponse> => {
+        return client.delete<ApiResponse>(`/movies/${movieId}/watchlist`, {
+            auth: true,
+        });
+    },
+
+    addMovieToList: async (listId: string, movieId: string): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/movies/lists/${listId}/items/${movieId}`, {}, {
+            auth: true,
+        });
+    },
+
+    removeMovieFromList: async (listId: string, movieId: string): Promise<ApiResponse> => {
+        return client.delete<ApiResponse>(`/movies/lists/${listId}/items/${movieId}`, {
+            auth: true,
+        });
+    },
+
+    getUserLists: async (movieId?: string, page = 1, limit = 20): Promise<ApiResponse> => {
+        const query = movieId ? `?movieId=${movieId}&page=${page}&limit=${limit}` : `?page=${page}&limit=${limit}`;
+        return client.get<ApiResponse>(`/movies/lists${query}`, {
+            auth: true,
+        });
+    },
 };
 
 export { MovieService };

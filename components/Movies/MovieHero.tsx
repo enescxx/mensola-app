@@ -9,6 +9,7 @@ import ActionButton from "./ActionButton";
 import { MovieHeroProps } from "./types";
 import { useWatched } from "@/hooks/movie/useWatched";
 import { useLike } from "@/hooks/movie/useLike";
+import AddToListBottomSheet from "./AddToListBottomSheet";
 
 const formatReleaseYear = (releaseDate?: string | Date) => {
     if (!releaseDate) return "";
@@ -31,6 +32,10 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
     const [isLiked, setIsLiked] = useState<boolean>(movie?.currentUserInteraction?.isLiked ?? false);
     const [likesCount, setLikesCount] = useState<number>(movie?.likesCount ?? 0);
 
+    const [isAddToListOpen, setIsAddToListOpen] = useState<boolean>(false);
+    const [isInList, setIsInList] = useState<boolean>(movie?.isInList ?? false);
+    const [isWatchlisted, setIsWatchlisted] = useState<boolean>(movie?.isWatchlisted ?? false);
+
     const commentsCount = movie?.commentsCount ?? movie?.interactions?.length ?? 0;
 
     useEffect(() => {
@@ -38,6 +43,18 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
             setIsWatched(movie.isWatched);
         }
     }, [movie?.isWatched]);
+
+    useEffect(() => {
+        if (movie?.isInList !== undefined) {
+            setIsInList(movie.isInList);
+        }
+    }, [movie?.isInList]);
+
+    useEffect(() => {
+        if (movie?.isWatchlisted !== undefined) {
+            setIsWatchlisted(movie.isWatchlisted);
+        }
+    }, [movie?.isWatchlisted]);
 
     useEffect(() => {
         if (movie?.currentUserInteraction?.isLiked !== undefined) {
@@ -136,7 +153,12 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                             onPress={handleWatchedToggle}
                             isLoading={isWatchedLoading}
                         />
-                        <ActionButton icon="add" isActive={true} activeColor="#38BDF866" />
+                        <ActionButton
+                            icon="add"
+                            isActive={isInList}
+                            activeColor="#38BDF866"
+                            onPress={() => setIsAddToListOpen(true)}
+                        />
                         <ActionButton
                             icon="heart"
                             isActive={isLiked}
@@ -152,6 +174,17 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                     </View>
                 </View>
             </View>
+
+            <AddToListBottomSheet
+                isVisible={isAddToListOpen}
+                onClose={() => setIsAddToListOpen(false)}
+                movieId={movie?.id}
+                isWatchlisted={isWatchlisted}
+                onStatusChange={({ isWatchlisted: updatedWatchlisted, isInList: updatedInList }) => {
+                    setIsWatchlisted(updatedWatchlisted);
+                    setIsInList(updatedInList);
+                }}
+            />
         </View>
     );
 }

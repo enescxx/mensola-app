@@ -53,4 +53,51 @@ export const styles = StyleSheet.create({
     overview: { color: "#8c8c8c" },
     expandBtn: {},
     expandBtnText: { color: "#fff" },
+    listItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 14,
+        paddingHorizontal: 4,
+        borderBottomWidth: 1,
+        borderBottomColor: "#2A2A2A",
+    },
+    listItemLeft: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12,
+        flex: 1,
+    },
+    listItemIcon: {
+        color: "#A7A7A7",
+        fontSize: 20,
+    },
+    listItemTitle: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontWeight: "500",
+        flex: 1,
+    },
+    checkbox: {
+        width: 24,
+        height: 24,
+        borderRadius: 6,
+        borderWidth: 2,
+        borderColor: "#555555",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    checkboxChecked: {
+        backgroundColor: "#1DB954",
+        borderColor: "#1DB954",
+    },
+    listContainer: {
+        paddingVertical: 8,
+    },
+    sheetError: {
+        color: "#FF3B30",
+        fontSize: 14,
+        marginBottom: 8,
+        textAlign: "center",
+    },
 });
