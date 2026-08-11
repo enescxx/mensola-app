@@ -86,3 +86,5 @@ export default function InteractionView({ data }: IInteractionViewProps) {
         </View>
     );
 }
+
+export { default as InteractionSheet } from "./InteractionSheet";
