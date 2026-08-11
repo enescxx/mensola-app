@@ -10,6 +10,8 @@ import { MovieHeroProps } from "./types";
 import { useWatched } from "@/hooks/movie/useWatched";
 import { useLike } from "@/hooks/movie/useLike";
 import AddToListBottomSheet from "./AddToListBottomSheet";
+import InteractionSheet from "../Interaction/InteractionSheet";
+import { MovieService } from "@/services/movie.service";
 
 const formatReleaseYear = (releaseDate?: string | Date) => {
     if (!releaseDate) return "";
@@ -33,8 +35,16 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
     const [likesCount, setLikesCount] = useState<number>(movie?.likesCount ?? 0);
 
     const [isAddToListOpen, setIsAddToListOpen] = useState<boolean>(false);
+    const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
+
     const [isInList, setIsInList] = useState<boolean>(movie?.isInList ?? false);
     const [isWatchlisted, setIsWatchlisted] = useState<boolean>(movie?.isWatchlisted ?? false);
+    const [userRating, setUserRating] = useState<number>(movie?.currentUserInteraction?.rating ?? 0);
+    const [userComment, setUserComment] = useState<string>(
+        movie?.currentUserInteraction?.comment?.content ||
+            (movie?.currentUserInteraction as any)?.review?.content ||
+            "",
+    );
 
     const commentsCount = movie?.commentsCount ?? movie?.interactions?.length ?? 0;
 
@@ -61,6 +71,20 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
             setIsLiked(movie.currentUserInteraction.isLiked);
         }
     }, [movie?.currentUserInteraction?.isLiked]);
+
+    useEffect(() => {
+        if (movie?.currentUserInteraction?.rating !== undefined) {
+            setUserRating(movie.currentUserInteraction.rating);
+        }
+    }, [movie?.currentUserInteraction?.rating]);
+
+    useEffect(() => {
+        const commentContent =
+            movie?.currentUserInteraction?.comment?.content || (movie?.currentUserInteraction as any)?.review?.content;
+        if (commentContent !== undefined) {
+            setUserComment(commentContent);
+        }
+    }, [movie?.currentUserInteraction?.comment?.content, (movie?.currentUserInteraction as any)?.review?.content]);
 
     useEffect(() => {
         if (movie?.likesCount !== undefined) {
@@ -168,8 +192,11 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                         />
                         <ActionButton
                             icon="star"
-                            isActive={!!movie?.currentUserInteraction?.rating}
+                            isActive={
+                                userRating > 0 || (typeof userComment === "string" && userComment.trim().length > 0)
+                            }
                             activeColor="#FFCC0066"
+                            onPress={() => setIsInteractionSheetOpen(true)}
                         />
                     </View>
                 </View>
@@ -183,6 +210,40 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                 onStatusChange={({ isWatchlisted: updatedWatchlisted, isInList: updatedInList }) => {
                     setIsWatchlisted(updatedWatchlisted);
                     setIsInList(updatedInList);
+                }}
+            />
+
+            <InteractionSheet
+                isVisible={isInteractionSheetOpen}
+                onClose={() => setIsInteractionSheetOpen(false)}
+                targetType="movie"
+                targetId={movie?.id ?? ""}
+                mediaTitle={movie?.title ?? ""}
+                mediaTypeTitle="Film"
+                mediaPoster={movie?.poster}
+                initialRating={userRating}
+                initialComment={userComment}
+                initialIsLiked={isLiked}
+                onSubmit={async ({ rating, comment, isLiked: updatedIsLiked }) => {
+                    if (!movie?.id) return;
+
+                    await MovieService.createOrUpdateInteraction(movie.id, {
+                        rating,
+                        comment,
+                        isLiked: updatedIsLiked,
+                    });
+
+                    setUserRating(rating);
+                    setUserComment(comment);
+
+                    if (updatedIsLiked !== isLiked) {
+                        setIsLiked(updatedIsLiked);
+                        if (updatedIsLiked) {
+                            setLikesCount((prev) => prev + 1);
+                        } else {
+                            setLikesCount((prev) => Math.max(0, prev - 1));
+                        }
+                    }
                 }}
             />
         </View>

@@ -62,6 +62,15 @@ const MovieService = {
             auth: true,
         });
     },
+
+    createOrUpdateInteraction: async (
+        movieId: string,
+        data: { rating?: number; comment?: string; isLiked?: boolean }
+    ): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/movies/${movieId}/interaction`, data, {
+            auth: true,
+        });
+    },
 };
 
 export { MovieService };

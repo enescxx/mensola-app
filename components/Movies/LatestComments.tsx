@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import InteractionView from "../Inteaction";
+import InteractionView from "../Interaction";
 import { GetMovieInteractionsItem } from "../../types";
 
 interface LatestCommentsProps {
