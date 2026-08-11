@@ -1,0 +1,88 @@
+import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { styles } from "./styles";
+import { IInteractionViewProps } from "./types";
+import Badge from "../Badge";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+
+export default function InteractionView({ data }: IInteractionViewProps) {
+    const { user, comment, likeCount, replyCount, ...interaction } = data;
+    const router = useRouter();
+
+    const formatDate = (date: Date | string): string => {
+        const parsedDate = typeof date === "string" ? new Date(date) : date;
+
+        if (Number.isNaN(parsedDate.getTime())) {
+            return "Bilinmiyor";
+        }
+
+        return parsedDate.toLocaleDateString("tr-TR", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+    };
+
+    const hasRating = typeof interaction.rating === "number" && interaction.rating > 0;
+
+    const handleUserPress = () => {
+        router.push({ pathname: "/users/[userId]", params: { userId: user.id } });
+    };
+
+    const handleInteractionPress = () => {
+        router.push({ pathname: "/interactions/[interactionId]", params: { interactionId: data.id } });
+    };
+
+    const handleLikePress = () => {
+        console.log("Liked");
+    };
+
+    const handleReplyPress = () => {
+        console.log("Replied");
+    };
+
+    return (
+        <View style={styles.container}>
+            <Pressable style={styles.cardContent} onPress={handleInteractionPress} android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
+                <View style={styles.headerContainer}>
+                    <TouchableOpacity style={styles.userInfoContainer} onPress={handleUserPress} activeOpacity={0.8}>
+                        <View style={styles.avatarWrapper}>
+                            <Image style={styles.avatarImg} source={{ uri: user.avatar }} />
+                        </View>
+                        <View style={styles.nameWrapper}>
+                            <Text style={styles.fullname}>{user.fullname || user.username}</Text>
+                            <Text style={styles.username}>@{user.username}</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <View style={styles.interactionInfo}>
+                        <Text style={styles.date}>{formatDate(comment.date)}</Text>
+                        <View style={styles.badges}>
+                            {hasRating ? (
+                                <Badge icon={<Ionicons name="star" color="#FF8000" />} value={interaction.rating} style={styles.badgeItem} />
+                            ) : null}
+                            {interaction.isLiked ? (
+                                <Badge icon={<Ionicons name="heart" color="#FF8000" />} style={styles.badgeItem} />
+                            ) : null}
+                        </View>
+                    </View>
+                </View>
+
+                <Pressable style={styles.commentContainer} onPress={handleInteractionPress} android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
+                    <Text style={styles.comment}>{comment.content}</Text>
+                </Pressable>
+
+                <View style={styles.actionButtons}>
+                    <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleLikePress}>
+                        <Ionicons name="heart-outline" size={14} color="#ff8a3d" />
+                        <Text style={styles.actionButtonText}>{likeCount}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleReplyPress}>
+                        <Ionicons name="chatbubble-outline" size={14} color="#ff8a3d" />
+                        <Text style={styles.actionButtonText}>{replyCount}</Text>
+                    </TouchableOpacity>
+                </View>
+            </Pressable>
+        </View>
+    );
+}
