@@ -46,7 +46,7 @@ const useRegister = () => {
             const response = await AuthService.register({
                 username,
                 email,
-                password
+                password,
             });
 
             const user = response.data.user;
@@ -62,14 +62,9 @@ const useRegister = () => {
         } catch (error) {
             if (error && error.success === false) {
                 const apiErrorMessage = error.error?.message || error?.message;
-                setError(
-                    apiErrorMessage ||
-                        "Kayıt yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
-                );
+                setError(apiErrorMessage || "Kayıt yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
             } else {
-                setError(
-                    "Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz."
-                );
+                setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
         } finally {
             setIsLoading(false);
@@ -87,7 +82,7 @@ const useRegister = () => {
         setConfirmPassword,
         isLoading,
         error,
-        handleRegister
+        handleRegister,
     };
 };
 

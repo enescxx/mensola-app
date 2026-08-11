@@ -1,11 +1,4 @@
-export type CommentTargetType =
-    | "movie"
-    | "tv"
-    | "song"
-    | "album"
-    | "playlist"
-    | "movieList"
-    | "comment";
+type CommentTargetType = "movie" | "tv" | "song" | "album" | "playlist" | "movieList" | "comment";
 
 interface IComment {
     id: string;
@@ -19,7 +12,7 @@ interface IComment {
     rating?: number;
     likesCount: number;
     repliesCount: number;
-    createdAt: string;
+    createdAt: Date | string;
 }
 
 export { IComment, CommentTargetType };

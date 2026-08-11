@@ -1,0 +1,56 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+    posterWrapper: { width: 120 },
+    poster: {
+        width: "100%",
+        aspectRatio: 2 / 3,
+        borderRadius: 16,
+        marginBottom: 8,
+        backgroundColor: "#1e1e1e",
+    },
+    heroBanner: {
+        height: 320,
+        width: "100%",
+        position: "relative",
+    },
+    bannerGradient: {
+        ...StyleSheet.absoluteFill,
+    },
+    bannerBackgroundImg: {
+        width: "100%",
+        height: "100%",
+    },
+    bannerContent: {
+        position: "absolute",
+        bottom: 10,
+        left: 16,
+        right: 16,
+        flexDirection: "row",
+        alignItems: "flex-end",
+        gap: 16,
+    },
+    infoContainer: { flex: 1, gap: 1 },
+    titleWrapper: { flexDirection: "row", alignItems: "center", gap: 8 },
+    movieTitle: { color: "#fff", fontSize: 22, fontWeight: "bold" },
+    releaseDate: { color: "#b3b3b3", fontSize: 14 },
+    metaWrapper: { flexDirection: "row", alignItems: "center", gap: 8 },
+    duration: { color: "#b3b3b3", fontSize: 14 },
+    dot: { color: "#8c8c8c", fontSize: 16 },
+    genres: { color: "#b3b3b3", fontSize: 14 },
+    movieStats: { flexDirection: "row", marginTop: 8, gap: 4 },
+    actionBar: { flexDirection: "row", gap: 8, marginTop: 8 },
+    actionBtn: {
+        alignItems: "center",
+        justifyContent: "center",
+        width: 48,
+        height: 48,
+        borderRadius: 32,
+        backgroundColor: "rgba(255, 255, 255, 0.08)",
+    },
+    actionBtnIcon: { color: "#fff", fontSize: 18 },
+    overviewWrapper: { paddingHorizontal: 16 },
+    overview: { color: "#8c8c8c" },
+    expandBtn: {},
+    expandBtnText: { color: "#fff" },
+});

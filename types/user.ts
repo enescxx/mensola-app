@@ -1,5 +1,5 @@
-import { IMovie } from "./movie";
-import { ITrack, IArtist, IPlaylist, IMovieList } from "./music";
+import { IMovie, IMovieList } from "./movie";
+import { ITrack, IPlaylist, IAlbum } from "./music";
 import { IComment } from "./comment";
 
 type StatTypes =
