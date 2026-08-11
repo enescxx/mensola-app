@@ -19,6 +19,18 @@ const MovieService = {
             auth: true,
         });
     },
+
+    likeMovie: async (movieId: string): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/movies/${movieId}/like`, {}, {
+            auth: true,
+        });
+    },
+
+    unlikeMovie: async (movieId: string): Promise<ApiResponse> => {
+        return client.delete<ApiResponse>(`/movies/${movieId}/like`, {
+            auth: true,
+        });
+    },
 };
 
 export { MovieService };

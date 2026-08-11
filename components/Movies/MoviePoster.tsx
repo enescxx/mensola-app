@@ -6,5 +6,5 @@ export default function MoviePoster() {
         <View style={styles.posterWrapper}>
             <Image source={{ uri: "aaa.jpg" }} style={styles.poster} />
         </View>
-    )
+    );
 }

@@ -20,6 +20,8 @@ type GetMovieInteractionsItem = Pick<IUserInteraction, "id" | "isLiked" | "ratin
 
 interface IMovieDetail extends IMovie {
     isWatched?: boolean;
+    likesCount?: number;
+    commentsCount?: number;
     interactions: GetMovieInteractionsItem[];
     currentUserInteraction: Omit<GetMovieInteractionsItem, "user">;
 }
