@@ -71,7 +71,47 @@ const MovieService = {
             auth: true,
         });
     },
+
+    getMovieListDetails: async (listId: string): Promise<ApiResponse> => {
+        return client.get<ApiResponse>(`/movies/lists/${listId}`, {
+            auth: true,
+        });
+    },
+
+    getMovieListItems: async (listId: string, page = 1, limit = 18): Promise<ApiResponse> => {
+        return client.get<ApiResponse>(`/movies/lists/${listId}/items?page=${page}&limit=${limit}`, {
+            auth: true,
+        });
+    },
+
+    getMovieListInteractions: async (listId: string, page = 1, limit = 18): Promise<ApiResponse> => {
+        return client.get<ApiResponse>(`/movies/lists/${listId}/interactions?page=${page}&limit=${limit}`, {
+            auth: true,
+        });
+    },
+
+    createOrUpdateListInteraction: async (
+        listId: string,
+        data: { rating?: number; comment?: string; isLiked?: boolean }
+    ): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/movies/lists/${listId}/interaction`, data, {
+            auth: true,
+        });
+    },
+
+    likeMovieList: async (listId: string): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/movies/lists/${listId}/like`, {}, {
+            auth: true,
+        });
+    },
+
+    unlikeMovieList: async (listId: string): Promise<ApiResponse> => {
+        return client.delete<ApiResponse>(`/movies/lists/${listId}/like`, {
+            auth: true,
+        });
+    },
 };
 
 export { MovieService };
+
 
