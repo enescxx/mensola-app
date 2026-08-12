@@ -12,8 +12,9 @@ export const styles = StyleSheet.create({
     },
     badgeText: {
         color: "#FF8000",
-        fontSize: 14,
+        fontSize: 12,
         fontWeight: "bold",
         marginLeft: 4,
+        includeFontPadding: false,
     },
 });

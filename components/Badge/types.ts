@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, TextStyle, ViewStyle } from "react-native";
 
 interface IBadgeProps {
     icon: ReactNode;
-    value?: number;
+    value?: number | string;
     onPress?: () => void;
     style?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
 }
 
 export { IBadgeProps };

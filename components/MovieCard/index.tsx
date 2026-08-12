@@ -1,4 +1,4 @@
-import { TouchableOpacity, Image } from "react-native";
+import { TouchableOpacity, Image, View, Text } from "react-native";
 
 import { styles } from "./styles";
 import { IMovieCardProps } from "./types";
@@ -15,8 +15,13 @@ export default function MovieCard({
 }: IMovieCardProps) {
     return (
         <TouchableOpacity onPress={onPress} style={[styles.movieCard, style]} activeOpacity={0.7}>
-            <Image source={{ uri: poster }} style={styles.poster} accessibilityLabel={title} />
-            {interactions && <MovieCardFooter interactions={interactions} variant={variant} />}
+            <View style={styles.posterContainer}>
+                <Image source={{ uri: poster }} style={styles.poster} accessibilityLabel={title} />
+                {interactions && <MovieCardFooter interactions={interactions} variant={variant} />}
+            </View>
+            <Text style={styles.title} numberOfLines={2}>
+                {title}
+            </Text>
         </TouchableOpacity>
     );
 }
