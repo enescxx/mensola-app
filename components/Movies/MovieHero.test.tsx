@@ -1,0 +1,69 @@
+import React from "react";
+import { render } from "@testing-library/react-native";
+import MovieHero from "./MovieHero";
+
+jest.mock("@/hooks/movie/useWatched", () => ({
+    useWatched: () => ({
+        markAsWatched: jest.fn(),
+        unmarkAsWatched: jest.fn(),
+        isLoading: false,
+    }),
+}));
+
+jest.mock("@/hooks/movie/useLike", () => ({
+    useLike: () => ({
+        likeMovie: jest.fn(),
+        unlikeMovie: jest.fn(),
+        isLoading: false,
+    }),
+}));
+
+jest.mock("@/services/movie.service", () => ({
+    MovieService: {
+        getUserLists: jest.fn().mockResolvedValue({ data: [] }),
+        createOrUpdateInteraction: jest.fn().mockResolvedValue({ success: true }),
+    },
+}));
+
+describe("MovieHero Component", () => {
+    const mockMovie = {
+        id: "movie-123",
+        tmdbId: "tmdb-456",
+        title: "Interstellar",
+        poster: "https://example.com/poster.jpg",
+        bannerUrl: "https://example.com/banner.jpg",
+        releaseDate: "2014-11-07T00:00:00Z",
+        duration: 169,
+        genres: ["Sci-Fi", "Drama"],
+        rating: 8.7,
+        likesCount: 1250,
+        commentsCount: 340,
+        isWatched: false,
+        isInList: false,
+        isWatchlisted: false,
+        currentUserInteraction: null,
+    };
+
+    it("should render movie title, release year, duration, and genres", () => {
+        const { getByText } = render(<MovieHero movie={mockMovie as any} />);
+
+        expect(getByText("Interstellar")).toBeTruthy();
+        expect(getByText("(2014)")).toBeTruthy();
+        expect(getByText("169 dk")).toBeTruthy();
+        expect(getByText("Sci-Fi, Drama")).toBeTruthy();
+    });
+
+    it("should render stats badges for rating, likesCount, and commentsCount", () => {
+        const { getByText } = render(<MovieHero movie={mockMovie as any} />);
+
+        expect(getByText("8.7")).toBeTruthy();
+        expect(getByText("1250")).toBeTruthy();
+        expect(getByText("340")).toBeTruthy();
+    });
+
+    it("should render null when movie prop is not provided", () => {
+        const { queryByText } = render(<MovieHero movie={undefined} />);
+
+        expect(queryByText("Interstellar")).toBeNull();
+    });
+});
