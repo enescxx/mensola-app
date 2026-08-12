@@ -1,49 +1,57 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { Ionicons, Entypo } from "@expo/vector-icons";
 
+import Badge from "@/components/Badge";
 import { styles } from "./styles";
 import { IMovieCardFooterProps } from "./types";
 
 export default function MovieCardFooter({
     interactions,
-    variant
+    variant = "profile",
 }: IMovieCardFooterProps) {
     const isProfile = variant === "profile";
 
     return (
-        <View style={styles.cardFooter}>
-            {interactions.rating && (
-                <View style={styles.badge}>
-                    <Ionicons name="star" size={12} color="#FF8000" />
-                    <Text style={styles.badgeText}>{interactions.rating}</Text>
-                </View>
-            )}
-            {typeof interactions?.likes === "number" &&
-            interactions.likes > 0 ? (
-                <View style={styles.badge}>
-                    <Ionicons name="heart" size={12} color="#FF8000" />
-                    {!isProfile && (
-                        <Text style={styles.badgeText}>
-                            {interactions.likes}
-                        </Text>
-                    )}
-                </View>
-            ) : interactions?.likes === true ? (
-                <Ionicons name="heart" size={12} color="#FF8000" />
+        <View style={styles.badgeContainer}>
+            {interactions.rating ? (
+                <Badge
+                    icon={<Ionicons name="star" size={10} color="#FF8000" />}
+                    value={interactions.rating}
+                    style={styles.badgeItem}
+                    textStyle={styles.badgeText}
+                />
             ) : null}
 
-            {typeof interactions?.reviews === "number" &&
-            interactions.reviews > 0 ? (
-                <View style={styles.badge}>
-                    <Entypo name="text" size={12} color="#FF8000" />
-                    {!isProfile && (
-                        <Text style={styles.badgeText}>
-                            {interactions.reviews}
-                        </Text>
-                    )}
-                </View>
-            ) : interactions?.reviews === true ? (
-                <Entypo name="text" size={12} color="#FF8000" />
+            {isProfile ? (
+                interactions.isLiked ? (
+                    <Badge
+                        icon={<Ionicons name="heart" size={10} color="#FF8000" />}
+                        style={styles.badgeItem}
+                    />
+                ) : null
+            ) : interactions.totalLikes && interactions.totalLikes > 0 ? (
+                <Badge
+                    icon={<Ionicons name="heart" size={10} color="#FF8000" />}
+                    value={interactions.totalLikes}
+                    style={styles.badgeItem}
+                    textStyle={styles.badgeText}
+                />
+            ) : null}
+
+            {isProfile ? (
+                interactions.hasReview ? (
+                    <Badge
+                        icon={<Entypo name="text" size={10} color="#FF8000" />}
+                        style={styles.badgeItem}
+                    />
+                ) : null
+            ) : interactions.totalReviews && interactions.totalReviews > 0 ? (
+                <Badge
+                    icon={<Entypo name="text" size={10} color="#FF8000" />}
+                    value={interactions.totalReviews}
+                    style={styles.badgeItem}
+                    textStyle={styles.badgeText}
+                />
             ) : null}
         </View>
     );
