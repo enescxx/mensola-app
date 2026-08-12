@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { MovieService } from "@/services/movie.service";
+import { BookmarkService } from "@/services/bookmark.service";
 
 export interface IMovieListItem {
     id: string;
@@ -29,7 +30,9 @@ export interface IMovieListDetails {
     creatorId?: string;
     owners?: IMovieListOwner[];
     isLiked?: boolean;
+    isSaved?: boolean;
     likesCount?: number;
+    savesCount?: number;
     currentUserInteraction?: {
         id?: string;
         rating?: number;
@@ -140,6 +143,29 @@ export const useMovieListDetails = (listId?: string) => {
         }
     };
 
+    const toggleSave = async () => {
+        if (!listId || !listDetails) return;
+
+        const currentIsSaved = !!listDetails.isSaved;
+        const currentSavesCount = listDetails.savesCount || 0;
+        const newIsSaved = !currentIsSaved;
+        const newSavesCount = newIsSaved ? currentSavesCount + 1 : Math.max(0, currentSavesCount - 1);
+
+        // Optimistic Update
+        setListDetails((prev) => (prev ? { ...prev, isSaved: newIsSaved, savesCount: newSavesCount } : prev));
+
+        try {
+            const res = await BookmarkService.toggleBookmark(listId, "movieList");
+            const isSavedResult = res.data?.isSaved;
+            if (typeof isSavedResult === "boolean") {
+                setListDetails((prev) => (prev ? { ...prev, isSaved: isSavedResult } : prev));
+            }
+        } catch (err) {
+            // Revert on error
+            setListDetails((prev) => (prev ? { ...prev, isSaved: currentIsSaved, savesCount: currentSavesCount } : prev));
+        }
+    };
+
     const submitInteraction = async (data: { rating?: number; comment?: string; isLiked?: boolean }) => {
         if (!listId) return;
         await MovieService.createOrUpdateListInteraction(listId, data);
@@ -155,6 +181,7 @@ export const useMovieListDetails = (listId?: string) => {
         error,
         refetch: () => fetchData(true),
         toggleLike,
+        toggleSave,
         submitInteraction,
     };
 };
