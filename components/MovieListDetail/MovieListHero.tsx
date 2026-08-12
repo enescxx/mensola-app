@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     NativeSyntheticEvent,
     TextLayoutEventData,
+    Share,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Entypo, Ionicons } from "@expo/vector-icons";
@@ -16,8 +17,16 @@ import Badge from "@/components/Badge";
 import MovieListOwnersBottomSheet from "./MovieListOwnersBottomSheet";
 import { styles } from "./styles";
 import { IMovieListHeroProps } from "./types";
+import { shareMovieList } from "@/utils/share";
 
-export default function MovieListHero({ listDetails, moviesCount, commentsCount, toggleLike, onCommentPress }: IMovieListHeroProps) {
+export default function MovieListHero({
+    listDetails,
+    moviesCount,
+    commentsCount,
+    toggleLike,
+    onCommentPress,
+    onSharePress,
+}: IMovieListHeroProps) {
     const [isOwnersSheetVisible, setIsOwnersSheetVisible] = useState(false);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
     const [isDescriptionTruncated, setIsDescriptionTruncated] = useState(false);
@@ -40,6 +49,20 @@ export default function MovieListHero({ listDetails, moviesCount, commentsCount,
         if (e.nativeEvent.lines.length > 2 && !isDescriptionTruncated) {
             setIsDescriptionTruncated(true);
         }
+    };
+
+    const handleShare = async () => {
+        if (onSharePress) {
+            onSharePress();
+            return;
+        }
+
+        if (!listDetails) return;
+
+        await shareMovieList({
+            id: listDetails.id,
+            title: listDetails.title,
+        });
     };
 
     return (
@@ -128,9 +151,7 @@ export default function MovieListHero({ listDetails, moviesCount, commentsCount,
                                 icon="share-social-outline"
                                 isActive={false}
                                 activeColor="#38BDF866"
-                                onPress={() => {
-                                    /* Placeholder for share */
-                                }}
+                                onPress={handleShare}
                             />
 
                             {/* 3. Beğen */}

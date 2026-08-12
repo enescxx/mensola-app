@@ -6,6 +6,7 @@ export interface IMovieListHeroProps {
     commentsCount?: number;
     toggleLike: () => void;
     onCommentPress?: () => void;
+    onSharePress?: () => void;
 }
 
 export type IMovieListHeaderProps = IMovieListHeroProps;
