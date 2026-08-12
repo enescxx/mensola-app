@@ -4,11 +4,11 @@ import { GetProfileResponse, GetStatDetailsResponse } from "../types";
 
 const STAT_ENDPOINT_MAP: Record<string, string> = {
     "movie-lists": "/movies/lists",
-    playlists: "/playlists", //
+    playlists: "/playlists",
     watchlist: "/movies/watchlist",
     watched: "/movies/watched",
     "liked-movies": "/movies/likes",
-    "liked-tracks": "/tracks/liked", //
+    "liked-tracks": "/tracks/likes",
     "liked-playlists": "/playlists/likes", //
     "liked-movie-lists": "/movies/lists/likes",
     "liked-albums": "/albums/likes", //

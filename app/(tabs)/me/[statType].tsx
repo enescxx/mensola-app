@@ -98,7 +98,7 @@ export default function StatDetailPage() {
             case "liked-playlists":
             case "liked-albums":
             case "favorite-tracks":
-                let type: "song" | "playlist" | "album" = "song";
+                let type: "track" | "playlist" | "album" = "track";
 
                 if (statType.includes("playlist")) {
                     type = "playlist";
@@ -120,17 +120,21 @@ export default function StatDetailPage() {
                     }
                 };
 
-                return (
-                    <MusicCard
-                        type={type}
-                        data={item}
-                        variant="row"
-                        onPress={() => {
-                            handleMusicCardPress();
-                        }}
-                        style={{ width: "31%" }}
-                    />
-                );
+                const musicCardProps: any = {
+                    type,
+                    data: item,
+                    variant: "row",
+                    onPress: () => {
+                        handleMusicCardPress();
+                    },
+                    style: { width: "31%" },
+                };
+
+                if (statType === "playlists") {
+                    musicCardProps.hideCreator = true;
+                }
+
+                return <MusicCard {...musicCardProps} />;
             case "watchlist":
             case "watched":
             case "liked-movies":
