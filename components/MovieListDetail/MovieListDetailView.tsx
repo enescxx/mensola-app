@@ -20,6 +20,7 @@ export default function MovieListDetailView({
     error,
     refetch,
     toggleLike,
+    toggleSave,
     submitInteraction,
 }: IMovieListDetailViewProps) {
     const router = useRouter();
@@ -104,6 +105,7 @@ export default function MovieListDetailView({
                             moviesCount={movies.length}
                             commentsCount={interactions.length}
                             toggleLike={toggleLike}
+                            toggleSave={toggleSave}
                             onCommentPress={() => setIsInteractionSheetOpen(true)}
                         />
                         <View style={styles.tabContainer}>

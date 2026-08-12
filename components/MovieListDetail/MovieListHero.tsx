@@ -24,13 +24,13 @@ export default function MovieListHero({
     moviesCount,
     commentsCount,
     toggleLike,
+    toggleSave,
     onCommentPress,
     onSharePress,
 }: IMovieListHeroProps) {
     const [isOwnersSheetVisible, setIsOwnersSheetVisible] = useState(false);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
     const [isDescriptionTruncated, setIsDescriptionTruncated] = useState(false);
-    const [isSaved, setIsSaved] = useState(false);
 
     if (!listDetails) return null;
 
@@ -41,8 +41,9 @@ export default function MovieListHero({
     const ownerText = othersCount > 0 ? `${creatorName} ve ${othersCount} diğer yönetici` : creatorName;
     const likesCount = listDetails.likesCount || 0;
 
-    const userRating = listDetails.currentUserInteraction?.rating || 0;
-    const userComment = listDetails.currentUserInteraction?.comment?.content || "";
+    const isSaved = listDetails?.isSaved ?? false;
+    const userRating = listDetails?.currentUserInteraction?.rating || 0;
+    const userComment = listDetails?.currentUserInteraction?.comment?.content || "";
     const hasUserInteraction = userRating > 0 || (typeof userComment === "string" && userComment.trim().length > 0);
 
     const handleTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
@@ -135,6 +136,10 @@ export default function MovieListHero({
                                 icon={<Entypo name="text" size={12} color="#FF8000" />}
                                 value={commentsCount ?? 0}
                             />
+                            <Badge
+                                icon={<Ionicons name="bookmark" size={12} color="#FF8000" />}
+                                value={listDetails.savesCount ?? 0}
+                            />
                         </View>
 
                         <View style={styles.actionBar}>
@@ -143,7 +148,7 @@ export default function MovieListHero({
                                 icon={isSaved ? "bookmark" : "bookmark-outline"}
                                 isActive={isSaved}
                                 activeColor="#1DB95466"
-                                onPress={() => setIsSaved((prev) => !prev)}
+                                onPress={toggleSave}
                             />
 
                             {/* 2. Paylaş */}

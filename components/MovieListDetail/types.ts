@@ -5,6 +5,7 @@ export interface IMovieListHeroProps {
     moviesCount: number;
     commentsCount?: number;
     toggleLike: () => void;
+    toggleSave?: () => void;
     onCommentPress?: () => void;
     onSharePress?: () => void;
 }
@@ -20,6 +21,7 @@ export interface IMovieListDetailViewProps {
     error: string;
     refetch: () => void;
     toggleLike: () => void;
+    toggleSave?: () => void;
     submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
 }
 

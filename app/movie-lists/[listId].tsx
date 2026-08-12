@@ -5,7 +5,7 @@ import { useMovieListDetails } from "@/hooks/movie/useMovieListDetails";
 
 export default function MovieListDetailPage() {
     const { listId } = useLocalSearchParams<{ listId?: string }>();
-    const { listDetails, movies, interactions, isLoading, isRefetching, error, refetch, toggleLike, submitInteraction } = useMovieListDetails(listId);
+    const { listDetails, movies, interactions, isLoading, isRefetching, error, refetch, toggleLike, toggleSave, submitInteraction } = useMovieListDetails(listId);
 
     return (
         <>
@@ -23,6 +23,7 @@ export default function MovieListDetailPage() {
                 error={error}
                 refetch={refetch}
                 toggleLike={toggleLike}
+                toggleSave={toggleSave}
                 submitInteraction={submitInteraction}
             />
         </>
