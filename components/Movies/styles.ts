@@ -9,6 +9,11 @@ export const styles = StyleSheet.create({
         marginBottom: 8,
         backgroundColor: "#1e1e1e",
     },
+    posterPlaceholder: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#222222",
+    },
     heroBanner: {
         height: 320,
         width: "100%",

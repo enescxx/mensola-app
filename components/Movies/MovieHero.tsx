@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { Alert, ImageBackground, Text, View } from "react-native";
+import { Alert, ImageBackground, Text, View, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "./styles";
-import MoviePoster from "./MoviePoster";
 import Badge from "../Badge";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import ActionButton from "./ActionButton";
@@ -140,14 +139,33 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
 
     return (
         <View style={styles.heroBanner}>
-            <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: movie?.poster ?? "aaa.jpg" }}>
-                <LinearGradient
-                    colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
-                    style={styles.bannerGradient}
-                />
-            </ImageBackground>
+            {movie?.poster ? (
+                <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: movie.poster }}>
+                    <LinearGradient
+                        colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                        style={styles.bannerGradient}
+                    />
+                </ImageBackground>
+            ) : (
+                <View style={[styles.bannerBackgroundImg, { backgroundColor: "#1e1e1e" }]}>
+                    <LinearGradient
+                        colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                        style={styles.bannerGradient}
+                    />
+                </View>
+            )}
+
             <View style={styles.bannerContent}>
-                <MoviePoster />
+                <View style={styles.posterWrapper}>
+                    {movie?.poster ? (
+                        <Image source={{ uri: movie.poster }} style={styles.poster} resizeMode="cover" />
+                    ) : (
+                        <View style={[styles.poster, styles.posterPlaceholder]}>
+                            <Ionicons name="film-outline" size={36} color="#666" />
+                        </View>
+                    )}
+                </View>
+
                 <View style={styles.infoContainer}>
                     <View style={styles.titleWrapper}>
                         <Text style={styles.movieTitle}>{movie?.title ?? "Film bilgileri yükleniyor"}</Text>
