@@ -21,9 +21,13 @@ const PlaylistService = {
     },
 
     likePlaylist: async (playlistId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/playlists/${playlistId}/like`, {}, {
-            auth: true,
-        });
+        return client.post<ApiResponse>(
+            `/playlists/${playlistId}/like`,
+            {},
+            {
+                auth: true,
+            },
+        );
     },
 
     unlikePlaylist: async (playlistId: string): Promise<ApiResponse> => {
@@ -34,9 +38,28 @@ const PlaylistService = {
 
     createOrUpdateInteraction: async (
         playlistId: string,
-        data: { rating?: number; comment?: string; isLiked?: boolean }
+        data: { rating?: number; comment?: string; isLiked?: boolean },
     ): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/playlists/${playlistId}/interaction`, data, {
+        return client.post<ApiResponse>(`/playlists/${playlistId}/interactions`, data, {
+            auth: true,
+        });
+    },
+
+    getUserPlaylists: async (trackId?: string): Promise<ApiResponse> => {
+        const url = trackId ? `/playlists?trackId=${trackId}` : "/playlists";
+        return client.get<ApiResponse>(url, {
+            auth: true,
+        });
+    },
+
+    addTrackToPlaylist: async (playlistId: string, trackId: string): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/playlists/${playlistId}/items/${trackId}`, {}, {
+            auth: true,
+        });
+    },
+
+    removeTrackFromPlaylist: async (playlistId: string, trackId: string): Promise<ApiResponse> => {
+        return client.delete<ApiResponse>(`/playlists/${playlistId}/items/${trackId}`, {
             auth: true,
         });
     },
