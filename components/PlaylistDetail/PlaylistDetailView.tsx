@@ -166,9 +166,13 @@ export default function PlaylistDetailView({
                 mediaTitle={playlistDetails?.title || "Playlist"}
                 mediaTypeTitle="Playlist"
                 mediaPoster={playlistDetails?.image}
-                initialRating={playlistDetails?.currentUserInteraction?.rating || 0}
+                initialRating={
+                    playlistDetails?.currentUserInteraction?.rating
+                        ? Number(playlistDetails.currentUserInteraction.rating)
+                        : 0
+                }
                 initialComment={playlistDetails?.currentUserInteraction?.comment?.content || ""}
-                initialIsLiked={playlistDetails?.isLiked || false}
+                initialIsLiked={playlistDetails?.currentUserInteraction?.isLiked ?? playlistDetails?.isLiked ?? false}
                 onSubmit={async ({ rating, comment, isLiked }) => {
                     await submitInteraction({ rating, comment, isLiked });
                 }}

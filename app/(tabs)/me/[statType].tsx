@@ -108,7 +108,7 @@ export default function StatDetailPage() {
 
                 const handleMusicCardPress = () => {
                     switch (type) {
-                        case "song":
+                        case "track":
                             router.push(`/tracks/${item.id}`);
                             break;
                         case "playlist":

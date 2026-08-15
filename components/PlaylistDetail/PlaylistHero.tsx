@@ -38,7 +38,9 @@ export default function PlaylistHero({
     const othersCount = owners.length > 1 ? owners.length - 1 : 0;
     const ownerText = othersCount > 0 ? `${creatorName} ve ${othersCount} diğer yönetici` : creatorName;
     const likesCount = playlistDetails.likesCount || 0;
-    const userRating = playlistDetails?.currentUserInteraction?.rating || 0;
+    const userRating = playlistDetails?.currentUserInteraction?.rating
+        ? Number(playlistDetails.currentUserInteraction.rating)
+        : 0;
     const userComment = playlistDetails?.currentUserInteraction?.comment?.content || "";
     const hasUserInteraction = userRating > 0 || (typeof userComment === "string" && userComment.trim().length > 0);
 
@@ -135,8 +137,8 @@ export default function PlaylistHero({
                         <View style={styles.actionBar}>
                             {/* Aktar */}
                             <ActionButton
-                                icon="sparkles-outline
-                                isActive={true}
+                                icon="sparkles-outline"
+                                isActive={false}
                                 activeColor="#8B5CF666"
                                 onPress={() => {}}
                             />

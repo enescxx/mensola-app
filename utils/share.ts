@@ -11,6 +11,11 @@ export interface IShareMovieListOptions {
     title: string;
 }
 
+export interface ISharePlaylistOptions {
+    id: string;
+    title: string;
+}
+
 export interface IShareMovieOptions {
     id: string;
     title: string;
@@ -46,6 +51,18 @@ export const shareMovieList = async (list: IShareMovieListOptions): Promise<bool
     return shareContent({
         title: list.title,
         message: `"${list.title}" film listesine Mensola'da göz atın!\n${shareUrl}`,
+        url: shareUrl,
+    });
+};
+
+/**
+ * Shares a Playlist with formatted title and web link.
+ */
+export const sharePlaylist = async (list: ISharePlaylistOptions): Promise<boolean> => {
+    const shareUrl = `https://mensola.app/playlists/${list.id}`;
+    return shareContent({
+        title: list.title,
+        message: `"${list.title}" oynatma listesine Mensola'da göz atın!\n${shareUrl}`,
         url: shareUrl,
     });
 };

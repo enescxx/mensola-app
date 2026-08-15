@@ -52,7 +52,7 @@ export default function MusicCard(props: IMusicCardProps) {
                 {title}
             </Text>
             <Text style={styles.subTitle} numberOfLines={1}>
-                {subtitle + (secondaryInfo ? ` • ${secondaryInfo}` : "")}
+                {(subtitle ? subtitle + " • " : "") + (secondaryInfo ? secondaryInfo : "")}
             </Text>
         </TouchableOpacity>
     );
