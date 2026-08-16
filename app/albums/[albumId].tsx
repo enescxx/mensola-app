@@ -8,13 +8,19 @@ export default function AlbumDetailPage() {
     const {
         albumDetails,
         tracks,
+        loadMoreTracks,
+        hasNextTrackPage,
+        isFetchingNextTrackPage,
         interactions,
+        submitInteraction,
+        loadMoreInteractions,
+        hasNextInteractionsPage,
+        isFetchingNextInteractionPage,
         isLoading,
         isRefetching,
         error,
-        refetch,
+        refetchAll,
         toggleLike,
-        submitInteraction,
     } = useAlbumDetails(albumId);
 
     return (
@@ -27,11 +33,17 @@ export default function AlbumDetailPage() {
             <AlbumDetailView
                 albumDetails={albumDetails}
                 tracks={tracks}
+                loadMoreTracks={loadMoreTracks}
+                hasNextTrackPage={hasNextTrackPage}
+                isFetchingNextTrackPage={isFetchingNextTrackPage}
                 interactions={interactions}
+                loadMoreInteractions={loadMoreInteractions}
+                hasNextInteractionsPage={hasNextInteractionsPage}
+                isFetchingNextInteractionPage={isFetchingNextInteractionPage}
                 isLoading={isLoading}
                 isRefetching={isRefetching}
                 error={error}
-                refetch={refetch}
+                refetchAll={refetchAll}
                 toggleLike={toggleLike}
                 submitInteraction={submitInteraction}
             />

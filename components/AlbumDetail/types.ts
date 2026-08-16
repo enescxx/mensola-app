@@ -15,11 +15,17 @@ export interface IAlbumHeroProps {
 export interface IAlbumDetailViewProps {
     albumDetails: IAlbumDetails | null;
     tracks: IAlbumTrackItem[];
+    loadMoreTracks: () => void;
+    hasNextTrackPage: boolean;
+    isFetchingNextTrackPage: boolean;
     interactions: IAlbumInteractionItem[];
+    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
+    loadMoreInteractions: () => void;
+    hasNextInteractionsPage: boolean;
+    isFetchingNextInteractionPage: boolean;
     isLoading: boolean;
     isRefetching: boolean;
     error: string;
-    refetch: () => void;
+    refetchAll: () => void;
     toggleLike: () => void;
-    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
 }

@@ -1,6 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
 import { PlaylistService } from "@/services/playlist.service";
 import { BookmarkService } from "@/services/bookmark.service";
+import { useInteracion } from "../shared/useInteraction";
+import { useDetailBase } from "../shared/useDetailBase";
+import { useListItems } from "../shared/useListItems";
 
 export interface IPlaylistOwner {
     id: string;
@@ -69,98 +72,70 @@ export interface IPlaylistInteractionItem {
 }
 
 export const usePlaylistDetails = (playlistId?: string) => {
-    const [playlistDetails, setPlaylistDetails] = useState<IPlaylistDetails | null>(null);
-    const [tracks, setTracks] = useState<IPlaylistTrackItem[]>([]);
-    const [interactions, setInteractions] = useState<IPlaylistInteractionItem[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isRefetching, setIsRefetching] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
+    const {
+        details: playlistDetails,
+        setDetails,
+        fetchData,
+        ...rest
+    } = useDetailBase<IPlaylistDetails>({
+        id: playlistId,
+        fetcher: (id) => PlaylistService.getPlaylistDetails(id),
+        onLike: (id) => PlaylistService.likePlaylist(id),
+        onUnlike: (id) => PlaylistService.unlikePlaylist(id),
+        getIsLiked: (d) => !!d.isLiked,
+        getLikesCount: (d) => d.likesCount ?? 0,
+        updateLike: (d, isLiked, count) => ({ ...d, isLiked, likesCount: count }),
+    });
 
-    const fetchData = useCallback(
-        async (isRefreshing = false) => {
-            if (!playlistId) return;
+    const {
+        items: tracks,
+        fetchNextPage: loadMoreTracks,
+        refetch: refetchMovies,
+        hasNextPage: hasNextTrackPage,
+        isFetchingNextPage: isFetchingNextTrackPage,
+    } = useListItems<IPlaylistTrackItem>({
+        listId: playlistId,
+        itemType: "track",
+        getFn: async (id, page, limit) => await PlaylistService.getPlaylistItems(id, page, limit),
+        limit: 18,
+    });
 
-            if (isRefreshing) {
-                setIsRefetching(true);
-            } else {
-                setIsLoading(true);
-            }
-            setError("");
-
-            try {
-                const [detailsRes, itemsRes, interactionsRes] = await Promise.allSettled([
-                    PlaylistService.getPlaylistDetails(playlistId),
-                    PlaylistService.getPlaylistItems(playlistId, 1, 30),
-                    PlaylistService.getPlaylistInteractions(playlistId, 1, 30),
-                ]);
-
-                if (detailsRes.status === "fulfilled" && detailsRes.value?.data) {
-                    setPlaylistDetails(detailsRes.value.data);
-                } else if (detailsRes.status === "rejected") {
-                    setError("Playlist yüklenirken bir hata oluştu.");
-                }
-
-                if (itemsRes.status === "fulfilled" && itemsRes.value?.data) {
-                    const itemsData = itemsRes.value.data.items || itemsRes.value.data || [];
-                    setTracks(itemsData);
-                }
-
-                if (interactionsRes.status === "fulfilled" && interactionsRes.value?.data) {
-                    const interactionsData = interactionsRes.value.data.items || interactionsRes.value.data || [];
-                    setInteractions(interactionsData);
-                }
-            } catch (err: any) {
-                setError(err?.message || "Playlist verileri yüklenirken bir hata oluştu.");
-            } finally {
-                setIsLoading(false);
-                setIsRefetching(false);
-            }
+    const {
+        submitInteraction,
+        interactions,
+        loadMoreInteractions,
+        refetchInteractions,
+        hasNextPage: hasNextInteractionsPage,
+        isFetchingNextPage: isFetchingNextInteractionPage,
+    } = useInteracion<IPlaylistInteractionItem>({
+        targetId: playlistId,
+        targetType: "playlist",
+        createOrUpdateInteraction: async (id, data) => {
+            await PlaylistService.createOrUpdateInteraction(id, data);
         },
-        [playlistId],
-    );
+        refreshFn: async (isRefreshing) => {
+            await fetchData(isRefreshing);
+        },
+        getFn: async (id, page, limit) => await PlaylistService.getPlaylistInteractions(id, page, limit),
+        limit: 20,
+    });
 
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
-
-    const toggleLike = async () => {
-        if (!playlistId || !playlistDetails) return;
-
-        const currentIsLiked = !!playlistDetails.isLiked;
-        const currentLikesCount = playlistDetails.likesCount || 0;
-        const newIsLiked = !currentIsLiked;
-        const newLikesCount = newIsLiked ? currentLikesCount + 1 : Math.max(0, currentLikesCount - 1);
-
-        setPlaylistDetails((prev) => (prev ? { ...prev, isLiked: newIsLiked, likesCount: newLikesCount } : prev));
-
-        try {
-            if (currentIsLiked) {
-                await PlaylistService.unlikePlaylist(playlistId);
-            } else {
-                await PlaylistService.likePlaylist(playlistId);
-            }
-        } catch {
-            setPlaylistDetails((prev) =>
-                prev ? { ...prev, isLiked: currentIsLiked, likesCount: currentLikesCount } : prev,
-            );
-        }
-    };
-
-    const submitInteraction = async (data: { rating?: number; comment?: string; isLiked?: boolean }) => {
-        if (!playlistId) return;
-        await PlaylistService.createOrUpdateInteraction(playlistId, data);
-        await fetchData(true);
-    };
+    const refetchAll = useCallback(async () => {
+        await Promise.all([fetchData(true), refetchInteractions(), refetchMovies()]);
+    }, [fetchData, refetchInteractions, refetchMovies]);
 
     return {
+        refetchAll,
         playlistDetails,
         tracks,
+        loadMoreTracks,
+        hasNextTrackPage,
+        isFetchingNextTrackPage,
         interactions,
-        isLoading,
-        isRefetching,
-        error,
-        refetch: () => fetchData(true),
-        toggleLike,
         submitInteraction,
+        loadMoreInteractions,
+        hasNextInteractionsPage,
+        isFetchingNextInteractionPage,
+        ...rest,
     };
 };

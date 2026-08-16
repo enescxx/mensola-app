@@ -14,7 +14,7 @@ export interface ITrackDetailViewProps {
     trackDetails: ITrackDetails | null;
     isLoading: boolean;
     error: string;
-    refetch: () => void;
+    refetchAll: () => void;
     toggleLike: () => void;
     submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
 }

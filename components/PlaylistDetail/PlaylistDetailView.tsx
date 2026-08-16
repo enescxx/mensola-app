@@ -12,16 +12,21 @@ import { IPlaylistDetailViewProps } from "./types";
 import { IPlaylistTrackItem, IPlaylistInteractionItem } from "@/hooks/music/usePlaylistDetails";
 
 export default function PlaylistDetailView({
+    refetchAll,
     playlistDetails,
     tracks,
+    loadMoreTracks,
+    hasNextTrackPage,
+    isFetchingNextTrackPage,
     interactions,
+    submitInteraction,
+    loadMoreInteractions,
+    hasNextInteractionsPage,
+    isFetchingNextInteractionPage,
     isLoading,
     isRefetching,
     error,
-    refetch,
     toggleLike,
-    toggleSave,
-    submitInteraction,
 }: IPlaylistDetailViewProps) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"tracks" | "comments">("tracks");
@@ -68,6 +73,23 @@ export default function PlaylistDetailView({
         );
     };
 
+    const renderFooter = () => {
+        if (!isFetchingNextInteractionPage || !isFetchingNextTrackPage || !isLoading) return null;
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color="#1DB954" />
+            </View>
+        );
+    };
+
+    const handleLoadMore = () => {
+        if (activeTab === "tracks") {
+            if (!isFetchingNextTrackPage && hasNextTrackPage) loadMoreTracks();
+        } else if (activeTab === "comments") {
+            if (!isFetchingNextInteractionPage && hasNextInteractionsPage) loadMoreInteractions();
+        }
+    };
+
     if (isLoading) {
         return (
             <View style={styles.loadingContainer}>
@@ -80,7 +102,7 @@ export default function PlaylistDetailView({
         return (
             <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error}</Text>
-                <TouchableOpacity style={styles.retryButton} onPress={refetch}>
+                <TouchableOpacity style={styles.retryButton} onPress={refetchAll}>
                     <Text style={styles.retryText}>Tekrar Deneyin</Text>
                 </TouchableOpacity>
             </View>
@@ -105,7 +127,6 @@ export default function PlaylistDetailView({
                             tracksCount={tracks.length}
                             commentsCount={interactions.length}
                             toggleLike={toggleLike}
-                            toggleSave={toggleSave}
                             onCommentPress={() => setIsInteractionSheetOpen(true)}
                         />
                         <View style={styles.tabContainer}>
@@ -139,7 +160,7 @@ export default function PlaylistDetailView({
                         </View>
                     </>
                 }
-                onRefresh={refetch}
+                onRefresh={refetchAll}
                 refreshing={isRefetching}
                 ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
                 ListEmptyComponent={
@@ -156,6 +177,9 @@ export default function PlaylistDetailView({
                         </Text>
                     </View>
                 }
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
             />
 
             <InteractionSheet

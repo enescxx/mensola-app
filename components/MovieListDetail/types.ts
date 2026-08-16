@@ -24,7 +24,7 @@ export interface IMovieListDetailViewProps {
     isRefetching: boolean;
     error: string;
     refetchAll: () => void;
-    loadMoreInteraction: () => void;
+    loadMoreInteractions: () => void;
     hasNextInteractionsPage?: boolean;
     isFetchingNextInteractionPage?: boolean;
     toggleLike: () => void;

@@ -111,7 +111,7 @@ export const useMovieListDetails = (listId?: string) => {
         refetchInteractions,
         hasNextPage: hasNextInteractionsPage,
         isFetchingNextPage: isFetchingNextInteractionPage,
-    } = useInteracion({
+    } = useInteracion<IMovieListInteractionItem>({
         targetId: listId,
         targetType: "movieList",
         createOrUpdateInteraction: async (id, data) => {
@@ -125,8 +125,8 @@ export const useMovieListDetails = (listId?: string) => {
     });
 
     const refetchAll = useCallback(async () => {
-        await Promise.all([fetchData(true), refetchInteractions()]);
-    }, [fetchData, refetchInteractions]);
+        await Promise.all([fetchData(true), refetchInteractions(), refetchMovies()]);
+    }, [fetchData, refetchInteractions, refetchMovies]);
 
     return {
         listDetails,
@@ -138,7 +138,6 @@ export const useMovieListDetails = (listId?: string) => {
         isFetchingNextInteractionPage,
         movies,
         loadMoreMovies,
-        refetchMovies,
         hasNextMoviePage,
         isFetchingNextMoviePage,
         fetchData,

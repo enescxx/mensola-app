@@ -1,5 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { AlbumService } from "@/services/album.service";
+import { useInteracion } from "../shared/useInteraction";
+import { useDetailBase } from "../shared/useDetailBase";
+import { useListItems } from "../shared/useListItems";
 
 export interface IAlbumArtist {
     id: string;
@@ -59,98 +62,70 @@ export interface IAlbumInteractionItem {
 }
 
 export const useAlbumDetails = (albumId?: string) => {
-    const [albumDetails, setAlbumDetails] = useState<IAlbumDetails | null>(null);
-    const [tracks, setTracks] = useState<IAlbumTrackItem[]>([]);
-    const [interactions, setInteractions] = useState<IAlbumInteractionItem[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isRefetching, setIsRefetching] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
+    const {
+        details: albumDetails,
+        setDetails,
+        fetchData,
+        ...rest
+    } = useDetailBase<IAlbumDetails>({
+        id: albumId,
+        fetcher: (id) => AlbumService.getAlbumDetails(id),
+        onLike: (id) => AlbumService.likeAlbum(id),
+        onUnlike: (id) => AlbumService.unlikeAlbum(id),
+        getIsLiked: (d) => !!d.isLiked,
+        getLikesCount: (d) => d.likesCount ?? 0,
+        updateLike: (d, isLiked, count) => ({ ...d, isLiked, likesCount: count }),
+    });
 
-    const fetchData = useCallback(
-        async (isRefreshing = false) => {
-            if (!albumId) return;
+    const {
+        items: tracks,
+        fetchNextPage: loadMoreTracks,
+        refetch: refetchTracks,
+        hasNextPage: hasNextTrackPage,
+        isFetchingNextPage: isFetchingNextTrackPage,
+    } = useListItems<IAlbumTrackItem>({
+        listId: albumId,
+        itemType: "track",
+        getFn: async (id, page, limit) => await AlbumService.getAlbumTracks(id, page, limit),
+        limit: 18,
+    });
 
-            if (isRefreshing) {
-                setIsRefetching(true);
-            } else {
-                setIsLoading(true);
-            }
-            setError("");
-
-            try {
-                const [detailsRes, tracksRes, interactionsRes] = await Promise.allSettled([
-                    AlbumService.getAlbumDetails(albumId),
-                    AlbumService.getAlbumTracks(albumId, 1, 30),
-                    AlbumService.getAlbumInteractions(albumId, 1, 30),
-                ]);
-
-                if (detailsRes.status === "fulfilled" && detailsRes.value?.data) {
-                    setAlbumDetails(detailsRes.value.data);
-                } else if (detailsRes.status === "rejected") {
-                    setError("Albüm yüklenirken bir hata oluştu.");
-                }
-
-                if (tracksRes.status === "fulfilled" && tracksRes.value?.data) {
-                    const tracksData = tracksRes.value.data.items || tracksRes.value.data || [];
-                    setTracks(tracksData);
-                }
-
-                if (interactionsRes.status === "fulfilled" && interactionsRes.value?.data) {
-                    const interactionsData = interactionsRes.value.data.items || interactionsRes.value.data || [];
-                    setInteractions(interactionsData);
-                }
-            } catch (err: any) {
-                setError(err?.message || "Albüm verileri yüklenirken bir hata oluştu.");
-            } finally {
-                setIsLoading(false);
-                setIsRefetching(false);
-            }
+    const {
+        submitInteraction,
+        interactions,
+        loadMoreInteractions,
+        refetchInteractions,
+        hasNextPage: hasNextInteractionsPage,
+        isFetchingNextPage: isFetchingNextInteractionPage,
+    } = useInteracion<IAlbumInteractionItem>({
+        targetId: albumId,
+        targetType: "album",
+        createOrUpdateInteraction: async (id, data) => {
+            await AlbumService.createOrUpdateInteraction(id, data);
         },
-        [albumId],
-    );
+        refreshFn: async (isRefreshing) => {
+            await fetchData(isRefreshing);
+        },
+        getFn: async (id, page, limit) => await AlbumService.getAlbumInteractions(id, page, limit),
+        limit: 20,
+    });
 
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
-
-    const toggleLike = async () => {
-        if (!albumId || !albumDetails) return;
-
-        const currentIsLiked = !!albumDetails.isLiked;
-        const currentLikesCount = albumDetails.likesCount || 0;
-        const newIsLiked = !currentIsLiked;
-        const newLikesCount = newIsLiked ? currentLikesCount + 1 : Math.max(0, currentLikesCount - 1);
-
-        setAlbumDetails((prev) => (prev ? { ...prev, isLiked: newIsLiked, likesCount: newLikesCount } : prev));
-
-        try {
-            if (currentIsLiked) {
-                await AlbumService.unlikeAlbum(albumId);
-            } else {
-                await AlbumService.likeAlbum(albumId);
-            }
-        } catch {
-            setAlbumDetails((prev) =>
-                prev ? { ...prev, isLiked: currentIsLiked, likesCount: currentLikesCount } : prev,
-            );
-        }
-    };
-
-    const submitInteraction = async (data: { rating?: number; comment?: string; isLiked?: boolean }) => {
-        if (!albumId) return;
-        await AlbumService.createOrUpdateInteraction(albumId, data);
-        await fetchData(true);
-    };
+    const refetchAll = useCallback(async () => {
+        await Promise.all([fetchData(true), refetchInteractions(), refetchTracks()]);
+    }, [fetchData, refetchInteractions, refetchTracks]);
 
     return {
+        refetchAll,
         albumDetails,
         tracks,
+        loadMoreTracks,
+        hasNextTrackPage,
+        isFetchingNextTrackPage,
         interactions,
-        isLoading,
-        isRefetching,
-        error,
-        refetch: () => fetchData(true),
-        toggleLike,
         submitInteraction,
+        loadMoreInteractions,
+        hasNextInteractionsPage,
+        isFetchingNextInteractionPage,
+        ...rest,
     };
 };

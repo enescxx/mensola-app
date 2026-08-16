@@ -13,7 +13,7 @@ export default function TrackDetailView({
     trackDetails,
     isLoading,
     error,
-    refetch,
+    refetchAll,
     toggleLike,
     submitInteraction,
 }: ITrackDetailViewProps) {
@@ -32,13 +32,12 @@ export default function TrackDetailView({
         return (
             <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error}</Text>
-                <TouchableOpacity style={styles.retryButton} onPress={refetch}>
+                <TouchableOpacity style={styles.retryButton} onPress={refetchAll}>
                     <Text style={styles.retryText}>Tekrar Deneyin</Text>
                 </TouchableOpacity>
             </View>
         );
     }
-
 
     return (
         <View style={styles.container}>

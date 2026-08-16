@@ -10,7 +10,7 @@ export interface IPlaylistHeroProps {
     tracksCount: number;
     commentsCount?: number;
     toggleLike: () => void;
-    toggleSave?: () => void;
+
     onCommentPress?: () => void;
     onSharePress?: () => void;
 }
@@ -18,14 +18,19 @@ export interface IPlaylistHeroProps {
 export interface IPlaylistDetailViewProps {
     playlistDetails: IPlaylistDetails | null;
     tracks: IPlaylistTrackItem[];
+    loadMoreTracks: () => void;
+    hasNextTrackPage: boolean;
+    isFetchingNextTrackPage: boolean;
     interactions: IPlaylistInteractionItem[];
+    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
+    loadMoreInteractions: () => void;
+    hasNextInteractionsPage: boolean;
+    isFetchingNextInteractionPage: boolean;
     isLoading: boolean;
     isRefetching: boolean;
     error: string;
-    refetch: () => void;
+    refetchAll: () => void;
     toggleLike: () => void;
-    toggleSave?: () => void;
-    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
 }
 
 export interface IPlaylistOwnersBottomSheetProps {

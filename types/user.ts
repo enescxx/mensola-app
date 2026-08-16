@@ -20,7 +20,7 @@ interface IUserStatItem {
     value: number;
 }
 
-type InteractionTypes = "movie" | "tv" | "song" | "album" | "playlist" | "movieList";
+type InteractionTypes = "movie" | "track" | "album" | "playlist" | "movieList";
 
 interface IUserInteraction {
     id: string;

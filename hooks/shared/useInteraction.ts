@@ -17,7 +17,7 @@ interface UseInteractionOptions {
     limit?: number;
 }
 
-export const useInteracion = ({
+export const useInteracion = <T extends object>({
     targetId,
     targetType,
     createOrUpdateInteraction,
@@ -51,7 +51,7 @@ export const useInteracion = ({
         enabled: !!targetId && !!getFn,
     });
 
-    const interactions: IMovieListInteractionItem[] = data?.pages.flat() || [];
+    const interactions: T[] = data?.pages.flat() || [];
 
     const submitInteraction = useCallback(
         async (data: InteractionData) => {

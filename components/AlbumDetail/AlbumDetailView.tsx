@@ -13,13 +13,19 @@ import { IAlbumDetailViewProps, IAlbumTrackItem, IAlbumInteractionItem } from ".
 export default function AlbumDetailView({
     albumDetails,
     tracks,
+    loadMoreTracks,
+    hasNextTrackPage,
+    isFetchingNextTrackPage,
     interactions,
+    submitInteraction,
+    loadMoreInteractions,
+    hasNextInteractionsPage,
+    isFetchingNextInteractionPage,
     isLoading,
     isRefetching,
     error,
-    refetch,
+    refetchAll,
     toggleLike,
-    submitInteraction,
 }: IAlbumDetailViewProps) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"tracks" | "comments">("tracks");
@@ -66,6 +72,23 @@ export default function AlbumDetailView({
         );
     };
 
+    const renderFooter = () => {
+        if (!isFetchingNextInteractionPage || !isFetchingNextTrackPage || !isLoading) return null;
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color="#1DB954" />
+            </View>
+        );
+    };
+
+    const handleLoadMore = () => {
+        if (activeTab === "tracks") {
+            if (!isFetchingNextTrackPage && hasNextTrackPage) loadMoreTracks();
+        } else if (activeTab === "comments") {
+            if (!isFetchingNextInteractionPage && hasNextInteractionsPage) loadMoreInteractions();
+        }
+    };
+
     if (isLoading) {
         return (
             <View style={styles.loadingContainer}>
@@ -78,7 +101,7 @@ export default function AlbumDetailView({
         return (
             <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error}</Text>
-                <TouchableOpacity style={styles.retryButton} onPress={refetch}>
+                <TouchableOpacity style={styles.retryButton} onPress={refetchAll}>
                     <Text style={styles.retryText}>Tekrar Deneyin</Text>
                 </TouchableOpacity>
             </View>
@@ -110,11 +133,7 @@ export default function AlbumDetailView({
                                 style={[styles.tabButton, isTracksTab && styles.activeTabButton]}
                                 onPress={() => setActiveTab("tracks")}
                                 activeOpacity={0.7}>
-                                <Ionicons
-                                    name="disc-outline"
-                                    size={18}
-                                    color={isTracksTab ? "#1DB954" : "#8c8c8c"}
-                                />
+                                <Ionicons name="disc-outline" size={18} color={isTracksTab ? "#1DB954" : "#8c8c8c"} />
                                 <Text style={[styles.tabText, isTracksTab && styles.activeTabText]}>
                                     Şarkılar ({tracks.length})
                                 </Text>
@@ -136,7 +155,7 @@ export default function AlbumDetailView({
                         </View>
                     </>
                 }
-                onRefresh={refetch}
+                onRefresh={refetchAll}
                 refreshing={isRefetching}
                 ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
                 ListEmptyComponent={
@@ -147,12 +166,13 @@ export default function AlbumDetailView({
                             color="#444"
                         />
                         <Text style={styles.emptyText}>
-                            {isTracksTab
-                                ? "Bu albümde henüz şarkı bulunmuyor."
-                                : "Bu albüme henüz yorum yapılmamış."}
+                            {isTracksTab ? "Bu albümde henüz şarkı bulunmuyor." : "Bu albüme henüz yorum yapılmamış."}
                         </Text>
                     </View>
                 }
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
             />
 
             <InteractionSheet

@@ -19,7 +19,7 @@ export default function MovieListDetailView({
     hasNextMoviePage,
     isFetchingNextMoviePage,
     interactions,
-    loadMoreInteraction,
+    loadMoreInteractions,
     hasNextInteractionsPage,
     isFetchingNextInteractionPage,
     isLoading,
@@ -88,7 +88,7 @@ export default function MovieListDetailView({
         if (activeTab === "movies") {
             if (!isFetchingNextMoviePage && hasNextMoviePage) loadMoreMovies();
         } else if (activeTab === "comments") {
-            if (!isFetchingNextInteractionPage && hasNextInteractionsPage) loadMoreInteraction();
+            if (!isFetchingNextInteractionPage && hasNextInteractionsPage) loadMoreInteractions();
         }
     };
 

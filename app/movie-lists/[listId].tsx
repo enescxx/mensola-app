@@ -38,7 +38,7 @@ export default function MovieListDetailPage() {
                 hasNextMoviePage={hasNextMoviePage}
                 isFetchingNextMoviePage={isFetchingNextMoviePage}
                 interactions={interactions}
-                loadMoreInteraction={loadMoreInteractions}
+                loadMoreInteractions={loadMoreInteractions}
                 hasNextInteractionsPage={hasNextInteractionsPage}
                 isFetchingNextInteractionPage={isFetchingNextInteractionPage}
                 isLoading={isLoading}
