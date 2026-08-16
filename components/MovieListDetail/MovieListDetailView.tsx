@@ -9,16 +9,23 @@ import InteractionView, { InteractionSheet } from "@/components/Interaction";
 import MovieListHero from "./MovieListHero";
 import { styles } from "./styles";
 import { IMovieListDetailViewProps } from "./types";
-import { IMovieListItem, IMovieListInteractionItem } from "@/hooks/movie/useMovieListDetails";
+import { IMovieListInteractionItem } from "@/hooks/movie/useMovieListDetails";
+import { IMovieListItem } from "@/types";
 
 export default function MovieListDetailView({
     listDetails,
     movies,
+    loadMoreMovies,
+    hasNextMoviePage,
+    isFetchingNextMoviePage,
     interactions,
+    loadMoreInteraction,
+    hasNextInteractionsPage,
+    isFetchingNextInteractionPage,
     isLoading,
     isRefetching,
     error,
-    refetch,
+    refetchAll,
     toggleLike,
     toggleSave,
     submitInteraction,
@@ -68,6 +75,23 @@ export default function MovieListDetailView({
         );
     };
 
+    const renderFooter = () => {
+        if (!isFetchingNextInteractionPage || !isFetchingNextMoviePage || !isLoading) return null;
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color="#1DB954" />
+            </View>
+        );
+    };
+
+    const handleLoadMore = () => {
+        if (activeTab === "movies") {
+            if (!isFetchingNextMoviePage && hasNextMoviePage) loadMoreMovies();
+        } else if (activeTab === "comments") {
+            if (!isFetchingNextInteractionPage && hasNextInteractionsPage) loadMoreInteraction();
+        }
+    };
+
     if (isLoading) {
         return (
             <View style={styles.loadingContainer}>
@@ -80,7 +104,7 @@ export default function MovieListDetailView({
         return (
             <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error}</Text>
-                <TouchableOpacity style={styles.retryButton} onPress={refetch}>
+                <TouchableOpacity style={styles.retryButton} onPress={refetchAll}>
                     <Text style={styles.retryText}>Tekrar Deneyin</Text>
                 </TouchableOpacity>
             </View>
@@ -135,7 +159,7 @@ export default function MovieListDetailView({
                         </View>
                     </>
                 }
-                onRefresh={refetch}
+                onRefresh={refetchAll}
                 refreshing={isRefetching}
                 ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
                 ListEmptyComponent={
@@ -150,6 +174,9 @@ export default function MovieListDetailView({
                         </Text>
                     </View>
                 }
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
             />
 
             <InteractionSheet

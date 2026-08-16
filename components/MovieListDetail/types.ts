@@ -1,4 +1,5 @@
-import { IMovieListDetails, IMovieListItem, IMovieListOwner, IMovieListInteractionItem } from "@/hooks/movie/useMovieListDetails";
+import { IMovieListDetails, IMovieListOwner, IMovieListInteractionItem } from "@/hooks/movie/useMovieListDetails";
+import { IMovieListItem } from "@/types";
 
 export interface IMovieListHeroProps {
     listDetails: IMovieListDetails | null;
@@ -15,11 +16,17 @@ export type IMovieListHeaderProps = IMovieListHeroProps;
 export interface IMovieListDetailViewProps {
     listDetails: IMovieListDetails | null;
     movies: IMovieListItem[];
+    loadMoreMovies: () => void;
+    hasNextMoviePage: boolean;
+    isFetchingNextMoviePage: boolean;
     interactions: IMovieListInteractionItem[];
     isLoading: boolean;
     isRefetching: boolean;
     error: string;
-    refetch: () => void;
+    refetchAll: () => void;
+    loadMoreInteraction: () => void;
+    hasNextInteractionsPage?: boolean;
+    isFetchingNextInteractionPage?: boolean;
     toggleLike: () => void;
     toggleSave?: () => void;
     submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;

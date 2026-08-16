@@ -5,7 +5,24 @@ import { useMovieListDetails } from "@/hooks/movie/useMovieListDetails";
 
 export default function MovieListDetailPage() {
     const { listId } = useLocalSearchParams<{ listId?: string }>();
-    const { listDetails, movies, interactions, isLoading, isRefetching, error, refetch, toggleLike, toggleSave, submitInteraction } = useMovieListDetails(listId);
+    const {
+        listDetails,
+        movies,
+        loadMoreMovies,
+        hasNextMoviePage,
+        isFetchingNextMoviePage,
+        interactions,
+        loadMoreInteractions,
+        hasNextInteractionsPage,
+        isFetchingNextInteractionPage,
+        isLoading,
+        isRefetching,
+        error,
+        refetchAll,
+        toggleLike,
+        toggleSave,
+        submitInteraction,
+    } = useMovieListDetails(listId);
 
     return (
         <>
@@ -17,11 +34,17 @@ export default function MovieListDetailPage() {
             <MovieListDetailView
                 listDetails={listDetails}
                 movies={movies}
+                loadMoreMovies={loadMoreMovies}
+                hasNextMoviePage={hasNextMoviePage}
+                isFetchingNextMoviePage={isFetchingNextMoviePage}
                 interactions={interactions}
+                loadMoreInteraction={loadMoreInteractions}
+                hasNextInteractionsPage={hasNextInteractionsPage}
+                isFetchingNextInteractionPage={isFetchingNextInteractionPage}
                 isLoading={isLoading}
                 isRefetching={isRefetching}
                 error={error}
-                refetch={refetch}
+                refetchAll={refetchAll}
                 toggleLike={toggleLike}
                 toggleSave={toggleSave}
                 submitInteraction={submitInteraction}

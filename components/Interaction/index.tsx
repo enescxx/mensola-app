@@ -43,7 +43,10 @@ export default function InteractionView({ data }: IInteractionViewProps) {
 
     return (
         <View style={styles.container}>
-            <Pressable style={styles.cardContent} onPress={handleInteractionPress} android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
+            <Pressable
+                style={styles.cardContent}
+                onPress={handleInteractionPress}
+                android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.userInfoContainer} onPress={handleUserPress} activeOpacity={0.8}>
                         <View style={styles.avatarWrapper}>
@@ -59,7 +62,11 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                         <Text style={styles.date}>{formatDate(comment.date)}</Text>
                         <View style={styles.badges}>
                             {hasRating ? (
-                                <Badge icon={<Ionicons name="star" color="#FF8000" />} value={interaction.rating} style={styles.badgeItem} />
+                                <Badge
+                                    icon={<Ionicons name="star" color="#FF8000" />}
+                                    value={interaction.rating}
+                                    style={styles.badgeItem}
+                                />
                             ) : null}
                             {interaction.isLiked ? (
                                 <Badge icon={<Ionicons name="heart" color="#FF8000" />} style={styles.badgeItem} />
@@ -68,7 +75,10 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                     </View>
                 </View>
 
-                <Pressable style={styles.commentContainer} onPress={handleInteractionPress} android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
+                <Pressable
+                    style={styles.commentContainer}
+                    onPress={handleInteractionPress}
+                    android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
                     <Text style={styles.comment}>{comment.content}</Text>
                 </Pressable>
 

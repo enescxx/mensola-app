@@ -1,15 +1,10 @@
-import { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { MovieService } from "@/services/movie.service";
-import { BookmarkService } from "@/services/bookmark.service";
-
-export interface IMovieListItem {
-    id: string;
-    title: string;
-    poster: string;
-    rating?: number;
-    isLiked?: boolean;
-    hasReview?: boolean;
-}
+import { useDetailBase } from "@/hooks/shared/useDetailBase";
+import { useBookmark } from "../shared/useBookmark";
+import { useInteracion } from "../shared/useInteraction";
+import { useListItems } from "../shared/useListItems";
+import { IMovieListItem } from "@/types";
 
 export interface IMovieListOwner {
     id: string;
@@ -65,123 +60,89 @@ export interface IMovieListInteractionItem {
 }
 
 export const useMovieListDetails = (listId?: string) => {
-    const [listDetails, setListDetails] = useState<IMovieListDetails | null>(null);
-    const [movies, setMovies] = useState<IMovieListItem[]>([]);
-    const [interactions, setInteractions] = useState<IMovieListInteractionItem[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isRefetching, setIsRefetching] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
+    const {
+        details: listDetails,
+        setDetails,
+        fetchData,
+        ...rest
+    } = useDetailBase<IMovieListDetails>({
+        id: listId,
+        fetcher: (id) => MovieService.getMovieListDetails(id),
+        onLike: (id) => MovieService.likeMovieList(id),
+        onUnlike: (id) => MovieService.unlikeMovieList(id),
+        getIsLiked: (d) => !!d.isLiked,
+        getLikesCount: (d) => d.likesCount ?? 0,
+        updateLike: (d, isLiked, count) => ({ ...d, isLiked, likesCount: count }),
+    });
 
-    const fetchData = useCallback(async (isRefreshing = false) => {
-        if (!listId) return;
+    const {
+        items: movies,
+        fetchNextPage: loadMoreMovies,
+        refetch: refetchMovies,
+        hasNextPage: hasNextMoviePage,
+        isFetchingNextPage: isFetchingNextMoviePage,
+    } = useListItems<IMovieListItem>({
+        listId: listId,
+        itemType: "movie",
+        getFn: async (id, page, limit) => await MovieService.getMovieListItems(id, page, limit),
+        limit: 18,
+    });
 
-        if (isRefreshing) {
-            setIsRefetching(true);
-        } else {
-            setIsLoading(true);
-        }
-        setError("");
+    const { toggleSave } = useBookmark<IMovieListDetails>({
+        targetId: listId,
+        targetType: "movieList",
+        targetDetails: listDetails || undefined,
+        setTargetDetails: (newIsSaved, newSavesCount) =>
+            setDetails((prev) =>
+                prev
+                    ? {
+                          ...prev,
+                          isSaved: newIsSaved,
+                          savesCount: typeof newSavesCount === "number" ? newSavesCount : prev.savesCount,
+                      }
+                    : prev,
+            ),
+    });
 
-        try {
-            const [detailsRes, itemsRes, interactionsRes] = await Promise.allSettled([
-                MovieService.getMovieListDetails(listId),
-                MovieService.getMovieListItems(listId, 1, 30),
-                MovieService.getMovieListInteractions(listId, 1, 30),
-            ]);
+    const {
+        submitInteraction,
+        interactions,
+        loadMoreInteractions,
+        refetchInteractions,
+        hasNextPage: hasNextInteractionsPage,
+        isFetchingNextPage: isFetchingNextInteractionPage,
+    } = useInteracion({
+        targetId: listId,
+        targetType: "movieList",
+        createOrUpdateInteraction: async (id, data) => {
+            await MovieService.createOrUpdateListInteraction(id, data);
+        },
+        refreshFn: async (isRefreshing) => {
+            await fetchData(isRefreshing);
+        },
+        getFn: async (id, page, limit) => await MovieService.getMovieListInteractions(id, page, limit),
+        limit: 20,
+    });
 
-            if (detailsRes.status === "fulfilled" && detailsRes.value?.data) {
-                const data = detailsRes.value.data;
-                setListDetails(data);
-
-                // If previewMovies are included in details response and items endpoint failed or returned empty
-                if (data.previewMovies && (!itemsRes || itemsRes.status !== "fulfilled")) {
-                    setMovies(data.previewMovies);
-                }
-            }
-
-            if (itemsRes.status === "fulfilled" && itemsRes.value?.data) {
-                const itemsData = itemsRes.value.data.items || itemsRes.value.data || [];
-                setMovies(itemsData);
-            }
-
-            if (interactionsRes.status === "fulfilled" && interactionsRes.value?.data) {
-                const interactionsData = interactionsRes.value.data.items || interactionsRes.value.data || [];
-                setInteractions(interactionsData);
-            }
-        } catch (err: any) {
-            setError(err?.message || "Liste verileri yüklenirken bir hata oluştu.");
-        } finally {
-            setIsLoading(false);
-            setIsRefetching(false);
-        }
-    }, [listId]);
-
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
-
-    const toggleLike = async () => {
-        if (!listId || !listDetails) return;
-
-        const currentIsLiked = !!listDetails.isLiked;
-        const currentLikesCount = listDetails.likesCount || 0;
-        const newIsLiked = !currentIsLiked;
-        const newLikesCount = newIsLiked ? currentLikesCount + 1 : Math.max(0, currentLikesCount - 1);
-
-        // Optimistic Update
-        setListDetails((prev) => (prev ? { ...prev, isLiked: newIsLiked, likesCount: newLikesCount } : prev));
-
-        try {
-            if (currentIsLiked) {
-                await MovieService.unlikeMovieList(listId);
-            } else {
-                await MovieService.likeMovieList(listId);
-            }
-        } catch (err) {
-            // Revert on error
-            setListDetails((prev) => (prev ? { ...prev, isLiked: currentIsLiked, likesCount: currentLikesCount } : prev));
-        }
-    };
-
-    const toggleSave = async () => {
-        if (!listId || !listDetails) return;
-
-        const currentIsSaved = !!listDetails.isSaved;
-        const currentSavesCount = listDetails.savesCount || 0;
-        const newIsSaved = !currentIsSaved;
-        const newSavesCount = newIsSaved ? currentSavesCount + 1 : Math.max(0, currentSavesCount - 1);
-
-        // Optimistic Update
-        setListDetails((prev) => (prev ? { ...prev, isSaved: newIsSaved, savesCount: newSavesCount } : prev));
-
-        try {
-            const res = await BookmarkService.toggleBookmark(listId, "movieList");
-            const isSavedResult = res.data?.isSaved;
-            if (typeof isSavedResult === "boolean") {
-                setListDetails((prev) => (prev ? { ...prev, isSaved: isSavedResult } : prev));
-            }
-        } catch (err) {
-            // Revert on error
-            setListDetails((prev) => (prev ? { ...prev, isSaved: currentIsSaved, savesCount: currentSavesCount } : prev));
-        }
-    };
-
-    const submitInteraction = async (data: { rating?: number; comment?: string; isLiked?: boolean }) => {
-        if (!listId) return;
-        await MovieService.createOrUpdateListInteraction(listId, data);
-        await fetchData(true);
-    };
+    const refetchAll = useCallback(async () => {
+        await Promise.all([fetchData(true), refetchInteractions()]);
+    }, [fetchData, refetchInteractions]);
 
     return {
         listDetails,
-        movies,
-        interactions,
-        isLoading,
-        isRefetching,
-        error,
-        refetch: () => fetchData(true),
-        toggleLike,
         toggleSave,
         submitInteraction,
+        interactions,
+        loadMoreInteractions,
+        hasNextInteractionsPage,
+        isFetchingNextInteractionPage,
+        movies,
+        loadMoreMovies,
+        refetchMovies,
+        hasNextMoviePage,
+        isFetchingNextMoviePage,
+        fetchData,
+        refetchAll,
+        ...rest,
     };
 };

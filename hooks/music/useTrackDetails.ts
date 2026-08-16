@@ -62,7 +62,7 @@ export const useTrackDetails = (trackId?: string) => {
 
             try {
                 const res = await TrackService.getTrackDetails(trackId);
-                
+
                 if (res.data) {
                     setTrackDetails(res.data);
                 } else {

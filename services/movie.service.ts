@@ -1,3 +1,4 @@
+import { IMovieListDetails } from "@/types/movie";
 import { client } from "../api/client";
 import { ApiResponse, GetMovieResponse } from "../types";
 
@@ -9,9 +10,13 @@ const MovieService = {
     },
 
     markAsWatched: async (movieId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/movies/${movieId}/watched`, {}, {
-            auth: true,
-        });
+        return client.post<ApiResponse>(
+            `/movies/${movieId}/watched`,
+            {},
+            {
+                auth: true,
+            },
+        );
     },
 
     unmarkAsWatched: async (movieId: string): Promise<ApiResponse> => {
@@ -21,9 +26,13 @@ const MovieService = {
     },
 
     likeMovie: async (movieId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/movies/${movieId}/like`, {}, {
-            auth: true,
-        });
+        return client.post<ApiResponse>(
+            `/movies/${movieId}/like`,
+            {},
+            {
+                auth: true,
+            },
+        );
     },
 
     unlikeMovie: async (movieId: string): Promise<ApiResponse> => {
@@ -33,9 +42,13 @@ const MovieService = {
     },
 
     addToWatchlist: async (movieId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/movies/${movieId}/watchlist`, {}, {
-            auth: true,
-        });
+        return client.post<ApiResponse>(
+            `/movies/${movieId}/watchlist`,
+            {},
+            {
+                auth: true,
+            },
+        );
     },
 
     removeFromWatchlist: async (movieId: string): Promise<ApiResponse> => {
@@ -45,9 +58,13 @@ const MovieService = {
     },
 
     addMovieToList: async (listId: string, movieId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/movies/lists/${listId}/items/${movieId}`, {}, {
-            auth: true,
-        });
+        return client.post<ApiResponse>(
+            `/movies/lists/${listId}/items/${movieId}`,
+            {},
+            {
+                auth: true,
+            },
+        );
     },
 
     removeMovieFromList: async (listId: string, movieId: string): Promise<ApiResponse> => {
@@ -65,14 +82,14 @@ const MovieService = {
 
     createOrUpdateInteraction: async (
         movieId: string,
-        data: { rating?: number; comment?: string; isLiked?: boolean }
+        data: { rating?: number; comment?: string; isLiked?: boolean },
     ): Promise<ApiResponse> => {
         return client.post<ApiResponse>(`/movies/${movieId}/interaction`, data, {
             auth: true,
         });
     },
 
-    getMovieListDetails: async (listId: string): Promise<ApiResponse> => {
+    getMovieListDetails: async (listId: string): Promise<ApiResponse<IMovieListDetails>> => {
         return client.get<ApiResponse>(`/movies/lists/${listId}`, {
             auth: true,
         });
@@ -92,7 +109,7 @@ const MovieService = {
 
     createOrUpdateListInteraction: async (
         listId: string,
-        data: { rating?: number; comment?: string; isLiked?: boolean }
+        data: { rating?: number; comment?: string; isLiked?: boolean },
     ): Promise<ApiResponse> => {
         return client.post<ApiResponse>(`/movies/lists/${listId}/interaction`, data, {
             auth: true,
@@ -100,9 +117,7 @@ const MovieService = {
     },
 
     likeMovieList: async (listId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/movies/lists/${listId}/like`, {}, {
-            auth: true,
-        });
+        return client.post<ApiResponse>(`/movies/lists/${listId}/like`, {}, { auth: true });
     },
 
     unlikeMovieList: async (listId: string): Promise<ApiResponse> => {
@@ -113,5 +128,3 @@ const MovieService = {
 };
 
 export { MovieService };
-
-
