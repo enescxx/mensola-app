@@ -4,6 +4,7 @@ export default function AuthLayout() {
     return (
         <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="[movieId]/index" />
+            <Stack.Screen name="[movieId]/interactions" />
         </Stack>
     );
 }
