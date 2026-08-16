@@ -46,7 +46,7 @@ describe("LatestComments Component", () => {
         fireEvent.press(getByText("Hepsini Gör"));
 
         expect(mockRouterPush).toHaveBeenCalledWith({
-            pathname: "/movie/[movieId]/interactions",
+            pathname: "/movies/[movieId]/interactions",
             params: { movieId: "movie-123" },
         });
     });

@@ -13,7 +13,7 @@ export default function LatestComments({ interactions }: LatestCommentsProps) {
 
     const handleSeeAllPress = () => {
         if (movieId) {
-            router.push({ pathname: "/movie/[movieId]/interactions", params: { movieId } });
+            router.push({ pathname: "/movies/[movieId]/interactions", params: { movieId } });
         }
     };
 

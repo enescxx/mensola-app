@@ -42,6 +42,7 @@ export default function MusicCard(props: IMusicCardProps) {
 
     const title = data.title;
     const image = data.image;
+    const fullSubtitle = [subtitle, secondaryInfo].filter(Boolean).join(" • ");
 
     return (
         <TouchableOpacity style={[styles.card, style]} onPress={onPress} activeOpacity={0.7}>
@@ -52,7 +53,7 @@ export default function MusicCard(props: IMusicCardProps) {
                 {title}
             </Text>
             <Text style={styles.subTitle} numberOfLines={1}>
-                {(subtitle ? subtitle + " • " : "") + (secondaryInfo ? secondaryInfo : "")}
+                {fullSubtitle}
             </Text>
         </TouchableOpacity>
     );
