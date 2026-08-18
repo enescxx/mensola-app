@@ -94,8 +94,7 @@ export function ProfileProvider({ userId, children }) {
                 handleStatPress,
                 handleSeeAllPress,
                 favorites,
-            }}
-        >
+            }}>
             {children}
         </ProfileContext.Provider>
     );

@@ -1,6 +1,6 @@
 import { client } from "../api/client";
 
-import { GetProfileResponse, GetStatDetailsResponse } from "../types";
+import { ApiResponse, GetProfileResponse, GetStatDetailsResponse } from "../types";
 
 const STAT_ENDPOINT_MAP: Record<string, string> = {
     "movie-lists": "/movies/lists",
@@ -9,13 +9,13 @@ const STAT_ENDPOINT_MAP: Record<string, string> = {
     watched: "/movies/watched",
     "liked-movies": "/movies/likes",
     "liked-tracks": "/tracks/likes",
-    "liked-playlists": "/playlists/likes", //
+    "liked-playlists": "/playlists/likes",
     "liked-movie-lists": "/movies/lists/likes",
-    "liked-albums": "/albums/likes", //
+    "liked-albums": "/albums/likes",
     followers: "/users/followers",
     following: "/users/following",
     "favorite-movies": "/movies/favorites",
-    "favorites-tracks": "/tracks/favorites", //
+    "favorites-tracks": "/tracks/favorites",
 };
 
 const ProfileService = {
@@ -31,11 +31,11 @@ const ProfileService = {
         });
     },
 
-    getStatDetails: async (statType: string, userId?: string): Promise<GetStatDetailsResponse> => {
-        return client.get<GetStatDetailsResponse>(STAT_ENDPOINT_MAP[statType], {
-            query: userId ? { userId } : {},
-            auth: true,
-        });
+    getStatDetails: async (statType: string, userId?: string, page?: number, limit?: number): Promise<ApiResponse> => {
+        return client.get<ApiResponse>(
+            `${STAT_ENDPOINT_MAP[statType]}?${userId && "userId=" + userId}&${page && "page=" + page}&${limit && "limit=" + limit}`,
+            { auth: true },
+        );
     },
 };
 

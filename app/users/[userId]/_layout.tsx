@@ -17,7 +17,7 @@ export default function RootLayout() {
                     options={{
                         headerShown: true,
                         header: (props) => <PageHeader {...props} />,
-                        animation: "slide_from_right",
+                        animation: "fade_from_bottom",
                     }}
                 />
             </Stack>

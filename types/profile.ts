@@ -1,6 +1,6 @@
 import { ApiResponse } from "./api";
 import { IUser } from "./user";
-import { IMovie } from "./movie";
+import { IMovie, IMovieList } from "./movie";
 import { ITrack, IPlaylist, IAlbum, IArtist } from "./music";
 
 interface FavoriteMovieData extends Pick<IMovie, "id" | "title" | "poster"> {
@@ -9,10 +9,7 @@ interface FavoriteMovieData extends Pick<IMovie, "id" | "title" | "poster"> {
     hasReview?: boolean;
 }
 
-interface ProfileData extends Pick<
-    IUser,
-    "id" | "fullname" | "username" | "bio" | "avatar" | "favoriteTracks"
-> {
+interface ProfileData extends Pick<IUser, "id" | "fullname" | "username" | "bio" | "avatar" | "favoriteTracks"> {
     favoriteMovies: FavoriteMovieData[];
     movieListCount?: number;
     playlistCount?: number;
@@ -28,17 +25,9 @@ interface ProfileData extends Pick<
 }
 
 type GetProfileResponse = ApiResponse<ProfileData>;
-type GetStatDetailsResponse =
-    | IMovie[]
-    | ITrack[]
-    | IPlaylist[]
-    | IAlbum[]
-    | IArtist[]
-    | IUser[];
 
-export {
-    FavoriteMovieData,
-    ProfileData,
-    GetProfileResponse,
-    GetStatDetailsResponse
-};
+type GetStatDetailsResponse = ApiResponse<{
+    items: IMovie[] | ITrack[] | IPlaylist[] | IAlbum[] | IArtist[] | IUser[] | IMovieList[];
+}>;
+
+export { FavoriteMovieData, ProfileData, GetProfileResponse, GetStatDetailsResponse };
