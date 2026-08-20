@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MovieHero from "./MovieHero";
 
 jest.mock("@/hooks/movie/useWatched", () => ({
@@ -20,10 +21,22 @@ jest.mock("@/hooks/movie/useLike", () => ({
 
 jest.mock("@/services/movie.service", () => ({
     MovieService: {
-        getUserLists: jest.fn().mockResolvedValue({ data: [] }),
+        getUserLists: jest.fn().mockResolvedValue({ data: { items: [], hasMore: false } }),
         createOrUpdateInteraction: jest.fn().mockResolvedValue({ success: true }),
     },
 }));
+
+const createTestQueryClient = () =>
+    new QueryClient({
+        defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+    });
+
+const renderWithQueryClient = (ui: React.ReactElement) => {
+    const queryClient = createTestQueryClient();
+    return render(
+        <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
+    );
+};
 
 describe("MovieHero Component", () => {
     const mockMovie = {
@@ -45,7 +58,7 @@ describe("MovieHero Component", () => {
     };
 
     it("should render movie title, release year, duration, and genres", () => {
-        const { getByText } = render(<MovieHero movie={mockMovie as any} />);
+        const { getByText } = renderWithQueryClient(<MovieHero movie={mockMovie as any} />);
 
         expect(getByText("Interstellar")).toBeTruthy();
         expect(getByText("(2014)")).toBeTruthy();
@@ -54,7 +67,7 @@ describe("MovieHero Component", () => {
     });
 
     it("should render stats badges for rating, likesCount, and commentsCount", () => {
-        const { getByText } = render(<MovieHero movie={mockMovie as any} />);
+        const { getByText } = renderWithQueryClient(<MovieHero movie={mockMovie as any} />);
 
         expect(getByText("8.7")).toBeTruthy();
         expect(getByText("1250")).toBeTruthy();
@@ -62,7 +75,7 @@ describe("MovieHero Component", () => {
     });
 
     it("should render null when movie prop is not provided", () => {
-        const { queryByText } = render(<MovieHero movie={undefined} />);
+        const { queryByText } = renderWithQueryClient(<MovieHero movie={undefined} />);
 
         expect(queryByText("Interstellar")).toBeNull();
     });

@@ -6,7 +6,6 @@ import { IFooterItemProps } from "./types";
 import { StatLabels } from "@/types/stat.types";
 
 export default function ProfileFooterItem({ statType, statValue, onPress }: IFooterItemProps) {
-    console.log(statType);
     return (
         <TouchableOpacity style={styles.footerItem} onPress={() => onPress?.(statType)}>
             <Text style={styles.footerItemLabel}>{StatLabels[statType]}</Text>

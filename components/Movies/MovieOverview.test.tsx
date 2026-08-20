@@ -5,7 +5,7 @@ import MovieOverview from "./MovieOverview";
 describe("MovieOverview Component", () => {
     it("should render movie description correctly", () => {
         const { getByText } = render(
-            <MovieOverview movie={{ description: "Bu bir bilim kurgu filmidir." } as any} />
+            <MovieOverview movie={{ overview: "Bu bir bilim kurgu filmidir." } as any} />
         );
 
         expect(getByText("Bu bir bilim kurgu filmidir.")).toBeTruthy();
@@ -19,7 +19,7 @@ describe("MovieOverview Component", () => {
 
     it("should toggle expanded state on press", () => {
         const { getByText } = render(
-            <MovieOverview movie={{ description: "Test açıklaması." } as any} />
+            <MovieOverview movie={{ overview: "Test açıklaması." } as any} />
         );
 
         const overviewText = getByText("Test açıklaması.");

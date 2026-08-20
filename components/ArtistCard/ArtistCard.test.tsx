@@ -3,13 +3,14 @@ import { render, fireEvent } from "@testing-library/react-native";
 import ArtistCard from "./index";
 import { IArtistCardProps } from "./types";
 
-const mockArtistProps: Omit<IArtistCardProps, "type"> = {
+const mockArtistProps: IArtistCardProps = {
     artist: {
+        id: "artist-1" as any,
         name: "Artist Name",
-        image: "https://example.com/artist.jpg",
-        followers: 1552
+        avatar: "https://example.com/artist.jpg",
+        followerCount: 1552,
     },
-    onPress: jest.fn()
+    onPress: jest.fn(),
 };
 
 describe("ArtistCard Component", () => {
@@ -39,13 +40,11 @@ describe("ArtistCard Component", () => {
     });
 
     it("should render the avatar image with correct uri", () => {
-        const { UNSAFE_getByType } = render(
-            <ArtistCard {...mockArtistProps} />
-        );
+        const { UNSAFE_getByType } = render(<ArtistCard {...mockArtistProps} />);
 
         const imageComponent = UNSAFE_getByType("Image");
         expect(imageComponent.props.source).toEqual({
-            uri: mockArtistProps.artist.image
+            uri: mockArtistProps.artist.avatar?.toString(),
         });
     });
 
@@ -55,7 +54,7 @@ describe("ArtistCard Component", () => {
                 {...mockArtistProps}
                 artist={{
                     ...mockArtistProps.artist,
-                    followers: undefined
+                    followerCount: undefined,
                 }}
             />
         );

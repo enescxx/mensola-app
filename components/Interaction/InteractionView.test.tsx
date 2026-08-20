@@ -26,7 +26,7 @@ describe("InteractionView Component", () => {
         },
         rating: 9,
         isLiked: true,
-        likeCount: 15,
+        likesCount: 15,
         replyCount: 3,
     };
 
