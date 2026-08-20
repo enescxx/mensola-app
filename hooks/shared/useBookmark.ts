@@ -1,9 +1,9 @@
-import { BookmarkTargetType } from "@/services/bookmark.service";
 import { BookmarkService } from "@/services/bookmark.service";
+import { BookmarkTargetId, BookmarkTargetType } from "@/types/bookmark.types";
 import { useCallback, useState } from "react";
 
 interface UseBookmarkOptions<T> {
-    targetId?: string;
+    targetId?: BookmarkTargetId;
     targetType?: BookmarkTargetType;
     targetDetails?: T;
     setTargetDetails?: (newIsSaved: boolean, newSavesCount?: number) => void;
@@ -27,7 +27,7 @@ export const useBookmark = <T extends { isSaved?: boolean; savesCount?: number }
         setTargetDetails(newIsSaved, newSavesCount);
 
         try {
-            const res = await BookmarkService.toggleBookmark(targetId, targetType);
+            const res = await BookmarkService.toggleBookmark({ targetId, targetType });
             const isSavedResult = res.data?.isSaved;
             if (typeof isSavedResult === "boolean") {
                 setTargetDetails(isSavedResult, newSavesCount);

@@ -1,23 +1,15 @@
 import { View } from "react-native";
 
-import { StatTypes } from "../../types";
-
 import { styles } from "./styles";
 import { IHeaderStatsProps } from "./types";
 import StatView from "./ProfileStatItem";
+import { StatType, StatTypeKey } from "@/types/stat.types";
 
-export default function ProfileStats({
-    stats,
-    onStatPress
-}: IHeaderStatsProps) {
+export default function ProfileStats({ stats, onStatPress }: IHeaderStatsProps) {
     return (
         <View style={styles.statsContainer}>
-            {stats?.map(stat => (
-                <StatView
-                    key={stat.type}
-                    statData={stat}
-                    onPress={onStatPress}
-                />
+            {Object.entries(stats).map(([key, value]) => (
+                <StatView key={key} statType={key as StatTypeKey} statValue={value} onPress={onStatPress} />
             ))}
         </View>
     );

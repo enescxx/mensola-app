@@ -31,7 +31,7 @@ export default function TrackHero({
     const artistName = trackDetails.artists && trackDetails.artists.length > 0 ? trackDetails.artists[0].name : "";
     const likesCount = trackDetails.likesCount || 0;
     const commentsCount = trackDetails.commentsCount || 0;
-    
+
     const userRating = trackDetails?.currentUserInteraction?.rating
         ? Number(trackDetails.currentUserInteraction.rating)
         : 0;
@@ -48,7 +48,7 @@ export default function TrackHero({
         <>
             <View style={styles.heroBanner}>
                 {trackDetails.image ? (
-                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: trackDetails.image }}>
+                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: trackDetails.image.toString() }}>
                         <LinearGradient
                             colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
                             style={styles.bannerGradient}
@@ -66,7 +66,11 @@ export default function TrackHero({
                 <View style={styles.bannerContent}>
                     <View style={styles.posterWrapper}>
                         {trackDetails.image ? (
-                            <Image source={{ uri: trackDetails.image }} style={styles.poster} resizeMode="cover" />
+                            <Image
+                                source={{ uri: trackDetails.image.toString() }}
+                                style={styles.poster}
+                                resizeMode="cover"
+                            />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
                                 <Ionicons name="musical-note-outline" size={36} color="#666" />
@@ -84,7 +88,10 @@ export default function TrackHero({
                         {trackDetails.artists && trackDetails.artists.length > 0 && (
                             <TouchableOpacity style={styles.creatorContainer} activeOpacity={0.8}>
                                 {trackDetails.artists[0].avatar ? (
-                                    <Image source={{ uri: trackDetails.artists[0].avatar }} style={styles.avatar} />
+                                    <Image
+                                        source={{ uri: trackDetails.artists[0].avatar.toString() }}
+                                        style={styles.avatar}
+                                    />
                                 ) : (
                                     <View style={[styles.avatar, styles.avatarPlaceholder]}>
                                         <Text style={styles.avatarLetter}>
@@ -104,7 +111,6 @@ export default function TrackHero({
                         </View>
 
                         <View style={styles.actionBar}>
-                            {/* Dinle */}
                             <ActionButton
                                 icon="play"
                                 isActive={false}
@@ -112,7 +118,6 @@ export default function TrackHero({
                                 onPress={onPlayPress || (() => {})}
                             />
 
-                            {/* Ekle */}
                             <ActionButton
                                 icon="add-outline"
                                 isActive={false}
@@ -120,7 +125,6 @@ export default function TrackHero({
                                 onPress={onAddPress || (() => {})}
                             />
 
-                            {/* Beğen */}
                             <ActionButton
                                 icon="heart"
                                 isActive={!!trackDetails.isLiked}
@@ -128,7 +132,6 @@ export default function TrackHero({
                                 onPress={toggleLike}
                             />
 
-                            {/* Oyla / Yorum Yap */}
                             <ActionButton
                                 icon="star"
                                 isActive={hasUserInteraction}
@@ -139,27 +142,6 @@ export default function TrackHero({
                     </View>
                 </View>
             </View>
-
-            {/* Description */}
-            {trackDetails.description ? (
-                <View style={styles.descriptionSection}>
-                    <Text
-                        style={styles.description}
-                        numberOfLines={isDescriptionExpanded ? undefined : 2}
-                        onTextLayout={handleTextLayout}>
-                        {trackDetails.description}
-                    </Text>
-
-                    {(isDescriptionTruncated || isDescriptionExpanded) && (
-                        <TouchableOpacity
-                            onPress={() => setIsDescriptionExpanded((prev) => !prev)}
-                            activeOpacity={0.7}
-                            style={styles.readMoreButton}>
-                            <Text style={styles.readMoreText}>{isDescriptionExpanded ? "Daha Az" : "Daha Fazla"}</Text>
-                        </TouchableOpacity>
-                    )}
-                </View>
-            ) : null}
         </>
     );
 }

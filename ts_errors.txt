@@ -1,0 +1,690 @@
+api/client.test.ts(4,1): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(5,14): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(6,14): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(7,17): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(10,1): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(12,18): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(16,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+api/client.test.ts(17,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+api/client.test.ts(18,9): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(19,9): error TS2304: Cannot find name 'global'.
+api/client.test.ts(19,24): error TS2708: Cannot use namespace 'jest' as a value.
+api/client.test.ts(22,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+api/client.test.ts(23,39): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(32,10): error TS2304: Cannot find name 'global'.
+api/client.test.ts(32,31): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(44,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(44,16): error TS2304: Cannot find name 'global'.
+api/client.test.ts(45,13): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(46,13): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(48,26): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(54,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(57,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+api/client.test.ts(58,39): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(58,64): error TS7006: Parameter 'key' implicitly has an 'any' type.
+api/client.test.ts(64,10): error TS2304: Cannot find name 'global'.
+api/client.test.ts(64,31): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(69,26): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(78,26): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(89,26): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(96,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(98,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(98,16): error TS2304: Cannot find name 'global'.
+api/client.test.ts(99,13): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(100,13): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(101,26): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(107,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(110,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+api/client.test.ts(113,39): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(115,10): error TS2304: Cannot find name 'global'.
+api/client.test.ts(115,31): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(120,26): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(128,26): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(133,15): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(134,13): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(137,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(138,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(140,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(143,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+api/client.test.ts(144,39): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(146,10): error TS2304: Cannot find name 'global'.
+api/client.test.ts(146,31): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(150,33): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(156,33): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(162,33): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(171,33): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(177,33): error TS7006: Parameter 'h' implicitly has an 'any' type.
+api/client.test.ts(186,31): error TS2304: Cannot find name 'global'.
+api/client.test.ts(186,52): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+api/client.test.ts(187,13): error TS7006: Parameter 'call' implicitly has an 'any' type.
+api/client.test.ts(189,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(191,9): error TS2304: Cannot find name 'expect'.
+api/client.test.ts(192,9): error TS2304: Cannot find name 'expect'.
+api/client.ts(114,66): error TS2322: Type 'null' is not assignable to type 'T'.
+  'T' could be instantiated with an arbitrary type which could be unrelated to 'null'.
+app/(tabs)/_layout.tsx(10,31): error TS2322: Type '{ state: TabNavigationState<ParamListBase>; descriptors: BottomTabDescriptorMap; navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>; insets: EdgeInsets; }' is not assignable to type 'BottomTabBarProps'.
+  Types of property 'descriptors' are incompatible.
+    Type 'import("/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/expo-router/build/react-navigation/bottom-tabs/types").BottomTabDescriptorMap' is not assignable to type 'import("/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/@react-navigation/bottom-tabs/lib/typescript/src/types").BottomTabDescriptorMap'.
+      'string' index signatures are incompatible.
+        Type 'import("/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/expo-router/build/react-navigation/bottom-tabs/types").BottomTabDescriptor' is not assignable to type 'import("/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/@react-navigation/bottom-tabs/lib/typescript/src/types").BottomTabDescriptor'.
+          Types of property 'options' are incompatible.
+            Type 'import("/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/expo-router/build/react-navigation/bottom-tabs/types").BottomTabNavigationOptions' is not assignable to type 'import("/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/@react-navigation/bottom-tabs/lib/typescript/src/types").BottomTabNavigationOptions'.
+              Type 'BottomTabNavigationOptions' is not assignable to type 'HeaderOptions'.
+                Types of property 'headerLeft' are incompatible.
+                  Type '((props: Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: ColorValue; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }) => ReactNode) | undefined' is not assignable to type '((props: Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: string; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }) => ReactNode) | undefined'.
+                    Type '(props: Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: ColorValue; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }) => ReactNode' is not assignable to type '(props: Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: string; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }) => ReactNode'.
+                      Types of parameters 'props' and 'props' are incompatible.
+                        Type 'Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: string; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }' is not assignable to type 'Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: ColorValue; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }'.
+                          Type 'Omit<HeaderButtonProps, "children"> & { backImage?: ((props: { tintColor: string; }) => ReactNode) | undefined; label?: string | undefined; ... 6 more ...; titleLayout?: Layout | undefined; } & { ...; }' is not assignable to type '{ backImage?: ((props: { tintColor: ColorValue; }) => ReactNode) | undefined; label?: string | undefined; truncatedLabel?: string | undefined; displayMode?: HeaderBackButtonDisplayMode | undefined; ... 4 more ...; titleLayout?: Layout | undefined; }'.
+                            Types of property 'backImage' are incompatible.
+                              Type '((props: { tintColor: string; }) => ReactNode) | undefined' is not assignable to type '((props: { tintColor: ColorValue; }) => ReactNode) | undefined'.
+                                Type '(props: { tintColor: string; }) => ReactNode' is not assignable to type '(props: { tintColor: ColorValue; }) => ReactNode'.
+                                  Types of parameters 'props' and 'props' are incompatible.
+                                    Type '{ tintColor: ColorValue; }' is not assignable to type '{ tintColor: string; }'.
+                                      Types of property 'tintColor' are incompatible.
+                                        Type 'ColorValue' is not assignable to type 'string'.
+                                          Type 'OpaqueColorValue' is not assignable to type 'string'.
+app/(tabs)/me/[statType].tsx(15,13): error TS2322: Type 'string' is not assignable to type 'StatType'.
+app/(tabs)/me/[statType].tsx(16,21): error TS18048: 'user' is possibly 'undefined'.
+app/(tabs)/me/[statType].tsx(27,32): error TS18048: 'user' is possibly 'undefined'.
+app/(tabs)/me/[statType].tsx(28,17): error TS2322: Type 'string' is not assignable to type 'StatType'.
+app/(tabs)/me/_layout.tsx(9,26): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+app/albums/[albumId].tsx(24,25): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'AlbumId | undefined'.
+  Type 'string' is not assignable to type 'AlbumId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "AlbumId"; }'.
+app/movie-lists/[listId].tsx(25,29): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'MovieListId | undefined'.
+  Type 'string' is not assignable to type 'MovieListId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "MovieListId"; }'.
+app/movies/[movieId]/index.tsx(10,50): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'MovieId | undefined'.
+  Type 'string' is not assignable to type 'MovieId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "MovieId"; }'.
+app/playlists/[playlistId].tsx(24,28): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'PlaylistId | undefined'.
+  Type 'string' is not assignable to type 'PlaylistId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "PlaylistId"; }'.
+app/tracks/[trackId].tsx(8,107): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'TrackId | undefined'.
+  Type 'string' is not assignable to type 'TrackId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "TrackId"; }'.
+app/users/[userId]/[statType].tsx(15,13): error TS2322: Type 'string' is not assignable to type 'StatType'.
+app/users/[userId]/[statType].tsx(16,13): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+app/users/[userId]/[statType].tsx(27,32): error TS18048: 'user' is possibly 'undefined'.
+app/users/[userId]/[statType].tsx(28,17): error TS2322: Type 'string' is not assignable to type 'StatType'.
+app/users/[userId]/_layout.tsx(11,26): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/AlbumDetail/AlbumDetailView.tsx(38,17): error TS2322: Type '{ title: any; image: any; duration: any; artists: any; }' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+  Property 'id' is missing in type '{ title: any; image: any; duration: any; artists: any; }' but required in type 'ITrack'.
+components/AlbumDetail/types.ts(1,10): error TS2724: '"@/hooks/music/useAlbumDetails"' has no exported member named 'IAlbumDetails'. Did you mean 'useAlbumDetails'?
+components/AlbumDetail/types.ts(1,25): error TS2305: Module '"@/hooks/music/useAlbumDetails"' has no exported member 'IAlbumTrackItem'.
+components/AlbumDetail/types.ts(1,42): error TS2305: Module '"@/hooks/music/useAlbumDetails"' has no exported member 'IAlbumInteractionItem'.
+components/ArtistCard/ArtistCard.test.tsx(12,14): error TS2708: Cannot use namespace 'jest' as a value.
+components/ArtistCard/ArtistCard.test.tsx(15,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(16,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(17,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/ArtistCard/ArtistCard.test.tsx(20,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(23,9): error TS2304: Cannot find name 'expect'.
+components/ArtistCard/ArtistCard.test.tsx(26,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(29,9): error TS2304: Cannot find name 'expect'.
+components/ArtistCard/ArtistCard.test.tsx(32,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(38,9): error TS2304: Cannot find name 'expect'.
+components/ArtistCard/ArtistCard.test.tsx(41,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(46,49): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ComponentType<unknown>'.
+components/ArtistCard/ArtistCard.test.tsx(47,9): error TS2304: Cannot find name 'expect'.
+components/ArtistCard/ArtistCard.test.tsx(52,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/ArtistCard/ArtistCard.test.tsx(63,9): error TS2304: Cannot find name 'expect'.
+components/ArtistCard/types.ts(1,25): error TS2307: Cannot find module '../../types/deleted' or its corresponding type declarations.
+components/Badge/Badge.test.tsx(6,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Badge/Badge.test.tsx(7,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Badge/Badge.test.tsx(12,9): error TS2304: Cannot find name 'expect'.
+components/Badge/Badge.test.tsx(13,9): error TS2304: Cannot find name 'expect'.
+components/Badge/Badge.test.tsx(16,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Badge/Badge.test.tsx(18,14): error TS2741: Property 'icon' is missing in type '{ value: number; }' but required in type 'IBadgeProps'.
+components/Badge/Badge.test.tsx(21,9): error TS2304: Cannot find name 'expect'.
+components/Badge/Badge.test.tsx(24,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Badge/Badge.test.tsx(25,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Badge/Badge.test.tsx(27,14): error TS2741: Property 'icon' is missing in type '{ value: string; onPress: any; }' but required in type 'IBadgeProps'.
+components/Badge/Badge.test.tsx(31,9): error TS2304: Cannot find name 'expect'.
+components/Badge/Badge.test.tsx(34,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Badge/Badge.test.tsx(39,9): error TS2304: Cannot find name 'expect'.
+components/Badge/Badge.test.tsx(40,9): error TS2304: Cannot find name 'expect'.
+components/BottomSheet/BottomSheet.test.tsx(6,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/BottomSheet/BottomSheet.test.tsx(9,18): error TS2708: Cannot use namespace 'jest' as a value.
+components/BottomSheet/BottomSheet.test.tsx(13,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/BottomSheet/BottomSheet.test.tsx(14,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/BottomSheet/BottomSheet.test.tsx(17,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/BottomSheet/BottomSheet.test.tsx(24,9): error TS2304: Cannot find name 'expect'.
+components/BottomSheet/BottomSheet.test.tsx(25,9): error TS2304: Cannot find name 'expect'.
+components/BottomSheet/BottomSheet.test.tsx(28,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/BottomSheet/BottomSheet.test.tsx(38,9): error TS2304: Cannot find name 'expect'.
+components/BottomSheet/BottomSheet.test.tsx(41,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/BottomSheet/BottomSheet.test.tsx(51,9): error TS2304: Cannot find name 'expect'.
+components/Button/Button.test.tsx(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Button/Button.test.tsx(5,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Button/Button.test.tsx(10,9): error TS2304: Cannot find name 'expect'.
+components/Button/Button.test.tsx(13,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Button/Button.test.tsx(14,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Button/Button.test.tsx(23,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(6,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/DynamicList/DynamicList.test.tsx(15,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/DynamicList/DynamicList.test.tsx(24,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(25,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(28,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(31,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/DynamicList/DynamicList.test.tsx(41,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(44,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/DynamicList/DynamicList.test.tsx(45,27): error TS2708: Cannot use namespace 'jest' as a value.
+components/DynamicList/DynamicList.test.tsx(55,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(60,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/DynamicList.test.tsx(63,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/DynamicList/DynamicList.test.tsx(77,9): error TS2304: Cannot find name 'expect'.
+components/DynamicList/types.ts(6,50): error TS2694: Namespace '"/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/react-native/types/index"' has no exported member 'ReactElement'.
+components/DynamicList/types.ts(9,36): error TS2694: Namespace '"/home/enesc/Masa\u00FCst\u00FC/mensola/mobile/node_modules/react-native/types/index"' has no exported member 'ComponentType'.
+components/Interaction/InteractionSheet/index.tsx(87,32): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: ImageProps): Image', gave the following error.
+    Type '{ uri: string | URL; }' is not assignable to type 'ImageSourcePropType | undefined'.
+      Types of property 'uri' are incompatible.
+        Type 'string | URL' is not assignable to type 'string | undefined'.
+          Type 'URL' is not assignable to type 'string'.
+  Overload 2 of 2, '(props: ImageProps, context: any): Image', gave the following error.
+    Type '{ uri: string | URL; }' is not assignable to type 'ImageSourcePropType | undefined'.
+      Types of property 'uri' are incompatible.
+        Type 'string | URL' is not assignable to type 'string | undefined'.
+          Type 'URL' is not assignable to type 'string'.
+components/Interaction/InteractionView.test.tsx(5,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/Interaction/InteractionView.test.tsx(7,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Interaction/InteractionView.test.tsx(13,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Interaction/InteractionView.test.tsx(33,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Interaction/InteractionView.test.tsx(37,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Interaction/InteractionView.test.tsx(40,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(41,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(42,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(43,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(44,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(47,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Interaction/InteractionView.test.tsx(52,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(58,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Interaction/InteractionView.test.tsx(63,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/InteractionView.test.tsx(69,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Interaction/InteractionView.test.tsx(80,9): error TS2304: Cannot find name 'expect'.
+components/Interaction/types.ts(1,51): error TS2307: Cannot find module '@/types/deleted' or its corresponding type declarations.
+components/MovieCard/MovieCard.test.tsx(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieCard/MovieCard.test.tsx(6,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieCard/MovieCard.test.tsx(17,14): error TS2322: Type '{ variant: "profile"; title: string; poster: string; interactions: { rating: string; isLiked: boolean; }; }' is not assignable to type 'IMovieCardProps'.
+  The types of 'interactions.rating' are incompatible between these types.
+    Type 'string' is not assignable to type 'number'.
+components/MovieCard/MovieCard.test.tsx(20,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(22,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(24,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(25,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(28,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieCard/MovieCard.test.tsx(40,14): error TS2322: Type '{ variant: "feed"; title: string; poster: string; interactions: { rating: string; totalLikes: number; totalReviews: number; }; }' is not assignable to type 'IMovieCardProps'.
+  The types of 'interactions.rating' are incompatible between these types.
+    Type 'string' is not assignable to type 'number'.
+components/MovieCard/MovieCard.test.tsx(43,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(45,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(46,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(47,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(50,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieCard/MovieCard.test.tsx(58,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(60,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(63,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieCard/MovieCard.test.tsx(70,17): error TS1117: An object literal cannot have multiple properties with the same name.
+components/MovieCard/MovieCard.test.tsx(75,14): error TS2322: Type '{ variant: "feed"; title: string; poster: string; interactions: { rating: string; totalReviews: number; }; }' is not assignable to type 'IMovieCardProps'.
+  The types of 'interactions.rating' are incompatible between these types.
+    Type 'string' is not assignable to type 'number'.
+components/MovieCard/MovieCard.test.tsx(78,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(80,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/MovieCard.test.tsx(81,9): error TS2304: Cannot find name 'expect'.
+components/MovieCard/types.ts(1,34): error TS2307: Cannot find module '../../types/deleted' or its corresponding type declarations.
+components/MovieListDetail/MovieListDetailView.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListDetailView.test.tsx(7,15): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListDetailView.test.tsx(11,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListDetailView.test.tsx(17,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListDetailView.test.tsx(19,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListDetailView.test.tsx(20,26): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListDetailView.test.tsx(25,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListDetailView.test.tsx(51,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListDetailView.test.tsx(60,17): error TS2322: Type '{ listDetails: null; movies: never[]; interactions: never[]; isLoading: true; isRefetching: false; error: string; refetch: () => void; toggleLike: () => void; submitInteraction: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & IMovieListDetailViewProps'.
+  Property 'refetch' does not exist on type 'IntrinsicAttributes & IMovieListDetailViewProps'.
+components/MovieListDetail/MovieListDetailView.test.tsx(67,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListDetailView.test.tsx(70,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListDetailView.test.tsx(79,17): error TS2322: Type '{ listDetails: any; movies: any; interactions: any; isLoading: false; isRefetching: false; error: string; refetch: () => void; toggleLike: () => void; submitInteraction: () => Promise<void>; }' is not assignable to type 'IntrinsicAttributes & IMovieListDetailViewProps'.
+  Property 'refetch' does not exist on type 'IntrinsicAttributes & IMovieListDetailViewProps'.
+components/MovieListDetail/MovieListDetailView.test.tsx(85,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListDetailView.test.tsx(86,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListDetailView.test.tsx(87,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListDetailView.test.tsx(91,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListDetailView.tsx(12,10): error TS2305: Module '"@/hooks/movie/useMovieListDetails"' has no exported member 'IMovieListInteractionItem'.
+components/MovieListDetail/MovieListDetailView.tsx(13,32): error TS2307: Cannot find module '@/types/deleted' or its corresponding type declarations.
+components/MovieListDetail/MovieListHero.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(6,21): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(9,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(15,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(17,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(18,26): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(23,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(25,15): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(29,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListHero.test.tsx(46,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListHero.test.tsx(57,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(58,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(59,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(62,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(63,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(64,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(65,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(68,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListHero.test.tsx(69,32): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(70,32): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(71,36): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListHero.test.tsx(86,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(89,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(92,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.test.tsx(95,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListHero.test.tsx(104,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListHero.tsx(38,34): error TS7006: Parameter 'owner' implicitly has an 'any' type.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(5,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(7,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(13,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(19,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(21,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(22,26): error TS2708: Cannot use namespace 'jest' as a value.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(27,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(45,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(49,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(59,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(60,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(61,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(64,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MovieListDetail/MovieListOwnersBottomSheet.test.tsx(76,9): error TS2304: Cannot find name 'expect'.
+components/MovieListDetail/MovieListOwnersBottomSheet.tsx(9,10): error TS2305: Module '"@/hooks/movie/useMovieListDetails"' has no exported member 'IMovieListOwner'.
+components/MovieListDetail/MovieListOwnersBottomSheet.tsx(50,41): error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/MovieListDetail/MovieListOwnersBottomSheet.tsx(55,27): error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/MovieListDetail/MovieListOwnersBottomSheet.tsx(78,25): error TS2322: Type 'string | UserId' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type 'UserId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/MovieListDetail/types.ts(1,10): error TS2724: '"@/hooks/movie/useMovieListDetails"' has no exported member named 'IMovieListDetails'. Did you mean 'useMovieListDetails'?
+components/MovieListDetail/types.ts(1,29): error TS2305: Module '"@/hooks/movie/useMovieListDetails"' has no exported member 'IMovieListOwner'.
+components/MovieListDetail/types.ts(1,46): error TS2305: Module '"@/hooks/movie/useMovieListDetails"' has no exported member 'IMovieListInteractionItem'.
+components/MovieListDetail/types.ts(2,32): error TS2307: Cannot find module '@/types/deleted' or its corresponding type declarations.
+components/Movies/ActionButton.test.tsx(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/ActionButton.test.tsx(6,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/ActionButton.test.tsx(11,9): error TS2304: Cannot find name 'expect'.
+components/Movies/ActionButton.test.tsx(14,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/ActionButton.test.tsx(15,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/ActionButton.test.tsx(21,9): error TS2304: Cannot find name 'expect'.
+components/Movies/ActionButton.test.tsx(24,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/ActionButton.test.tsx(25,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/ActionButton.test.tsx(30,9): error TS2304: Cannot find name 'expect'.
+components/Movies/AddToListBottomSheet.test.tsx(5,28): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/AddToListBottomSheet.test.tsx(6,33): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/AddToListBottomSheet.test.tsx(8,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/AddToListBottomSheet.test.tsx(21,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/AddToListBottomSheet.test.tsx(22,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/AddToListBottomSheet.test.tsx(27,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/AddToListBottomSheet.test.tsx(36,9): error TS2304: Cannot find name 'expect'.
+components/Movies/AddToListBottomSheet.test.tsx(37,9): error TS2304: Cannot find name 'expect'.
+components/Movies/AddToListBottomSheet.test.tsx(38,9): error TS2304: Cannot find name 'expect'.
+components/Movies/AddToListBottomSheet.test.tsx(41,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/AddToListBottomSheet.test.tsx(50,9): error TS2304: Cannot find name 'expect'.
+components/Movies/AddToListBottomSheet.tsx(24,23): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'MovieId | undefined'.
+  Type 'string' is not assignable to type 'MovieId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "MovieId"; }'.
+components/Movies/LatestComments.test.tsx(5,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/LatestComments.test.tsx(7,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/LatestComments.test.tsx(14,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/LatestComments.test.tsx(25,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/LatestComments.test.tsx(29,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/LatestComments.test.tsx(32,9): error TS2304: Cannot find name 'expect'.
+components/Movies/LatestComments.test.tsx(33,9): error TS2304: Cannot find name 'expect'.
+components/Movies/LatestComments.test.tsx(34,9): error TS2304: Cannot find name 'expect'.
+components/Movies/LatestComments.test.tsx(37,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/LatestComments.test.tsx(40,9): error TS2304: Cannot find name 'expect'.
+components/Movies/LatestComments.test.tsx(43,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/LatestComments.test.tsx(48,9): error TS2304: Cannot find name 'expect'.
+components/Movies/LatestComments.tsx(4,42): error TS2307: Cannot find module '../../types/deleted' or its corresponding type declarations.
+components/Movies/MovieHero.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(7,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(8,26): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(13,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(15,20): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(16,22): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(21,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(23,23): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(24,36): error TS2708: Cannot use namespace 'jest' as a value.
+components/Movies/MovieHero.test.tsx(28,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieHero.test.tsx(47,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieHero.test.tsx(48,39): error TS2739: Type '{ movie: any; }' is missing the following properties from type 'MovieHeroProps': isLoading, error
+components/Movies/MovieHero.test.tsx(50,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(51,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(52,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(53,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(56,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieHero.test.tsx(57,39): error TS2739: Type '{ movie: any; }' is missing the following properties from type 'MovieHeroProps': isLoading, error
+components/Movies/MovieHero.test.tsx(59,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(60,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(61,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.test.tsx(64,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieHero.test.tsx(65,41): error TS2739: Type '{ movie: undefined; }' is missing the following properties from type 'MovieHeroProps': isLoading, error
+components/Movies/MovieHero.test.tsx(67,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieHero.tsx(248,76): error TS2554: Expected 1 arguments, but got 2.
+components/Movies/MovieOverview.test.tsx(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieOverview.test.tsx(6,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieOverview.test.tsx(11,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieOverview.test.tsx(14,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieOverview.test.tsx(17,9): error TS2304: Cannot find name 'expect'.
+components/Movies/MovieOverview.test.tsx(20,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Movies/MovieOverview.test.tsx(28,9): error TS2304: Cannot find name 'expect'.
+components/Movies/types.ts(2,30): error TS2307: Cannot find module '../../types/deleted' or its corresponding type declarations.
+components/MusicCard/MusicCard.test.tsx(7,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Omit<IMusicCardProps, "type">'.
+components/MusicCard/MusicCard.test.tsx(14,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Omit<IMusicCardProps, "type">'.
+components/MusicCard/MusicCard.test.tsx(21,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Omit<IMusicCardProps, "type">'.
+components/MusicCard/MusicCard.test.tsx(27,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(28,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(29,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/MusicCard/MusicCard.test.tsx(32,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(33,62): error TS2322: Type 'Omit<IMusicCardProps, "type">' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/MusicCard/MusicCard.test.tsx(35,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(36,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(39,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(40,62): error TS2322: Type 'Omit<IMusicCardProps, "type">' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/MusicCard/MusicCard.test.tsx(42,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(45,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(46,62): error TS2322: Type 'Omit<IMusicCardProps, "type">' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/MusicCard/MusicCard.test.tsx(48,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(51,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(52,65): error TS2322: Type 'Omit<IMusicCardProps, "type">' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/MusicCard/MusicCard.test.tsx(54,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(57,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(58,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/MusicCard/MusicCard.test.tsx(60,62): error TS2322: Type 'Omit<IMusicCardProps, "type">' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/MusicCard/MusicCard.test.tsx(66,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(69,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(70,69): error TS2322: Type 'Omit<IMusicCardProps, "type">' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/MusicCard/MusicCard.test.tsx(72,49): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ComponentType<unknown>'.
+components/MusicCard/MusicCard.test.tsx(73,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/MusicCard.test.tsx(74,32): error TS2339: Property 'image' does not exist on type 'Omit<IMusicCardProps, "type">'.
+components/MusicCard/MusicCard.test.tsx(78,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/MusicCard/MusicCard.test.tsx(79,88): error TS2322: Type 'undefined' is not assignable to type 'number'.
+components/MusicCard/MusicCard.test.tsx(81,9): error TS2304: Cannot find name 'expect'.
+components/MusicCard/index.tsx(31,24): error TS18048: 'songData.artists' is possibly 'undefined'.
+components/MusicCard/index.tsx(32,13): error TS2322: Type 'string | 0' is not assignable to type 'string'.
+  Type 'number' is not assignable to type 'string'.
+components/MusicCard/index.tsx(37,34): error TS2339: Property 'artists' does not exist on type 'IAlbum'.
+components/MusicCard/index.tsx(37,47): error TS7006: Parameter 'artist' implicitly has an 'any' type.
+components/MusicCard/index.tsx(38,13): error TS2322: Type 'string | 0 | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+components/MusicCard/index.tsx(57,24): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: ImageProps): Image', gave the following error.
+    Type '{ uri: string | URL | undefined; }' is not assignable to type 'ImageSourcePropType | undefined'.
+      Types of property 'uri' are incompatible.
+        Type 'string | URL | undefined' is not assignable to type 'string | undefined'.
+          Type 'URL' is not assignable to type 'string'.
+  Overload 2 of 2, '(props: ImageProps, context: any): Image', gave the following error.
+    Type '{ uri: string | URL | undefined; }' is not assignable to type 'ImageSourcePropType | undefined'.
+      Types of property 'uri' are incompatible.
+        Type 'string | URL | undefined' is not assignable to type 'string | undefined'.
+          Type 'URL' is not assignable to type 'string'.
+components/PageHeader/PageHeader.test.tsx(6,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/PageHeader/PageHeader.test.tsx(10,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/PageHeader/PageHeader.test.tsx(12,17): error TS2708: Cannot use namespace 'jest' as a value.
+components/PageHeader/PageHeader.test.tsx(23,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/PageHeader/PageHeader.test.tsx(24,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/PageHeader/PageHeader.test.tsx(27,5): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/PageHeader/PageHeader.test.tsx(30,9): error TS2304: Cannot find name 'expect'.
+components/PageHeader/PageHeader.test.tsx(33,5): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/PageHeader/PageHeader.test.tsx(38,9): error TS2304: Cannot find name 'expect'.
+components/PageHeader/PageHeader.test.tsx(41,5): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/PageHeader/PageHeader.test.tsx(52,9): error TS2304: Cannot find name 'expect'.
+components/PageHeader/PageHeader.test.tsx(55,5): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/PageHeader/PageHeader.test.tsx(56,33): error TS2708: Cannot use namespace 'jest' as a value.
+components/PageHeader/PageHeader.test.tsx(77,9): error TS2304: Cannot find name 'expect'.
+components/PageHeader/PageHeader.test.tsx(80,9): error TS2304: Cannot find name 'expect'.
+components/PageHeader/index.tsx(4,40): error TS2307: Cannot find module '@react-navigation/native-stack' or its corresponding type declarations.
+components/PageHeader/index.tsx(32,47): error TS2339: Property 'backButton' does not exist on type '{ container: { backgroundColor: string; paddingHorizontal: number; }; content: { flexDirection: "row"; alignItems: "center"; height: number; margin: number; gap: number; }; buttonContainer: { flexDirection: "row"; ... 5 more ...; backgroundColor: string; }; headerButton: { ...; }; titleContainer: { ...; }; titleText...'.
+components/PlaylistDetail/PlaylistDetailView.tsx(12,10): error TS2305: Module '"@/hooks/music/usePlaylistDetails"' has no exported member 'IPlaylistTrackItem'.
+components/PlaylistDetail/PlaylistDetailView.tsx(12,30): error TS2305: Module '"@/hooks/music/usePlaylistDetails"' has no exported member 'IPlaylistInteractionItem'.
+components/PlaylistDetail/PlaylistDetailView.tsx(39,17): error TS2322: Type '{ title: any; image: any; duration: any; artists: any; }' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+  Property 'id' is missing in type '{ title: any; image: any; duration: any; artists: any; }' but required in type 'ITrack'.
+components/PlaylistDetail/PlaylistHero.tsx(36,61): error TS7006: Parameter 'o' implicitly has an 'any' type.
+components/PlaylistDetail/PlaylistOwnersBottomSheet.tsx(9,10): error TS2305: Module '"@/hooks/music/usePlaylistDetails"' has no exported member 'IPlaylistOwner'.
+components/PlaylistDetail/PlaylistOwnersBottomSheet.tsx(55,45): error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/PlaylistDetail/PlaylistOwnersBottomSheet.tsx(61,27): error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/PlaylistDetail/PlaylistOwnersBottomSheet.tsx(84,25): error TS2322: Type 'string | UserId' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type 'UserId'.
+    Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/PlaylistDetail/types.ts(2,5): error TS2724: '"@/hooks/music/usePlaylistDetails"' has no exported member named 'IPlaylistDetails'. Did you mean 'usePlaylistDetails'?
+components/PlaylistDetail/types.ts(3,5): error TS2305: Module '"@/hooks/music/usePlaylistDetails"' has no exported member 'IPlaylistTrackItem'.
+components/PlaylistDetail/types.ts(4,5): error TS2305: Module '"@/hooks/music/usePlaylistDetails"' has no exported member 'IPlaylistOwner'.
+components/PlaylistDetail/types.ts(5,5): error TS2305: Module '"@/hooks/music/usePlaylistDetails"' has no exported member 'IPlaylistInteractionItem'.
+components/Profile/ProfileBody.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileBody.test.tsx(6,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileBody.test.tsx(9,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileBody.test.tsx(14,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileBody.test.tsx(15,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileBody.test.tsx(16,36): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+components/Profile/ProfileBody.test.tsx(29,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileBody.test.tsx(30,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileBody.test.tsx(33,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileBody.test.tsx(34,36): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+components/Profile/ProfileBody.test.tsx(43,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileBody.test.tsx(44,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileBody.tsx(8,13): error TS2339: Property 'bodyData' does not exist on type 'ProfileContextType | null'.
+components/Profile/ProfileBody.tsx(8,23): error TS2339: Property 'handleSeeAllPress' does not exist on type 'ProfileContextType | null'.
+components/Profile/ProfileBody.tsx(11,29): error TS7006: Parameter 'movie' implicitly has an 'any' type.
+components/Profile/ProfileBody.tsx(30,40): error TS18046: 'item' is of type 'unknown'.
+components/Profile/ProfileBody.tsx(31,41): error TS18046: 'item' is of type 'unknown'.
+components/Profile/ProfileBody.tsx(46,36): error TS2322: Type '"song"' is not assignable to type '"track" | "album" | "playlist"'.
+components/Profile/ProfileBody.tsx(46,48): error TS2322: Type 'unknown' is not assignable to type 'ITrack | IPlaylist | IAlbum'.
+components/Profile/ProfileFooter.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileFooter.test.tsx(6,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileFooter.test.tsx(9,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileFooter.test.tsx(11,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileFooter.test.tsx(12,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileFooter.test.tsx(13,37): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileFooter.test.tsx(14,36): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+components/Profile/ProfileFooter.test.tsx(25,48): error TS2345: Argument of type '"FooterItem"' is not assignable to parameter of type 'ElementType'.
+components/Profile/ProfileFooter.test.tsx(27,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileFooter.tsx(9,13): error TS2339: Property 'footerData' does not exist on type 'ProfileContextType | null'.
+components/Profile/ProfileFooter.tsx(9,25): error TS2339: Property 'handleStatPress' does not exist on type 'ProfileContextType | null'.
+components/Profile/ProfileFooter.tsx(12,29): error TS7006: Parameter 'type' implicitly has an 'any' type.
+components/Profile/ProfileFooter.tsx(16,25): error TS7006: Parameter 'item' implicitly has an 'any' type.
+components/Profile/ProfileFooterItem.test.tsx(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileFooterItem.test.tsx(6,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileFooterItem.test.tsx(8,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileFooterItem.test.tsx(14,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileFooterItem.test.tsx(15,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileFooterItem.test.tsx(19,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileHeader.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileHeader.test.tsx(6,24): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileHeader.test.tsx(9,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileHeader.test.tsx(11,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileHeader.test.tsx(12,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileHeader.test.tsx(13,36): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+components/Profile/ProfileHeader.test.tsx(26,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileHeader.test.tsx(27,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileHeader.test.tsx(28,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileHeader.test.tsx(31,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileHeader.test.tsx(32,36): error TS2694: Namespace 'global.jest' has no exported member 'Mock'.
+components/Profile/ProfileHeader.test.tsx(43,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileHeader.test.tsx(44,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileHeader.tsx(9,13): error TS2339: Property 'headerData' does not exist on type 'ProfileContextType | null'.
+components/Profile/ProfileHeader.tsx(9,25): error TS2339: Property 'handleStatPress' does not exist on type 'ProfileContextType | null'.
+components/Profile/ProfileStatItem.test.tsx(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileStatItem.test.tsx(6,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileStatItem.test.tsx(8,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileStatItem.test.tsx(14,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileStatItem.test.tsx(15,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileStatItem.test.tsx(18,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileStatItem.test.tsx(19,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileStatItem.tsx(15,28): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+components/Profile/ProfileStats.test.tsx(4,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileStats.test.tsx(6,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileStats.test.tsx(7,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileStats.test.tsx(16,46): error TS2345: Argument of type '"StatView"' is not assignable to parameter of type 'ElementType'.
+components/Profile/ProfileStats.test.tsx(17,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileStats.test.tsx(20,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileStats.test.tsx(22,46): error TS2345: Argument of type '"StatView"' is not assignable to parameter of type 'ElementType'.
+components/Profile/ProfileStats.test.tsx(24,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileStats.tsx(3,27): error TS2307: Cannot find module '../../types/deleted' or its corresponding type declarations.
+components/Profile/ProfileView.test.tsx(4,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileView.test.tsx(5,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileView.test.tsx(6,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/Profile/ProfileView.test.tsx(8,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileView.test.tsx(9,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/Profile/ProfileView.test.tsx(12,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileView.test.tsx(12,33): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ComponentType<unknown>'.
+components/Profile/ProfileView.test.tsx(13,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileView.test.tsx(13,33): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ComponentType<unknown>'.
+components/Profile/ProfileView.test.tsx(14,9): error TS2304: Cannot find name 'expect'.
+components/Profile/ProfileView.test.tsx(14,33): error TS2345: Argument of type 'string' is not assignable to parameter of type 'ComponentType<unknown>'.
+components/Profile/types.ts(1,65): error TS2307: Cannot find module '../../types/deleted' or its corresponding type declarations.
+components/StatDetailView/StatDetailItem.tsx(71,22): error TS2322: Type '{ type: "playlist"; data: PlaylistItemsResponseDataItem | GetPlaylistsResponseDataItem; onPress: (() => void) | undefined; style: { ...; }; hideCreator: boolean | undefined; }' is not assignable to type 'IntrinsicAttributes & IMusicCardProps<ITrack, IAlbum, IPlaylist>'.
+  Types of property 'data' are incompatible.
+    Type 'PlaylistItemsResponseDataItem | GetPlaylistsResponseDataItem' is not assignable to type 'IPlaylist'.
+      Type 'PlaylistItemsResponseDataItem' is not assignable to type 'IPlaylist'.
+        Types of property 'id' are incompatible.
+          Type 'TrackId' is not assignable to type 'PlaylistId'.
+            Type 'TrackId' is not assignable to type '{ readonly __brand: "PlaylistId"; }'.
+              Types of property '__brand' are incompatible.
+                Type '"TrackId"' is not assignable to type '"PlaylistId"'.
+components/TabBar/TabBar.test.tsx(6,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBar.test.tsx(10,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBar.test.tsx(17,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBar.test.tsx(18,22): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBar.test.tsx(19,26): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBar.test.tsx(35,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBar.test.tsx(36,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBar.test.tsx(39,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBar.test.tsx(42,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(43,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(46,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBar.test.tsx(53,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(59,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(62,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBar.test.tsx(69,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(70,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(73,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBar.test.tsx(80,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBar.test.tsx(81,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(6,1): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBarItem.test.tsx(13,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBarItem.test.tsx(14,25): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBarItem.test.tsx(16,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBarItem.test.tsx(17,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/TabBar/TabBarItem.test.tsx(20,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBarItem.test.tsx(30,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(32,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(34,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(37,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(38,13): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(44,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TabBar/TabBarItem.test.tsx(54,9): error TS2304: Cannot find name 'expect'.
+components/TabBar/TabBarItem.test.tsx(56,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TextField/TextField.test.tsx(5,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TextField/TextField.test.tsx(10,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(13,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TextField/TextField.test.tsx(16,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(19,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TextField/TextField.test.tsx(26,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(27,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(28,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(31,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TextField/TextField.test.tsx(38,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(39,9): error TS2304: Cannot find name 'expect'.
+components/TextField/TextField.test.tsx(42,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/TextField/TextField.test.tsx(43,34): error TS2708: Cannot use namespace 'jest' as a value.
+components/TextField/TextField.test.tsx(52,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(14,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(15,31): error TS2708: Cannot use namespace 'jest' as a value.
+components/UserCard/UserCard.test.tsx(16,29): error TS2708: Cannot use namespace 'jest' as a value.
+components/UserCard/UserCard.test.tsx(18,5): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(19,9): error TS2708: Cannot use namespace 'jest' as a value.
+components/UserCard/UserCard.test.tsx(22,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(25,17): error TS2322: Type '{ id: string; username: string; fullname: string; avatar: string; isFollowing: boolean; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ id: string; username: string; fullname: string; avatar: string; isFollowing: boolean; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(26,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(32,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(33,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(36,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(39,17): error TS2322: Type '{ id: string; username: string; fullname: string; avatar: string; isFollowing: boolean; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ id: string; username: string; fullname: string; avatar: string; isFollowing: boolean; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(40,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(46,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(47,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(48,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(51,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(54,17): error TS2322: Type '{ isFollowing: false; isFollower: false; id: string; username: string; fullname: string; avatar: string; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ isFollowing: false; isFollower: false; id: string; username: string; fullname: string; avatar: string; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(55,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(61,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(64,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(67,17): error TS2322: Type '{ isFollowing: false; isFollower: true; id: string; username: string; fullname: string; avatar: string; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ isFollowing: false; isFollower: true; id: string; username: string; fullname: string; avatar: string; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(68,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(74,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(77,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(80,17): error TS2322: Type '{ isFollowing: true; id: string; username: string; fullname: string; avatar: string; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ isFollowing: true; id: string; username: string; fullname: string; avatar: string; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(81,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(87,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(90,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(93,17): error TS2322: Type '{ id: string; username: string; fullname: string; avatar: string; isFollowing: boolean; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ id: string; username: string; fullname: string; avatar: string; isFollowing: boolean; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(94,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(102,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(103,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(106,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+components/UserCard/UserCard.test.tsx(109,17): error TS2322: Type '{ isFollowing: true; id: string; username: string; fullname: string; avatar: string; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname"> & { isFollowing?: boolean | undefined; isFollower?: boolean | undefined; }'.
+  Type '{ isFollowing: true; id: string; username: string; fullname: string; avatar: string; isFollower: boolean; }' is not assignable to type 'Pick<IUser, "avatar" | "id" | "username" | "fullname">'.
+    Types of property 'id' are incompatible.
+      Type 'string' is not assignable to type 'UserId'.
+        Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(110,17): error TS2322: Type 'string' is not assignable to type 'UserId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "UserId"; }'.
+components/UserCard/UserCard.test.tsx(118,9): error TS2304: Cannot find name 'expect'.
+components/UserCard/UserCard.test.tsx(119,9): error TS2304: Cannot find name 'expect'.
+hooks/movie/useMovieLists.ts(26,62): error TS2559: Type 'MovieId' has no properties in common with type 'GetListsRequest'.
+hooks/movie/useMovieLists.ts(36,29): error TS2339: Property 'map' does not exist on type 'GetListsResponseDataItem[] | GetListsResponseData'.
+  Property 'map' does not exist on type 'GetListsResponseData'.
+hooks/movie/useMovieLists.ts(91,60): error TS2345: Argument of type 'string' is not assignable to parameter of type 'MovieListId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "MovieListId"; }'.
+hooks/movie/useMovieLists.ts(93,55): error TS2345: Argument of type 'string' is not assignable to parameter of type 'MovieListId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "MovieListId"; }'.
+hooks/music/useUserPlaylists.ts(24,69): error TS2345: Argument of type 'string' is not assignable to parameter of type 'TrackId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "TrackId"; }'.
+hooks/music/useUserPlaylists.ts(27,68): error TS2339: Property 'map' does not exist on type 'GetPlaylistsResponseDataItem[] | GetPlaylistsResponseData'.
+  Property 'map' does not exist on type 'GetPlaylistsResponseData'.
+hooks/music/useUserPlaylists.ts(58,63): error TS2345: Argument of type 'string' is not assignable to parameter of type 'PlaylistId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "PlaylistId"; }'.
+hooks/music/useUserPlaylists.ts(60,58): error TS2345: Argument of type 'string' is not assignable to parameter of type 'PlaylistId'.
+  Type 'string' is not assignable to type '{ readonly __brand: "PlaylistId"; }'.

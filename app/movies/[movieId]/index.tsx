@@ -4,9 +4,10 @@ import { useLocalSearchParams } from "expo-router";
 
 import MovieDetailView from "@/components/Movies/MovieDetailView";
 import { useMovie } from "@/hooks/movie/useMovie";
+import { MovieId } from "@/types/common.types";
 
 export default function MoviePage() {
-    const { movieId } = useLocalSearchParams<{ movieId?: string }>();
+    const { movieId } = useLocalSearchParams<{ movieId?: MovieId }>();
     const { movie, isLoading, error } = useMovie(movieId);
 
     return (

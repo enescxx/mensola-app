@@ -1,23 +1,25 @@
-import { ApiResponse, InteractionTypes } from "@/types";
-import { IMovieListInteractionItem } from "@/types/movie";
+import {
+    InteractionItemResponse,
+    InteractionsRequest,
+    InteractionsResponse,
+    InteractionTargetId,
+    InteractionTargetTypes,
+    UpsertInteractionRequest,
+    UpsertInteractionSummary,
+} from "@/types/interaction.types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 
-interface InteractionData {
-    rating?: number;
-    comment?: string;
-    isLiked?: boolean;
-}
 interface UseInteractionOptions {
-    targetId?: string;
-    targetType?: InteractionTypes;
-    createOrUpdateInteraction?: (id: string, data: InteractionData) => Promise<void>;
-    getFn?: (id: string, page: number, limit: number) => Promise<ApiResponse>;
+    targetId?: InteractionTargetId;
+    targetType?: InteractionTargetTypes;
+    createOrUpdateInteraction?: (data: UpsertInteractionRequest) => Promise<void>;
+    getFn?: (data: InteractionsRequest) => Promise<InteractionsResponse>;
     refreshFn?: (isRefreshing: boolean) => Promise<void>;
     limit?: number;
 }
 
-export const useInteracion = <T extends object>({
+export const useInteracion = ({
     targetId,
     targetType,
     createOrUpdateInteraction,
@@ -37,8 +39,8 @@ export const useInteracion = <T extends object>({
         queryKey: ["interactions", targetType, targetId],
         queryFn: async ({ pageParam }) => {
             if (!targetId || !getFn) return [];
-            const response = await getFn(targetId, pageParam, limit);
-            return response.data.items;
+            const response = await getFn({ targetId, page: pageParam, limit });
+            return response.data?.items ?? [];
         },
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {
@@ -51,12 +53,12 @@ export const useInteracion = <T extends object>({
         enabled: !!targetId && !!getFn,
     });
 
-    const interactions: T[] = data?.pages.flat() || [];
+    const interactions: InteractionItemResponse[] = data?.pages.flat() || [];
 
     const submitInteraction = useCallback(
-        async (data: InteractionData) => {
+        async (interaction: UpsertInteractionSummary) => {
             if (!targetId || !createOrUpdateInteraction) return;
-            await createOrUpdateInteraction(targetId, data);
+            await createOrUpdateInteraction({ targetId, interaction });
 
             if (refreshFn) {
                 await refreshFn(true);

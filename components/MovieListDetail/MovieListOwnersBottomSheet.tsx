@@ -6,19 +6,19 @@ import BottomSheet from "@/components/BottomSheet";
 import UserCard from "@/components/UserCard";
 import { useGlobalUser } from "@/context/AuthContext";
 import { useFollow } from "@/hooks/user/useFollow";
-import { IMovieListOwner } from "@/hooks/movie/useMovieListDetails";
 import { IMovieListOwnersBottomSheetProps } from "./types";
+import { FollowUsersResponseDataItem, IUser } from "@/types/user.types";
+import { UserId } from "@/types/common.types";
 
 export default function MovieListOwnersBottomSheet({
     isVisible,
     onClose,
     owners: initialOwners,
-    creatorId,
 }: IMovieListOwnersBottomSheetProps) {
     const router = useRouter();
     const { user: currentUser } = useGlobalUser();
     const { followHandler, unfollowHandler, error: followError } = useFollow();
-    const [owners, setOwners] = useState<IMovieListOwner[]>(initialOwners);
+    const [owners, setOwners] = useState<FollowUsersResponseDataItem[]>(initialOwners);
 
     useEffect(() => {
         setOwners(initialOwners);
@@ -36,7 +36,7 @@ export default function MovieListOwnersBottomSheet({
         );
     };
 
-    const handleFollowPress = (targetUserId: string, isFollowing?: boolean) => {
+    const handleFollowPress = (targetUserId: UserId, isFollowing?: boolean) => {
         const targetUser = owners.find((o) => o.id === targetUserId);
         const name = targetUser?.fullname || targetUser?.username || "kullanıcı";
 
@@ -75,7 +75,7 @@ export default function MovieListOwnersBottomSheet({
                             ...item,
                             avatar: item.avatar ?? undefined,
                         }}
-                        currentUserId={currentUser?.id || ""}
+                        currentUserId={currentUser?.id as UserId}
                         onFollowPress={handleFollowPress}
                         onCardPress={handleCardPress}
                     />

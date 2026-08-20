@@ -4,21 +4,16 @@ import { styles } from "./styles";
 import FooterItem from "./ProfileFooterItem";
 
 import { useProfileContext } from "../../context/ProfileContext";
+import { StatTypeKey } from "@/types/stat.types";
 
 export default function ProfileFooter() {
     const { footerData, handleStatPress } = useProfileContext();
     const { stats } = footerData;
 
-    const footerItemPress = type => {};
-
     return (
         <View style={styles.profileFooter}>
-            {stats?.map(item => (
-                <FooterItem
-                    key={item.type}
-                    statData={item}
-                    onPress={handleStatPress}
-                />
+            {Object.entries(stats).map(([key, value]) => (
+                <FooterItem key={key} statType={key as StatTypeKey} statValue={value} onPress={handleStatPress} />
             ))}
         </View>
     );

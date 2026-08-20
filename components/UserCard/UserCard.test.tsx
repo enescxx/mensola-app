@@ -8,7 +8,7 @@ const mockUser = {
     fullname: "John Doe",
     avatar: "https://example.com/avatar.jpg",
     isFollowing: false,
-    isFollower: false
+    isFollower: false,
 };
 
 describe("UserCard component", () => {
@@ -26,7 +26,7 @@ describe("UserCard component", () => {
                 currentUserId="current-user"
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         expect(getByText("@johndoe")).toBeTruthy();
@@ -40,7 +40,7 @@ describe("UserCard component", () => {
                 currentUserId={mockUser.id}
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         expect(queryByText("Takip Et")).toBeNull();
@@ -55,7 +55,7 @@ describe("UserCard component", () => {
                 currentUserId="current-user"
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         expect(getByText("Takip Et")).toBeTruthy();
@@ -68,7 +68,7 @@ describe("UserCard component", () => {
                 currentUserId="current-user"
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         expect(getByText("Sen de Takip Et")).toBeTruthy();
@@ -81,7 +81,7 @@ describe("UserCard component", () => {
                 currentUserId="current-user"
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         expect(getByText("Takip Ediliyor")).toBeTruthy();
@@ -94,7 +94,7 @@ describe("UserCard component", () => {
                 currentUserId="current-user"
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         fireEvent.press(getByText("@johndoe"));
@@ -110,7 +110,7 @@ describe("UserCard component", () => {
                 currentUserId="current-user"
                 onFollowPress={mockOnFollowPress}
                 onCardPress={mockOnCardPress}
-            />
+            />,
         );
 
         fireEvent.press(getByText("Takip Ediliyor"));

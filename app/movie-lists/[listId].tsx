@@ -2,9 +2,10 @@ import { useLocalSearchParams, Stack } from "expo-router";
 
 import { MovieListDetailView } from "@/components/MovieListDetail";
 import { useMovieListDetails } from "@/hooks/movie/useMovieListDetails";
+import { MovieListId } from "@/types/common.types";
 
 export default function MovieListDetailPage() {
-    const { listId } = useLocalSearchParams<{ listId?: string }>();
+    const { listId } = useLocalSearchParams<{ listId?: MovieListId }>();
     const {
         listDetails,
         movies,

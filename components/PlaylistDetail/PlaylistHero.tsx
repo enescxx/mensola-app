@@ -68,7 +68,9 @@ export default function PlaylistHero({
         <>
             <View style={styles.heroBanner}>
                 {playlistDetails.image ? (
-                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: playlistDetails.image }}>
+                    <ImageBackground
+                        style={styles.bannerBackgroundImg}
+                        source={{ uri: playlistDetails.image.toString() }}>
                         <LinearGradient
                             colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
                             style={styles.bannerGradient}
@@ -86,7 +88,11 @@ export default function PlaylistHero({
                 <View style={styles.bannerContent}>
                     <View style={styles.posterWrapper}>
                         {playlistDetails.image ? (
-                            <Image source={{ uri: playlistDetails.image }} style={styles.poster} resizeMode="cover" />
+                            <Image
+                                source={{ uri: playlistDetails.image.toString() }}
+                                style={styles.poster}
+                                resizeMode="cover"
+                            />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
                                 <Ionicons name="musical-notes-outline" size={36} color="#666" />
@@ -107,7 +113,7 @@ export default function PlaylistHero({
                                 onPress={() => setIsOwnersSheetVisible(true)}
                                 activeOpacity={0.8}>
                                 {creator.avatar ? (
-                                    <Image source={{ uri: creator.avatar }} style={styles.avatar} />
+                                    <Image source={{ uri: creator.avatar.toString() }} style={styles.avatar} />
                                 ) : (
                                     <View style={[styles.avatar, styles.avatarPlaceholder]}>
                                         <Text style={styles.avatarLetter}>
@@ -196,7 +202,6 @@ export default function PlaylistHero({
                 isVisible={isOwnersSheetVisible}
                 onClose={() => setIsOwnersSheetVisible(false)}
                 owners={owners}
-                creatorId={playlistDetails.creatorId}
             />
         </>
     );

@@ -1,83 +1,18 @@
-import { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { PlaylistService } from "@/services/playlist.service";
-import { BookmarkService } from "@/services/bookmark.service";
 import { useInteracion } from "../shared/useInteraction";
 import { useDetailBase } from "../shared/useDetailBase";
 import { useListItems } from "../shared/useListItems";
+import { PlaylistDetails, PlaylistItemsResponseDataItem } from "@/types/playlist.types";
+import { PlaylistId } from "@/types/common.types";
 
-export interface IPlaylistOwner {
-    id: string;
-    username: string;
-    fullname?: string;
-    avatar?: string | null;
-    isFollowing?: boolean;
-    isFollower?: boolean;
-}
-
-export interface IPlaylistDetails {
-    id: string;
-    title: string;
-    description?: string;
-    image?: string;
-    isPrivate?: boolean;
-    listType?: string;
-    creatorId?: string;
-    creator?: IPlaylistOwner;
-    owners?: IPlaylistOwner[];
-    isLiked?: boolean;
-
-    likesCount?: number;
-    savesCount?: number;
-    songCount?: number;
-    currentUserInteraction?: {
-        id?: string;
-        rating?: number;
-        isLiked?: boolean;
-        comment?: {
-            id?: string;
-            content?: string;
-            date?: string;
-        };
-    } | null;
-}
-
-export interface IPlaylistTrackItem {
-    id: string;
-    title: string;
-    duration?: number;
-    image?: string;
-    addedAt?: string;
-    addedBy?: string;
-    isLiked?: boolean;
-    artists?: { id: string; name: string }[];
-}
-
-export interface IPlaylistInteractionItem {
-    id: string;
-    rating?: number | string;
-    isLiked?: boolean;
-    user: {
-        id: string;
-        username: string;
-        fullname?: string;
-        avatar?: string;
-    };
-    comment: {
-        id: string;
-        content: string;
-        date: string;
-    };
-    likeCount: number;
-    replyCount: number;
-}
-
-export const usePlaylistDetails = (playlistId?: string) => {
+export const usePlaylistDetails = (playlistId?: PlaylistId) => {
     const {
         details: playlistDetails,
         setDetails,
         fetchData,
         ...rest
-    } = useDetailBase<IPlaylistDetails>({
+    } = useDetailBase<PlaylistDetails, PlaylistId>({
         id: playlistId,
         fetcher: (id) => PlaylistService.getPlaylistDetails(id),
         onLike: (id) => PlaylistService.likePlaylist(id),
@@ -93,10 +28,10 @@ export const usePlaylistDetails = (playlistId?: string) => {
         refetch: refetchMovies,
         hasNextPage: hasNextTrackPage,
         isFetchingNextPage: isFetchingNextTrackPage,
-    } = useListItems<IPlaylistTrackItem>({
+    } = useListItems<PlaylistItemsResponseDataItem, PlaylistId>({
         listId: playlistId,
         itemType: "track",
-        getFn: async (id, page, limit) => await PlaylistService.getPlaylistItems(id, page, limit),
+        getFn: async (id, page, limit) => await PlaylistService.getPlaylistItems({ playlistId: id, page, limit }),
         limit: 18,
     });
 
@@ -107,16 +42,16 @@ export const usePlaylistDetails = (playlistId?: string) => {
         refetchInteractions,
         hasNextPage: hasNextInteractionsPage,
         isFetchingNextPage: isFetchingNextInteractionPage,
-    } = useInteracion<IPlaylistInteractionItem>({
+    } = useInteracion({
         targetId: playlistId,
         targetType: "playlist",
-        createOrUpdateInteraction: async (id, data) => {
-            await PlaylistService.createOrUpdateInteraction(id, data);
+        createOrUpdateInteraction: async (data) => {
+            await PlaylistService.createOrUpdateInteraction(data);
         },
         refreshFn: async (isRefreshing) => {
             await fetchData(isRefreshing);
         },
-        getFn: async (id, page, limit) => await PlaylistService.getPlaylistInteractions(id, page, limit),
+        getFn: async (data) => await PlaylistService.getPlaylistInteractions(data),
         limit: 20,
     });
 

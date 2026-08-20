@@ -7,7 +7,7 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [shouldShowMore, setShouldShowMore] = useState(false);
 
-    const overviewText = movie?.description ?? "Bu film hakkında daha fazla bilgi yok.";
+    const overviewText = movie?.overview ?? "Bu film hakkında daha fazla bilgi yok.";
 
     return (
         <TouchableOpacity style={styles.overviewWrapper} onPress={() => setIsExpanded(!isExpanded)} activeOpacity={0.7}>

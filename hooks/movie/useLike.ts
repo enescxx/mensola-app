@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 import { MovieService } from "@/services/movie.service";
+import { MovieId } from "@/types/common.types";
 
-const useLike = (defaultMovieId?: string) => {
+const useLike = (defaultMovieId?: MovieId) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const likeMovie = async (targetMovieId?: string | (() => void), onSuccess?: () => void) => {
+    const likeMovie = async (targetMovieId?: MovieId | (() => void), onSuccess?: () => void) => {
         let id = defaultMovieId;
         let callback = onSuccess;
 
@@ -38,7 +39,7 @@ const useLike = (defaultMovieId?: string) => {
         }
     };
 
-    const unlikeMovie = async (targetMovieId?: string | (() => void), onSuccess?: () => void) => {
+    const unlikeMovie = async (targetMovieId?: MovieId | (() => void), onSuccess?: () => void) => {
         let id = defaultMovieId;
         let callback = onSuccess;
 

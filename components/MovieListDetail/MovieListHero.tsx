@@ -70,7 +70,7 @@ export default function MovieListHero({
         <>
             <View style={styles.heroBanner}>
                 {listDetails.image ? (
-                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: listDetails.image }}>
+                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: listDetails.image.toString() }}>
                         <LinearGradient
                             colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
                             style={styles.bannerGradient}
@@ -88,7 +88,11 @@ export default function MovieListHero({
                 <View style={styles.bannerContent}>
                     <View style={styles.posterWrapper}>
                         {listDetails.image ? (
-                            <Image source={{ uri: listDetails.image }} style={styles.poster} resizeMode="cover" />
+                            <Image
+                                source={{ uri: listDetails.image.toString() }}
+                                style={styles.poster}
+                                resizeMode="cover"
+                            />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
                                 <Ionicons name="film-outline" size={36} color="#666" />
@@ -109,7 +113,7 @@ export default function MovieListHero({
                                 onPress={() => setIsOwnersSheetVisible(true)}
                                 activeOpacity={0.8}>
                                 {creator.avatar ? (
-                                    <Image source={{ uri: creator.avatar }} style={styles.avatar} />
+                                    <Image source={{ uri: creator.avatar.toString() }} style={styles.avatar} />
                                 ) : (
                                     <View style={[styles.avatar, styles.avatarPlaceholder]}>
                                         <Text style={styles.avatarLetter}>
@@ -128,14 +132,8 @@ export default function MovieListHero({
                                 icon={<Ionicons name="film-outline" size={12} color="#FF8000" />}
                                 value={moviesCount}
                             />
-                            <Badge
-                                icon={<Ionicons name="heart" size={12} color="#FF8000" />}
-                                value={likesCount}
-                            />
-                            <Badge
-                                icon={<Entypo name="text" size={12} color="#FF8000" />}
-                                value={commentsCount ?? 0}
-                            />
+                            <Badge icon={<Ionicons name="heart" size={12} color="#FF8000" />} value={likesCount} />
+                            <Badge icon={<Entypo name="text" size={12} color="#FF8000" />} value={commentsCount ?? 0} />
                             <Badge
                                 icon={<Ionicons name="bookmark" size={12} color="#FF8000" />}
                                 value={listDetails.savesCount ?? 0}

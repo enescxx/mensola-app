@@ -1,0 +1,59 @@
+import { ApiResponse } from "./api";
+import {
+    AlbumId,
+    CommentId,
+    InteractionId,
+    MovieId,
+    MovieListId,
+    PaginationQueries,
+    PaginationResponse,
+    PlaylistId,
+    TrackId,
+    UserId,
+} from "./common.types";
+import { IUser } from "./user.types";
+
+export interface IComment {
+    id: CommentId;
+    userId: UserId;
+    interactionId: InteractionId;
+    parentId?: CommentId;
+    content: string;
+    createdAt?: Date | string;
+}
+export type CommentSummary = Pick<IComment, "id" | "content"> & { date: IComment["createdAt"] };
+export type InteractionTargetId = MovieId | TrackId | PlaylistId | AlbumId | MovieListId;
+export type InteractionTargetTypes = "movie" | "track" | "album" | "playlist" | "movieList";
+export interface IInteraction {
+    id: InteractionId;
+    userId: UserId;
+    targetId: InteractionTargetId;
+    targetType: InteractionTargetTypes;
+    isLiked?: boolean;
+    rating?: number;
+    comment?: CommentSummary;
+    likesCount?: number;
+    replyCount?: number;
+    interactedAt?: Date | string;
+    updatedAt?: Date | string;
+}
+export type InteractionSummary = Pick<
+    IInteraction,
+    "id" | "rating" | "isLiked" | "comment" | "likesCount" | "replyCount"
+>;
+export type UpsertInteractionSummary = { rating?: number; comment?: string; isLiked?: boolean };
+export type UpsertInteractionRequest = {
+    targetId: InteractionTargetId;
+    interaction: UpsertInteractionSummary;
+};
+export type UpsertInteractionResponse = InteractionSummary & {
+    interactedAt?: IInteraction["interactedAt"];
+    updatedAt?: IInteraction["updatedAt"];
+};
+export type InteractionsRequest = PaginationQueries & { targetId: InteractionTargetId };
+export type InteractionItemResponse = Pick<IInteraction, "id" | "rating" | "isLiked" | "likesCount" | "replyCount"> & {
+    user: IUser;
+    comment: CommentSummary;
+};
+export type InteractionResponseData = PaginationResponse & { items: InteractionItemResponse[] };
+export type InteractionsResponse = ApiResponse<InteractionResponseData>;

@@ -1,21 +1,15 @@
 import { TouchableOpacity, Text } from "react-native";
 
 import { styles } from "./styles";
-import { IHeaderStatItemProps, StatLabels } from "./types";
+import { IHeaderStatItemProps } from "./types";
+import { StatLabels } from "@/types/stat.types";
 
-export default function ProfileStatItem({
-    statData,
-    onPress
-}: IHeaderStatItemProps) {
-    const statLabel = StatLabels[statData.type];
+export default function ProfileStatItem({ statType, statValue, onPress }: IHeaderStatItemProps) {
+    const statLabel = StatLabels[statType];
 
     return (
-        <TouchableOpacity
-            style={styles.statItem}
-            onPress={() => onPress(statData.type)}
-            activeOpacity={0.7}
-        >
-            <Text style={styles.statValue}>{statData.value}</Text>
+        <TouchableOpacity style={styles.statItem} onPress={() => onPress?.(statType)} activeOpacity={0.7}>
+            <Text style={styles.statValue}>{statValue}</Text>
             <Text style={styles.statLabel}>{statLabel}</Text>
         </TouchableOpacity>
     );

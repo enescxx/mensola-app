@@ -1,73 +1,18 @@
-import { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { AlbumService } from "@/services/album.service";
 import { useInteracion } from "../shared/useInteraction";
 import { useDetailBase } from "../shared/useDetailBase";
 import { useListItems } from "../shared/useListItems";
+import { AlbumDetails, AlbumTracksResponseDataItem } from "@/types/album.types";
+import { AlbumId } from "@/types/common.types";
 
-export interface IAlbumArtist {
-    id: string;
-    name: string;
-    avatar?: string | null;
-}
-
-export interface IAlbumDetails {
-    id: string;
-    title: string;
-    description?: string;
-    image?: string;
-    releaseDate?: string;
-    songCount?: number;
-    artists?: IAlbumArtist[];
-    isLiked?: boolean;
-    likesCount?: number;
-    commentsCount?: number;
-    currentUserInteraction?: {
-        id?: string;
-        rating?: number | string;
-        isLiked?: boolean;
-        comment?: {
-            id?: string;
-            content?: string;
-            date?: string;
-        };
-    } | null;
-}
-
-export interface IAlbumTrackItem {
-    id: string;
-    title: string;
-    duration?: number;
-    image?: string;
-    isLiked?: boolean;
-    artists?: { id: string; name: string }[];
-}
-
-export interface IAlbumInteractionItem {
-    id: string;
-    rating?: number | string;
-    isLiked?: boolean;
-    user: {
-        id: string;
-        username: string;
-        fullname?: string;
-        avatar?: string;
-    };
-    comment: {
-        id: string;
-        content: string;
-        date: string;
-    };
-    likeCount: number;
-    replyCount: number;
-}
-
-export const useAlbumDetails = (albumId?: string) => {
+export const useAlbumDetails = (albumId?: AlbumId) => {
     const {
         details: albumDetails,
         setDetails,
         fetchData,
         ...rest
-    } = useDetailBase<IAlbumDetails>({
+    } = useDetailBase<AlbumDetails, AlbumId>({
         id: albumId,
         fetcher: (id) => AlbumService.getAlbumDetails(id),
         onLike: (id) => AlbumService.likeAlbum(id),
@@ -83,10 +28,10 @@ export const useAlbumDetails = (albumId?: string) => {
         refetch: refetchTracks,
         hasNextPage: hasNextTrackPage,
         isFetchingNextPage: isFetchingNextTrackPage,
-    } = useListItems<IAlbumTrackItem>({
+    } = useListItems<AlbumTracksResponseDataItem>({
         listId: albumId,
         itemType: "track",
-        getFn: async (id, page, limit) => await AlbumService.getAlbumTracks(id, page, limit),
+        getFn: async (id, page, limit) => await AlbumService.getAlbumTracks({ albumId: id as AlbumId, page, limit }),
         limit: 18,
     });
 
@@ -97,16 +42,16 @@ export const useAlbumDetails = (albumId?: string) => {
         refetchInteractions,
         hasNextPage: hasNextInteractionsPage,
         isFetchingNextPage: isFetchingNextInteractionPage,
-    } = useInteracion<IAlbumInteractionItem>({
+    } = useInteracion({
         targetId: albumId,
         targetType: "album",
-        createOrUpdateInteraction: async (id, data) => {
-            await AlbumService.createOrUpdateInteraction(id, data);
+        createOrUpdateInteraction: async (data) => {
+            await AlbumService.createOrUpdateInteraction(data);
         },
         refreshFn: async (isRefreshing) => {
             await fetchData(isRefreshing);
         },
-        getFn: async (id, page, limit) => await AlbumService.getAlbumInteractions(id, page, limit),
+        getFn: async (data) => await AlbumService.getAlbumInteractions(data),
         limit: 20,
     });
 

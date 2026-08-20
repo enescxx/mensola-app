@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import { View, Image, Text } from "react-native";
 
 import { styles } from "./styles";
 import ProfileStats from "./ProfileStats";
@@ -12,31 +12,17 @@ export default function ProfileHeader() {
         <View style={styles.headerContent}>
             <View style={styles.headerTopRow}>
                 <View style={styles.imageWrapper}>
-                    <Image
-                        source={{ uri: headerData.avatar }}
-                        style={styles.profilePicture}
-                    />
+                    <Image source={{ uri: headerData.avatar?.toString() }} style={styles.profilePicture} />
                 </View>
                 <View style={styles.rightInfoContainer}>
                     <View style={styles.nameWrapper}>
-                        {headerData.fullname ? (
-                            <Text style={styles.fullnameLabel}>
-                                {headerData.fullname}
-                            </Text>
-                        ) : null}
-                        <Text style={styles.usernameLabel}>
-                            @{headerData.username}
-                        </Text>
+                        {headerData.fullname ? <Text style={styles.fullnameLabel}>{headerData.fullname}</Text> : null}
+                        <Text style={styles.usernameLabel}>@{headerData.username}</Text>
                     </View>
-                    <ProfileStats
-                        stats={headerData.stats}
-                        onStatPress={handleStatPress}
-                    />
+                    <ProfileStats stats={headerData.stats} onStatPress={handleStatPress} />
                 </View>
             </View>
-            {headerData.bio ? (
-                <Text style={styles.userBio}>{headerData.bio}</Text>
-            ) : null}
+            {headerData.bio ? <Text style={styles.userBio}>{headerData.bio}</Text> : null}
         </View>
     );
 }

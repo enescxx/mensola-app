@@ -1,18 +1,18 @@
-// hooks/shared/useDetailBase.ts
-import { ApiResponse } from "@/types";
+import { ApiResponse } from "@/types/api";
+import { MovieLikeActionsResponse } from "@/types/movie.types";
 import { useState, useCallback, useEffect } from "react";
 
-interface UseDetailBaseOptions<T> {
-    id?: string;
-    fetcher: (id: string) => Promise<ApiResponse<T>>;
-    onLike?: (id: string) => Promise<ApiResponse>;
-    onUnlike?: (id: string) => Promise<ApiResponse>;
+interface UseDetailBaseOptions<T, ID> {
+    id?: ID;
+    fetcher: (id: ID) => Promise<ApiResponse<T>>;
+    onLike?: (id: ID) => Promise<ApiResponse<any>>;
+    onUnlike?: (id: ID) => Promise<ApiResponse<any>>;
     getLikesCount?: (details: T) => number;
     getIsLiked?: (details: T) => boolean;
     updateLike?: (details: T, newIsLiked: boolean, newCount: number) => T;
 }
 
-export const useDetailBase = <T extends object>({
+export const useDetailBase = <T extends object, ID>({
     id,
     fetcher,
     onLike,
@@ -20,7 +20,7 @@ export const useDetailBase = <T extends object>({
     getLikesCount,
     getIsLiked,
     updateLike,
-}: UseDetailBaseOptions<T>) => {
+}: UseDetailBaseOptions<T, ID>) => {
     const [details, setDetails] = useState<T | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isRefetching, setIsRefetching] = useState(false);

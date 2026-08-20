@@ -4,68 +4,16 @@ import { useDetailBase } from "@/hooks/shared/useDetailBase";
 import { useBookmark } from "../shared/useBookmark";
 import { useInteracion } from "../shared/useInteraction";
 import { useListItems } from "../shared/useListItems";
-import { IMovieListItem } from "@/types";
+import { MovieListDetails, MovieSummaryViaInteraction } from "@/types/movie.types";
+import { MovieListId } from "@/types/common.types";
 
-export interface IMovieListOwner {
-    id: string;
-    username: string;
-    fullname: string;
-    avatar: string | null;
-    isFollowing?: boolean;
-    isFollower?: boolean;
-}
-
-export interface IMovieListDetails {
-    id: string;
-    title: string;
-    description?: string;
-    image?: string;
-    isPrivate?: boolean;
-    listType?: string;
-    creatorId?: string;
-    owners?: IMovieListOwner[];
-    isLiked?: boolean;
-    isSaved?: boolean;
-    likesCount?: number;
-    savesCount?: number;
-    currentUserInteraction?: {
-        id?: string;
-        rating?: number;
-        isLiked?: boolean;
-        comment?: {
-            id?: string;
-            content?: string;
-            date?: string;
-        };
-    } | null;
-}
-
-export interface IMovieListInteractionItem {
-    id: string;
-    rating?: number;
-    isLiked?: boolean;
-    user: {
-        id: string;
-        username: string;
-        fullname?: string;
-        avatar?: string;
-    };
-    comment: {
-        id: string;
-        content: string;
-        date: string;
-    };
-    likeCount: number;
-    replyCount: number;
-}
-
-export const useMovieListDetails = (listId?: string) => {
+export const useMovieListDetails = (listId?: MovieListId) => {
     const {
         details: listDetails,
         setDetails,
         fetchData,
         ...rest
-    } = useDetailBase<IMovieListDetails>({
+    } = useDetailBase<MovieListDetails, MovieListId>({
         id: listId,
         fetcher: (id) => MovieService.getMovieListDetails(id),
         onLike: (id) => MovieService.likeMovieList(id),
@@ -81,14 +29,14 @@ export const useMovieListDetails = (listId?: string) => {
         refetch: refetchMovies,
         hasNextPage: hasNextMoviePage,
         isFetchingNextPage: isFetchingNextMoviePage,
-    } = useListItems<IMovieListItem>({
+    } = useListItems<MovieSummaryViaInteraction, MovieListId>({
         listId: listId,
         itemType: "movie",
         getFn: async (id, page, limit) => await MovieService.getMovieListItems(id, page, limit),
         limit: 18,
     });
 
-    const { toggleSave } = useBookmark<IMovieListDetails>({
+    const { toggleSave } = useBookmark<MovieListDetails>({
         targetId: listId,
         targetType: "movieList",
         targetDetails: listDetails || undefined,
@@ -111,16 +59,16 @@ export const useMovieListDetails = (listId?: string) => {
         refetchInteractions,
         hasNextPage: hasNextInteractionsPage,
         isFetchingNextPage: isFetchingNextInteractionPage,
-    } = useInteracion<IMovieListInteractionItem>({
+    } = useInteracion({
         targetId: listId,
         targetType: "movieList",
-        createOrUpdateInteraction: async (id, data) => {
-            await MovieService.createOrUpdateListInteraction(id, data);
+        createOrUpdateInteraction: async (data) => {
+            await MovieService.createOrUpdateListInteraction(data);
         },
         refreshFn: async (isRefreshing) => {
             await fetchData(isRefreshing);
         },
-        getFn: async (id, page, limit) => await MovieService.getMovieListInteractions(id, page, limit),
+        getFn: async (data) => await MovieService.getMovieListInteractions(data),
         limit: 20,
     });
 

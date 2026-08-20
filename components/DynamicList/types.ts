@@ -1,6 +1,7 @@
-import React, { FlatListProps } from "react-native";
+import React from "react";
+import { FlatListProps } from "react-native";
 
-interface IDynamicListProps<T> extends Partial<FlatListProps<T>> {
+export interface IDynamicListProps<T> extends Partial<FlatListProps<T>> {
     title?: string;
     data: T[];
     renderItem: ({ item }: { item: T }) => React.ReactElement;
@@ -8,5 +9,3 @@ interface IDynamicListProps<T> extends Partial<FlatListProps<T>> {
     variant?: "horizontal" | "vertical";
     ItemSeparatorComponent?: React.ComponentType<any> | null;
 }
-
-export { IDynamicListProps };

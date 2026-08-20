@@ -1,25 +1,17 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
 import { styles } from "./styles";
 import { IHeaderAction } from "./types";
+import { NativeStackHeaderProps } from "expo-router";
 
-export default function PageHeader({
-    options,
-    navigation,
-    back
-}: NativeStackHeaderProps) {
+export default function PageHeader({ options, navigation, back }: NativeStackHeaderProps) {
     const insets = useSafeAreaInsets();
 
-    const title =
-        options.title ||
-        (typeof options.headerTitle === "string" ? options.headerTitle : "");
+    const title = options.title || (typeof options.headerTitle === "string" ? options.headerTitle : "");
 
-    const actions = (options as any).headerRightActions as
-        | IHeaderAction[]
-        | undefined;
+    const actions = (options as any).headerRightActions as IHeaderAction[] | undefined;
 
     return (
         <View style={[styles.container, { paddingTop: insets.top }]}>
@@ -29,15 +21,10 @@ export default function PageHeader({
                         <View style={styles.headerButton}>
                             <TouchableOpacity
                                 onPress={() => navigation.goBack()}
-                                style={styles.backButton}
+                                style={styles.headerButton}
                                 activeOpacity={0.7}
-                                testID="back-button"
-                            >
-                                <Ionicons
-                                    name="chevron-back"
-                                    size={24}
-                                    color="#8c8c8c"
-                                />
+                                testID="back-button">
+                                <Ionicons name="chevron-back" size={24} color="#8c8c8c" />
                             </TouchableOpacity>
                         </View>
                     )}
@@ -49,13 +36,12 @@ export default function PageHeader({
                 </View>
                 {actions && actions.length > 0 ? (
                     <View style={styles.buttonContainer}>
-                        {actions.map(action => (
+                        {actions.map((action) => (
                             <View key={action.id} style={styles.headerButton}>
                                 <TouchableOpacity
                                     onPress={action.onPress}
                                     activeOpacity={0.7}
-                                    testID={`action-button-${action.id}`}
-                                >
+                                    testID={`action-button-${action.id}`}>
                                     <Ionicons
                                         name={action.icon}
                                         size={action.size || 24}

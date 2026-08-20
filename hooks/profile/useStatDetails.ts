@@ -1,9 +1,11 @@
 import { ProfileService } from "@/services/profile.service";
+import { UserId } from "@/types/common.types";
+import { StatType } from "@/types/stat.types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 interface UseStatDetailsOptions {
-    statType: string;
-    userId?: string;
+    statType: StatType;
+    userId?: UserId;
     limit?: number;
 }
 
@@ -14,9 +16,9 @@ export const useStatDetails = ({ statType, userId, limit }: UseStatDetailsOption
             queryKey: [statType, userId || "me"],
             queryFn: async ({ pageParam }) => {
                 if (!statType) return [];
-                const response = await ProfileService.getStatDetails(statType, userId, pageParam, limit);
+                const response = await ProfileService.getStatDetails({ statType, userId, page: pageParam, limit });
 
-                return response.data?.items;
+                return response.data?.items ?? [];
             },
             initialPageParam: 1,
             getNextPageParam: (lastPage, allPages) => {
@@ -28,14 +30,5 @@ export const useStatDetails = ({ statType, userId, limit }: UseStatDetailsOption
 
     const statData = data?.pages.flat();
 
-    return {
-        statData,
-        fetchNextPage,
-        refetch,
-        hasNextPage,
-        isFetchingNextPage,
-        isLoading,
-        isError,
-        isRefetching,
-    };
+    return { statData, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, isRefetching };
 };

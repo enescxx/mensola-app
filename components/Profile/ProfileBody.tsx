@@ -3,16 +3,17 @@ import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
 
 import { useProfileContext } from "../../context/ProfileContext";
+import { MovieSummaryViaInteraction } from "@/types/movie.types";
 
 export default function ProfileBody() {
     const { bodyData, handleSeeAllPress } = useProfileContext();
     const { favoriteMovies, favoriteTracks } = bodyData;
 
-    const getInteractions = movie => {
+    const getInteractions = (movie: MovieSummaryViaInteraction) => {
         return {
             rating: movie.rating,
             isLiked: movie.isLiked,
-            hasReview: movie.hasReview
+            hasReview: movie.hasReview,
         };
     };
 
@@ -42,9 +43,7 @@ export default function ProfileBody() {
                     data={favoriteTracks}
                     variant="horizontal"
                     onSeeAllPress={() => handleSeeAllPress("tracks")}
-                    renderItem={({ item }) => (
-                        <MusicCard type="song" data={item} />
-                    )}
+                    renderItem={({ item }) => <MusicCard type="track" data={item} />}
                 />
             ) : null}
         </>

@@ -1,10 +1,7 @@
 import { TextInputProps } from "react-native";
 
-type TextFieldType = "text" | "email" | "password" | "number";
-
-interface ITextFieldProps extends TextInputProps {
+export type TextFieldType = "text" | "email" | "password" | "number";
+export interface ITextFieldProps extends TextInputProps {
     label?: string;
     type?: TextFieldType;
 }
-
-export { ITextFieldProps, TextFieldType };

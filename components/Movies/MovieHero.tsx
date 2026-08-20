@@ -11,6 +11,7 @@ import { useLike } from "@/hooks/movie/useLike";
 import AddToListBottomSheet from "./AddToListBottomSheet";
 import InteractionSheet from "../Interaction/InteractionSheet";
 import { MovieService } from "@/services/movie.service";
+import { MovieId } from "@/types/common.types";
 
 const formatReleaseYear = (releaseDate?: string | Date) => {
     if (!releaseDate) return "";
@@ -235,7 +236,7 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                 isVisible={isInteractionSheetOpen}
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="movie"
-                targetId={movie?.id ?? ""}
+                targetId={movie?.id as MovieId}
                 mediaTitle={movie?.title ?? ""}
                 mediaTypeTitle="Film"
                 mediaPoster={movie?.poster}
@@ -245,17 +246,20 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                 onSubmit={async ({ rating, comment, isLiked: updatedIsLiked }) => {
                     if (!movie?.id) return;
 
-                    await MovieService.createOrUpdateInteraction(movie.id, {
-                        rating,
-                        comment,
-                        isLiked: updatedIsLiked,
+                    await MovieService.createOrUpdateInteraction({
+                        targetId: movie.id,
+                        interaction: {
+                            rating,
+                            comment,
+                            isLiked: updatedIsLiked,
+                        },
                     });
 
-                    setUserRating(rating);
-                    setUserComment(comment);
+                    setUserRating(rating ?? 0);
+                    setUserComment(comment ?? "");
 
                     if (updatedIsLiked !== isLiked) {
-                        setIsLiked(updatedIsLiked);
+                        setIsLiked(updatedIsLiked ?? false);
                         if (updatedIsLiked) {
                             setLikesCount((prev) => prev + 1);
                         } else {

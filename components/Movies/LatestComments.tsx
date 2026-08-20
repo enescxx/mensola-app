@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import InteractionView from "../Interaction";
-import { GetMovieInteractionsItem } from "../../types";
+import { InteractionItemResponse } from "@/types/interaction.types";
 
 interface LatestCommentsProps {
-    interactions: GetMovieInteractionsItem[];
+    interactions: InteractionItemResponse[];
 }
 
 export default function LatestComments({ interactions }: LatestCommentsProps) {
@@ -34,7 +34,7 @@ export default function LatestComments({ interactions }: LatestCommentsProps) {
 
             {commentInteractions.map((item) => (
                 <View key={item.id} style={styles.commentItem}>
-                    <InteractionView data={{ ...item, likeCount: 0, replyCount: 0 }} />
+                    <InteractionView data={{ ...item, likesCount: 0, replyCount: 0 }} />
                 </View>
             ))}
         </View>

@@ -2,9 +2,10 @@ import { useLocalSearchParams, Stack } from "expo-router";
 
 import AlbumDetailView from "@/components/AlbumDetail";
 import { useAlbumDetails } from "@/hooks/music/useAlbumDetails";
+import { AlbumId } from "@/types/common.types";
 
 export default function AlbumDetailPage() {
-    const { albumId } = useLocalSearchParams<{ albumId?: string }>();
+    const { albumId } = useLocalSearchParams<{ albumId?: AlbumId }>();
     const {
         albumDetails,
         tracks,

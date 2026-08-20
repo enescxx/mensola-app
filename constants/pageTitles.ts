@@ -1,4 +1,6 @@
-const STAT_TITLES: Record<string, string> = {
+import { StatType } from "@/types/stat.types";
+
+export const STAT_TITLES: Record<StatType, string> = {
     "favorite-movies": "Favori Filmler",
     "favorite-tracks": "Favori Şarkılar",
     watchlist: "İzleme Listesi",
@@ -11,7 +13,5 @@ const STAT_TITLES: Record<string, string> = {
     followers: "Takipçiler",
     following: "Takip Edilenler",
     "movie-lists": "Film Listeleri",
-    "liked-movie-lists": "Beğenilen Film Listeleri"
+    "liked-movie-lists": "Beğenilen Film Listeleri",
 };
-
-export { STAT_TITLES };

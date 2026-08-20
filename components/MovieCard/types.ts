@@ -1,7 +1,6 @@
-import { IUserInteraction } from "../../types";
 import { StyleProp, ViewStyle } from "react-native";
 
-interface IMovieCardInteractions {
+export interface IMovieCardInteractions {
     rating?: number;
     isLiked?: boolean;
     hasReview?: boolean;
@@ -9,12 +8,12 @@ interface IMovieCardInteractions {
     totalReviews?: number;
 }
 
-interface IMovieCardFooterProps {
+export interface IMovieCardFooterProps {
     interactions: IMovieCardInteractions;
     variant: "profile" | "feed";
 }
 
-interface IMovieCardProps {
+export interface IMovieCardProps {
     title: string;
     poster: string;
     interactions?: IMovieCardInteractions;
@@ -22,5 +21,3 @@ interface IMovieCardProps {
     style?: StyleProp<ViewStyle>;
     onPress?: () => void;
 }
-
-export { IMovieCardFooterProps, IMovieCardProps };

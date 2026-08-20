@@ -9,8 +9,9 @@ import InteractionView, { InteractionSheet } from "@/components/Interaction";
 import MovieListHero from "./MovieListHero";
 import { styles } from "./styles";
 import { IMovieListDetailViewProps } from "./types";
-import { IMovieListInteractionItem } from "@/hooks/movie/useMovieListDetails";
-import { IMovieListItem } from "@/types";
+import { MovieSummaryViaInteraction } from "@/types/movie.types";
+import { InteractionItemResponse } from "@/types/interaction.types";
+import { MovieListId } from "@/types/common.types";
 
 export default function MovieListDetailView({
     listDetails,
@@ -34,7 +35,7 @@ export default function MovieListDetailView({
     const [activeTab, setActiveTab] = useState<"movies" | "comments">("movies");
     const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
 
-    const renderMovieItem = ({ item }: { item: IMovieListItem }) => {
+    const renderMovieItem = ({ item }: { item: MovieSummaryViaInteraction }) => {
         return (
             <MovieCard
                 title={item.title}
@@ -50,7 +51,7 @@ export default function MovieListDetailView({
         );
     };
 
-    const renderCommentItem = ({ item }: { item: IMovieListInteractionItem }) => {
+    const renderCommentItem = ({ item }: { item: InteractionItemResponse }) => {
         return (
             <InteractionView
                 data={{
@@ -68,7 +69,7 @@ export default function MovieListDetailView({
                         content: item.comment.content,
                         date: item.comment.date,
                     },
-                    likeCount: item.likeCount || 0,
+                    likesCount: item.likesCount || 0,
                     replyCount: item.replyCount || 0,
                 }}
             />
@@ -183,7 +184,7 @@ export default function MovieListDetailView({
                 isVisible={isInteractionSheetOpen}
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="movieList"
-                targetId={listDetails?.id || ""}
+                targetId={listDetails?.id as MovieListId}
                 mediaTitle={listDetails?.title || "Film Listesi"}
                 mediaTypeTitle="Film Listesi"
                 mediaPoster={listDetails?.image}

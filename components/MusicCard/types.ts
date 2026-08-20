@@ -1,24 +1,28 @@
-import { ITrack, IAlbum, IPlaylist } from "../../types";
+import { IAlbum } from "@/types/album.types";
+import { IPlaylist } from "@/types/playlist.types";
+import { ITrack } from "@/types/track.types";
 import { StyleProp, ViewStyle } from "react-native";
 
-type MusicCardType = "song" | "album" | "playlist";
-
-type IMusicCardProps =
+type IMusicCardProps<
+    TTrack extends ITrack = ITrack,
+    TAlbum extends IAlbum = IAlbum,
+    TPlaylist extends IPlaylist = IPlaylist,
+> =
     | {
           type: "track";
-          data: Pick<ITrack, "title" | "image" | "artists" | "duration">;
+          data: TTrack;
           onPress?: () => void;
           style?: StyleProp<ViewStyle>;
       }
     | {
           type: "album";
-          data: Pick<IAlbum, "title" | "image" | "artists" | "releaseYear">;
+          data: TAlbum;
           onPress?: () => void;
           style?: StyleProp<ViewStyle>;
       }
     | {
           type: "playlist";
-          data: Pick<IPlaylist, "title" | "image" | "creator" | "songCount">;
+          data: TPlaylist;
           onPress?: () => void;
           style?: StyleProp<ViewStyle>;
           hideCreator?: boolean;

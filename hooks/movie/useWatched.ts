@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 import { MovieService } from "@/services/movie.service";
+import { MovieId } from "@/types/common.types";
 
-const useWatched = (defaultMovieId?: string) => {
+const useWatched = (defaultMovieId?: MovieId) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const markAsWatched = async (targetMovieId?: string | (() => void), onSuccess?: () => void) => {
+    const markAsWatched = async (targetMovieId?: MovieId | (() => void), onSuccess?: () => void) => {
         let id = defaultMovieId;
         let callback = onSuccess;
 
@@ -38,7 +39,7 @@ const useWatched = (defaultMovieId?: string) => {
         }
     };
 
-    const unmarkAsWatched = async (targetMovieId?: string | (() => void), onSuccess?: () => void) => {
+    const unmarkAsWatched = async (targetMovieId?: MovieId | (() => void), onSuccess?: () => void) => {
         let id = defaultMovieId;
         let callback = onSuccess;
 

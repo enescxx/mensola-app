@@ -1,12 +1,10 @@
-import {
-    IPlaylistDetails,
-    IPlaylistTrackItem,
-    IPlaylistOwner,
-    IPlaylistInteractionItem,
-} from "@/hooks/music/usePlaylistDetails";
+import { InteractionItemResponse, UpsertInteractionRequest, UpsertInteractionSummary } from "@/types/interaction.types";
+import { PlaylistDetails } from "@/types/playlist.types";
+import { ITrack } from "@/types/track.types";
+import { FollowUsersResponseDataItem } from "@/types/user.types";
 
 export interface IPlaylistHeroProps {
-    playlistDetails: IPlaylistDetails | null;
+    playlistDetails: PlaylistDetails;
     tracksCount: number;
     commentsCount?: number;
     toggleLike: () => void;
@@ -14,15 +12,14 @@ export interface IPlaylistHeroProps {
     onCommentPress?: () => void;
     onSharePress?: () => void;
 }
-
 export interface IPlaylistDetailViewProps {
-    playlistDetails: IPlaylistDetails | null;
-    tracks: IPlaylistTrackItem[];
+    playlistDetails: PlaylistDetails;
+    tracks: ITrack[];
     loadMoreTracks: () => void;
     hasNextTrackPage: boolean;
     isFetchingNextTrackPage: boolean;
-    interactions: IPlaylistInteractionItem[];
-    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
+    interactions: InteractionItemResponse[];
+    submitInteraction: (data: UpsertInteractionSummary) => Promise<void>;
     loadMoreInteractions: () => void;
     hasNextInteractionsPage: boolean;
     isFetchingNextInteractionPage: boolean;
@@ -32,10 +29,8 @@ export interface IPlaylistDetailViewProps {
     refetchAll: () => void;
     toggleLike: () => void;
 }
-
 export interface IPlaylistOwnersBottomSheetProps {
     isVisible: boolean;
     onClose: () => void;
-    owners: IPlaylistOwner[];
-    creatorId?: string;
+    owners: FollowUsersResponseDataItem[];
 }

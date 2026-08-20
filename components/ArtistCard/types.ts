@@ -1,8 +1,6 @@
-import { IArtist } from "../../types";
+import { IArtist } from "@/types/artist.types";
 
-interface IArtistCardProps {
-    artist: Pick<IArtist, "name" | "image" | "followers">;
+export interface IArtistCardProps {
+    artist: IArtist;
     onPress?: () => void;
 }
-
-export { IArtistCardProps };

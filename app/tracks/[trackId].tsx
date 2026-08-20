@@ -2,9 +2,10 @@ import { useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
 import { TrackDetailView } from "@/components/TrackDetail";
 import { useTrackDetails } from "@/hooks/music/useTrackDetails";
+import { TrackId } from "@/types/common.types";
 
 export default function TrackDetailScreen() {
-    const { trackId } = useLocalSearchParams<{ trackId?: string }>();
+    const { trackId } = useLocalSearchParams<{ trackId?: TrackId }>();
     const { trackDetails, isLoading, error, refetchAll, toggleLike, submitInteraction } = useTrackDetails(trackId);
 
     return (

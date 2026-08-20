@@ -9,7 +9,9 @@ import InteractionView, { InteractionSheet } from "@/components/Interaction";
 import PlaylistHero from "./PlaylistHero";
 import { styles } from "./styles";
 import { IPlaylistDetailViewProps } from "./types";
-import { IPlaylistTrackItem, IPlaylistInteractionItem } from "@/hooks/music/usePlaylistDetails";
+import { ITrack } from "@/types/track.types";
+import { InteractionItemResponse } from "@/types/interaction.types";
+import { PlaylistId } from "@/types/common.types";
 
 export default function PlaylistDetailView({
     refetchAll,
@@ -32,23 +34,18 @@ export default function PlaylistDetailView({
     const [activeTab, setActiveTab] = useState<"tracks" | "comments">("tracks");
     const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
 
-    const renderTrackItem = ({ item }: { item: IPlaylistTrackItem }) => {
+    const renderTrackItem = ({ item }: { item: ITrack }) => {
         return (
             <MusicCard
                 type="track"
-                data={{
-                    title: item.title,
-                    image: item.image || "",
-                    duration: item.duration || 0,
-                    artists: item.artists || [],
-                }}
+                data={item}
                 style={{ width: "31%" }}
                 onPress={() => router.push(`/tracks/${item.id}` as any)}
             />
         );
     };
 
-    const renderCommentItem = ({ item }: { item: IPlaylistInteractionItem }) => {
+    const renderCommentItem = ({ item }: { item: InteractionItemResponse }) => {
         return (
             <InteractionView
                 data={{
@@ -66,7 +63,7 @@ export default function PlaylistDetailView({
                         content: item.comment.content,
                         date: item.comment.date,
                     },
-                    likeCount: item.likeCount || 0,
+                    likesCount: item.likesCount || 0,
                     replyCount: item.replyCount || 0,
                 }}
             />
@@ -186,7 +183,7 @@ export default function PlaylistDetailView({
                 isVisible={isInteractionSheetOpen}
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="playlist"
-                targetId={playlistDetails?.id || ""}
+                targetId={playlistDetails?.id as PlaylistId}
                 mediaTitle={playlistDetails?.title || "Playlist"}
                 mediaTypeTitle="Playlist"
                 mediaPoster={playlistDetails?.image}

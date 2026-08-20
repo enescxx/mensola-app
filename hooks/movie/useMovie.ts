@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 
 import { MovieService } from "../../services/movie.service";
-import { IMovieDetail } from "../../types";
+import { MovieDetails } from "@/types/movie.types";
+import { MovieId } from "@/types/common.types";
 
-const useMovie = (movieId?: string) => {
-    const [movie, setMovie] = useState<IMovieDetail | null>(null);
+const useMovie = (movieId?: MovieId) => {
+    const [movie, setMovie] = useState<MovieDetails | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 

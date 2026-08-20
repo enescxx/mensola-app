@@ -1,9 +1,10 @@
-import { IAlbumDetails, IAlbumTrackItem, IAlbumInteractionItem } from "@/hooks/music/useAlbumDetails";
-
-export { IAlbumDetails, IAlbumTrackItem, IAlbumInteractionItem };
+import { AlbumDetails } from "@/types/album.types";
+import { InteractionItemResponse, UpsertInteractionRequest } from "@/types/interaction.types";
+import { ITrack } from "@/types/track.types";
+import { UpsertInteractionSummary } from "@/types/interaction.types";
 
 export interface IAlbumHeroProps {
-    albumDetails: IAlbumDetails | null;
+    albumDetails: AlbumDetails | null;
     tracksCount: number;
     commentsCount?: number;
     toggleLike: () => void;
@@ -13,13 +14,13 @@ export interface IAlbumHeroProps {
 }
 
 export interface IAlbumDetailViewProps {
-    albumDetails: IAlbumDetails | null;
-    tracks: IAlbumTrackItem[];
+    albumDetails: AlbumDetails | null;
+    tracks: ITrack[];
     loadMoreTracks: () => void;
     hasNextTrackPage: boolean;
     isFetchingNextTrackPage: boolean;
-    interactions: IAlbumInteractionItem[];
-    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
+    interactions: InteractionItemResponse[];
+    submitInteraction: (data: UpsertInteractionSummary) => Promise<void>;
     loadMoreInteractions: () => void;
     hasNextInteractionsPage: boolean;
     isFetchingNextInteractionPage: boolean;

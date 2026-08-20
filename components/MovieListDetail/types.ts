@@ -1,8 +1,9 @@
-import { IMovieListDetails, IMovieListOwner, IMovieListInteractionItem } from "@/hooks/movie/useMovieListDetails";
-import { IMovieListItem } from "@/types";
+import { InteractionItemResponse } from "@/types/interaction.types";
+import { IMovie, MovieListDetails } from "@/types/movie.types";
+import { FollowUsersResponseDataItem } from "@/types/user.types";
 
 export interface IMovieListHeroProps {
-    listDetails: IMovieListDetails | null;
+    listDetails: MovieListDetails | null;
     moviesCount: number;
     commentsCount?: number;
     toggleLike: () => void;
@@ -14,12 +15,12 @@ export interface IMovieListHeroProps {
 export type IMovieListHeaderProps = IMovieListHeroProps;
 
 export interface IMovieListDetailViewProps {
-    listDetails: IMovieListDetails | null;
-    movies: IMovieListItem[];
+    listDetails: MovieListDetails | null;
+    movies: IMovie[];
     loadMoreMovies: () => void;
     hasNextMoviePage: boolean;
     isFetchingNextMoviePage: boolean;
-    interactions: IMovieListInteractionItem[];
+    interactions: InteractionItemResponse[];
     isLoading: boolean;
     isRefetching: boolean;
     error: string;
@@ -35,6 +36,6 @@ export interface IMovieListDetailViewProps {
 export interface IMovieListOwnersBottomSheetProps {
     isVisible: boolean;
     onClose: () => void;
-    owners: IMovieListOwner[];
+    owners: FollowUsersResponseDataItem[];
     creatorId?: string;
 }

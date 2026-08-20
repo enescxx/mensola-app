@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { View, Text, ActivityIndicator, TouchableOpacity, ScrollView } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
-import InteractionView, { InteractionSheet } from "@/components/Interaction";
+import { InteractionSheet } from "@/components/Interaction";
 import TrackHero from "./TrackHero";
 import LatestComments from "./LatestComments";
 import AddToPlaylistBottomSheet from "./AddToPlaylistBottomSheet";
 import { styles } from "./styles";
 import { ITrackDetailViewProps } from "./types";
+import { TrackId } from "@/types/common.types";
 
 export default function TrackDetailView({
     trackDetails,
@@ -60,7 +60,7 @@ export default function TrackDetailView({
                 isVisible={isInteractionSheetOpen}
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="track"
-                targetId={trackDetails?.id || ""}
+                targetId={trackDetails?.id as TrackId}
                 mediaTitle={trackDetails?.title || "Şarkı"}
                 mediaTypeTitle="Şarkı"
                 mediaPoster={trackDetails?.image}

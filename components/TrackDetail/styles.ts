@@ -63,7 +63,6 @@ export const styles = StyleSheet.create({
     posterWrapper: {
         width: 110,
     },
-    // Square poster for playlist (vs 2/3 ratio for movies)
     poster: {
         width: "100%",
         aspectRatio: 1,
@@ -228,5 +227,83 @@ export const styles = StyleSheet.create({
         color: "#1DB954",
         fontSize: 12,
         fontWeight: "600",
+    },
+    listContainer: {
+        paddingVertical: 8,
+    },
+    sheetError: {
+        color: "#FF3B30",
+        fontSize: 14,
+        marginBottom: 8,
+        textAlign: "center",
+    },
+    bottomSheetEmptyText: {
+        color: "#8C8C8C",
+        fontSize: 15,
+        paddingVertical: 24,
+        textAlign: "center",
+    },
+    listItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 14,
+        paddingHorizontal: 4,
+        borderBottomWidth: 1,
+        borderBottomColor: "#2A2A2A",
+    },
+    listItemLeft: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12,
+        flex: 1,
+    },
+    listItemIcon: {
+        color: "#A7A7A7",
+        fontSize: 20,
+    },
+    listItemTitle: {
+        color: "#FFFFFF",
+        fontSize: 16,
+        fontWeight: "500",
+        flex: 1,
+    },
+    checkbox: {
+        width: 24,
+        height: 24,
+        borderRadius: 6,
+        borderWidth: 2,
+        borderColor: "#555555",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    checkboxChecked: {
+        backgroundColor: "#1DB954",
+        borderColor: "#1DB954",
+    },
+    commentsContainer: {
+        gap: 10,
+        paddingTop: 14,
+        paddingHorizontal: 16,
+        paddingBottom: 16,
+    },
+    commentsHeader: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 8,
+    },
+    commentsTitle: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "700",
+    },
+    seeAll: {
+        color: "#1DB954",
+        fontSize: 13,
+        fontWeight: "600",
+    },
+    commentItem: {
+        marginBottom: 8,
     },
 });

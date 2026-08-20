@@ -1,37 +1,19 @@
-import { StatTypes, IUserStatItem, IUser, IMovie, ITrack } from "../../types";
+import { StatType, StatTypeKey } from "@/types/stat.types";
+import { UserStats } from "@/types/user.types";
 
-const StatLabels: Record<StatTypes, string> = {
-    movieListCount: "Oluşturulan Film Listeleri",
-    playlistCount: "Oluşturulan Playlistler",
-    watchlistMoviesCount: "İzleme Listesi",
-    watchedMoviesCount: "İzlendi",
-    likedMoviesCount: "Beğenilen Filmler",
-    likedTracksCount: "Beğenilen Şarkılar",
-    likedPlaylistsCount: "Beğenilen Playlistler",
-    likedMovieListsCount: "Beğenilen Film Listeleri",
-    likedAlbumsCount: "Beğenilen Albümler",
-    followerCount: "Takipçi",
-    followingCount: "Takip"
-};
-
-interface IHeaderStatsProps {
-    stats: [IUserStatItem, IUserStatItem, IUserStatItem];
-    onStatPress?: (type: StatTypes) => void;
+export interface IHeaderStatsProps {
+    stats: Partial<UserStats>;
+    onStatPress?: (type: StatTypeKey) => void;
 }
 
-interface IHeaderStatItemProps {
-    statData: IUserStatItem;
-    onPress?: (type: StatTypes) => void;
+export interface IHeaderStatItemProps {
+    statType: StatTypeKey;
+    statValue: number;
+    onPress?: (type: StatTypeKey) => void;
 }
 
-interface IFooterItemProps {
-    statData: IUserStatItem;
-    onPress?: (type: StatTypes) => void;
+export interface IFooterItemProps {
+    statType: StatTypeKey;
+    statValue: number;
+    onPress?: (type: StatTypeKey) => void;
 }
-
-export {
-    StatLabels,
-    IHeaderStatsProps,
-    IHeaderStatItemProps,
-    IFooterItemProps
-};

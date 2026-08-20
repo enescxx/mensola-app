@@ -8,7 +8,10 @@ import MusicCard from "@/components/MusicCard";
 import InteractionView, { InteractionSheet } from "@/components/Interaction";
 import AlbumHero from "./AlbumHero";
 import { styles } from "./styles";
-import { IAlbumDetailViewProps, IAlbumTrackItem, IAlbumInteractionItem } from "./types";
+import { IAlbumDetailViewProps } from "./types";
+import { ITrack } from "@/types/track.types";
+import { InteractionItemResponse, UpsertInteractionRequest, UpsertInteractionSummary } from "@/types/interaction.types";
+import { AlbumId } from "@/types/common.types";
 
 export default function AlbumDetailView({
     albumDetails,
@@ -31,23 +34,18 @@ export default function AlbumDetailView({
     const [activeTab, setActiveTab] = useState<"tracks" | "comments">("tracks");
     const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
 
-    const renderTrackItem = ({ item }: { item: IAlbumTrackItem }) => {
+    const renderTrackItem = ({ item }: { item: ITrack }) => {
         return (
             <MusicCard
                 type="track"
-                data={{
-                    title: item.title,
-                    image: item.image || albumDetails?.image || "",
-                    duration: item.duration || 0,
-                    artists: item.artists || [],
-                }}
+                data={item}
                 style={{ width: "31%" }}
                 onPress={() => router.push(`/tracks/${item.id}` as any)}
             />
         );
     };
 
-    const renderCommentItem = ({ item }: { item: IAlbumInteractionItem }) => {
+    const renderCommentItem = ({ item }: { item: InteractionItemResponse }) => {
         return (
             <InteractionView
                 data={{
@@ -65,7 +63,7 @@ export default function AlbumDetailView({
                         content: item.comment.content,
                         date: item.comment.date,
                     },
-                    likeCount: item.likeCount || 0,
+                    likesCount: item.likesCount || 0,
                     replyCount: item.replyCount || 0,
                 }}
             />
@@ -112,9 +110,9 @@ export default function AlbumDetailView({
 
     return (
         <View style={styles.container}>
-            <DynamicList
+            <DynamicList<ITrack | InteractionItemResponse>
                 key={activeTab}
-                data={isTracksTab ? (tracks as any[]) : (interactions as any[])}
+                data={isTracksTab ? (tracks as ITrack[]) : (interactions as InteractionItemResponse[])}
                 variant="vertical"
                 numColumns={isTracksTab ? 3 : 1}
                 columnWrapperStyle={isTracksTab ? styles.rowWrapper : undefined}
@@ -179,7 +177,7 @@ export default function AlbumDetailView({
                 isVisible={isInteractionSheetOpen}
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="album"
-                targetId={albumDetails?.id || ""}
+                targetId={albumDetails?.id as AlbumId}
                 mediaTitle={albumDetails?.title || "Albüm"}
                 mediaTypeTitle="Albüm"
                 mediaPoster={albumDetails?.image}
@@ -190,8 +188,8 @@ export default function AlbumDetailView({
                 }
                 initialComment={albumDetails?.currentUserInteraction?.comment?.content || ""}
                 initialIsLiked={albumDetails?.currentUserInteraction?.isLiked ?? albumDetails?.isLiked ?? false}
-                onSubmit={async ({ rating, comment, isLiked }) => {
-                    await submitInteraction({ rating, comment, isLiked });
+                onSubmit={async (data: UpsertInteractionSummary) => {
+                    await submitInteraction(data);
                 }}
             />
         </View>

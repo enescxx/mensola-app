@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { StyleProp, ViewStyle, TextStyle } from "react-native";
 
-interface IBottomSheetProps {
+export interface IBottomSheetProps {
     isVisible: boolean;
     onClose: () => void;
     title?: string;
@@ -13,5 +13,3 @@ interface IBottomSheetProps {
     titleStyle?: StyleProp<TextStyle>;
     testID?: string;
 }
-
-export { IBottomSheetProps };

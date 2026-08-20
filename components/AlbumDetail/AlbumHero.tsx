@@ -64,7 +64,7 @@ export default function AlbumHero({
         <>
             <View style={styles.heroBanner}>
                 {albumDetails.image ? (
-                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: albumDetails.image }}>
+                    <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: albumDetails.image.toString() }}>
                         <LinearGradient
                             colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
                             style={styles.bannerGradient}
@@ -82,7 +82,11 @@ export default function AlbumHero({
                 <View style={styles.bannerContent}>
                     <View style={styles.posterWrapper}>
                         {albumDetails.image ? (
-                            <Image source={{ uri: albumDetails.image }} style={styles.poster} resizeMode="cover" />
+                            <Image
+                                source={{ uri: albumDetails.image.toString() }}
+                                style={styles.poster}
+                                resizeMode="cover"
+                            />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
                                 <Ionicons name="disc-outline" size={36} color="#666" />
@@ -100,7 +104,7 @@ export default function AlbumHero({
                         {artist && (
                             <TouchableOpacity style={styles.creatorContainer} activeOpacity={0.8}>
                                 {artist.avatar ? (
-                                    <Image source={{ uri: artist.avatar }} style={styles.avatar} />
+                                    <Image source={{ uri: artist.avatar.toString() }} style={styles.avatar} />
                                 ) : (
                                     <View style={[styles.avatar, styles.avatarPlaceholder]}>
                                         <Text style={styles.avatarLetter}>
@@ -159,27 +163,6 @@ export default function AlbumHero({
                     </View>
                 </View>
             </View>
-
-            {/* Description */}
-            {albumDetails.description ? (
-                <View style={styles.descriptionSection}>
-                    <Text
-                        style={styles.description}
-                        numberOfLines={isDescriptionExpanded ? undefined : 2}
-                        onTextLayout={handleTextLayout}>
-                        {albumDetails.description}
-                    </Text>
-
-                    {(isDescriptionTruncated || isDescriptionExpanded) && (
-                        <TouchableOpacity
-                            onPress={() => setIsDescriptionExpanded((prev) => !prev)}
-                            activeOpacity={0.7}
-                            style={styles.readMoreButton}>
-                            <Text style={styles.readMoreText}>{isDescriptionExpanded ? "Daha Az" : "Daha Fazla"}</Text>
-                        </TouchableOpacity>
-                    )}
-                </View>
-            ) : null}
         </>
     );
 }
