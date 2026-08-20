@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
 import BottomSheet from "@/components/BottomSheet";
@@ -17,9 +17,12 @@ export default function AddToListBottomSheet({
     const {
         lists,
         isLoading,
+        isLoadingMore,
+        hasMore,
         actionLoadingId,
         error,
         fetchUserLists,
+        loadMore,
         toggleListSelection,
     } = useMovieLists(movieId, isWatchlisted);
 
@@ -29,13 +32,14 @@ export default function AddToListBottomSheet({
         }
     }, [isVisible, movieId, fetchUserLists]);
 
+    const handleEndReached = useCallback(() => {
+        if (hasMore && !isLoadingMore) {
+            loadMore();
+        }
+    }, [hasMore, isLoadingMore, loadMore]);
+
     return (
-        <BottomSheet
-            isVisible={isVisible}
-            onClose={onClose}
-            title="Listelerime Ekle"
-            showCloseButton
-        >
+        <BottomSheet isVisible={isVisible} onClose={onClose} title="Listelerime Ekle" showCloseButton>
             <View style={styles.listContainer}>
                 {error ? <Text style={styles.sheetError}>{error}</Text> : null}
 
@@ -53,7 +57,13 @@ export default function AddToListBottomSheet({
                                 onStatusChange={onStatusChange}
                             />
                         )}
-                        scrollEnabled={false}
+                        onEndReached={handleEndReached}
+                        onEndReachedThreshold={0.3}
+                        ListFooterComponent={
+                            isLoadingMore ? (
+                                <ActivityIndicator size="small" color="#1DB954" style={{ paddingVertical: 12 }} />
+                            ) : null
+                        }
                     />
                 )}
             </View>

@@ -1,9 +1,10 @@
-import { ITrackDetails } from "@/hooks/music/useTrackDetails";
-
-export { ITrackDetails };
+import { IPlaylistItemOption } from "@/hooks/music/useUserPlaylists";
+import { PlaylistId, TrackId } from "@/types/common.types";
+import { InteractionItemResponse, UpsertInteractionSummary } from "@/types/interaction.types";
+import { TrackDetails } from "@/types/track.types";
 
 export interface ITrackHeroProps {
-    trackDetails: ITrackDetails | null;
+    trackDetails: TrackDetails | null;
     toggleLike: () => void;
     onCommentPress?: () => void;
     onAddPress?: () => void;
@@ -11,10 +12,27 @@ export interface ITrackHeroProps {
 }
 
 export interface ITrackDetailViewProps {
-    trackDetails: ITrackDetails | null;
+    trackDetails: TrackDetails | null;
     isLoading: boolean;
     error: string;
     refetchAll: () => void;
     toggleLike: () => void;
-    submitInteraction: (data: { rating?: number; comment?: string; isLiked?: boolean }) => Promise<void>;
+    submitInteraction: (data: UpsertInteractionSummary) => Promise<void>;
+}
+
+export interface AddToPlaylistBottomSheetProps {
+    isVisible: boolean;
+    onClose: () => void;
+    trackId?: TrackId;
+}
+
+export interface AddToPlaylistSheetItemProps {
+    item: IPlaylistItemOption;
+    onToggle: (playlistId: PlaylistId) => void;
+    isLoading?: boolean;
+}
+
+export interface LatestCommentsProps {
+    interactions: InteractionItemResponse[];
+    commentsCount?: number;
 }

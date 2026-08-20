@@ -1,82 +1,102 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 
 import { MovieService } from "@/services/movie.service";
+import { GetListsResponseDataItem } from "@/types/movie.types";
+import { MovieId, MovieListId } from "@/types/common.types";
 
 export interface IMovieListOption {
-    id: string;
+    id: MovieListId | "watchlist";
     title: string;
     isWatchlist: boolean;
     isChecked: boolean;
 }
 
-const useMovieLists = (movieId?: string, initialIsWatchlisted?: boolean) => {
-    const [lists, setLists] = useState<IMovieListOption[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+const DEFAULT_LIMIT = 20;
+
+const toListOption = (item: GetListsResponseDataItem, movieId?: MovieId): IMovieListOption => ({
+    id: item.listId,
+    title: item.listTitle,
+    isWatchlist: false,
+    isChecked:
+        item.containsMovie !== undefined
+            ? Boolean(item.containsMovie)
+            : Array.isArray(item.previewMovies)
+              ? item.previewMovies.some((m) => m.id === movieId)
+              : false,
+});
+
+const QUERY_KEY = (movieId?: MovieId) => ["userMovieLists", movieId ?? "all"];
+
+const useMovieLists = (movieId?: MovieId, initialIsWatchlisted?: boolean) => {
+    const queryClient = useQueryClient();
     const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
     const [error, setError] = useState<string>("");
 
-    const fetchUserLists = useCallback(async () => {
-        if (!movieId) return;
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isRefetching, refetch } = useInfiniteQuery(
+        {
+            queryKey: QUERY_KEY(movieId),
+            queryFn: async ({ pageParam }) => {
+                const response = await MovieService.getUserLists({ movieId, page: pageParam, limit: DEFAULT_LIMIT });
+                return response.data;
+            },
+            initialPageParam: 1,
+            getNextPageParam: (lastPage, allPages) => {
+                if (!lastPage?.hasMore) return undefined;
+                return allPages.length + 1;
+            },
+            enabled: !!movieId,
+        },
+    );
 
-        setIsLoading(true);
-        setError("");
+    const watchlistOption: IMovieListOption = {
+        id: "watchlist",
+        title: "İzleme Listesi",
+        isWatchlist: true,
+        isChecked: initialIsWatchlisted ?? false,
+    };
 
-        try {
-            const response = await MovieService.getUserLists(movieId);
-            const rawLists = response?.data?.items || response?.data || [];
+    const fetchedLists: IMovieListOption[] = (data?.pages ?? []).flatMap((page) =>
+        (page?.items ?? []).map((item) => toListOption(item, movieId)),
+    );
 
-            const formattedLists: IMovieListOption[] = [
-                {
-                    id: "watchlist",
-                    title: "İzleme Listesi",
-                    isWatchlist: true,
-                    isChecked: initialIsWatchlisted ?? false,
-                },
-                ...rawLists.map((item: any) => ({
-                    id: item.listId || item.id,
-                    title: item.listTitle || item.title,
-                    isWatchlist: false,
-                    isChecked:
-                        item.containsMovie !== undefined
-                            ? Boolean(item.containsMovie)
-                            : Array.isArray(item.previewMovies)
-                            ? item.previewMovies.some((m: any) => m.id === movieId)
-                            : false,
-                })),
-            ];
-
-            setLists(formattedLists);
-        } catch (err: any) {
-            setError("Listeler yüklenirken bir hata oluştu.");
-        } finally {
-            setIsLoading(false);
-        }
-    }, [movieId, initialIsWatchlisted]);
+    const lists: IMovieListOption[] = [watchlistOption, ...fetchedLists];
 
     const toggleListSelection = async (
-        listId: string,
+        listId: MovieListId,
         isWatchlist: boolean,
-        onStatusChange?: (newListState: { isWatchlisted: boolean; isInList: boolean }) => void
+        onStatusChange?: (newListState: { isWatchlisted: boolean; isInList: boolean }) => void,
     ) => {
         if (!movieId) return;
 
-        const targetList = lists.find((l) => l.id === listId);
-        if (!targetList) return;
+        const target = lists.find((l) => l.id === listId);
+        if (!target) return;
 
-        const currentlyChecked = targetList.isChecked;
+        const currentlyChecked = target.isChecked;
         const newChecked = !currentlyChecked;
         setActionLoadingId(listId);
         setError("");
 
-        // Optimistic UI update
-        const updatedLists = lists.map((l) =>
-            l.id === listId ? { ...l, isChecked: newChecked } : l
-        );
-        setLists(updatedLists);
+        // Optimistic update: for watchlist we update local state via onStatusChange,
+        // for regular lists we update the query cache directly
+        if (!isWatchlist) {
+            queryClient.setQueryData(QUERY_KEY(movieId), (old: typeof data) => {
+                if (!old) return old;
+                return {
+                    ...old,
+                    pages: old.pages.map((page) => ({
+                        ...page,
+                        items: page?.items?.map((item) =>
+                            item.listId === listId ? { ...item, containsMovie: newChecked } : item,
+                        ),
+                    })),
+                };
+            });
+        }
 
         if (onStatusChange) {
-            const isWatchlisted = updatedLists.find((l) => l.isWatchlist)?.isChecked ?? false;
-            const isInList = updatedLists.some((l) => l.isChecked);
+            const isWatchlisted = isWatchlist ? newChecked : (initialIsWatchlisted ?? false);
+            const isInList = isWatchlisted || fetchedLists.some((l) => (l.id === listId ? newChecked : l.isChecked));
             onStatusChange({ isWatchlisted, isInList });
         }
 
@@ -95,19 +115,30 @@ const useMovieLists = (movieId?: string, initialIsWatchlisted?: boolean) => {
                 }
             }
         } catch (err: any) {
-            // Revert optimistic update on error
-            const revertedLists = lists.map((l) =>
-                l.id === listId ? { ...l, isChecked: currentlyChecked } : l
-            );
-            setLists(revertedLists);
+            // Revert optimistic update
+            if (!isWatchlist) {
+                queryClient.setQueryData(QUERY_KEY(movieId), (old: typeof data) => {
+                    if (!old) return old;
+                    return {
+                        ...old,
+                        pages: old.pages.map((page) => ({
+                            ...page,
+                            items: page?.items?.map((item) =>
+                                item.listId === listId ? { ...item, containsMovie: currentlyChecked } : item,
+                            ),
+                        })),
+                    };
+                });
+            }
 
             if (onStatusChange) {
-                const isWatchlisted = revertedLists.find((l) => l.isWatchlist)?.isChecked ?? false;
-                const isInList = revertedLists.some((l) => l.isChecked);
+                const isWatchlisted = isWatchlist ? currentlyChecked : (initialIsWatchlisted ?? false);
+                const isInList =
+                    isWatchlisted || fetchedLists.some((l) => (l.id === listId ? currentlyChecked : l.isChecked));
                 onStatusChange({ isWatchlisted, isInList });
             }
 
-            if (err && err.success === false) {
+            if (err?.success === false) {
                 setError(err.error?.message || err?.message || "İşlem sırasında bir hata oluştu.");
             } else {
                 setError("Sunucuya bağlanılamadı.");
@@ -120,9 +151,13 @@ const useMovieLists = (movieId?: string, initialIsWatchlisted?: boolean) => {
     return {
         lists,
         isLoading,
+        isLoadingMore: isFetchingNextPage,
+        isRefetching,
         actionLoadingId,
         error,
-        fetchUserLists,
+        hasMore: hasNextPage ?? false,
+        fetchUserLists: refetch,
+        loadMore: fetchNextPage,
         toggleListSelection,
     };
 };

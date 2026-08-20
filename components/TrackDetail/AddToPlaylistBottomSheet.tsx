@@ -1,27 +1,23 @@
-import React, { useEffect } from "react";
-import { ActivityIndicator, FlatList, Text, View, StyleSheet } from "react-native";
+import { useCallback, useEffect } from "react";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
 import BottomSheet from "@/components/BottomSheet";
 import { useUserPlaylists } from "@/hooks/music/useUserPlaylists";
 import AddToPlaylistSheetItem from "./AddToPlaylistSheetItem";
 
-interface AddToPlaylistBottomSheetProps {
-    isVisible: boolean;
-    onClose: () => void;
-    trackId?: string;
-}
+import { styles } from "./styles";
+import { AddToPlaylistBottomSheetProps } from "./types";
 
-export default function AddToPlaylistBottomSheet({
-    isVisible,
-    onClose,
-    trackId,
-}: AddToPlaylistBottomSheetProps) {
+export default function AddToPlaylistBottomSheet({ isVisible, onClose, trackId }: AddToPlaylistBottomSheetProps) {
     const {
         playlists,
         isLoading,
+        isLoadingMore,
+        hasMore,
         actionLoadingId,
         error,
         fetchUserPlaylists,
+        loadMore,
         togglePlaylistSelection,
     } = useUserPlaylists(trackId);
 
@@ -31,20 +27,21 @@ export default function AddToPlaylistBottomSheet({
         }
     }, [isVisible, trackId, fetchUserPlaylists]);
 
+    const handleEndReached = useCallback(() => {
+        if (hasMore && !isLoadingMore) {
+            loadMore();
+        }
+    }, [hasMore, isLoadingMore, loadMore]);
+
     return (
-        <BottomSheet
-            isVisible={isVisible}
-            onClose={onClose}
-            title="Playlistlerime Ekle"
-            showCloseButton
-        >
+        <BottomSheet isVisible={isVisible} onClose={onClose} title="Playlistlerime Ekle" showCloseButton>
             <View style={styles.listContainer}>
                 {error ? <Text style={styles.sheetError}>{error}</Text> : null}
 
                 {isLoading ? (
                     <ActivityIndicator size="large" color="#1DB954" style={{ paddingVertical: 24 }} />
                 ) : playlists.length === 0 ? (
-                    <Text style={styles.emptyText}>Henüz playlistiniz bulunmuyor.</Text>
+                    <Text style={styles.bottomSheetEmptyText}>Henüz playlistiniz bulunmuyor.</Text>
                 ) : (
                     <FlatList
                         data={playlists}
@@ -56,28 +53,16 @@ export default function AddToPlaylistBottomSheet({
                                 isLoading={actionLoadingId === item.id}
                             />
                         )}
-                        scrollEnabled={false}
+                        onEndReached={handleEndReached}
+                        onEndReachedThreshold={0.3}
+                        ListFooterComponent={
+                            isLoadingMore ? (
+                                <ActivityIndicator size="small" color="#1DB954" style={{ paddingVertical: 12 }} />
+                            ) : null
+                        }
                     />
                 )}
             </View>
         </BottomSheet>
     );
 }
-
-const styles = StyleSheet.create({
-    listContainer: {
-        paddingVertical: 8,
-    },
-    sheetError: {
-        color: "#FF3B30",
-        fontSize: 14,
-        marginBottom: 8,
-        textAlign: "center",
-    },
-    emptyText: {
-        color: "#8C8C8C",
-        fontSize: 15,
-        paddingVertical: 24,
-        textAlign: "center",
-    },
-});

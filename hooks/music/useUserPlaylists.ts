@@ -1,58 +1,78 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+
 import { PlaylistService } from "@/services/playlist.service";
+import { GetPlaylistsResponseDataItem } from "@/types/playlist.types";
+import { PlaylistId, TrackId } from "@/types/common.types";
 
 export interface IPlaylistItemOption {
-    id: string;
+    id: PlaylistId;
     title: string;
     isChecked: boolean;
 }
 
-export const useUserPlaylists = (trackId?: string) => {
-    const [playlists, setPlaylists] = useState<IPlaylistItemOption[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
+const DEFAULT_LIMIT = 20;
+
+const toPlaylistOption = (item: GetPlaylistsResponseDataItem): IPlaylistItemOption => ({
+    id: item.id,
+    title: item.title,
+    isChecked: Boolean(item.containsTrack),
+});
+
+const QUERY_KEY = (trackId?: TrackId) => ["userPlaylists", trackId ?? "all"];
+
+export const useUserPlaylists = (trackId?: TrackId) => {
+    const queryClient = useQueryClient();
+    const [actionLoadingId, setActionLoadingId] = useState<PlaylistId | null>(null);
     const [error, setError] = useState<string>("");
 
-    const fetchUserPlaylists = useCallback(async () => {
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, isRefetching, refetch } = useInfiniteQuery(
+        {
+            queryKey: QUERY_KEY(trackId),
+            queryFn: async ({ pageParam }) => {
+                const response = await PlaylistService.getUserPlaylists({
+                    trackId,
+                    page: pageParam,
+                    limit: DEFAULT_LIMIT,
+                });
+                return response.data;
+            },
+            initialPageParam: 1,
+            getNextPageParam: (lastPage, allPages) => {
+                if (!lastPage?.hasMore) return undefined;
+                return allPages.length + 1;
+            },
+            enabled: !!trackId,
+        },
+    );
+
+    const playlists: IPlaylistItemOption[] = (data?.pages ?? []).flatMap((page) =>
+        (page?.items ?? []).map(toPlaylistOption),
+    );
+
+    const togglePlaylistSelection = async (playlistId: PlaylistId) => {
         if (!trackId) return;
 
-        setIsLoading(true);
-        setError("");
+        const target = playlists.find((p) => p.id === playlistId);
+        if (!target) return;
 
-        try {
-            const response = await PlaylistService.getUserPlaylists(trackId);
-            const rawLists = response?.data?.items || response?.data || [];
-
-            const formattedLists: IPlaylistItemOption[] = rawLists.map((item: any) => ({
-                id: item.id,
-                title: item.title,
-                isChecked: Boolean(item.containsTrack),
-            }));
-
-            setPlaylists(formattedLists);
-        } catch (err: any) {
-            setError("Playlistler yüklenirken bir hata oluştu.");
-        } finally {
-            setIsLoading(false);
-        }
-    }, [trackId]);
-
-    const togglePlaylistSelection = async (playlistId: string) => {
-        if (!trackId) return;
-
-        const targetList = playlists.find((l) => l.id === playlistId);
-        if (!targetList) return;
-
-        const currentlyChecked = targetList.isChecked;
-        const newChecked = !currentlyChecked;
+        const currentlyChecked = target.isChecked;
         setActionLoadingId(playlistId);
         setError("");
 
-        // Optimistic UI update
-        const updatedLists = playlists.map((l) =>
-            l.id === playlistId ? { ...l, isChecked: newChecked } : l
-        );
-        setPlaylists(updatedLists);
+        // Optimistic update in query cache
+        queryClient.setQueryData(QUERY_KEY(trackId), (old: typeof data) => {
+            if (!old) return old;
+            return {
+                ...old,
+                pages: old.pages.map((page) => ({
+                    ...page,
+                    items: page?.items?.map((item) =>
+                        item.id === playlistId ? { ...item, containsTrack: !currentlyChecked } : item,
+                    ),
+                })),
+            };
+        });
 
         try {
             if (currentlyChecked) {
@@ -61,13 +81,21 @@ export const useUserPlaylists = (trackId?: string) => {
                 await PlaylistService.addTrackToPlaylist(playlistId, trackId);
             }
         } catch (err: any) {
-            // Revert optimistic update on error
-            const revertedLists = playlists.map((l) =>
-                l.id === playlistId ? { ...l, isChecked: currentlyChecked } : l
-            );
-            setPlaylists(revertedLists);
+            // Revert optimistic update
+            queryClient.setQueryData(QUERY_KEY(trackId), (old: typeof data) => {
+                if (!old) return old;
+                return {
+                    ...old,
+                    pages: old.pages.map((page) => ({
+                        ...page,
+                        items: page?.items?.map((item) =>
+                            item.id === playlistId ? { ...item, containsTrack: currentlyChecked } : item,
+                        ),
+                    })),
+                };
+            });
 
-            if (err && err.success === false) {
+            if (err?.success === false) {
                 setError(err.error?.message || err?.message || "İşlem sırasında bir hata oluştu.");
             } else {
                 setError("Sunucuya bağlanılamadı.");
@@ -80,9 +108,13 @@ export const useUserPlaylists = (trackId?: string) => {
     return {
         playlists,
         isLoading,
+        isLoadingMore: isFetchingNextPage,
+        isRefetching,
         actionLoadingId,
         error,
-        fetchUserPlaylists,
+        hasMore: hasNextPage ?? false,
+        fetchUserPlaylists: refetch,
+        loadMore: fetchNextPage,
         togglePlaylistSelection,
     };
 };
