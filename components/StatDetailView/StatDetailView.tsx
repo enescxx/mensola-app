@@ -1,4 +1,4 @@
-import { StatDetailProps, ViewTypes } from "./types";
+import { StatDetailProps } from "./types";
 import { styles } from "./styles";
 import DynamicList from "../DynamicList";
 import StatDetailItem from "./StatDetailItem";
@@ -6,8 +6,11 @@ import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from "react-na
 import { useEffect, useState } from "react";
 import { useFollow } from "@/hooks/user/useFollow";
 import { useRouter } from "expo-router";
+import { UserId } from "@/types/common.types";
+import { StatDetailsItemMap, StatType } from "@/types/stat.types";
+import { FollowUsersResponseDataItem } from "@/types/user.types";
 
-export default function StatDetailView({
+export default function StatDetailView<T extends StatType = StatType>({
     currentUserId,
     statType,
     items,
@@ -19,7 +22,13 @@ export default function StatDetailView({
     isError,
     refetch,
     isOwnProfile = false,
-}: StatDetailProps) {
+}: StatDetailProps<T>) {
+    const router = useRouter();
+    const { followHandler, unfollowHandler } = useFollow();
+    const [statDetailItems, setStatDetailItems] = useState(items);
+
+    useEffect(() => setStatDetailItems(items), [items]);
+
     if (isError && !statType) {
         return (
             <View style={styles.errorContainer}>
@@ -39,9 +48,6 @@ export default function StatDetailView({
         );
     }
 
-    const [statDetailItems, setStatDetailItems] = useState(items);
-    useEffect(() => setStatDetailItems(items), [items]);
-
     if (!statDetailItems || statDetailItems.length <= 0) {
         return (
             <View style={styles.emptyContainer}>
@@ -49,8 +55,6 @@ export default function StatDetailView({
             </View>
         );
     }
-
-    const { followHandler, unfollowHandler } = useFollow();
 
     const isGrid = [
         "watchlist",
@@ -64,8 +68,7 @@ export default function StatDetailView({
         "favorite-movies",
     ].includes(statType);
 
-    const renderItem = ({ item }: any /* ======================================================== */) => {
-        const router = useRouter();
+    const renderItem = ({ item }: any) => {
         switch (statType) {
             case "movie-lists":
             case "liked-movie-lists":
@@ -86,7 +89,7 @@ export default function StatDetailView({
             case "liked-tracks":
             case "liked-playlists":
             case "liked-albums":
-            case "favorite-tracks":
+            case "favorite-tracks": {
                 let cardType: "track" | "playlist" | "album" = "track";
 
                 if (statType.includes("playlist")) {
@@ -118,6 +121,7 @@ export default function StatDetailView({
                         hideCreator={isOwnProfile && statType === "playlists" ? true : false}
                     />
                 );
+            }
             case "watchlist":
             case "watched":
             case "liked-movies":
@@ -132,21 +136,20 @@ export default function StatDetailView({
                     />
                 );
             case "followers":
-            case "following":
-                const toggleFollowStateInList = (targetUserId: string) => {
-                    setStatDetailItems((prevData: any[]) =>
-                        prevData?.map((userItem) =>
+            case "following": {
+                const toggleFollowStateInList = (targetUserId: UserId) => {
+                    setStatDetailItems((prev) => {
+                        const typedPrev = prev as FollowUsersResponseDataItem[];
+                        const mapped = typedPrev?.map((userItem) =>
                             userItem.id === targetUserId
-                                ? {
-                                      ...userItem,
-                                      isFollowing: !userItem.isFollowing,
-                                  }
+                                ? { ...userItem, isFollowing: !userItem.isFollowing }
                                 : userItem,
-                        ),
-                    );
+                        );
+                        return mapped as StatDetailsItemMap[T][];
+                    });
                 };
 
-                const handleFollowPress = (targetId: string, isFollowing: boolean) => {
+                const handleFollowPress = (targetId: UserId, isFollowing: boolean) => {
                     if (isFollowing) {
                         Alert.alert(
                             "Takipten çıkılıyor",
@@ -175,9 +178,10 @@ export default function StatDetailView({
                         data={item}
                         onCardPress={(userId) => router.push(`/users/${userId}`)}
                         onFollowPress={handleFollowPress}
-                        currentUserId={currentUserId || ""}
+                        currentUserId={currentUserId}
                     />
                 );
+            }
         }
     };
 

@@ -3,9 +3,10 @@ import { StatusBar } from "expo-status-bar";
 import { ProfileProvider } from "@/context/ProfileContext";
 
 import PageHeader from "@/components/PageHeader";
+import { UserId } from "@/types/common.types";
 
 export default function RootLayout() {
-    const { userId } = useLocalSearchParams<{ userId: string }>();
+    const { userId } = useLocalSearchParams<{ userId: UserId }>();
 
     return (
         <ProfileProvider userId={userId}>

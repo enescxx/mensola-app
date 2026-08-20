@@ -1,21 +1,15 @@
-export type StatTypes =
-    | "movie-lists"
-    | "playlists"
-    | "watchlist"
-    | "watched"
-    | "liked-movies"
-    | "liked-tracks"
-    | "liked-playlists"
-    | "liked-movie-lists"
-    | "liked-albums"
-    | "followers"
-    | "following"
-    | "favorite-movies"
-    | "favorites-tracks";
-export type StatDetailProps = {
-    currentUserId?: string;
-    statType: string; //StatTypes;
-    items?: any; /* ================================================== */
+import { LikedAlbumsResponseDataItem } from "@/types/album.types";
+import { UserId } from "@/types/common.types";
+import { IMovie, MovieSummaryViaInteraction } from "@/types/movie.types";
+import { GetPlaylistsResponseDataItem, PlaylistItemsResponseDataItem } from "@/types/playlist.types";
+import { StatDetailsItemMap, StatType } from "@/types/stat.types";
+import { FavoriteTracks, ITrack } from "@/types/track.types";
+import { FollowUsersResponseDataItem } from "@/types/user.types";
+
+export type StatDetailProps<T extends StatType = StatType> = {
+    currentUserId: UserId;
+    statType: T;
+    items?: StatDetailsItemMap[T][];
     loadMore?: () => void;
     hasNextPage?: boolean;
     isFetchingNextPage?: boolean;
@@ -26,31 +20,34 @@ export type StatDetailProps = {
     isOwnProfile?: boolean;
 };
 export type ViewTypes = "dynamic-list" | "music-card" | "movie-card" | "user-card";
-export type StatDetailItemProps = { viewType?: ViewTypes } & (
+
+export type StatDetailItemProps<T extends StatType = StatType> = { viewType?: ViewTypes } & (
     | {
           viewType?: "dynamic-list";
-          data: any; /* ================================================== */
+          data: MovieSummaryViaInteraction[];
           listTitle?: string;
           onSeeAllPress?: () => void;
           onListItemPress?: (movieId: string) => void;
       }
-    | {
+    | ({
           viewType?: "music-card";
-          cardType: "track" | "album" | "playlist";
-          data: any; /* ================================================== */
           hideCreator?: boolean;
           onPress?: () => void;
-      }
+      } & (
+          | { cardType: "track"; data: ITrack | PlaylistItemsResponseDataItem }
+          | { cardType: "album"; data: LikedAlbumsResponseDataItem }
+          | { cardType: "playlist"; data: GetPlaylistsResponseDataItem }
+      ))
     | {
           viewType?: "movie-card";
-          data: any; /* ================================================== */
+          data: MovieSummaryViaInteraction;
           onPress?: () => void;
       }
     | {
           viewType?: "user-card";
-          data: any; /* ================================================== */
-          currentUserId: string;
-          onCardPress?: (userId: string) => void;
-          onFollowPress?: (userId: string, isFollowing: boolean) => void;
+          data: FollowUsersResponseDataItem;
+          currentUserId: UserId;
+          onCardPress?: (userId: UserId) => void;
+          onFollowPress?: (userId: UserId, isFollowing: boolean) => void;
       }
 );

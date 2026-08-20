@@ -3,9 +3,11 @@ import { useStatDetails } from "../../../hooks/profile/useStatDetails";
 import { useGlobalUser } from "../../../context/AuthContext";
 import { STAT_TITLES } from "../../../constants/pageTitles";
 import { StatDetailView } from "@/components/StatDetailView";
+import { StatType } from "@/types/stat.types";
+import { UserId } from "@/types/common.types";
 
 export default function StatDetailPage() {
-    const { statType } = useLocalSearchParams<{ statType: string }>();
+    const { statType } = useLocalSearchParams<{ statType: StatType }>();
     const pageTitle = STAT_TITLES[statType] || "Detay";
 
     const { user } = useGlobalUser();
@@ -13,7 +15,7 @@ export default function StatDetailPage() {
     const { statData, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, isRefetching } =
         useStatDetails({
             statType,
-            userId: user.id,
+            userId: user?.id,
         });
 
     return (
@@ -24,7 +26,7 @@ export default function StatDetailPage() {
                 }}
             />
             <StatDetailView
-                currentUserId={user.id}
+                currentUserId={user?.id as UserId}
                 statType={statType}
                 items={statData}
                 loadMore={fetchNextPage}
