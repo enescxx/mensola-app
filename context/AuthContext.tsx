@@ -1,21 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
-import { AuthanticatedUser } from "../types/auth";
+import { IUser } from "@/types/user.types";
 
-const AuthContext = createContext<
-    | { user: AuthanticatedUser; setUser: (u: AuthanticatedUser) => void }
-    | undefined
->(undefined);
+const AuthContext = createContext<{ user?: IUser; setUser: (u: IUser) => void } | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-    children
-}) => {
-    const [user, setUser] = useState<AuthanticatedUser>(null);
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [user, setUser] = useState<IUser>();
 
-    return (
-        <AuthContext.Provider value={{ user, setUser }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
 };
 
 export const useGlobalUser = () => useContext(AuthContext)!;

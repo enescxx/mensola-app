@@ -1,76 +1,47 @@
 import { useState, useEffect, useCallback } from "react";
 
 import { ProfileService } from "../../services/profile.service";
-import { GetProfileResponse, StatTypes } from "../../types";
+import { UserProfile } from "@/types/user.types";
+import { UserId } from "@/types/common.types";
+import { isApiError } from "@/utils/api.utils";
 
-const useProfile = (targetProfileId?: string) => {
-    const [profile, setProfile] = useState<GetProfileResponse>({});
+const useProfile = (userId: UserId | "me") => {
+    const [profile, setProfile] = useState<UserProfile>();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<string | null>(null);
 
     const fetchProfile = useCallback(async () => {
         setIsLoading(true);
         setError(null);
 
         try {
-            const response =
-                targetProfileId === "me"
-                    ? await ProfileService.getMe()
-                    : await ProfileService.getProfile(targetProfileId);
+            const response = await ProfileService.getProfile({ userId });
 
-            const {
-                id,
-                username,
-                fullname,
-                bio,
-                avatar,
-                favoriteMovies,
-                favoriteTracks,
-                ...rawStats
-            } = response.data.profile as GetProfileResponse;
-
-            const stats = Object.keys(rawStats).map(key => ({
-                type: key as StatTypes,
-                value: rawStats[key]
-            }));
-
-            setProfile({
-                id,
-                username,
-                fullname,
-                bio,
-                avatar,
-                favoriteMovies,
-                favoriteTracks,
-                stats
-            });
+            if (!response.data?.profile) throw new Error("Bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
+            setProfile(response.data.profile);
+            console.log(response.data.profile);
         } catch (error) {
-            if (error && error.success === false) {
+            if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;
                 setError(
-                    apiErrorMessage ||
-                        "Profil bilgileri çekilirken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
+                    apiErrorMessage || "Profil bilgileri çekilirken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.",
                 );
+            } else if (error instanceof Error) {
+                setError(error.message);
             } else {
-                setError(
-                    "Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz."
-                );
+                setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
         } finally {
             setIsLoading(false);
         }
-    }, [targetProfileId]);
+    }, [userId]);
 
     useEffect(() => {
         fetchProfile();
     }, [fetchProfile]);
 
-    return {
-        profile,
-        isLoading,
-        error
-    };
+    return { profile, isLoading, error };
 };
 
 export { useProfile };
