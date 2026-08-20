@@ -1,40 +1,39 @@
-import { client } from "../api/client";
-
 import {
     AuthResponse,
-    LogoutResponse,
-    ForgotPasswordResponse,
+    ForgotPasswordRequest,
+    LoginRequest,
+    LogoutRequest,
+    RegisterRequest,
+    ResetPasswordRequest,
     VerifyResetCodeResponse,
-    ResetPasswordResponse,
-} from "../types";
+    VerifyResetTokenRequest,
+} from "@/types/auth.types";
+import { client } from "../api/client";
+import { ApiResponse } from "@/types/api";
 
 const AuthService = {
-    login: async (credentials: Record<string, any>): Promise<AuthResponse> => {
-        return client.post<AuthResponse>("/auth/login", credentials, {
-            auth: false,
-        });
+    login: async (data: LoginRequest): Promise<AuthResponse> => {
+        return await client.post<AuthResponse>("/v1/auth/login", data, { auth: false });
     },
 
-    register: async (credentials: Record<string, string>): Promise<AuthResponse> => {
-        return client.post<AuthResponse>("/auth/register", credentials, {
-            auth: false,
-        });
+    register: async (data: RegisterRequest): Promise<AuthResponse> => {
+        return await client.post<AuthResponse>("/v1/auth/register", data, { auth: false });
     },
 
-    logout: async (refreshToken): Promise<LogoutResponse> => {
-        return client.post<LogoutResponse>("/auth/logout", { refreshToken }, { auth: false });
+    logout: async (data: LogoutRequest): Promise<ApiResponse> => {
+        return await client.post<ApiResponse>("/v1/auth/logout", data, { auth: false });
     },
 
-    forgotPassword: async (email): Promise<ForgotPasswordResponse> => {
-        return client.post<ForgotPasswordResponse>("/auth/forgot-password", { email }, { auth: false });
+    forgotPassword: async (data: ForgotPasswordRequest): Promise<ApiResponse> => {
+        return await client.post<ApiResponse>("/v1/auth/forgot-password", data, { auth: false });
     },
 
-    verifyResetToken: async (credentials): Promise<VerifyResetCodeResponse> => {
-        return client.post<VerifyResetCodeResponse>("/auth/verify-reset-code", credentials, { auth: false });
+    verifyResetCode: async (data: VerifyResetTokenRequest): Promise<VerifyResetCodeResponse> => {
+        return await client.post<VerifyResetCodeResponse>("/v1/auth/verify-reset-code", data, { auth: false });
     },
 
-    resetPassword: async (credentials): Promise<ResetPasswordResponse> => {
-        return client.post<ResetPasswordResponse>("/auth/reset-password", credentials, { auth: false });
+    resetPassword: async (data: ResetPasswordRequest): Promise<ApiResponse> => {
+        return await client.post<ApiResponse>("/v1/auth/reset-password", data, { auth: false });
     },
 };
 

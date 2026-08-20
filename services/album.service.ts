@@ -1,57 +1,59 @@
+import {
+    AlbumDetailsResponse,
+    AlbumLikeActionsResponse,
+    AlbumTracksRequest,
+    AlbumTracksResponse,
+    LikedAlbumsRequest,
+    LikedAlbumsResponse,
+} from "@/types/album.types";
 import { client } from "../api/client";
-import { ApiResponse } from "../types";
+import {
+    InteractionsRequest,
+    InteractionsResponse,
+    UpsertInteractionRequest,
+    UpsertInteractionResponse,
+} from "@/types/interaction.types";
+import { AlbumId } from "@/types/common.types";
 
 const AlbumService = {
-    getLikedAlbums: async (userId?: string, page = 1, limit = 18): Promise<ApiResponse> => {
-        const queryParams = new URLSearchParams();
-        if (userId) queryParams.append("userId", userId);
-        queryParams.append("page", page.toString());
-        queryParams.append("limit", limit.toString());
-
-        return client.get<ApiResponse>(`/albums/likes?${queryParams.toString()}`, {
+    getLikedAlbums: async (data: LikedAlbumsRequest): Promise<LikedAlbumsResponse> => {
+        const { userId, page = 1, limit = 18 } = data;
+        return client.get<LikedAlbumsResponse>(`/v1/albums/likes`, {
             auth: true,
+            params: { userId, page, limit },
         });
     },
 
-    getAlbumDetails: async (albumId: string): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/albums/${albumId}`, {
+    getAlbumDetails: async (albumId: AlbumId): Promise<AlbumDetailsResponse> => {
+        return client.get<AlbumDetailsResponse>(`/v1/albums/${albumId}`, { auth: true });
+    },
+
+    getAlbumTracks: async (data: AlbumTracksRequest): Promise<AlbumTracksResponse> => {
+        const { albumId, page = 1, limit = 15 } = data;
+        return client.get<AlbumTracksResponse>(`/v1/albums/${albumId}/tracks`, {
             auth: true,
+            params: { page, limit },
         });
     },
 
-    getAlbumTracks: async (albumId: string, page = 1, limit = 30): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/albums/${albumId}/tracks?page=${page}&limit=${limit}`, {
+    getAlbumInteractions: async (data: InteractionsRequest): Promise<InteractionsResponse> => {
+        const { targetId, page = 1, limit = 15 } = data;
+        return client.get<InteractionsResponse>(`/v1/albums/${targetId}/interactions`, {
             auth: true,
+            params: { page, limit },
         });
     },
 
-    getAlbumInteractions: async (albumId: string, page = 1, limit = 30): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/albums/${albumId}/interactions?page=${page}&limit=${limit}`, {
-            auth: true,
-        });
+    likeAlbum: async (albumId: AlbumId): Promise<AlbumLikeActionsResponse> => {
+        return client.post<AlbumLikeActionsResponse>(`/v1/albums/${albumId}/like`, {}, { auth: true });
     },
 
-    likeAlbum: async (albumId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(
-            `/albums/${albumId}/like`,
-            {},
-            {
-                auth: true,
-            },
-        );
+    unlikeAlbum: async (albumId: AlbumId): Promise<AlbumLikeActionsResponse> => {
+        return client.delete<AlbumLikeActionsResponse>(`/v1/albums/${albumId}/like`, { auth: true });
     },
 
-    unlikeAlbum: async (albumId: string): Promise<ApiResponse> => {
-        return client.delete<ApiResponse>(`/albums/${albumId}/like`, {
-            auth: true,
-        });
-    },
-
-    createOrUpdateInteraction: async (
-        albumId: string,
-        data: { rating?: number; comment?: string; isLiked?: boolean },
-    ): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/albums/${albumId}/interactions`, data, {
+    createOrUpdateInteraction: async (data: UpsertInteractionRequest): Promise<UpsertInteractionResponse> => {
+        return client.post<UpsertInteractionResponse>(`/v1/albums/${data.targetId}/interactions`, data.interaction, {
             auth: true,
         });
     },

@@ -1,28 +1,17 @@
+import {
+    ToggleBookmarkRequest,
+    ToggleBookmarkResponse,
+    UserBookmarksRequest,
+    UserBookmarksResponse,
+} from "@/types/bookmark.types";
 import { client } from "../api/client";
-import { ApiResponse } from "../types";
-
-export type BookmarkTargetType = "playlist" | "movieList";
 
 export const BookmarkService = {
-    toggleBookmark: async (
-        targetId: string,
-        targetType: BookmarkTargetType,
-    ): Promise<ApiResponse<{ isSaved: boolean }>> => {
-        return client.post<ApiResponse<{ isSaved: boolean }>>(
-            "/bookmarks/toggle",
-            { targetId, targetType },
-            {
-                auth: true,
-            },
-        );
+    toggleBookmark: async (data: ToggleBookmarkRequest): Promise<ToggleBookmarkResponse> => {
+        return await client.post<ToggleBookmarkResponse>("/v1/bookmarks/toggle", data, { auth: true });
     },
 
-    getUserBookmarks: async (targetType?: BookmarkTargetType, page = 1, limit = 20): Promise<ApiResponse> => {
-        const query = targetType
-            ? `?targetType=${targetType}&page=${page}&limit=${limit}`
-            : `?page=${page}&limit=${limit}`;
-        return client.get<ApiResponse>(`/bookmarks${query}`, {
-            auth: true,
-        });
+    getUserBookmarks: async (data: UserBookmarksRequest): Promise<UserBookmarksResponse> => {
+        return await client.get<UserBookmarksResponse>(`/v1/bookmarks`, { auth: true, params: { ...data } });
     },
 };

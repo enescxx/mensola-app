@@ -1,41 +1,18 @@
+import { GetProfileRequest, GetProfileResponse } from "@/types/user.types";
 import { client } from "../api/client";
-
-import { ApiResponse, GetProfileResponse, GetStatDetailsResponse } from "../types";
-
-const STAT_ENDPOINT_MAP: Record<string, string> = {
-    "movie-lists": "/movies/lists",
-    playlists: "/playlists",
-    watchlist: "/movies/watchlist",
-    watched: "/movies/watched",
-    "liked-movies": "/movies/likes",
-    "liked-tracks": "/tracks/likes",
-    "liked-playlists": "/playlists/likes",
-    "liked-movie-lists": "/movies/lists/likes",
-    "liked-albums": "/albums/likes",
-    followers: "/users/followers",
-    following: "/users/following",
-    "favorite-movies": "/movies/favorites",
-    "favorites-tracks": "/tracks/favorites",
-};
+import { GetStatDetailsRequest, STAT_ENDPOINT_MAP, StatDetailsResponse, StatType } from "@/types/stat.types";
 
 const ProfileService = {
-    getMe: async (): Promise<GetProfileResponse> => {
-        return client.get<GetProfileResponse>("/users/me", {
-            auth: true,
-        });
+    getProfile: async (data: GetProfileRequest): Promise<GetProfileResponse> => {
+        return client.get<GetProfileResponse>(`/v1/users/${data.userId}`, { auth: true });
     },
 
-    getProfile: async (profileId: string): Promise<GetProfileResponse> => {
-        return client.get<GetProfileResponse>(`/users/${profileId}`, {
+    getStatDetails: async <T extends StatType>(data: GetStatDetailsRequest<T>): Promise<StatDetailsResponse<T>> => {
+        const { statType, userId, page, limit } = data;
+        return await client.get<StatDetailsResponse<T>>(`/v1${STAT_ENDPOINT_MAP[statType]}`, {
             auth: true,
+            params: { userId, page, limit },
         });
-    },
-
-    getStatDetails: async (statType: string, userId?: string, page?: number, limit?: number): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(
-            `${STAT_ENDPOINT_MAP[statType]}?${userId && "userId=" + userId}&${page && "page=" + page}&${limit && "limit=" + limit}`,
-            { auth: true },
-        );
     },
 };
 

@@ -1,18 +1,14 @@
+import { FollowActionResponse, FollowActionResponseData } from "@/types/user.types";
 import { client } from "../api/client";
-
-import { FollowActionsResponse } from "../types";
+import { UserId } from "@/types/common.types";
 
 const UserService = {
-    follow: async (targetUserId: string): Promise<FollowActionsResponse> => {
-        client.post(`/users/${targetUserId}/follow`, {}, { auth: true });
-
-        return { userId: targetUserId, isFollowing: true };
+    follow: async (targetUserId: UserId): Promise<FollowActionResponse> => {
+        return await client.post<FollowActionResponse>(`/v1/users/${targetUserId}/follow`, {}, { auth: true });
     },
 
-    unfollow: async (targetUserId: string): Promise<FollowActionsResponse> => {
-        client.delete(`/users/${targetUserId}/follow`, { auth: true });
-
-        return { userId: targetUserId, isFollowing: false };
+    unfollow: async (targetUserId: UserId): Promise<FollowActionResponse> => {
+        return await client.delete(`/v1/users/${targetUserId}/follow`, { auth: true });
     },
 };
 

@@ -1,34 +1,23 @@
+import { TrackId } from "@/types/common.types";
 import { client } from "../api/client";
-import { ApiResponse } from "../types";
+import { UpsertInteractionRequest, UpsertInteractionResponse } from "@/types/interaction.types";
+import { TrackDetailsResponse, TrackLikeActionsResponse } from "@/types/track.types";
 
 const TrackService = {
-    getTrackDetails: async (trackId: string): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/tracks/${trackId}`, {
-            auth: true,
-        });
+    getTrackDetails: async (trackId: TrackId): Promise<TrackDetailsResponse> => {
+        return client.get<TrackDetailsResponse>(`/v1/tracks/${trackId}`, { auth: true });
     },
 
-    likeTrack: async (trackId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(
-            `/tracks/${trackId}/like`,
-            {},
-            {
-                auth: true,
-            },
-        );
+    likeTrack: async (trackId: TrackId): Promise<TrackLikeActionsResponse> => {
+        return client.post<TrackLikeActionsResponse>(`/v1/tracks/${trackId}/like`, {}, { auth: true });
     },
 
-    unlikeTrack: async (trackId: string): Promise<ApiResponse> => {
-        return client.delete<ApiResponse>(`/tracks/${trackId}/like`, {
-            auth: true,
-        });
+    unlikeTrack: async (trackId: TrackId): Promise<TrackLikeActionsResponse> => {
+        return client.delete<TrackLikeActionsResponse>(`/v1/tracks/${trackId}/like`, { auth: true });
     },
 
-    createOrUpdateInteraction: async (
-        trackId: string,
-        data: { rating?: number; comment?: string; isLiked?: boolean },
-    ): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/tracks/${trackId}/interactions`, data, {
+    createOrUpdateInteraction: async (data: UpsertInteractionRequest): Promise<UpsertInteractionResponse> => {
+        return client.post<UpsertInteractionResponse>(`/v1/tracks/${data.targetId}/interactions`, data.interaction, {
             auth: true,
         });
     },

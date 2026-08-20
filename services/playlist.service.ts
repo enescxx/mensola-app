@@ -1,67 +1,68 @@
+import {
+    InteractionsRequest,
+    InteractionsResponse,
+    UpsertInteractionRequest,
+    UpsertInteractionResponse,
+} from "@/types/interaction.types";
 import { client } from "../api/client";
-import { ApiResponse } from "../types";
+import { PlaylistId, TrackId } from "@/types/common.types";
+import {
+    AddToPlaylistResponse,
+    GetPlaylistsRequest,
+    GetPlaylistsResponse,
+    PlaylistDetailsResponse,
+    PlaylistItemsRequest,
+    PlaylistItemsResponse,
+    PlaylistLikeActionsResponse,
+} from "@/types/playlist.types";
+import { ApiResponse } from "@/types/api";
 
 const PlaylistService = {
-    getPlaylistDetails: async (playlistId: string): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/playlists/${playlistId}`, {
+    getPlaylistDetails: async (playlistId: PlaylistId): Promise<PlaylistDetailsResponse> => {
+        return client.get<PlaylistDetailsResponse>(`/v1/playlists/${playlistId}`, { auth: true });
+    },
+
+    getPlaylistItems: async (data: PlaylistItemsRequest): Promise<PlaylistItemsResponse> => {
+        const { playlistId, page, limit } = data;
+        return client.get<PlaylistItemsResponse>(`/v1/playlists/${playlistId}/items`, {
+            auth: true,
+            params: { page, limit },
+        });
+    },
+
+    getPlaylistInteractions: async (data: InteractionsRequest): Promise<InteractionsResponse> => {
+        const { targetId, page, limit } = data;
+        return client.get<InteractionsResponse>(`/v1/playlists/${targetId}/interactions`, {
+            auth: true,
+            params: { page, limit },
+        });
+    },
+
+    likePlaylist: async (playlistId: PlaylistId): Promise<PlaylistLikeActionsResponse> => {
+        return client.post<PlaylistLikeActionsResponse>(`/v1/playlists/${playlistId}/like`, {}, { auth: true });
+    },
+
+    unlikePlaylist: async (playlistId: PlaylistId): Promise<PlaylistLikeActionsResponse> => {
+        return client.delete<PlaylistLikeActionsResponse>(`/v1/playlists/${playlistId}/like`, { auth: true });
+    },
+
+    createOrUpdateInteraction: async (data: UpsertInteractionRequest): Promise<UpsertInteractionResponse> => {
+        return client.post<UpsertInteractionResponse>(`/v1/playlists/${data.targetId}/interactions`, data.interaction, {
             auth: true,
         });
     },
 
-    getPlaylistItems: async (playlistId: string, page = 1, limit = 30): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/playlists/${playlistId}/items?page=${page}&limit=${limit}`, {
-            auth: true,
-        });
+    getUserPlaylists: async (data: GetPlaylistsRequest): Promise<GetPlaylistsResponse> => {
+        const { trackId, page, limit } = data;
+        return client.get<GetPlaylistsResponse>(`/v1/playlists`, { auth: true, params: { trackId, page, limit } });
     },
 
-    getPlaylistInteractions: async (playlistId: string, page = 1, limit = 30): Promise<ApiResponse> => {
-        return client.get<ApiResponse>(`/playlists/${playlistId}/interactions?page=${page}&limit=${limit}`, {
-            auth: true,
-        });
+    addTrackToPlaylist: async (playlistId: PlaylistId, trackId: TrackId): Promise<AddToPlaylistResponse> => {
+        return client.post<AddToPlaylistResponse>(`/v1/playlists/${playlistId}/items/${trackId}`, {}, { auth: true });
     },
 
-    likePlaylist: async (playlistId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(
-            `/playlists/${playlistId}/like`,
-            {},
-            {
-                auth: true,
-            },
-        );
-    },
-
-    unlikePlaylist: async (playlistId: string): Promise<ApiResponse> => {
-        return client.delete<ApiResponse>(`/playlists/${playlistId}/like`, {
-            auth: true,
-        });
-    },
-
-    createOrUpdateInteraction: async (
-        playlistId: string,
-        data: { rating?: number; comment?: string; isLiked?: boolean },
-    ): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/playlists/${playlistId}/interactions`, data, {
-            auth: true,
-        });
-    },
-
-    getUserPlaylists: async (trackId?: string): Promise<ApiResponse> => {
-        const url = trackId ? `/playlists?trackId=${trackId}` : "/playlists";
-        return client.get<ApiResponse>(url, {
-            auth: true,
-        });
-    },
-
-    addTrackToPlaylist: async (playlistId: string, trackId: string): Promise<ApiResponse> => {
-        return client.post<ApiResponse>(`/playlists/${playlistId}/items/${trackId}`, {}, {
-            auth: true,
-        });
-    },
-
-    removeTrackFromPlaylist: async (playlistId: string, trackId: string): Promise<ApiResponse> => {
-        return client.delete<ApiResponse>(`/playlists/${playlistId}/items/${trackId}`, {
-            auth: true,
-        });
+    removeTrackFromPlaylist: async (playlistId: PlaylistId, trackId: TrackId): Promise<ApiResponse> => {
+        return client.delete<ApiResponse>(`/v1/playlists/${playlistId}/items/${trackId}`, { auth: true });
     },
 };
 
