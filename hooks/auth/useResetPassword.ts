@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { AuthService } from "../../services/auth.service";
+import { isApiError } from "@/utils/api.utils";
 
 const useResetPassword = () => {
     const router = useRouter();
@@ -23,36 +24,22 @@ const useResetPassword = () => {
         setError("");
 
         try {
-            const response = await AuthService.resetPassword({
-                newPassword,
-                ticket
-            });
+            await AuthService.resetPassword({ newPassword, ticket });
 
             router.replace("/(auth)/login");
         } catch (error) {
-            if (error && error.success === false) {
+            if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;
-                setError(
-                    apiErrorMessage ||
-                        "Doğrulama yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
-                );
+                setError(apiErrorMessage || "Doğrulama yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
             } else {
-                setError(
-                    "Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz."
-                );
+                setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
         } finally {
             setIsLoading(false);
         }
     };
 
-    return {
-        newPassword,
-        setNewPassword,
-        isLoading,
-        error,
-        handleResetPassword
-    };
+    return { newPassword, setNewPassword, isLoading, error, handleResetPassword };
 };
 
 export { useResetPassword };

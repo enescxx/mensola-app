@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 
 import { AuthService } from "../../services/auth.service";
+import { isApiError } from "@/utils/api.utils";
 
 const useForgotPassword = () => {
     const router = useRouter();
@@ -22,36 +23,25 @@ const useForgotPassword = () => {
         setError("");
 
         try {
-            const response = await AuthService.forgotPassword(email);
+            await AuthService.forgotPassword({ email });
 
             router.replace({
                 pathname: "/(auth)/verify-reset-token",
-                params: { email }
+                params: { email },
             });
         } catch (error) {
-            if (error && error.success === false) {
+            if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;
-                setError(
-                    apiErrorMessage ||
-                        "E-posta gönderilirken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
-                );
+                setError(apiErrorMessage || "E-posta gönderilirken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
             } else {
-                setError(
-                    "Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz."
-                );
+                setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
         } finally {
             setIsLoading(false);
         }
     };
 
-    return {
-        email,
-        setEmail,
-        isLoading,
-        error,
-        handleForgotPassword
-    };
+    return { email, setEmail, isLoading, error, handleForgotPassword };
 };
 
 export { useForgotPassword };

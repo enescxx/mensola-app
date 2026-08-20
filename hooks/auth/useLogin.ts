@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { useGlobalUser } from "../../context/AuthContext";
-import { AuthService } from "../../services/auth.service";
+import { useGlobalUser } from "@/context/AuthContext";
+import { AuthService } from "@/services/auth.service";
+import { isApiError } from "@/utils/api.utils";
 
 const useLogin = () => {
     const { setUser } = useGlobalUser();
@@ -33,20 +34,27 @@ const useLogin = () => {
         try {
             const response = await AuthService.login({ email, password });
 
-            const user = response.data.user;
+            if (!response.data?.accessToken || !response.data?.refreshToken || !response.data?.user) {
+                throw new Error("Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
+            }
+
+            const { user, accessToken, refreshToken } = response.data;
+
             setUser(user);
 
-            const accessToken = response.data.accessToken;
-            const refreshToken = response.data.refreshToken;
-
-            await AsyncStorage.setItem("token", accessToken);
-            await AsyncStorage.setItem("refreshToken", refreshToken);
+            await AsyncStorage.multiSet([
+                ["token", accessToken],
+                ["refreshToken", refreshToken],
+            ]);
 
             router.replace("/(tabs)/home");
         } catch (error) {
-            if (error && error.success === false) {
+            console.log(error);
+            if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;
                 setError(apiErrorMessage || "Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
+            } else if (error instanceof Error) {
+                setError(error.message);
             } else {
                 setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
@@ -55,15 +63,7 @@ const useLogin = () => {
         }
     };
 
-    return {
-        email,
-        setEmail,
-        password,
-        setPassword,
-        isLoading,
-        error,
-        handleLogin,
-    };
+    return { email, setEmail, password, setPassword, isLoading, error, handleLogin };
 };
 
 export { useLogin };

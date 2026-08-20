@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { AuthService } from "../../services/auth.service";
+import { isApiError } from "@/utils/api.utils";
 
-const useVerifyResetToken = () => {
+const useVerifyResetCode = () => {
     const router = useRouter();
 
     const { email } = useLocalSearchParams<{ email: string }>();
@@ -23,41 +24,32 @@ const useVerifyResetToken = () => {
         setError("");
 
         try {
-            const response = await AuthService.verifyResetToken({
-                email,
-                code
-            });
+            const response = await AuthService.verifyResetCode({ email, code });
+            if (!response.data?.ticket) {
+                throw new Error("Kod doğrulanırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
+            }
 
             const ticket = response.data.ticket;
 
             router.replace({
                 pathname: "/(auth)/reset-password",
-                params: { ticket }
+                params: { ticket },
             });
         } catch (error) {
-            if (error && error.success === false) {
+            if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;
-                setError(
-                    apiErrorMessage ||
-                        "Doğrulama yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz."
-                );
+                setError(apiErrorMessage || "Doğrulama yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
+            } else if (error instanceof Error) {
+                setError(error.message);
             } else {
-                setError(
-                    "Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz."
-                );
+                setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyiniz.");
             }
         } finally {
             setIsLoading(false);
         }
     };
 
-    return {
-        code,
-        setCode,
-        isLoading,
-        error,
-        handleVerifyToken
-    };
+    return { code, setCode, isLoading, error, handleVerifyToken };
 };
 
-export { useVerifyResetToken };
+export { useVerifyResetCode };

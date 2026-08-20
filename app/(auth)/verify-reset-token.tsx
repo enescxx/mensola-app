@@ -1,22 +1,14 @@
 import React, { useEffect } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    KeyboardAvoidingView,
-    Platform,
-    Alert
-} from "react-native";
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
-import { useVerifyResetToken } from "../../hooks/auth/useVerifyResetToken";
+import { useVerifyResetCode } from "../../hooks/auth/useVerifyResetCode";
 
 export default function VerifyResetTokenScreen() {
-    const { code, setCode, isLoading, error, handleVerifyToken } =
-        useVerifyResetToken();
+    const { code, setCode, isLoading, error, handleVerifyToken } = useVerifyResetCode();
 
     useEffect(() => {
         if (isLoading) return;
@@ -25,21 +17,13 @@ export default function VerifyResetTokenScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={styles.innerContainer}
-            >
+            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.innerContainer}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.logoText}>mensola</Text>
                 </View>
 
                 <View style={styles.formContainer}>
-                    <TextField
-                        label="Doğrulama Kodu"
-                        type="number"
-                        value={code}
-                        onChangeText={setCode}
-                    />
+                    <TextField label="Doğrulama Kodu" type="number" value={code} onChangeText={setCode} />
                     <Button label="Kodu Doğrula" onPress={handleVerifyToken} />
                 </View>
             </KeyboardAvoidingView>
@@ -52,14 +36,14 @@ const styles = StyleSheet.create({
     innerContainer: {
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: 24
+        paddingHorizontal: 24,
     },
     headerContainer: { alignItems: "center", marginBottom: 48 },
     logoText: {
         fontSize: 42,
         fontWeight: "bold",
         color: "#ffffff",
-        letterSpacing: 1.5
+        letterSpacing: 1.5,
     },
-    formContainer: { marginBottom: 24 }
+    formContainer: { marginBottom: 24 },
 });
