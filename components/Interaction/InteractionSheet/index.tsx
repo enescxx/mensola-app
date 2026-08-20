@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-    ActivityIndicator,
-    Image,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import BottomSheet from "@/components/BottomSheet";
@@ -69,23 +62,26 @@ export default function InteractionSheet({
         }
     };
 
-    const displayType = mediaTypeTitle || (targetType === "movie" ? "Film" : targetType === "track" ? "Şarkı" : targetType === "playlist" ? "Çalma Listesi" : targetType === "album" ? "Albüm" : "İçerik");
+    const displayType =
+        mediaTypeTitle ||
+        (targetType === "movie"
+            ? "Film"
+            : targetType === "track"
+              ? "Şarkı"
+              : targetType === "playlist"
+                ? "Çalma Listesi"
+                : targetType === "album"
+                  ? "Albüm"
+                  : "İçerik");
     const isPortraitMedia = targetType === "movie" || targetType === "movieList";
     const posterStyle = isPortraitMedia ? styles.poster2x3 : styles.posterSquare;
 
     return (
-        <BottomSheet
-            isVisible={isVisible}
-            onClose={onClose}
-            title="Değerlendir & Yorum Yap"
-            showCloseButton
-        >
+        <BottomSheet isVisible={isVisible} onClose={onClose} title="Değerlendir & Yorum Yap" showCloseButton>
             <View style={styles.container}>
                 {/* Media Header */}
                 <View style={styles.headerRow}>
-                    {mediaPoster ? (
-                        <Image source={{ uri: mediaPoster }} style={posterStyle} />
-                    ) : null}
+                    {mediaPoster ? <Image source={{ uri: mediaPoster.toString() }} style={posterStyle} /> : null}
                     <View style={styles.headerInfo}>
                         <Text style={styles.mediaTitle} numberOfLines={1}>
                             {mediaTitle}
@@ -100,9 +96,7 @@ export default function InteractionSheet({
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
                         <Text style={styles.sectionTitle}>Puanınız</Text>
-                        <Text style={styles.ratingValue}>
-                            {rating > 0 ? `${rating} / 10` : "Puan Seçilmedi"}
-                        </Text>
+                        <Text style={styles.ratingValue}>{rating > 0 ? `${rating} / 10` : "Puan Seçilmedi"}</Text>
                     </View>
                     <View style={styles.starsContainer}>
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((starIndex) => (
@@ -110,8 +104,7 @@ export default function InteractionSheet({
                                 key={starIndex}
                                 style={styles.starButton}
                                 onPress={() => handleStarPress(starIndex)}
-                                activeOpacity={0.7}
-                            >
+                                activeOpacity={0.7}>
                                 <Ionicons
                                     name={starIndex <= rating ? "star" : "star-outline"}
                                     size={24}
@@ -123,11 +116,7 @@ export default function InteractionSheet({
                 </View>
 
                 {/* Like Toggle Section */}
-                <TouchableOpacity
-                    style={styles.likeRow}
-                    onPress={handleToggleLike}
-                    activeOpacity={0.8}
-                >
+                <TouchableOpacity style={styles.likeRow} onPress={handleToggleLike} activeOpacity={0.8}>
                     <View style={styles.likeLeft}>
                         <Ionicons
                             name={isLiked ? "heart" : "heart-outline"}
@@ -159,14 +148,10 @@ export default function InteractionSheet({
 
                 {/* Submit Button */}
                 <TouchableOpacity
-                    style={[
-                        styles.submitButton,
-                        (isLoading || isSubmitting) && styles.submitButtonDisabled,
-                    ]}
+                    style={[styles.submitButton, (isLoading || isSubmitting) && styles.submitButtonDisabled]}
                     onPress={handleSubmit}
                     disabled={isLoading || isSubmitting}
-                    activeOpacity={0.8}
-                >
+                    activeOpacity={0.8}>
                     {isLoading || isSubmitting ? (
                         <ActivityIndicator color="#FFFFFF" />
                     ) : (

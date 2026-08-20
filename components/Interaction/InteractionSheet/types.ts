@@ -1,14 +1,16 @@
+import { InteractionTargetId, InteractionTargetTypes, UpsertInteractionSummary } from "@/types/interaction.types";
+
 export interface IInteractionSheetProps {
     isVisible: boolean;
     onClose: () => void;
-    targetType: "movie" | "track" | "playlist" | "album" | "movieList";
-    targetId: string;
+    targetType: InteractionTargetTypes;
+    targetId: InteractionTargetId;
     mediaTitle: string;
     mediaTypeTitle?: string;
-    mediaPoster?: string;
+    mediaPoster?: URL | string;
     initialRating?: number;
     initialComment?: string;
     initialIsLiked?: boolean;
-    onSubmit?: (data: { rating: number; comment: string; isLiked: boolean }) => Promise<void> | void;
+    onSubmit?: (data: UpsertInteractionSummary) => Promise<void> | void;
     isLoading?: boolean;
 }

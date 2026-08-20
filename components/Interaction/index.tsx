@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 export default function InteractionView({ data }: IInteractionViewProps) {
-    const { user, comment, likeCount, replyCount, ...interaction } = data;
+    const { user, comment, likesCount, replyCount, ...interaction } = data;
     const router = useRouter();
 
     const formatDate = (date: Date | string): string => {
@@ -50,7 +50,7 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.userInfoContainer} onPress={handleUserPress} activeOpacity={0.8}>
                         <View style={styles.avatarWrapper}>
-                            <Image style={styles.avatarImg} source={{ uri: user.avatar }} />
+                            <Image style={styles.avatarImg} source={{ uri: user.avatar?.toString() }} />
                         </View>
                         <View style={styles.nameWrapper}>
                             <Text style={styles.fullname}>{user.fullname || user.username}</Text>
@@ -59,7 +59,7 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                     </TouchableOpacity>
 
                     <View style={styles.interactionInfo}>
-                        <Text style={styles.date}>{formatDate(comment.date)}</Text>
+                        <Text style={styles.date}>{comment.date && formatDate(comment.date)}</Text>
                         <View style={styles.badges}>
                             {hasRating ? (
                                 <Badge
@@ -85,7 +85,7 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                 <View style={styles.actionButtons}>
                     <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleLikePress}>
                         <Ionicons name="heart-outline" size={14} color="#ff8a3d" />
-                        <Text style={styles.actionButtonText}>{likeCount}</Text>
+                        <Text style={styles.actionButtonText}>{likesCount}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleReplyPress}>
                         <Ionicons name="chatbubble-outline" size={14} color="#ff8a3d" />
