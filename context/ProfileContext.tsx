@@ -58,7 +58,18 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         router.push(fullPath as Href);
     };
 
-    const { id, username, fullname, bio, avatar, favoriteMovies, favoriteTracks, ...stats } = profile;
+    const {
+        id,
+        username,
+        fullname,
+        bio,
+        avatar,
+        favoriteMovies,
+        favoriteTracks,
+        mutualFollowers,
+        isFollowingByMe,
+        ...stats
+    } = profile;
 
     const activeHeaderStats = ["watchedMoviesCount", "followersCount", "followingCount"] as const;
 
