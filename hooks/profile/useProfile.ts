@@ -20,7 +20,6 @@ const useProfile = (userId: UserId | "me") => {
 
             if (!response.data?.profile) throw new Error("Bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
             setProfile(response.data.profile);
-            console.log(response.data.profile);
         } catch (error) {
             if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;
