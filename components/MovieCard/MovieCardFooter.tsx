@@ -5,10 +5,7 @@ import Badge from "@/components/Badge";
 import { styles } from "./styles";
 import { IMovieCardFooterProps } from "./types";
 
-export default function MovieCardFooter({
-    interactions,
-    variant = "profile",
-}: IMovieCardFooterProps) {
+export default function MovieCardFooter({ interactions, variant = "profile" }: IMovieCardFooterProps) {
     const isProfile = variant === "profile";
 
     return (
@@ -24,10 +21,7 @@ export default function MovieCardFooter({
 
             {isProfile ? (
                 interactions.isLiked ? (
-                    <Badge
-                        icon={<Ionicons name="heart" size={10} color="#FF8000" />}
-                        style={styles.badgeItem}
-                    />
+                    <Badge icon={<Ionicons name="heart" size={10} color="#FF8000" />} style={styles.badgeItem} />
                 ) : null
             ) : interactions.totalLikes && interactions.totalLikes > 0 ? (
                 <Badge
@@ -40,10 +34,7 @@ export default function MovieCardFooter({
 
             {isProfile ? (
                 interactions.hasReview ? (
-                    <Badge
-                        icon={<Entypo name="text" size={10} color="#FF8000" />}
-                        style={styles.badgeItem}
-                    />
+                    <Badge icon={<Entypo name="text" size={10} color="#FF8000" />} style={styles.badgeItem} />
                 ) : null
             ) : interactions.totalReviews && interactions.totalReviews > 0 ? (
                 <Badge

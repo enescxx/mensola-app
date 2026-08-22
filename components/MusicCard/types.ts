@@ -4,10 +4,10 @@ import { ITrack } from "@/types/track.types";
 import { StyleProp, ViewStyle } from "react-native";
 
 type IMusicCardProps<
-    TTrack extends ITrack = ITrack,
-    TAlbum extends IAlbum = IAlbum,
-    TPlaylist extends IPlaylist = IPlaylist,
-> =
+    TTrack extends Omit<ITrack, "id"> = Omit<ITrack, "id">,
+    TAlbum extends Omit<IAlbum, "id"> = Omit<IAlbum, "id">,
+    TPlaylist extends Omit<IPlaylist, "id"> = Omit<IPlaylist, "id">,
+> = { layout?: "horizontal" | "vertical" } & (
     | {
           type: "track";
           data: TTrack;
@@ -26,6 +26,7 @@ type IMusicCardProps<
           onPress?: () => void;
           style?: StyleProp<ViewStyle>;
           hideCreator?: boolean;
-      };
+      }
+);
 
 export { IMusicCardProps };

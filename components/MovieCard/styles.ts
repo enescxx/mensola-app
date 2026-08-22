@@ -1,21 +1,13 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    movieCard: {
-        width: 120,
-    },
-    posterContainer: {
-        position: "relative",
-        width: "100%",
-        aspectRatio: 2 / 3,
-        borderRadius: 12,
-        overflow: "hidden",
-        backgroundColor: "#1e1e1e",
-    },
-    poster: {
-        width: "100%",
-        height: "100%",
-    },
+    horizontalContainer: { height: 105, flexDirection: "row", gap: 12, alignItems: "center" },
+    verticalContainer: { width: 120 },
+    posterContainer: { aspectRatio: 2 / 3, borderRadius: 12, overflow: "hidden", backgroundColor: "#1e1e1e" },
+    infoWrapper: { flex: 1, justifyContent: "center" },
+    horizontalPosterContainer: { height: 105 },
+    verticalPosterContainer: { width: "100%" },
+    poster: { width: "100%", height: "100%" },
     badgeContainer: {
         position: "absolute",
         bottom: 6,
@@ -31,21 +23,14 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "rgba(255, 128, 0, 0.15)",
+        backgroundColor: "rgba(0, 0, 0, 0.75)",
+        borderWidth: 1,
+        borderColor: "rgba(255, 128, 0, 0.5)",
         paddingHorizontal: 5,
         borderRadius: 5,
     },
-    badgeText: {
-        fontSize: 11,
-        fontWeight: "bold",
-        marginLeft: 3,
-        includeFontPadding: false,
-    },
-    title: {
-        color: "#FFFFFF",
-        fontSize: 12,
-        fontWeight: "600",
-        marginTop: 6,
-        lineHeight: 16,
-    },
+    badgeText: { fontSize: 11, fontWeight: "bold", marginLeft: 3, includeFontPadding: false },
+    title: { color: "#FFFFFF", fontSize: 12, fontWeight: "600", marginTop: 6, lineHeight: 16 },
+    horizontalTitle: { fontSize: 14, marginBottom: 4 },
+    genres: { fontSize: 12, color: "#a0a0a0", marginBottom: 4 },
 });

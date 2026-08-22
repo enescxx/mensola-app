@@ -7,12 +7,14 @@ import { IAlbum } from "@/types/album.types";
 import { IPlaylist } from "@/types/playlist.types";
 
 export default function MusicCard<
-    TTrack extends ITrack = ITrack,
-    TAlbum extends IAlbum = IAlbum,
-    TPlaylist extends IPlaylist = IPlaylist,
->(props: IMusicCardProps<TTrack, TAlbum, TPlaylist>) {
+    TTrack extends Omit<ITrack, "id"> = Omit<ITrack, "id">,
+    TAlbum extends Omit<IAlbum, "id"> = Omit<IAlbum, "id">,
+    TPlaylist extends Omit<IPlaylist, "id"> = Omit<IPlaylist, "id">,
+>({ layout = "vertical", ...props }: IMusicCardProps<TTrack, TAlbum, TPlaylist>) {
     const { type, data, onPress, style } = props;
-    function formatSecondsToMinutes(totalSeconds: number) {
+    const isHorizontal = layout === "horizontal";
+    function formatDuration(ms: number) {
+        const totalSeconds = Math.floor(ms / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const remainingSeconds = totalSeconds % 60;
 
@@ -23,13 +25,16 @@ export default function MusicCard<
     }
 
     let subtitle: string | null;
+    let albumTitle: string | null = null;
     let secondaryInfo: string | null;
 
     switch (type) {
         case "track": {
             const songData = data as Extract<IMusicCardProps, { type: "track" }>["data"];
             subtitle = songData.artists?.map((artist) => artist.name).join(", ") ?? null;
-            secondaryInfo = songData.duration ? `${formatSecondsToMinutes(songData.duration)}` : null;
+            albumTitle = isHorizontal && songData.album?.title ? songData.album.title : null;
+            //subtitle = [subtitle, albumTitle].filter(Boolean).join(" • ");
+            secondaryInfo = songData.duration ? `${formatDuration(songData.duration)}` : null;
             break;
         }
         case "album": {
@@ -52,16 +57,30 @@ export default function MusicCard<
     const fullSubtitle = [subtitle, secondaryInfo].filter(Boolean).join(" • ");
 
     return (
-        <TouchableOpacity style={[styles.card, style]} onPress={onPress} activeOpacity={0.7}>
-            <View style={styles.imageWrapper}>
+        <TouchableOpacity
+            style={[isHorizontal ? styles.horizontalCard : styles.verticalCard, style]}
+            onPress={onPress}
+            activeOpacity={0.7}>
+            <View
+                style={[
+                    styles.imageWrapper,
+                    isHorizontal ? styles.horizontalImageWrapper : styles.verticalImageWrapper,
+                ]}>
                 <Image source={{ uri: image?.toString() }} style={styles.fullImage} />
             </View>
-            <Text style={styles.mainTitle} numberOfLines={1}>
-                {title}
-            </Text>
-            <Text style={styles.subTitle} numberOfLines={1}>
-                {fullSubtitle}
-            </Text>
+            <View style={styles.infoWrapper}>
+                <Text style={styles.mainTitle} numberOfLines={1}>
+                    {title}
+                </Text>
+                {albumTitle && isHorizontal && type === "track" && (
+                    <Text style={styles.albumTitle} numberOfLines={1}>
+                        {albumTitle}
+                    </Text>
+                )}
+                <Text style={styles.subTitle} numberOfLines={1}>
+                    {fullSubtitle}
+                </Text>
+            </View>
         </TouchableOpacity>
     );
 }

@@ -11,6 +11,7 @@ export interface IMovieCardInteractions {
 export interface IMovieCardFooterProps {
     interactions: IMovieCardInteractions;
     variant: "profile" | "feed";
+    layout?: "horizontal" | "vertical";
 }
 
 export interface IMovieCardProps {
@@ -18,6 +19,10 @@ export interface IMovieCardProps {
     poster: string;
     interactions?: IMovieCardInteractions;
     variant?: "profile" | "feed";
+    layout?: "horizontal" | "vertical";
     style?: StyleProp<ViewStyle>;
     onPress?: () => void;
+    releaseDate?: string;
+    genres?: string[];
+    ratingAverage?: number;
 }

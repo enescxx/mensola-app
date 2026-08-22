@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatListProps } from "react-native";
+import { FlatListProps, StyleProp, ViewStyle } from "react-native";
 
 export interface IDynamicListProps<T> extends Partial<FlatListProps<T>> {
     title?: string;
@@ -8,4 +8,5 @@ export interface IDynamicListProps<T> extends Partial<FlatListProps<T>> {
     onSeeAllPress?: () => void;
     variant?: "horizontal" | "vertical";
     ItemSeparatorComponent?: React.ComponentType<any> | null;
+    style?: StyleProp<ViewStyle>;
 }

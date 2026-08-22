@@ -7,21 +7,17 @@ const typePresets: Record<TextFieldType, Partial<ITextFieldProps>> = {
     text: {},
     email: { keyboardType: "email-address" },
     password: { secureTextEntry: true },
-    number: { keyboardType: "number-pad" }
+    number: { keyboardType: "number-pad" },
 };
 
-export default function TextField({
-    label,
-    type = "text",
-    ...rest
-}: ITextFieldProps) {
+export default function TextField({ label, type = "text", style, ...rest }: ITextFieldProps) {
     const presetProps = typePresets[type];
 
     return (
         <>
             {label && <Text style={styles.label}>{label}</Text>}
             <TextInput
-                style={styles.textField}
+                style={[styles.textField, style]}
                 placeholderTextColor="#8c8c8c"
                 autoCapitalize="none"
                 autoCorrect={false}

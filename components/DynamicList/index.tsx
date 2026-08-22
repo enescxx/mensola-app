@@ -10,6 +10,7 @@ export default function DynamicList<T>({
     onSeeAllPress,
     variant = "horizontal",
     ItemSeparatorComponent,
+    style,
     ...restProps
 }: IDynamicListProps<T>) {
     const isHorizontal = variant === "horizontal";
@@ -36,7 +37,7 @@ export default function DynamicList<T>({
                 horizontal={isHorizontal}
                 showsHorizontalScrollIndicator={false}
                 ItemSeparatorComponent={ItemSeparatorComponent || renderDefaultSeparator}
-                contentContainerStyle={isHorizontal ? styles.horizontalContent : styles.verticalContent}
+                contentContainerStyle={[isHorizontal ? styles.horizontalContent : styles.verticalContent, style]}
                 {...restProps}
             />
         </View>
