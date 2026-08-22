@@ -10,6 +10,7 @@ export type BookmarkId = Brand<string, "BookmarkId">;
 export type MovieId = Brand<string, "MovieId">;
 export type MovieListId = Brand<string, "MovieListId">;
 export type WatchedMovieId = Brand<string, "WatchedMovieId">;
+export type TmdbId = Brand<number, "TmdbId">;
 
 export type TrackId = Brand<string, "TrackId">;
 export type PlaylistId = Brand<string, "PlaylistId">;

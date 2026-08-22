@@ -7,7 +7,7 @@ export interface IMovie {
     id: MovieId;
     title: string;
     poster: string;
-    releaseDate?: Date | string;
+    releaseDate?: string;
     ratingAverage?: number;
     genres?: string[];
     duration?: number;

@@ -1,3 +1,4 @@
+import { IAlbum } from "./album.types";
 import { ApiResponse } from "./api";
 import { IArtist } from "./artist.types";
 import { AlbumId, PaginationResponse, SpotifyTrackId, TrackId } from "./common.types";
@@ -10,6 +11,7 @@ export interface ITrack {
     image?: URL | string;
     duration: number;
     albumId?: AlbumId;
+    album?: Omit<IAlbum, "id"> | IAlbum;
     artists?: IArtist[];
 }
 export type TrackDetails = ITrack & {
