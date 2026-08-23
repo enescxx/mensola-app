@@ -6,6 +6,7 @@ import { SpotifyTrackItem } from "@/types/spotify.types";
 import MovieCard from "../MovieCard";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { SearchResultListProps } from "./types";
+import { useRouter } from "expo-router";
 
 export default function SearchResultList({
     activeTab,
@@ -19,6 +20,7 @@ export default function SearchResultList({
     error,
     addSearch,
 }: SearchResultListProps) {
+    const router = useRouter();
     const renderSearchResults = ({ item }: { item: any }) => {
         switch (activeTab) {
             case "movie":
@@ -31,7 +33,10 @@ export default function SearchResultList({
                         poster={movie.poster}
                         releaseDate={movie.releaseDate}
                         genres={movie.genres}
-                        onPress={() => addSearch({ type: "movie", data: movie })}
+                        onPress={() => {
+                            addSearch({ type: "movie", data: movie });
+                            router.push(`/movies/${item.tmdbId}?type=tmdb`);
+                        }}
                     />
                 );
             case "track":
@@ -41,7 +46,10 @@ export default function SearchResultList({
                         layout="horizontal"
                         type="track"
                         data={track}
-                        onPress={() => addSearch({ type: "track", data: track })}
+                        onPress={() => {
+                            addSearch({ type: "track", data: track });
+                            router.push(`/tracks/${item.spotifyId}?type=spotify`);
+                        }}
                     />
                 );
         }

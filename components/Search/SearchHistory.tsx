@@ -7,8 +7,10 @@ import MusicCard from "../MusicCard";
 import { SpotifyTrackItem } from "@/types/spotify.types";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./styles";
+import { useRouter } from "expo-router";
 
 export default function SearchHistory({ history, addSearch, removeSearch, clearHistory }: SearchHistoryProps) {
+    const router = useRouter();
     const renderItem = ({ item }: { item: SearchHistoryItem }) => {
         const itemView = () => {
             switch (item.type) {
@@ -22,7 +24,10 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
                             poster={movie.poster}
                             releaseDate={movie.releaseDate}
                             genres={movie.genres}
-                            onPress={() => addSearch({ type: "movie", data: movie })}
+                            onPress={() => {
+                                addSearch({ type: "movie", data: movie });
+                                router.push(`/movies/${item.data.tmdbId}?type=tmdb`);
+                            }}
                         />
                     );
                 }
@@ -33,7 +38,10 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
                             layout="horizontal"
                             type="track"
                             data={track}
-                            onPress={() => addSearch({ type: "track", data: track })}
+                            onPress={() => {
+                                addSearch({ type: "track", data: track });
+                                router.push(`/tracks/${item.data.spotifyId}?type=spotify`);
+                            }}
                         />
                     );
                 }
