@@ -29,6 +29,7 @@ export default function PlaylistDetailPage() {
         <>
             <Stack.Screen
                 options={{
+                    headerTransparent: true,
                     title: playlistDetails?.title || "Playlist",
                 }}
             />

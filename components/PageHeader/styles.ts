@@ -1,7 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    container: { backgroundColor: "#121212", paddingHorizontal: 12 },
+    container: {
+        backgroundColor: "#121212",
+        paddingHorizontal: 12,
+    },
     content: {
         flexDirection: "row",
         alignItems: "center",
@@ -16,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderWidth: 1,
         borderColor: "#333333",
-        backgroundColor: "#1e1e1e",
+        backgroundColor: "rgba(30, 30, 30, 0.8)",
     },
     headerButton: {
         height: 48,
@@ -24,8 +27,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    titleContainer: { flex: 1 },
-    titleText: { color: "#fff", fontSize: 16 },
+    titleContainer: {
+        flex: 1,
+        height: 48,
+        borderRadius: 24,
+        paddingHorizontal: 24,
+        justifyContent: "center",
+        borderWidth: 1,
+        borderColor: "#333333",
+        backgroundColor: "rgba(30, 30, 30, 0.8)",
+    },
+    titleText: { color: "#8c8c8c", fontSize: 16 },
 });
 
 export { styles };

@@ -13,8 +13,23 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
 
     const actions = (options as any).headerRightActions as IHeaderAction[] | undefined;
 
+    const isTransparent = options.headerTransparent === true;
+
     return (
-        <View style={[styles.container, { paddingTop: insets.top }]}>
+        <View
+            style={[
+                styles.container,
+                { paddingTop: insets.top },
+                isTransparent && {
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 100,
+                    elevation: 100,
+                    backgroundColor: "transparent",
+                },
+            ]}>
             <View style={styles.content}>
                 <View style={styles.buttonContainer}>
                     {back && (
@@ -29,11 +44,14 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
                         </View>
                     )}
                 </View>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.titleText} numberOfLines={1}>
-                        {title}
-                    </Text>
-                </View>
+                {title && (
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.titleText} numberOfLines={1}>
+                            {title}
+                        </Text>
+                    </View>
+                )}
+
                 {actions && actions.length > 0 ? (
                     <View style={styles.buttonContainer}>
                         {actions.map((action) => (

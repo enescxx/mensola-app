@@ -6,11 +6,11 @@ export default function TracksLayout() {
         <Stack
             screenOptions={{
                 headerShown: true,
+                headerTransparent: true,
                 header: (props) => <PageHeader {...props} />,
                 contentStyle: { backgroundColor: "#121212" },
                 animation: "slide_from_right",
-            }}
-        >
+            }}>
             <Stack.Screen name="[trackId]" options={{ title: "Şarkı" }} />
         </Stack>
     );
