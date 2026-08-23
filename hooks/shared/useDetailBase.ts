@@ -50,7 +50,8 @@ export const useDetailBase = <T extends object, ID>({
     }, [fetchData]);
 
     const toggleLike = useCallback(async () => {
-        if (!id || !details || !onLike || !onUnlike || !getLikesCount || !getIsLiked || !updateLike) return;
+        const targetDbId = (details as any).id;
+        if (!targetDbId || !details || !onLike || !onUnlike || !getLikesCount || !getIsLiked || !updateLike) return;
 
         const currentIsLiked = getIsLiked(details);
         const currentCount = getLikesCount(details);
@@ -60,8 +61,8 @@ export const useDetailBase = <T extends object, ID>({
         setDetails((prev) => (prev ? updateLike(prev, newIsLiked, newCount) : prev));
 
         try {
-            if (currentIsLiked) await onUnlike(id);
-            else await onLike(id);
+            if (currentIsLiked) await onUnlike(targetDbId);
+            else await onLike(targetDbId);
         } catch {
             setDetails((prev) => (prev ? updateLike(prev, currentIsLiked, currentCount) : prev));
         }
