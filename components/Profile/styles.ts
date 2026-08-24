@@ -2,41 +2,27 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     scrollContent: {
-        paddingBottom: 100
+        paddingBottom: 100,
     },
     headerContent: { paddingHorizontal: 20, gap: 12 },
     headerTopRow: {
         flexDirection: "row",
         gap: 8,
         alignItems: "center",
-        justifyContent: "center"
-    },
-    imageWrapper: {
-        backgroundColor: "#1e1e1e",
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        borderWidth: 1,
-        borderColor: "#333333",
-        overflow: "hidden"
-    },
-    profilePicture: {
-        width: "100%",
-        height: "100%",
-        resizeMode: "cover"
+        justifyContent: "center",
     },
     rightInfoContainer: { flex: 1, gap: 8 },
     nameWrapper: {
         flexDirection: "row",
         gap: 4,
-        alignItems: "center"
+        alignItems: "center",
     },
     fullnameLabel: { fontSize: 20, color: "#fff", fontWeight: "bold" },
     usernameLabel: { fontSize: 16, color: "#8c8c8c" },
     statsContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        gap: 8
+        gap: 8,
     },
     statItem: {
         backgroundColor: "#1e1e1e",
@@ -46,7 +32,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderWidth: 1,
-        borderColor: "#333333"
+        borderColor: "#333333",
     },
     statValue: { fontSize: 16, color: "#fff" },
     statLabel: { fontSize: 12, color: "#8c8c8c" },
@@ -61,15 +47,25 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 8,
         borderWidth: 1,
-        borderColor: "#333333"
+        borderColor: "#333333",
     },
     footerItemRightContainer: {
         flexDirection: "row",
         gap: 4,
-        alignItems: "center"
+        alignItems: "center",
     },
     footerItemLabel: { color: "#fff" },
-    footerItemValue: { color: "#8c8c8c" }
+    footerItemValue: { color: "#8c8c8c" },
+    actionButtonContainer: { flexDirection: "row", gap: 8, flex: 1 },
+    actionButton: {
+        backgroundColor: "#1e1e1e",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 8,
+        borderRadius: 8,
+    },
+    actionButtonText: { color: "#fff" },
 });
 
 export { styles };
