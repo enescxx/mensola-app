@@ -28,18 +28,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         gap: 8,
     },
-    avatarWrapper: {
-        width: 38,
-        height: 38,
-        borderRadius: 19,
-        backgroundColor: "#2a3142",
-        overflow: "hidden",
-    },
-    avatarImg: {
-        width: "100%",
-        height: "100%",
-        resizeMode: "cover",
-    },
     nameWrapper: {
         flex: 1,
         justifyContent: "center",

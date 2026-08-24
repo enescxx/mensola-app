@@ -21,13 +21,10 @@ const useMovie = (movieId?: MovieId | TmdbId, type: "app" | "tmdb" = "app") => {
 
         try {
             if (type === "tmdb") {
-                console.log(type);
                 const response = await MovieService.findOrFetchMovie(movieId as TmdbId);
-                console.log(response.data);
                 setMovie(response.data || null);
             } else {
                 const response = await MovieService.getMovie(movieId as MovieId);
-                console.log(response.data);
                 setMovie(response.data || null);
             }
         } catch (fetchError: any) {

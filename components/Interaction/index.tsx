@@ -4,6 +4,7 @@ import { IInteractionViewProps } from "./types";
 import Badge from "../Badge";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import Avatar from "../Avatar";
 
 export default function InteractionView({ data }: IInteractionViewProps) {
     const { user, comment, likesCount, replyCount, ...interaction } = data;
@@ -49,9 +50,7 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                 android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.userInfoContainer} onPress={handleUserPress} activeOpacity={0.8}>
-                        <View style={styles.avatarWrapper}>
-                            <Image style={styles.avatarImg} source={{ uri: user.avatar?.toString() }} />
-                        </View>
+                        <Avatar size={38} user={user} />
                         <View style={styles.nameWrapper}>
                             <Text style={styles.fullname}>{user.fullname || user.username}</Text>
                             <Text style={styles.username}>@{user.username}</Text>
