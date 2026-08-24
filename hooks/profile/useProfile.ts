@@ -40,7 +40,7 @@ const useProfile = (userId: UserId | "me") => {
         fetchProfile();
     }, [fetchProfile]);
 
-    return { profile, isLoading, error };
+    return { profile, fetchProfile, isLoading, error };
 };
 
 export { useProfile };

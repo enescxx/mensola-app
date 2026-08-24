@@ -13,7 +13,10 @@ export interface IUser {
 }
 export type UserFavorites = { favoriteMovies: FavoriteMovies; favoriteTracks: FavoriteTracks };
 export type UserStats = Record<StatTypeKey, number>;
-export type UserRelationships = { mutualFollowers?: Pick<IUser, "id" | "username" | "fullname">[]; isFollowingByMe?: boolean };
+export type UserRelationships = {
+    mutualFollowers?: Pick<IUser, "id" | "username" | "fullname">[];
+    isFollowingByMe?: boolean;
+};
 export type UserProfile = IUser & UserStats & UserFavorites & UserRelationships;
 export type GetProfileRequest = { userId: UserId | "me" };
 export type GetProfileResponse = ApiResponse<{ profile: UserProfile }>;
@@ -22,3 +25,4 @@ export type FollowActionResponse = ApiResponse<FollowActionResponseData>;
 export type FollowUsersResponseDataItem = IUser & { isFollowing: boolean; isFollower: boolean };
 export type FollowUsersResponseData = PaginationResponse & { items: FollowUsersResponseDataItem[] };
 export type FollowUsersResponse = ApiResponse<FollowUsersResponseData>;
+export type UpdateProfileResponse = ApiResponse<{ user: IUser }>;

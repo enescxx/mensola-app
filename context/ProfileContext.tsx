@@ -10,7 +10,9 @@ import { IUser, UserFavorites, UserStats } from "@/types/user.types";
 
 export interface ProfileContextType {
     userId?: UserId | "me";
-    headerData: IUser & { stats: Partial<UserStats>; isOwnProfile: boolean };
+    refetch: () => Promise<void>;
+    isLoading: boolean;
+    headerData: IUser & { stats: Partial<UserStats>; isOwnProfile: boolean; isFollowingByMe?: boolean };
     bodyData: UserFavorites;
     footerData: { stats: Partial<UserStats> };
     isOwnProfile: boolean;
@@ -22,7 +24,7 @@ export interface ProfileContextType {
 const ProfileContext = createContext<ProfileContextType | null>(null);
 
 export function ProfileProvider({ userId, children }: { userId: UserId | "me"; children: React.ReactNode }) {
-    const { profile, isLoading, error } = useProfile(userId);
+    const { profile, fetchProfile, isLoading, error } = useProfile(userId);
     const router = useRouter();
 
     if (isLoading) {
@@ -85,6 +87,7 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         avatar,
         stats: headerStats,
         isOwnProfile,
+        isFollowingByMe,
     };
     const bodyData = {
         favoriteMovies: favoriteMovies?.slice(0, 3),
@@ -101,6 +104,8 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         <ProfileContext.Provider
             value={{
                 userId,
+                refetch: fetchProfile,
+                isLoading,
                 headerData,
                 bodyData,
                 footerData,

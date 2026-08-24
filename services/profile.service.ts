@@ -1,6 +1,11 @@
-import { GetProfileRequest, GetProfileResponse } from "@/types/user.types";
+import { GetProfileRequest, GetProfileResponse, IUser, UpdateProfileResponse } from "@/types/user.types";
 import { client } from "../api/client";
 import { GetStatDetailsRequest, STAT_ENDPOINT_MAP, StatDetailsResponse, StatType } from "@/types/stat.types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { uploadAsync, FileSystemUploadType } from "expo-file-system/legacy";
+import { ApiResponse } from "@/types/api";
+
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
 const ProfileService = {
     getProfile: async (data: GetProfileRequest): Promise<GetProfileResponse> => {
@@ -13,6 +18,32 @@ const ProfileService = {
             auth: true,
             params: { userId, page, limit },
         });
+    },
+
+    uploadAvatar: async (localImageUri: string): Promise<ApiResponse<{ avatarUrl: string }>> => {
+        const token = await AsyncStorage.getItem("token");
+
+        const uploadResult = await uploadAsync(`${BASE_URL}/v1/storage/upload/avatar`, localImageUri, {
+            fieldName: "avatar",
+            httpMethod: "POST",
+            uploadType: FileSystemUploadType.MULTIPART,
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: "application/json",
+            },
+        });
+
+        const parsedData = JSON.parse(uploadResult.body);
+
+        if (uploadResult.status >= 400 || !parsedData.success) {
+            throw parsedData || new Error("Görsel yüklenemedi");
+        }
+
+        return parsedData;
+    },
+
+    editProfile: async (data: Pick<IUser, "fullname" | "bio" | "avatar">): Promise<UpdateProfileResponse> => {
+        return await client.patch<UpdateProfileResponse>("/v1/users/me", data, { auth: true });
     },
 };
 
