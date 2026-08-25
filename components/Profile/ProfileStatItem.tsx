@@ -8,7 +8,10 @@ export default function ProfileStatItem({ statType, statValue, onPress }: IHeade
     const statLabel = StatLabels[statType];
 
     return (
-        <TouchableOpacity style={styles.statItem} onPress={() => onPress?.(statType)} activeOpacity={0.7}>
+        <TouchableOpacity
+            style={styles.statItem}
+            onPress={() => onPress?.(statType)}
+            activeOpacity={0.7}>
             <Text style={styles.statValue}>{statValue}</Text>
             <Text style={styles.statLabel}>{statLabel}</Text>
         </TouchableOpacity>

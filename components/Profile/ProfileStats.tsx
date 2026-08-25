@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { styles } from "./styles";
 import { IHeaderStatsProps } from "./types";
 import StatView from "./ProfileStatItem";
-import { StatType, StatTypeKey } from "@/types/stat.types";
+import { StatTypeKey } from "@/types/stat.types";
 
 export default function ProfileStats({ stats, onStatPress }: IHeaderStatsProps) {
     return (

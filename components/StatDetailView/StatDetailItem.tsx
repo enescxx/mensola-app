@@ -80,13 +80,15 @@ export default function StatDetailItem<T extends StatType = StatType>(props: Sta
             return <></>;
         }
         case "user-card": {
-            var { data, currentUserId, onFollowPress, onCardPress } = props;
+            var { data, currentUserId, onFollowPress, onCardPress, isFirst, isLast } = props;
             return (
                 <UserCard
                     user={data}
                     currentUserId={currentUserId}
                     onFollowPress={onFollowPress}
                     onCardPress={onCardPress}
+                    isFirst={isFirst}
+                    isLast={isLast}
                 />
             );
         }

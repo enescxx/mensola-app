@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { IAddToListSheetItemProps } from "./types";
 import { MovieListId } from "@/types/common.types";
+import { Colors } from "@/constants/colors";
 
 export default function AddToListSheetItem({
     item,
@@ -26,10 +27,10 @@ export default function AddToListSheetItem({
             </View>
 
             {isLoading ? (
-                <ActivityIndicator size="small" color="#1DB954" />
+                <ActivityIndicator size="small" color={Colors.primary} />
             ) : (
                 <View style={[styles.checkbox, item.isChecked && styles.checkboxChecked]}>
-                    {item.isChecked && <Ionicons name="checkmark" size={16} color="#FFFFFF" />}
+                    {item.isChecked && <Ionicons name="checkmark" size={16} color={Colors.textPrimary} />}
                 </View>
             )}
         </TouchableOpacity>

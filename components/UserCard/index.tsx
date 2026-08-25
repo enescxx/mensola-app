@@ -1,11 +1,13 @@
-import { TouchableOpacity, View, Image, Text } from "react-native";
+import { View, Text } from "react-native";
 
 import { styles } from "./styles";
 import { IUserCardProps, FollowState } from "./types";
 
 import Button from "../Button";
+import Avatar from "../Avatar";
+import { ListGroupItem } from "../ListGroup";
 
-export default function UserCard({ user, currentUserId, onFollowPress, onCardPress }: IUserCardProps) {
+export default function UserCard({ user, currentUserId, onFollowPress, onCardPress, isFirst, isLast }: IUserCardProps) {
     const isSelf = user.id === currentUserId;
 
     let followState: FollowState;
@@ -45,13 +47,13 @@ export default function UserCard({ user, currentUserId, onFollowPress, onCardPre
     const buttonConfig = getButtonContent();
 
     return (
-        <TouchableOpacity style={styles.card} onPress={() => onCardPress?.(user.id)} activeOpacity={0.7}>
-            <View style={styles.imageWrapper}>
-                <Image source={{ uri: user.avatar?.toString() }} style={styles.avatar} />
-            </View>
-            <View style={styles.nameWrapper}>
-                {user.fullname ? <Text style={styles.fullnameText}>{user.fullname}</Text> : null}
-                <Text style={styles.usernameText}>@{user.username}</Text>
+        <ListGroupItem isFirst={isFirst} isLast={isLast} onPress={() => onCardPress?.(user.id)} style={{ paddingVertical: 10 }}>
+            <View style={styles.leftWrapper}>
+                <Avatar user={user} size={34} />
+                <View style={styles.nameWrapper}>
+                    {user.fullname ? <Text style={styles.fullnameText}>{user.fullname}</Text> : null}
+                    <Text style={styles.usernameText}>@{user.username}</Text>
+                </View>
             </View>
             {!isSelf && buttonConfig && (
                 <Button
@@ -62,6 +64,6 @@ export default function UserCard({ user, currentUserId, onFollowPress, onCardPre
                     activeOpacity={0.7}
                 />
             )}
-        </TouchableOpacity>
+        </ListGroupItem>
     );
 }

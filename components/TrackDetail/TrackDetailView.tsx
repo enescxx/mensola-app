@@ -8,6 +8,7 @@ import AddToPlaylistBottomSheet from "./AddToPlaylistBottomSheet";
 import { styles } from "./styles";
 import { ITrackDetailViewProps } from "./types";
 import { TrackId } from "@/types/common.types";
+import { Colors } from "@/constants/colors";
 
 export default function TrackDetailView({
     trackDetails,
@@ -23,7 +24,7 @@ export default function TrackDetailView({
     if (isLoading) {
         return (
             <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="#1DB954" />
+                <ActivityIndicator size="large" color={Colors.primary} />
             </View>
         );
     }

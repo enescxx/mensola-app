@@ -6,6 +6,7 @@ import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
 import { useVerifyResetCode } from "../../hooks/auth/useVerifyResetCode";
+import { Colors } from "@/constants/colors";
 
 export default function VerifyResetTokenScreen() {
     const { code, setCode, isLoading, error, handleVerifyToken } = useVerifyResetCode();
@@ -32,7 +33,7 @@ export default function VerifyResetTokenScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#121212" },
+    container: { flex: 1, backgroundColor: Colors.background },
     innerContainer: {
         flex: 1,
         justifyContent: "center",
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     logoText: {
         fontSize: 42,
         fontWeight: "bold",
-        color: "#ffffff",
+        color: Colors.textPrimary,
         letterSpacing: 1.5,
     },
     formContainer: { marginBottom: 24 },

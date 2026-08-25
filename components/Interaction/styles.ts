@@ -1,12 +1,13 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
         padding: 12,
-        backgroundColor: "#1a1f2e",
+        backgroundColor: Colors.surfaceLight,
         borderRadius: 14,
         borderWidth: 1,
-        borderColor: "rgba(255,255,255,0.06)",
+        borderColor: Colors.border,
         shadowColor: "#000",
         shadowOpacity: 0.16,
         shadowRadius: 8,
@@ -34,20 +35,20 @@ export const styles = StyleSheet.create({
     },
     username: {
         fontSize: 12,
-        color: "#9ca3af",
+        color: Colors.textSecondary,
         marginTop: 2,
     },
     fullname: {
         fontSize: 14,
         fontWeight: "700",
-        color: "#f9fafb",
+        color: Colors.textPrimary,
     },
     interactionInfo: {
         alignItems: "flex-end",
         gap: 6,
     },
     date: {
-        color: "#9ca3af",
+        color: Colors.textSecondary,
         fontSize: 11,
     },
     badges: {
@@ -63,7 +64,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 3,
     },
     commentContainer: {
-        backgroundColor: "rgba(255,255,255,0.04)",
+        backgroundColor: Colors.surface,
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 8,
@@ -71,7 +72,7 @@ export const styles = StyleSheet.create({
     },
     comment: {
         fontSize: 12.5,
-        color: "#f3f4f6",
+        color: Colors.textPrimary,
         lineHeight: 18,
     },
     actionButtons: {
@@ -86,10 +87,10 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingVertical: 6,
         borderRadius: 999,
-        backgroundColor: "rgba(255,138,61,0.1)",
+        backgroundColor: "rgba(74, 158, 255, 0.15)",
     },
     actionButtonText: {
-        color: "#ff8a3d",
+        color: Colors.primary,
         fontSize: 12,
         fontWeight: "600",
     },

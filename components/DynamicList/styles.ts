@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -5,7 +6,7 @@ export const styles = StyleSheet.create({
         width: "100%",
     },
     listTitle: {
-        color: "white",
+        color: Colors.textPrimary,
         fontSize: 18,
         fontWeight: "bold",
         marginHorizontal: 16,
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         paddingRight: 16,
     },
-    seeAll: { color: "#1DB954", fontSize: 14, marginTop: 12 },
+    seeAll: { color: Colors.primary, fontSize: 14, marginTop: 12 },
     horizontalContent: {
         paddingHorizontal: 16,
     },

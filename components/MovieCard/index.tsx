@@ -6,6 +6,7 @@ import { IMovieCardProps } from "./types";
 import MovieCardFooter from "./MovieCardFooter";
 import Badge from "../Badge";
 import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 export default function MovieCard({
     title,

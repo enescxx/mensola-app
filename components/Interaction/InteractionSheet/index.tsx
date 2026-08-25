@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import BottomSheet from "@/components/BottomSheet";
 import { styles } from "./styles";
 import { IInteractionSheetProps } from "./types";
+import { Colors } from "@/constants/colors";
 
 export default function InteractionSheet({
     isVisible,
@@ -108,7 +109,7 @@ export default function InteractionSheet({
                                 <Ionicons
                                     name={starIndex <= rating ? "star" : "star-outline"}
                                     size={24}
-                                    color={starIndex <= rating ? "#FF8000" : "#555555"}
+                                    color={starIndex <= rating ? "#FF8000" : Colors.border}
                                 />
                             </TouchableOpacity>
                         ))}

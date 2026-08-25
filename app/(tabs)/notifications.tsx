@@ -1,10 +1,6 @@
-import { Text } from "react-native";
+import { Colors } from "@/constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Notifications() {
-    return (
-        <SafeAreaView>
-            <Text>Notifications Page</Text>
-        </SafeAreaView>
-    );
+    return <SafeAreaView style={{ flex: 1, backgroundColor: Colors.background }}></SafeAreaView>;
 }

@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { styles } from "./styles";
 import { IHeaderAction } from "./types";
 import { NativeStackHeaderProps } from "expo-router";
+import { Colors } from "@/constants/colors";
 
 export default function PageHeader({ options, navigation, back }: NativeStackHeaderProps) {
     const insets = useSafeAreaInsets();
@@ -39,7 +40,7 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
                                 style={styles.headerButton}
                                 activeOpacity={0.7}
                                 testID="back-button">
-                                <Ionicons name="chevron-back" size={24} color="#8c8c8c" />
+                                <Ionicons name="chevron-back" size={24} color={Colors.textMuted} />
                             </TouchableOpacity>
                         </View>
                     )}

@@ -18,6 +18,7 @@ import MovieListOwnersBottomSheet from "./MovieListOwnersBottomSheet";
 import { styles } from "./styles";
 import { IMovieListHeroProps } from "./types";
 import { shareMovieList } from "@/utils/share";
+import { Colors } from "@/constants/colors";
 
 export default function MovieListHero({
     listDetails,
@@ -72,14 +73,14 @@ export default function MovieListHero({
                 {listDetails.image ? (
                     <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: listDetails.image.toString() }}>
                         <LinearGradient
-                            colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                            colors={["transparent", "rgba(8, 12, 18, 0.8)", Colors.background]}
                             style={styles.bannerGradient}
                         />
                     </ImageBackground>
                 ) : (
-                    <View style={[styles.bannerBackgroundImg, { backgroundColor: "#1e1e1e" }]}>
+                    <View style={[styles.bannerBackgroundImg, { backgroundColor: Colors.surface }]}>
                         <LinearGradient
-                            colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                            colors={["transparent", "rgba(8, 12, 18, 0.8)", Colors.background]}
                             style={styles.bannerGradient}
                         />
                     </View>
@@ -95,7 +96,7 @@ export default function MovieListHero({
                             />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
-                                <Ionicons name="film-outline" size={36} color="#666" />
+                                <Ionicons name="film-outline" size={36} color={Colors.textSecondary} />
                             </View>
                         )}
                     </View>
@@ -145,7 +146,7 @@ export default function MovieListHero({
                             <ActionButton
                                 icon={isSaved ? "bookmark" : "bookmark-outline"}
                                 isActive={isSaved}
-                                activeColor="#1DB95466"
+                                activeColor={`${Colors.warning}66`}
                                 onPress={toggleSave}
                             />
 
@@ -153,7 +154,7 @@ export default function MovieListHero({
                             <ActionButton
                                 icon="share-social-outline"
                                 isActive={false}
-                                activeColor="#38BDF866"
+                                activeColor={`${Colors.primary}66`}
                                 onPress={handleShare}
                             />
 
@@ -161,7 +162,7 @@ export default function MovieListHero({
                             <ActionButton
                                 icon="heart"
                                 isActive={!!listDetails.isLiked}
-                                activeColor="#FF3B3066"
+                                activeColor={`${Colors.accentPink}66`}
                                 onPress={toggleLike}
                             />
 
@@ -169,7 +170,7 @@ export default function MovieListHero({
                             <ActionButton
                                 icon="star"
                                 isActive={hasUserInteraction}
-                                activeColor="#FFCC0066"
+                                activeColor={`${Colors.warning}66`}
                                 onPress={onCommentPress}
                             />
                         </View>

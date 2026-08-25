@@ -1,10 +1,11 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: "100%",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         paddingTop: 20,
     },
     rowWrapper: {
@@ -15,17 +16,17 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     emptyContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         padding: 48,
     },
     emptyText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 20,
         textAlign: "center",
         marginBottom: 16,
@@ -34,17 +35,17 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         padding: 24,
     },
     errorText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 16,
         textAlign: "center",
         marginBottom: 16,
     },
     retryButton: {
-        backgroundColor: "#1DB954",
+        backgroundColor: Colors.primary,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20,

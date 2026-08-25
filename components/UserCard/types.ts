@@ -10,4 +10,6 @@ export interface IUserCardProps {
     currentUserId: UserId;
     onFollowPress?: (userId: UserId, isFollowing: boolean) => void;
     onCardPress?: (userId: UserId) => void;
+    isFirst?: boolean;
+    isLast?: boolean;
 }

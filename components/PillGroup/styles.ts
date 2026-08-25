@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -6,19 +7,19 @@ export const styles = StyleSheet.create({
         paddingVertical: 4,
         paddingHorizontal: 16,
         borderRadius: 20,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
         borderWidth: 1,
-        borderColor: "#2e2e2e",
+        borderColor: Colors.border,
         flexDirection: "row",
         alignItems: "center",
         gap: 4,
     },
     activePill: {
-        backgroundColor: "#1DB954",
-        borderColor: "#1DB954",
+        backgroundColor: Colors.primary,
+        borderColor: Colors.border,
     },
-    text: { color: "#8e8e93", fontSize: 14, fontWeight: "600" },
-    activeText: { color: "#ffffff" },
-    icon: { color: "#8e8e93", fontSize: 14, fontWeight: "600" },
-    activeIcon: { color: "#ffffff" },
+    text: { color: Colors.textMuted, fontSize: 14, fontWeight: "600" },
+    activeText: { color: Colors.textPrimary },
+    icon: { color: Colors.textMuted, fontSize: 14, fontWeight: "600" },
+    activeIcon: { color: Colors.textPrimary },
 });

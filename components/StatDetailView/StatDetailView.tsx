@@ -68,7 +68,7 @@ export default function StatDetailView<T extends StatType = StatType>({
         "favorite-movies",
     ].includes(statType);
 
-    const renderItem = ({ item }: any) => {
+    const renderItem = ({ item, index }: any) => {
         switch (statType) {
             case "movie-lists":
             case "liked-movie-lists":
@@ -155,16 +155,10 @@ export default function StatDetailView<T extends StatType = StatType>({
                             "Takipten çıkılıyor",
                             `${item.fullname || item.username} adlı kişiyi takip etmeyi bırakmak istiyor musunuz?`,
                             [
-                                {
-                                    text: "Hayır",
-                                    onPress: () => {},
-                                    style: "cancel",
-                                },
+                                { text: "Hayır", onPress: () => {}, style: "cancel" },
                                 {
                                     text: "Evet",
-                                    onPress: () => {
-                                        unfollowHandler(targetId, () => toggleFollowStateInList(targetId));
-                                    },
+                                    onPress: () => unfollowHandler(targetId, () => toggleFollowStateInList(targetId)),
                                 },
                             ],
                         );
@@ -179,6 +173,8 @@ export default function StatDetailView<T extends StatType = StatType>({
                         onCardPress={(userId) => router.push(`/users/${userId}`)}
                         onFollowPress={handleFollowPress}
                         currentUserId={currentUserId}
+                        isFirst={index === 0}
+                        isLast={index === (statDetailItems?.length ?? 0) - 1}
                     />
                 );
             }
@@ -198,6 +194,8 @@ export default function StatDetailView<T extends StatType = StatType>({
         if (!isFetchingNextPage && hasNextPage) loadMore?.();
     };
 
+    const isUserList = statType === "followers" || statType === "following";
+
     return (
         <View style={styles.container}>
             <DynamicList
@@ -208,6 +206,7 @@ export default function StatDetailView<T extends StatType = StatType>({
                 refreshing={isRefetching}
                 numColumns={isGrid ? 3 : 1}
                 columnWrapperStyle={isGrid ? styles.rowWrapper : undefined}
+                ItemSeparatorComponent={isUserList ? () => null : undefined}
                 onEndReached={handleLoadMore}
                 onEndReachedThreshold={0.5}
                 ListFooterComponent={renderFooter}

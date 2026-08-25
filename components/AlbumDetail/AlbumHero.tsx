@@ -16,6 +16,7 @@ import Badge from "@/components/Badge";
 import { styles } from "./styles";
 import { IAlbumHeroProps } from "./types";
 import { shareAlbum } from "@/utils/share";
+import { Colors } from "@/constants/colors";
 
 export default function AlbumHero({
     albumDetails,
@@ -66,14 +67,14 @@ export default function AlbumHero({
                 {albumDetails.image ? (
                     <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: albumDetails.image.toString() }}>
                         <LinearGradient
-                            colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                            colors={["transparent", "rgba(8, 12, 18, 0.8)", Colors.background]}
                             style={styles.bannerGradient}
                         />
                     </ImageBackground>
                 ) : (
-                    <View style={[styles.bannerBackgroundImg, { backgroundColor: "#1e1e1e" }]}>
+                    <View style={[styles.bannerBackgroundImg, { backgroundColor: Colors.surface }]}>
                         <LinearGradient
-                            colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                            colors={["transparent", "rgba(8, 12, 18, 0.8)", Colors.background]}
                             style={styles.bannerGradient}
                         />
                     </View>
@@ -89,7 +90,7 @@ export default function AlbumHero({
                             />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
-                                <Ionicons name="disc-outline" size={36} color="#666" />
+                                <Ionicons name="disc-outline" size={36} color={Colors.textSecondary} />
                             </View>
                         )}
                     </View>
@@ -123,8 +124,14 @@ export default function AlbumHero({
                                 icon={<Ionicons name="musical-note-outline" size={12} color="#FF8000" />}
                                 value={tracksCount}
                             />
-                            <Badge icon={<Ionicons name="heart" size={12} color="#FF8000" />} value={likesCount} />
-                            <Badge icon={<Entypo name="text" size={12} color="#FF8000" />} value={commentsCount ?? 0} />
+                            <Badge
+                                icon={<Ionicons name="heart" size={12} color="#FF8000" />}
+                                value={likesCount}
+                            />
+                            <Badge
+                                icon={<Entypo name="text" size={12} color="#FF8000" />}
+                                value={commentsCount ?? 0}
+                            />
                         </View>
 
                         <View style={styles.actionBar}>
@@ -132,7 +139,7 @@ export default function AlbumHero({
                             <ActionButton
                                 icon="play"
                                 isActive={false}
-                                activeColor="#1DB95466"
+                                activeColor={`${Colors.primary}66`}
                                 onPress={onPlayPress || (() => {})}
                             />
 
@@ -140,7 +147,7 @@ export default function AlbumHero({
                             <ActionButton
                                 icon="share-social-outline"
                                 isActive={false}
-                                activeColor="#38BDF866"
+                                activeColor={`${Colors.primary}66`}
                                 onPress={handleShare}
                             />
 
@@ -148,7 +155,7 @@ export default function AlbumHero({
                             <ActionButton
                                 icon="heart"
                                 isActive={!!albumDetails.isLiked}
-                                activeColor="#FF3B3066"
+                                activeColor={`${Colors.accentPink}66`}
                                 onPress={toggleLike}
                             />
 
@@ -156,7 +163,7 @@ export default function AlbumHero({
                             <ActionButton
                                 icon="star"
                                 isActive={hasUserInteraction}
-                                activeColor="#FFCC0066"
+                                activeColor={`${Colors.warning}66`}
                                 onPress={onCommentPress}
                             />
                         </View>

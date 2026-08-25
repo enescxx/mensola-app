@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import { styles } from "./stles";
+import { styles } from "./styles";
 import { IAvatarProps } from "./types";
 import { Image } from "expo-image";
 
@@ -41,8 +41,8 @@ export default function Avatar({ url, name, user, size }: IAvatarProps) {
                     width: size,
                     height: size,
                     borderRadius: size / 2,
-                    backgroundColor,
                 },
+                { backgroundColor },
             ]}>
             <Text style={[styles.initialText, !!size && { fontSize: size * 0.42 }]}>{initial}</Text>
         </View>

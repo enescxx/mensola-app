@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native";
+import { Colors } from "@/constants/colors";
 
 export const styles = StyleSheet.create({
     imageWrapper: {
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
         width: 40,
         height: 40,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#333333",
+        borderColor: Colors.border,
         overflow: "hidden",
         alignItems: "center",
         justifyContent: "center",
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
     },
     initialText: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontWeight: "700",
     },
 });

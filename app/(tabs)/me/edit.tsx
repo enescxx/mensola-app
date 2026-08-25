@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import Avatar from "@/components/Avatar";
 import TextField from "@/components/TextField";
 import { useEditProfile } from "@/hooks/profile/useEditProfile";
+import { Colors } from "@/constants/colors";
 
 export default function EditProfileScreen() {
     const {
@@ -39,7 +40,7 @@ export default function EditProfileScreen() {
                     onPress={submitEdit}
                     disabled={isLoading}>
                     {isLoading ? (
-                        <ActivityIndicator size="small" color="#000" />
+                        <ActivityIndicator size="small" color={Colors.textPrimary} />
                     ) : (
                         <Text style={styles.saveButtonText}>Kaydet</Text>
                     )}
@@ -98,7 +99,7 @@ export default function EditProfileScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         paddingHorizontal: 20,
     },
     header: {
@@ -108,18 +109,18 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
     },
     cancelButton: {
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
         paddingVertical: 10,
         paddingHorizontal: 18,
         borderRadius: 12,
     },
     cancelButtonText: {
-        color: "#9CA3AF",
+        color: Colors.textMuted,
         fontSize: 14,
         fontWeight: "600",
     },
     saveButton: {
-        backgroundColor: "#1DB954",
+        backgroundColor: Colors.primary,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 12,
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     saveButtonText: {
-        color: "#fff",
+        color: Colors.textPrimary,
         fontSize: 14,
         fontWeight: "700",
     },
@@ -143,25 +144,25 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 16,
         marginBottom: 32,
-        backgroundColor: "#181818",
+        backgroundColor: Colors.surface,
         padding: 16,
         borderRadius: 16,
         borderWidth: 1,
-        borderColor: "#262626",
+        borderColor: Colors.border,
     },
     avatarActions: {
         flex: 1,
         gap: 8,
     },
     actionButton: {
-        backgroundColor: "#242424",
+        backgroundColor: Colors.surfaceLight,
         paddingVertical: 9,
         paddingHorizontal: 14,
         borderRadius: 10,
         alignItems: "center",
     },
     actionButtonText: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 13,
         fontWeight: "600",
     },
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
         borderColor: "rgba(239, 68, 68, 0.2)",
     },
     deleteButtonText: {
-        color: "#EF4444",
+        color: Colors.danger,
         fontSize: 13,
         fontWeight: "600",
     },

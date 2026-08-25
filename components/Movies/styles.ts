@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -7,12 +8,12 @@ export const styles = StyleSheet.create({
         aspectRatio: 2 / 3,
         borderRadius: 16,
         marginBottom: 8,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surfaceLight,
     },
     posterPlaceholder: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#222222",
+        backgroundColor: Colors.surfaceLight,
     },
     heroBanner: {
         height: 320,
@@ -37,12 +38,12 @@ export const styles = StyleSheet.create({
     },
     infoContainer: { flex: 1, gap: 1 },
     titleWrapper: { flexDirection: "row", alignItems: "center", gap: 8 },
-    movieTitle: { color: "#fff", fontSize: 22, fontWeight: "bold" },
-    releaseDate: { color: "#b3b3b3", fontSize: 14 },
+    movieTitle: { color: Colors.textPrimary, fontSize: 22, fontWeight: "bold" },
+    releaseDate: { color: Colors.textSecondary, fontSize: 14 },
     metaWrapper: { flexDirection: "row", alignItems: "center", gap: 8 },
-    duration: { color: "#b3b3b3", fontSize: 14 },
-    dot: { color: "#8c8c8c", fontSize: 16 },
-    genres: { color: "#b3b3b3", fontSize: 14 },
+    duration: { color: Colors.textSecondary, fontSize: 14 },
+    dot: { color: Colors.textSecondary, fontSize: 16 },
+    genres: { color: Colors.textSecondary, fontSize: 14 },
     movieStats: { flexDirection: "row", marginTop: 8, gap: 4 },
     actionBar: { flexDirection: "row", gap: 8, marginTop: 8 },
     actionBtn: {
@@ -51,13 +52,13 @@ export const styles = StyleSheet.create({
         width: 48,
         height: 48,
         borderRadius: 32,
-        backgroundColor: "rgba(255, 255, 255, 0.08)",
+        backgroundColor: Colors.surface,
     },
-    actionBtnIcon: { color: "#fff", fontSize: 18 },
+    actionBtnIcon: { color: Colors.textPrimary, fontSize: 18 },
     overviewWrapper: { paddingHorizontal: 16 },
-    overview: { color: "#8c8c8c" },
+    overview: { color: Colors.textSecondary },
     expandBtn: {},
-    expandBtnText: { color: "#fff" },
+    expandBtnText: { color: Colors.textPrimary },
     listItem: {
         flexDirection: "row",
         alignItems: "center",
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 14,
         paddingHorizontal: 4,
         borderBottomWidth: 1,
-        borderBottomColor: "#2A2A2A",
+        borderBottomColor: Colors.surface,
     },
     listItemLeft: {
         flexDirection: "row",
@@ -74,11 +75,11 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     listItemIcon: {
-        color: "#A7A7A7",
+        color: Colors.textSecondary,
         fontSize: 20,
     },
     listItemTitle: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 16,
         fontWeight: "500",
         flex: 1,
@@ -88,19 +89,19 @@ export const styles = StyleSheet.create({
         height: 24,
         borderRadius: 6,
         borderWidth: 2,
-        borderColor: "#555555",
+        borderColor: Colors.border,
         alignItems: "center",
         justifyContent: "center",
     },
     checkboxChecked: {
-        backgroundColor: "#1DB954",
-        borderColor: "#1DB954",
+        backgroundColor: Colors.primary,
+        borderColor: Colors.primary,
     },
     listContainer: {
         paddingVertical: 8,
     },
     sheetError: {
-        color: "#FF3B30",
+        color: Colors.danger,
         fontSize: 14,
         marginBottom: 8,
         textAlign: "center",

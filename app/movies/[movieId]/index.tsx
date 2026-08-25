@@ -4,6 +4,7 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import MovieDetailView from "@/components/Movies/MovieDetailView";
 import { useMovie } from "@/hooks/movie/useMovie";
 import { MovieId, TmdbId } from "@/types/common.types";
+import { Colors } from "@/constants/colors";
 
 export default function MoviePage() {
     const { movieId, type } = useLocalSearchParams<{
@@ -34,6 +35,6 @@ export default function MoviePage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
 });

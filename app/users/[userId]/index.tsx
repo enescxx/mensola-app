@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import ProfileView from "@/components/Profile";
+import { Colors } from "@/constants/colors";
 
 export default function Profile() {
     return (
@@ -14,7 +15,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         paddingTop: 20,
     },
 });

@@ -5,6 +5,7 @@ import Badge from "../Badge";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Avatar from "../Avatar";
+import { Colors } from "@/constants/colors";
 
 export default function InteractionView({ data }: IInteractionViewProps) {
     const { user, comment, likesCount, replyCount, ...interaction } = data;
@@ -47,7 +48,7 @@ export default function InteractionView({ data }: IInteractionViewProps) {
             <Pressable
                 style={styles.cardContent}
                 onPress={handleInteractionPress}
-                android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
+                android_ripple={{ color: "rgba(74, 158, 255, 0.2)" }}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.userInfoContainer} onPress={handleUserPress} activeOpacity={0.8}>
                         <Avatar size={38} user={user} />
@@ -77,17 +78,17 @@ export default function InteractionView({ data }: IInteractionViewProps) {
                 <Pressable
                     style={styles.commentContainer}
                     onPress={handleInteractionPress}
-                    android_ripple={{ color: "rgba(255,138,61,0.12)" }}>
+                    android_ripple={{ color: "rgba(74, 158, 255, 0.2)" }}>
                     <Text style={styles.comment}>{comment.content}</Text>
                 </Pressable>
 
                 <View style={styles.actionButtons}>
                     <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleLikePress}>
-                        <Ionicons name="heart-outline" size={14} color="#ff8a3d" />
+                        <Ionicons name="heart-outline" size={14} color={Colors.primary} />
                         <Text style={styles.actionButtonText}>{likesCount}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleReplyPress}>
-                        <Ionicons name="chatbubble-outline" size={14} color="#ff8a3d" />
+                        <Ionicons name="chatbubble-outline" size={14} color={Colors.primary} />
                         <Text style={styles.actionButtonText}>{replyCount}</Text>
                     </TouchableOpacity>
                 </View>

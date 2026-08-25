@@ -12,6 +12,7 @@ import { IPlaylistDetailViewProps } from "./types";
 import { ITrack } from "@/types/track.types";
 import { InteractionItemResponse } from "@/types/interaction.types";
 import { PlaylistId } from "@/types/common.types";
+import { Colors } from "@/constants/colors";
 
 export default function PlaylistDetailView({
     refetchAll,
@@ -74,7 +75,7 @@ export default function PlaylistDetailView({
         if (!isFetchingNextInteractionPage || !isFetchingNextTrackPage || !isLoading) return null;
         return (
             <View style={styles.loadingContainer}>
-                <ActivityIndicator size="small" color="#1DB954" />
+                <ActivityIndicator size="small" color={Colors.primary} />
             </View>
         );
     };
@@ -90,7 +91,7 @@ export default function PlaylistDetailView({
     if (isLoading) {
         return (
             <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="#1DB954" />
+                <ActivityIndicator size="large" color={Colors.primary} />
             </View>
         );
     }

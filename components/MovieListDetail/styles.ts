@@ -1,31 +1,32 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     loadingContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     errorContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         padding: 24,
     },
     errorText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 16,
         textAlign: "center",
         marginBottom: 16,
     },
     retryButton: {
-        backgroundColor: "#1DB954",
+        backgroundColor: Colors.primary,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20,
@@ -38,7 +39,7 @@ export const styles = StyleSheet.create({
         gap: "3.5%",
         paddingHorizontal: "4%",
     },
-    // Hero Banner styles (matched with MovieHero)
+
     heroBanner: {
         height: 310,
         width: "100%",
@@ -67,12 +68,12 @@ export const styles = StyleSheet.create({
         width: "100%",
         aspectRatio: 2 / 3,
         borderRadius: 14,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
     },
     posterPlaceholder: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#222222",
+        backgroundColor: Colors.surface,
     },
     infoContainer: {
         flex: 1,
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     movieTitle: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 20,
         fontWeight: "bold",
     },

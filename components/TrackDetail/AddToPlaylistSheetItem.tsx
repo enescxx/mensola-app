@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { styles } from "./styles";
 import { AddToPlaylistSheetItemProps } from "./types";
+import { Colors } from "@/constants/colors";
 
 export default function AddToPlaylistSheetItem({ item, onToggle, isLoading = false }: AddToPlaylistSheetItemProps) {
     return (
@@ -19,7 +20,7 @@ export default function AddToPlaylistSheetItem({ item, onToggle, isLoading = fal
             </View>
 
             {isLoading ? (
-                <ActivityIndicator size="small" color="#1DB954" />
+                <ActivityIndicator size="small" color={Colors.primary} />
             ) : (
                 <View style={[styles.checkbox, item.isChecked && styles.checkboxChecked]}>
                     {item.isChecked && <Ionicons name="checkmark" size={16} color="#FFFFFF" />}

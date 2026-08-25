@@ -1,31 +1,32 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     loadingContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     errorContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         padding: 24,
     },
     errorText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 16,
         textAlign: "center",
         marginBottom: 16,
     },
     retryButton: {
-        backgroundColor: "#1DB954",
+        backgroundColor: Colors.primary,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20,
@@ -38,7 +39,7 @@ export const styles = StyleSheet.create({
         gap: "3.5%",
         paddingHorizontal: "4%",
     },
-    // Hero Banner styles
+
     heroBanner: {
         height: 310,
         width: "100%",
@@ -67,12 +68,12 @@ export const styles = StyleSheet.create({
         width: "100%",
         aspectRatio: 1,
         borderRadius: 12,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
     },
     posterPlaceholder: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#222222",
+        backgroundColor: Colors.surface,
     },
     infoContainer: {
         flex: 1,
@@ -82,8 +83,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
-    movieTitle: {
-        color: "#FFFFFF",
+    trackTitle: {
+        color: Colors.textPrimary,
         fontSize: 20,
         fontWeight: "bold",
     },
@@ -99,17 +100,17 @@ export const styles = StyleSheet.create({
         marginRight: 6,
     },
     avatarPlaceholder: {
-        backgroundColor: "#333",
+        backgroundColor: Colors.surfaceLight,
         justifyContent: "center",
         alignItems: "center",
     },
     avatarLetter: {
-        color: "#FFF",
+        color: Colors.textPrimary,
         fontSize: 11,
         fontWeight: "bold",
     },
     creatorName: {
-        color: "#B3B3B3",
+        color: Colors.textSecondary,
         fontSize: 13,
         fontWeight: "500",
     },
@@ -129,116 +130,29 @@ export const styles = StyleSheet.create({
         paddingTop: 14,
         paddingBottom: 4,
     },
-    description: {
-        color: "#CCCCCC",
-        fontSize: 14,
-        lineHeight: 20,
-    },
-    readMoreButton: {
-        marginTop: 4,
-        alignSelf: "flex-start",
-    },
-    readMoreText: {
-        color: "#1DB954",
-        fontSize: 13,
-        fontWeight: "600",
-    },
-    tabContainer: {
-        flexDirection: "row",
-        borderBottomWidth: 1,
-        borderBottomColor: "#222222",
-        marginTop: 12,
-        marginBottom: 16,
-        paddingHorizontal: 16,
-    },
-    tabButton: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 8,
-        paddingVertical: 12,
-        marginRight: 24,
-        borderBottomWidth: 2,
-        borderBottomColor: "transparent",
-    },
-    activeTabButton: {
-        borderBottomColor: "#1DB954",
-    },
-    tabText: {
-        color: "#8c8c8c",
-        fontSize: 15,
-        fontWeight: "600",
-    },
-    activeTabText: {
-        color: "#FFFFFF",
-    },
+
     emptyContainer: {
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: 48,
     },
     emptyText: {
-        color: "#8c8c8c",
+        color: Colors.textMuted,
         fontSize: 15,
         marginTop: 12,
     },
-    ownerRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        paddingVertical: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: "#1f1f1f",
-    },
-    ownerAvatar: {
-        width: 44,
-        height: 44,
-        borderRadius: 22,
-        marginRight: 12,
-    },
-    ownerAvatarPlaceholder: {
-        backgroundColor: "#2a2a2a",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    ownerAvatarLetter: {
-        color: "#FFFFFF",
-        fontSize: 18,
-        fontWeight: "bold",
-    },
-    ownerInfo: {
-        flex: 1,
-    },
-    ownerName: {
-        color: "#FFFFFF",
-        fontSize: 15,
-        fontWeight: "600",
-        marginBottom: 2,
-    },
-    ownerUsername: {
-        color: "#8c8c8c",
-        fontSize: 13,
-    },
-    creatorBadge: {
-        backgroundColor: "rgba(29, 185, 84, 0.15)",
-        paddingHorizontal: 10,
-        paddingVertical: 4,
-        borderRadius: 12,
-    },
-    creatorBadgeText: {
-        color: "#1DB954",
-        fontSize: 12,
-        fontWeight: "600",
-    },
+
     listContainer: {
         paddingVertical: 8,
     },
     sheetError: {
-        color: "#FF3B30",
+        color: Colors.danger,
         fontSize: 14,
         marginBottom: 8,
         textAlign: "center",
     },
     bottomSheetEmptyText: {
-        color: "#8C8C8C",
+        color: Colors.textSecondary,
         fontSize: 15,
         paddingVertical: 24,
         textAlign: "center",
@@ -250,7 +164,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 14,
         paddingHorizontal: 4,
         borderBottomWidth: 1,
-        borderBottomColor: "#2A2A2A",
+        borderBottomColor: Colors.border,
     },
     listItemLeft: {
         flexDirection: "row",
@@ -259,11 +173,11 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     listItemIcon: {
-        color: "#A7A7A7",
+        color: Colors.textSecondary,
         fontSize: 20,
     },
     listItemTitle: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 16,
         fontWeight: "500",
         flex: 1,
@@ -273,13 +187,13 @@ export const styles = StyleSheet.create({
         height: 24,
         borderRadius: 6,
         borderWidth: 2,
-        borderColor: "#555555",
+        borderColor: Colors.border,
         alignItems: "center",
         justifyContent: "center",
     },
     checkboxChecked: {
-        backgroundColor: "#1DB954",
-        borderColor: "#1DB954",
+        backgroundColor: Colors.primary,
+        borderColor: Colors.primary,
     },
     commentsContainer: {
         gap: 10,
@@ -294,12 +208,12 @@ export const styles = StyleSheet.create({
         marginBottom: 8,
     },
     commentsTitle: {
-        color: "#fff",
+        color: Colors.textPrimary,
         fontSize: 16,
         fontWeight: "700",
     },
     seeAll: {
-        color: "#1DB954",
+        color: Colors.primary,
         fontSize: 13,
         fontWeight: "600",
     },

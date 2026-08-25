@@ -1,5 +1,6 @@
 import { Stack } from "expo-router";
 import PageHeader from "@/components/PageHeader";
+import { Colors } from "@/constants/colors";
 
 export default function PlaylistsLayout() {
     return (
@@ -7,7 +8,7 @@ export default function PlaylistsLayout() {
             screenOptions={{
                 headerShown: true,
                 header: (props) => <PageHeader {...props} />,
-                contentStyle: { backgroundColor: "#121212" },
+                contentStyle: { backgroundColor: Colors.background },
                 animation: "slide_from_right",
             }}
         >

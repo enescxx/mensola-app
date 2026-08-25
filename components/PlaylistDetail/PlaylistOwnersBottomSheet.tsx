@@ -68,8 +68,7 @@ export default function PlaylistOwnersBottomSheet({
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 24 }}
-                ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
-                renderItem={({ item }) => (
+                renderItem={({ item, index }) => (
                     <UserCard
                         user={{
                             ...item,
@@ -78,6 +77,8 @@ export default function PlaylistOwnersBottomSheet({
                         currentUserId={currentUser?.id as UserId}
                         onFollowPress={handleFollowPress}
                         onCardPress={handleCardPress}
+                        isFirst={index === 0}
+                        isLast={index === owners.length - 1}
                     />
                 )}
             />

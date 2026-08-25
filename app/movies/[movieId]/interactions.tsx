@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams } from "expo-router";
+import { Colors } from "@/constants/colors";
 
 export default function MovieInteractionsPage() {
     const { movieId } = useLocalSearchParams<{ movieId?: string }>();
@@ -18,7 +19,7 @@ export default function MovieInteractionsPage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     content: {
         flex: 1,
@@ -27,13 +28,13 @@ const styles = StyleSheet.create({
         padding: 24,
     },
     title: {
-        color: "#fff",
+        color: Colors.textPrimary,
         fontSize: 22,
         fontWeight: "700",
         marginBottom: 8,
     },
     subtitle: {
-        color: "#9ca3af",
+        color: Colors.textMuted,
         fontSize: 14,
     },
 });

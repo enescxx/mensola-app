@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { TABS_CONFIG } from "../../constants/tabs";
 import { styles } from "./styles";
 import { ITabBarItemProps } from "./types";
+import { Colors } from "@/constants/colors";
 
 function TabBarItem({ routeName, onPress, isFocused }: ITabBarItemProps) {
     const { activeIcon, inactiveIcon } = TABS_CONFIG[routeName];
@@ -14,16 +15,13 @@ function TabBarItem({ routeName, onPress, isFocused }: ITabBarItemProps) {
         <TouchableOpacity
             onPress={onPress}
             activeOpacity={0.7}
-            style={
-                isFocused ? styles.activeTabButton : styles.inactiveTabButton
-            }
-            testID={`tab-button-${routeName}`}
-        >
+            style={isFocused ? styles.activeTabButton : styles.inactiveTabButton}
+            testID={`tab-button-${routeName}`}>
             <View style={styles.iconContainer}>
                 <Ionicons
                     name={iconName}
                     size={isFocused ? 32 : 28}
-                    color={isFocused ? "#fff" : "#8c8c8c"}
+                    color={isFocused ? Colors.textPrimary : Colors.textMuted}
                 />
             </View>
         </TouchableOpacity>

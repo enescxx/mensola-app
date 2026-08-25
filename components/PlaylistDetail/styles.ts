@@ -1,37 +1,38 @@
 import { StyleSheet } from "react-native";
+import { Colors } from "@/constants/colors";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     loadingContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     errorContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         padding: 24,
     },
     errorText: {
-        color: "#8c8c8c",
+        color: Colors.textMuted,
         fontSize: 16,
         textAlign: "center",
         marginBottom: 16,
     },
     retryButton: {
-        backgroundColor: "#1DB954",
+        backgroundColor: Colors.primary,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20,
     },
     retryText: {
-        color: "white",
+        color: Colors.textPrimary,
         fontWeight: "600",
     },
     rowWrapper: {
@@ -68,12 +69,12 @@ export const styles = StyleSheet.create({
         width: "100%",
         aspectRatio: 1,
         borderRadius: 12,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
     },
     posterPlaceholder: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#222222",
+        backgroundColor: Colors.surfaceLight,
     },
     infoContainer: {
         flex: 1,
@@ -84,7 +85,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     movieTitle: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 20,
         fontWeight: "bold",
     },
@@ -100,17 +101,17 @@ export const styles = StyleSheet.create({
         marginRight: 6,
     },
     avatarPlaceholder: {
-        backgroundColor: "#333",
+        backgroundColor: Colors.surfaceLight,
         justifyContent: "center",
         alignItems: "center",
     },
     avatarLetter: {
-        color: "#FFF",
+        color: Colors.textPrimary,
         fontSize: 11,
         fontWeight: "bold",
     },
     creatorName: {
-        color: "#B3B3B3",
+        color: Colors.textSecondary,
         fontSize: 13,
         fontWeight: "500",
     },
@@ -131,7 +132,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 4,
     },
     description: {
-        color: "#CCCCCC",
+        color: Colors.textSecondary,
         fontSize: 14,
         lineHeight: 20,
     },
@@ -140,14 +141,14 @@ export const styles = StyleSheet.create({
         alignSelf: "flex-start",
     },
     readMoreText: {
-        color: "#1DB954",
+        color: Colors.primary,
         fontSize: 13,
         fontWeight: "600",
     },
     tabContainer: {
         flexDirection: "row",
         borderBottomWidth: 1,
-        borderBottomColor: "#222222",
+        borderBottomColor: Colors.border,
         marginTop: 12,
         marginBottom: 16,
         paddingHorizontal: 16,
@@ -162,15 +163,15 @@ export const styles = StyleSheet.create({
         borderBottomColor: "transparent",
     },
     activeTabButton: {
-        borderBottomColor: "#1DB954",
+        borderBottomColor: Colors.primary,
     },
     tabText: {
-        color: "#8c8c8c",
+        color: Colors.textMuted,
         fontSize: 15,
         fontWeight: "600",
     },
     activeTabText: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
     },
     emptyContainer: {
         alignItems: "center",
@@ -178,7 +179,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 48,
     },
     emptyText: {
-        color: "#8c8c8c",
+        color: Colors.textMuted,
         fontSize: 15,
         marginTop: 12,
     },
@@ -187,7 +188,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         paddingVertical: 12,
         borderBottomWidth: 1,
-        borderBottomColor: "#1f1f1f",
+        borderBottomColor: Colors.border,
     },
     ownerAvatar: {
         width: 44,
@@ -196,12 +197,12 @@ export const styles = StyleSheet.create({
         marginRight: 12,
     },
     ownerAvatarPlaceholder: {
-        backgroundColor: "#2a2a2a",
+        backgroundColor: Colors.surfaceLight,
         justifyContent: "center",
         alignItems: "center",
     },
     ownerAvatarLetter: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 18,
         fontWeight: "bold",
     },
@@ -209,23 +210,23 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     ownerName: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 15,
         fontWeight: "600",
         marginBottom: 2,
     },
     ownerUsername: {
-        color: "#8c8c8c",
+        color: Colors.textMuted,
         fontSize: 13,
     },
     creatorBadge: {
-        backgroundColor: "rgba(29, 185, 84, 0.15)",
+        backgroundColor: "rgba(74, 158, 255, 0.15)",
         paddingHorizontal: 10,
         paddingVertical: 4,
         borderRadius: 12,
     },
     creatorBadgeText: {
-        color: "#1DB954",
+        color: Colors.primary,
         fontSize: 12,
         fontWeight: "600",
     },

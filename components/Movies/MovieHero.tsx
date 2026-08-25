@@ -12,6 +12,7 @@ import AddToListBottomSheet from "./AddToListBottomSheet";
 import InteractionSheet from "../Interaction/InteractionSheet";
 import { MovieService } from "@/services/movie.service";
 import { MovieId } from "@/types/common.types";
+import { Colors } from "@/constants/colors";
 
 const formatReleaseYear = (releaseDate?: string | Date) => {
     if (!releaseDate) return "";
@@ -143,14 +144,14 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
             {movie?.poster ? (
                 <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: movie.poster }}>
                     <LinearGradient
-                        colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                        colors={["transparent", "rgba(18, 18, 18, 0.8)", Colors.background]}
                         style={styles.bannerGradient}
                     />
                 </ImageBackground>
             ) : (
-                <View style={[styles.bannerBackgroundImg, { backgroundColor: "#1e1e1e" }]}>
+                <View style={[styles.bannerBackgroundImg, { backgroundColor: Colors.background }]}>
                     <LinearGradient
-                        colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                        colors={["transparent", "rgba(18, 18, 18, 0.8)", Colors.background]}
                         style={styles.bannerGradient}
                     />
                 </View>
@@ -162,7 +163,7 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                         <Image source={{ uri: movie.poster }} style={styles.poster} resizeMode="cover" />
                     ) : (
                         <View style={[styles.poster, styles.posterPlaceholder]}>
-                            <Ionicons name="film-outline" size={36} color="#666" />
+                            <Ionicons name="film-outline" size={36} color={Colors.textSecondary} />
                         </View>
                     )}
                 </View>
@@ -192,20 +193,20 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                         <ActionButton
                             icon="checkmark"
                             isActive={isWatched}
-                            activeColor="#1DB95466"
+                            activeColor="#1DB954"
                             onPress={handleWatchedToggle}
                             isLoading={isWatchedLoading}
                         />
                         <ActionButton
                             icon="add"
                             isActive={isInList}
-                            activeColor="#38BDF866"
+                            activeColor="#38BDF8"
                             onPress={() => setIsAddToListOpen(true)}
                         />
                         <ActionButton
                             icon="heart"
                             isActive={isLiked}
-                            activeColor="#FF3B3066"
+                            activeColor="#FF3B30"
                             onPress={handleLikeToggle}
                             isLoading={isLikeLoading}
                         />
@@ -214,7 +215,7 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                             isActive={
                                 userRating > 0 || (typeof userComment === "string" && userComment.trim().length > 0)
                             }
-                            activeColor="#FFCC0066"
+                            activeColor="#FFCC00"
                             onPress={() => setIsInteractionSheetOpen(true)}
                         />
                     </View>

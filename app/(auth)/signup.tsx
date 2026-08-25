@@ -7,7 +7,7 @@ import {
     KeyboardAvoidingView,
     Platform,
     Alert,
-    ScrollView
+    ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -16,6 +16,7 @@ import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
 import { useRegister } from "../../hooks/auth/useRegister";
+import { Colors } from "@/constants/colors";
 
 export default function SignupScreen() {
     const router = useRouter();
@@ -30,7 +31,7 @@ export default function SignupScreen() {
         setConfirmPassword,
         isLoading,
         error,
-        handleRegister
+        handleRegister,
     } = useRegister();
 
     useEffect(() => {
@@ -40,10 +41,7 @@ export default function SignupScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={{ flex: 1 }}
-            >
+            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.headerContainer}>
                         <Text style={styles.logoText}>mensola</Text>
@@ -78,16 +76,11 @@ export default function SignupScreen() {
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
                         />
-                        <Button
-                            label="Hesap Oluştur"
-                            onPress={handleRegister}
-                        />
+                        <Button label="Hesap Oluştur" onPress={handleRegister} />
                     </View>
 
                     <View style={styles.footerContainer}>
-                        <Text style={styles.footerText}>
-                            Zaten hesabın var mı?{" "}
-                        </Text>
+                        <Text style={styles.footerText}>Zaten hesabın var mı? </Text>
                         <TouchableOpacity onPress={() => router.push("/login")}>
                             <Text style={styles.loginLink}>Giriş Yap</Text>
                         </TouchableOpacity>
@@ -99,28 +92,27 @@ export default function SignupScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#121212" },
+    container: { flex: 1, backgroundColor: Colors.background },
     scrollContainer: {
         flexGrow: 1,
         justifyContent: "center",
         paddingHorizontal: 24,
-        paddingVertical: 40
+        paddingVertical: 40,
     },
     headerContainer: { alignItems: "center", marginBottom: 40 },
     logoText: {
         fontSize: 42,
         fontWeight: "bold",
-        color: "#ffffff",
-        letterSpacing: 1.5
+        color: Colors.textPrimary,
+        letterSpacing: 1.5,
     },
-    subtitleText: { fontSize: 14, color: "#a0a0a0", marginTop: 8 },
     formContainer: { marginBottom: 24 },
     footerContainer: {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 16
+        marginTop: 16,
     },
-    footerText: { color: "#a0a0a0", fontSize: 14 },
-    loginLink: { color: "#1DB954", fontSize: 14, fontWeight: "bold" }
+    footerText: { color: Colors.textSecondary, fontSize: 14 },
+    loginLink: { color: Colors.primary, fontSize: 14, fontWeight: "bold" },
 });

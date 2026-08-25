@@ -7,6 +7,7 @@ import { useProfile } from "../hooks/profile/useProfile";
 import { UserId } from "@/types/common.types";
 import { STAT_ROUTE_MAP, StatTypeKey } from "@/types/stat.types";
 import { IUser, UserFavorites, UserStats } from "@/types/user.types";
+import { Colors } from "@/constants/colors";
 
 export interface ProfileContextType {
     userId?: UserId | "me";
@@ -30,7 +31,7 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
     if (isLoading) {
         return (
             <SafeAreaView style={styles.container}>
-                <ActivityIndicator size="large" color="#1DB954" />
+                <ActivityIndicator size="large" color={Colors.primary} />
             </SafeAreaView>
         );
     }
@@ -38,7 +39,7 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
     if (error || !profile) {
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={{ color: "#fff" }}>Kullanıcı bulunamadı.</Text>
+                <Text style={{ color: Colors.textPrimary }}>Kullanıcı bulunamadı.</Text>
             </SafeAreaView>
         );
     }
@@ -130,7 +131,7 @@ export const useProfileContext = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         justifyContent: "center",
         alignItems: "center",
     },

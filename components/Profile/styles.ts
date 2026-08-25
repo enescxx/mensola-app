@@ -1,71 +1,161 @@
-import { StyleSheet } from "react-native";
+import { Colors } from "@/constants/colors";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     scrollContent: {
-        paddingBottom: 100,
+        paddingBottom: 120,
     },
-    headerContent: { paddingHorizontal: 20, gap: 12 },
-    headerTopRow: {
+
+    headerWrapper: {
+        alignItems: "center",
+        paddingTop: 12,
+        paddingBottom: 20,
+        paddingHorizontal: 20,
+        gap: 12,
+    },
+
+    avatarRing: {
+        padding: 3,
+        borderRadius: 999,
+        borderWidth: 2,
+        borderColor: Colors.primary,
+        shadowColor: Colors.primary,
+        shadowOpacity: 0.4,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 0 },
+        elevation: 8,
+    },
+
+    nameBlock: {
+        alignItems: "center",
+        gap: 4,
+    },
+    fullnameLabel: {
+        fontSize: 20,
+        fontWeight: "700",
+        color: Colors.textPrimary,
+        letterSpacing: -0.4,
+    },
+    usernameLabel: {
+        fontSize: 13,
+        color: Colors.textMuted,
+        fontWeight: "400",
+    },
+
+    userBio: {
+        color: Colors.textSecondary,
+        fontSize: 13,
+        textAlign: "center",
+        lineHeight: 18,
+        paddingHorizontal: 16,
+    },
+
+    actionButtonContainer: {
         flexDirection: "row",
-        gap: 8,
+        gap: 10,
+        width: "100%",
+    },
+    actionButton: {
+        flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        paddingVertical: 9,
+        borderRadius: 10,
+        backgroundColor: Colors.surface,
+        borderWidth: 1,
+        borderColor: Colors.border,
     },
-    rightInfoContainer: { flex: 1, gap: 8 },
-    nameWrapper: {
-        flexDirection: "row",
-        gap: 4,
-        alignItems: "center",
+    actionButtonPrimary: {
+        backgroundColor: Colors.primary,
+        borderColor: Colors.primary,
     },
-    fullnameLabel: { fontSize: 20, color: "#fff", fontWeight: "bold" },
-    usernameLabel: { fontSize: 16, color: "#8c8c8c" },
+    actionButtonFollowing: {
+        backgroundColor: "transparent",
+        borderColor: Colors.primary,
+    },
+    actionButtonText: {
+        color: Colors.textPrimary,
+        fontSize: 13,
+        fontWeight: "600",
+    },
+    actionButtonTextPrimary: {
+        color: "#fff",
+    },
+
     statsContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "center",
         gap: 8,
+        width: "100%",
     },
     statItem: {
-        backgroundColor: "#1e1e1e",
-        borderRadius: 16,
-        aspectRatio: 1,
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        borderWidth: 1,
-        borderColor: "#333333",
-    },
-    statValue: { fontSize: 16, color: "#fff" },
-    statLabel: { fontSize: 12, color: "#8c8c8c" },
-    userBio: { color: "#8c8c8c" },
-    profileFooter: { gap: 4, paddingHorizontal: 20, marginTop: 20 },
-    footerItem: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "#1e1e1e",
-        paddingHorizontal: 20,
         paddingVertical: 10,
-        borderRadius: 8,
+        borderRadius: 12,
+        backgroundColor: Colors.surface,
         borderWidth: 1,
-        borderColor: "#333333",
+        borderColor: Colors.border,
+        gap: 2,
     },
-    footerItemRightContainer: {
+    statValue: {
+        fontSize: 16,
+        fontWeight: "700",
+        color: Colors.textPrimary,
+        letterSpacing: -0.4,
+    },
+    statLabel: {
+        fontSize: 10,
+        color: Colors.textSecondary,
+        textTransform: "uppercase",
+        letterSpacing: 0.6,
+    },
+
+    divider: {
+        height: 1,
+        backgroundColor: Colors.border,
+        marginHorizontal: 20,
+        marginVertical: 4,
+    },
+
+    profileFooter: {
+        paddingHorizontal: 20,
+        marginTop: 8,
+        gap: 6,
+    },
+    sectionLabel: {
+        fontSize: 12,
+        fontWeight: "700",
+        color: Colors.textMuted,
+        textTransform: "uppercase",
+        letterSpacing: 0.8,
+        marginBottom: 4,
+        marginTop: 8,
+    },
+
+    footerItemLeft: {
         flexDirection: "row",
-        gap: 4,
         alignItems: "center",
-    },
-    footerItemLabel: { color: "#fff" },
-    footerItemValue: { color: "#8c8c8c" },
-    actionButtonContainer: { flexDirection: "row", gap: 8, flex: 1 },
-    actionButton: {
-        backgroundColor: "#1e1e1e",
+        gap: 12,
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        paddingVertical: 8,
-        borderRadius: 8,
     },
-    actionButtonText: { color: "#fff" },
+    footerItemLabel: {
+        color: Colors.textPrimary,
+        fontSize: 14,
+        fontWeight: "400",
+    },
+    footerItemRight: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4,
+    },
+    footerItemValue: {
+        color: Colors.textMuted,
+        fontSize: 14,
+    },
 });
 
 export { styles };

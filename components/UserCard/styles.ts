@@ -1,47 +1,32 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    card: {
+    leftWrapper: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 16,
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-        backgroundColor: "#181818",
-        borderRadius: 16,
-        borderWidth: 0.5,
-        borderColor: "#333333",
-        overflow: "hidden"
+        gap: 12,
+        flex: 1,
     },
-    imageWrapper: {
-        backgroundColor: "#1e1e1e",
-        width: 48,
-        height: 48,
-        borderRadius: 24,
-        borderWidth: 1,
-        borderColor: "#333333",
-        overflow: "hidden"
-    },
-    avatar: { width: "100%", height: "100%", resizeMode: "cover" },
-    nameWrapper: { flex: 1 },
-    fullnameText: { fontSize: 16, color: "#fff", fontWeight: "bold" },
-    usernameText: { fontSize: 12, color: "#8c8c8c" },
+    nameWrapper: { flex: 1, justifyContent: "center" },
+    fullnameText: { fontSize: 14, color: Colors.textPrimary, fontWeight: "bold" },
+    usernameText: { fontSize: 12, color: Colors.textMuted },
     btnFollow: {
         width: 120,
-        height: 36,
-        paddingVertical: 2,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    btnFollowing: {
-        width: 120,
-        height: 36,
+        height: 30,
         paddingVertical: 2,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#333333"
     },
-    btnText: { fontSize: 14 }
+    btnFollowing: {
+        width: 120,
+        height: 30,
+        paddingVertical: 2,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: Colors.surfaceLight,
+    },
+    btnText: { fontSize: 13 },
 });
 
 export { styles };

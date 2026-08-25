@@ -15,6 +15,7 @@ import ActionButton from "@/components/Movies/ActionButton";
 import Badge from "@/components/Badge";
 import { styles } from "./styles";
 import { ITrackHeroProps } from "./types";
+import { Colors } from "@/constants/colors";
 
 export default function TrackHero({
     trackDetails,
@@ -23,9 +24,6 @@ export default function TrackHero({
     onAddPress,
     onPlayPress,
 }: ITrackHeroProps) {
-    const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-    const [isDescriptionTruncated, setIsDescriptionTruncated] = useState(false);
-
     if (!trackDetails) return null;
 
     const artistName = trackDetails.artists && trackDetails.artists.length > 0 ? trackDetails.artists[0].name : "";
@@ -38,26 +36,20 @@ export default function TrackHero({
     const userComment = trackDetails?.currentUserInteraction?.comment?.content || "";
     const hasUserInteraction = userRating > 0 || (typeof userComment === "string" && userComment.trim().length > 0);
 
-    const handleTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-        if (e.nativeEvent.lines.length > 2 && !isDescriptionTruncated) {
-            setIsDescriptionTruncated(true);
-        }
-    };
-
     return (
         <>
             <View style={styles.heroBanner}>
                 {trackDetails.image ? (
                     <ImageBackground style={styles.bannerBackgroundImg} source={{ uri: trackDetails.image.toString() }}>
                         <LinearGradient
-                            colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                            colors={["transparent", "rgba(8, 12, 18, 0.8)", Colors.background]}
                             style={styles.bannerGradient}
                         />
                     </ImageBackground>
                 ) : (
-                    <View style={[styles.bannerBackgroundImg, { backgroundColor: "#1e1e1e" }]}>
+                    <View style={[styles.bannerBackgroundImg, { backgroundColor: Colors.surface }]}>
                         <LinearGradient
-                            colors={["transparent", "rgba(18, 18, 18, 0.8)", "#121212"]}
+                            colors={["transparent", "rgba(8, 12, 18, 0.8)", Colors.background]}
                             style={styles.bannerGradient}
                         />
                     </View>
@@ -73,14 +65,14 @@ export default function TrackHero({
                             />
                         ) : (
                             <View style={[styles.poster, styles.posterPlaceholder]}>
-                                <Ionicons name="musical-note-outline" size={36} color="#666" />
+                                <Ionicons name="musical-note-outline" size={36} color={Colors.textSecondary} />
                             </View>
                         )}
                     </View>
 
                     <View style={styles.infoContainer}>
                         <View style={styles.titleWrapper}>
-                            <Text style={styles.movieTitle} numberOfLines={2}>
+                            <Text style={styles.trackTitle} numberOfLines={2}>
                                 {trackDetails.title}
                             </Text>
                         </View>
@@ -114,28 +106,28 @@ export default function TrackHero({
                             <ActionButton
                                 icon="play"
                                 isActive={false}
-                                activeColor="#1DB95466"
+                                activeColor={`${Colors.primary}66`}
                                 onPress={onPlayPress || (() => {})}
                             />
 
                             <ActionButton
                                 icon="add-outline"
                                 isActive={false}
-                                activeColor="#8B5CF666"
+                                activeColor={`${Colors.secondary}66`}
                                 onPress={onAddPress || (() => {})}
                             />
 
                             <ActionButton
                                 icon="heart"
                                 isActive={!!trackDetails.isLiked}
-                                activeColor="#FF3B3066"
+                                activeColor={`${Colors.accentPink}66`}
                                 onPress={toggleLike}
                             />
 
                             <ActionButton
                                 icon="star"
                                 isActive={hasUserInteraction}
-                                activeColor="#FFCC0066"
+                                activeColor={`${Colors.warning}66`}
                                 onPress={onCommentPress || (() => {})}
                             />
                         </View>

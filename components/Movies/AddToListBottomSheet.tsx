@@ -6,6 +6,7 @@ import { useMovieLists } from "@/hooks/movie/useMovieLists";
 import AddToListSheetItem from "./AddToListSheetItem";
 import { styles } from "./styles";
 import { IAddToListBottomSheetProps } from "./types";
+import { Colors } from "@/constants/colors";
 
 export default function AddToListBottomSheet({
     isVisible,
@@ -44,7 +45,7 @@ export default function AddToListBottomSheet({
                 {error ? <Text style={styles.sheetError}>{error}</Text> : null}
 
                 {isLoading ? (
-                    <ActivityIndicator size="large" color="#1DB954" style={{ paddingVertical: 24 }} />
+                    <ActivityIndicator size="large" color={Colors.primary} style={{ paddingVertical: 24 }} />
                 ) : (
                     <FlatList
                         data={lists}
@@ -61,7 +62,11 @@ export default function AddToListBottomSheet({
                         onEndReachedThreshold={0.3}
                         ListFooterComponent={
                             isLoadingMore ? (
-                                <ActivityIndicator size="small" color="#1DB954" style={{ paddingVertical: 12 }} />
+                                <ActivityIndicator
+                                    size="small"
+                                    color={Colors.primary}
+                                    style={{ paddingVertical: 12 }}
+                                />
                             ) : null
                         }
                     />

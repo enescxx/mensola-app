@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import InteractionView from "../Interaction";
 import { InteractionItemResponse } from "@/types/interaction.types";
+import { Colors } from "@/constants/colors";
 
 interface LatestCommentsProps {
     interactions: InteractionItemResponse[];
@@ -55,12 +56,12 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     title: {
-        color: "#fff",
+        color: Colors.textPrimary,
         fontSize: 16,
         fontWeight: "700",
     },
     seeAll: {
-        color: "#ff8a3d",
+        color: Colors.primary,
         fontSize: 13,
         fontWeight: "600",
     },

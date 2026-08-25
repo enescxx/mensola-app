@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -8,14 +9,14 @@ export const styles = StyleSheet.create({
         aspectRatio: 1,
         borderRadius: 12,
         overflow: "hidden",
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
         borderWidth: 1,
-        borderColor: "#333",
+        borderColor: Colors.border,
     },
     horizontalImageWrapper: { width: 70 },
     verticalImageWrapper: { width: "100%" },
     fullImage: { width: "100%", height: "100%", objectFit: "cover" },
-    mainTitle: { color: "white", fontSize: 14, fontWeight: "bold", marginTop: 10 },
-    albumTitle: { color: "#a0a0a0", fontSize: 12, marginTop: 2 },
-    subTitle: { color: "#a0a0a0", fontSize: 12, marginTop: 2 },
+    mainTitle: { color: Colors.textPrimary, fontSize: 14, fontWeight: "bold", marginTop: 10 },
+    albumTitle: { color: Colors.textSecondary, fontSize: 12, marginTop: 2 },
+    subTitle: { color: Colors.textSecondary, fontSize: 12, marginTop: 2 },
 });

@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     sheetContainer: {
-        backgroundColor: "#1E1E1E",
+        backgroundColor: Colors.background,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 4,
         borderRadius: 2,
-        backgroundColor: "#444444",
+        backgroundColor: Colors.primary,
     },
     header: {
         flexDirection: "row",
@@ -41,13 +42,13 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingVertical: 12,
         borderBottomWidth: 1,
-        borderBottomColor: "#2A2A2A",
+        borderBottomColor: Colors.border,
         marginBottom: 16,
     },
     title: {
         fontSize: 18,
         fontWeight: "600",
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         flex: 1,
     },
     closeButton: {

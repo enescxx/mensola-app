@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -15,7 +16,7 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     center: {
         flex: 1,
@@ -26,12 +27,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        color: "#ffffff",
+        color: Colors.textPrimary,
         marginBottom: 10,
     },
     subtitle: {
         fontSize: 16,
-        color: "#a0a0a0",
+        color: Colors.textMuted,
         textAlign: "center",
     },
 });

@@ -8,6 +8,7 @@ import { SearchEmptyStateProps } from "./types";
 import { styles } from "./styles";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { NewAlbumsItem } from "@/types/spotify.types";
+import { Colors } from "@/constants/colors";
 
 export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
     const isMoviesTab = activeTab === "movie";
@@ -64,7 +65,7 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
             ListFooterComponent={
                 isFetchingNextPage ? (
                     <View style={styles.loadingContainer}>
-                        <ActivityIndicator size="small" color="#1DB954" />
+                        <ActivityIndicator size="small" color={Colors.primary} />
                     </View>
                 ) : null
             }

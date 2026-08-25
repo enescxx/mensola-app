@@ -1,8 +1,9 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         paddingHorizontal: 12,
     },
     content: {
@@ -18,8 +19,8 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         alignItems: "center",
         borderWidth: 1,
-        borderColor: "#333333",
-        backgroundColor: "rgba(30, 30, 30, 0.8)",
+        borderColor: Colors.border,
+        backgroundColor: Colors.surface,
     },
     headerButton: {
         height: 48,
@@ -34,10 +35,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         justifyContent: "center",
         borderWidth: 1,
-        borderColor: "#333333",
-        backgroundColor: "rgba(30, 30, 30, 0.8)",
+        borderColor: Colors.border,
+        backgroundColor: Colors.surface,
     },
-    titleText: { color: "#8c8c8c", fontSize: 16 },
+    titleText: { color: Colors.textSecondary, fontSize: 16 },
 });
 
 export { styles };

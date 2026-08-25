@@ -7,6 +7,7 @@ import MovieCard from "../MovieCard";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { SearchResultListProps } from "./types";
 import { useRouter } from "expo-router";
+import { Colors } from "@/constants/colors";
 
 export default function SearchResultList({
     activeTab,
@@ -64,7 +65,7 @@ export default function SearchResultList({
         if (!isFetchingNextPage) return null;
         return (
             <View style={styles.loadingContainer}>
-                <ActivityIndicator size="small" color="#1DB954" />
+                <ActivityIndicator size="small" color={Colors.primary} />
             </View>
         );
     };

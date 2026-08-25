@@ -7,6 +7,7 @@ import AddToPlaylistSheetItem from "./AddToPlaylistSheetItem";
 
 import { styles } from "./styles";
 import { AddToPlaylistBottomSheetProps } from "./types";
+import { Colors } from "@/constants/colors";
 
 export default function AddToPlaylistBottomSheet({ isVisible, onClose, trackId }: AddToPlaylistBottomSheetProps) {
     const {
@@ -39,7 +40,7 @@ export default function AddToPlaylistBottomSheet({ isVisible, onClose, trackId }
                 {error ? <Text style={styles.sheetError}>{error}</Text> : null}
 
                 {isLoading ? (
-                    <ActivityIndicator size="large" color="#1DB954" style={{ paddingVertical: 24 }} />
+                    <ActivityIndicator size="large" color={Colors.primary} style={{ paddingVertical: 24 }} />
                 ) : playlists.length === 0 ? (
                     <Text style={styles.bottomSheetEmptyText}>Henüz playlistiniz bulunmuyor.</Text>
                 ) : (
@@ -57,7 +58,11 @@ export default function AddToPlaylistBottomSheet({ isVisible, onClose, trackId }
                         onEndReachedThreshold={0.3}
                         ListFooterComponent={
                             isLoadingMore ? (
-                                <ActivityIndicator size="small" color="#1DB954" style={{ paddingVertical: 12 }} />
+                                <ActivityIndicator
+                                    size="small"
+                                    color={Colors.primary}
+                                    style={{ paddingVertical: 12 }}
+                                />
                             ) : null
                         }
                     />

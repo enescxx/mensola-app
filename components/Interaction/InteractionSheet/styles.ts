@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -14,20 +15,20 @@ export const styles = StyleSheet.create({
         width: 48,
         aspectRatio: 2 / 3,
         borderRadius: 8,
-        backgroundColor: "#2A2A2A",
+        backgroundColor: Colors.surface,
     },
     posterSquare: {
         width: 56,
         aspectRatio: 1 / 1,
         borderRadius: 8,
-        backgroundColor: "#2A2A2A",
+        backgroundColor: Colors.surface,
     },
     headerInfo: {
         flex: 1,
         gap: 4,
     },
     mediaTitle: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 17,
         fontWeight: "bold",
     },
@@ -52,7 +53,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     sectionTitle: {
-        color: "#A7A7A7",
+        color: Colors.textSecondary,
         fontSize: 14,
         fontWeight: "600",
     },
@@ -74,7 +75,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "#262626",
+        backgroundColor: Colors.surface,
         paddingHorizontal: 14,
         paddingVertical: 12,
         borderRadius: 12,
@@ -85,13 +86,13 @@ export const styles = StyleSheet.create({
         gap: 10,
     },
     likeText: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 15,
         fontWeight: "500",
     },
     commentInput: {
-        backgroundColor: "#262626",
-        color: "#FFFFFF",
+        backgroundColor: Colors.surface,
+        color: Colors.textPrimary,
         borderRadius: 12,
         padding: 12,
         minHeight: 88,
@@ -110,7 +111,7 @@ export const styles = StyleSheet.create({
         opacity: 0.6,
     },
     submitButtonText: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 16,
         fontWeight: "bold",
     },

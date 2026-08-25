@@ -1,37 +1,38 @@
+import { Colors } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     loadingContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
     },
     errorContainer: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#121212",
+        backgroundColor: Colors.background,
         padding: 24,
     },
     errorText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 16,
         textAlign: "center",
         marginBottom: 16,
     },
     retryButton: {
-        backgroundColor: "#1DB954",
+        backgroundColor: Colors.primary,
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 20,
     },
     retryText: {
-        color: "white",
+        color: Colors.textSecondary,
         fontWeight: "600",
     },
     rowWrapper: {
@@ -67,12 +68,12 @@ export const styles = StyleSheet.create({
         width: "100%",
         aspectRatio: 1,
         borderRadius: 12,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: Colors.surface,
     },
     posterPlaceholder: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#222222",
+        backgroundColor: Colors.surface,
     },
     infoContainer: {
         flex: 1,
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     movieTitle: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
         fontSize: 20,
         fontWeight: "bold",
     },
@@ -99,17 +100,17 @@ export const styles = StyleSheet.create({
         marginRight: 6,
     },
     avatarPlaceholder: {
-        backgroundColor: "#333",
+        backgroundColor: Colors.surfaceLight,
         justifyContent: "center",
         alignItems: "center",
     },
     avatarLetter: {
-        color: "#FFF",
+        color: Colors.textPrimary,
         fontSize: 11,
         fontWeight: "bold",
     },
     creatorName: {
-        color: "#B3B3B3",
+        color: Colors.textSecondary,
         fontSize: 13,
         fontWeight: "500",
     },
@@ -129,24 +130,11 @@ export const styles = StyleSheet.create({
         paddingTop: 14,
         paddingBottom: 4,
     },
-    description: {
-        color: "#CCCCCC",
-        fontSize: 14,
-        lineHeight: 20,
-    },
-    readMoreButton: {
-        marginTop: 4,
-        alignSelf: "flex-start",
-    },
-    readMoreText: {
-        color: "#1DB954",
-        fontSize: 13,
-        fontWeight: "600",
-    },
+
     tabContainer: {
         flexDirection: "row",
         borderBottomWidth: 1,
-        borderBottomColor: "#222222",
+        borderBottomColor: Colors.border,
         marginTop: 12,
         marginBottom: 16,
         paddingHorizontal: 16,
@@ -161,15 +149,15 @@ export const styles = StyleSheet.create({
         borderBottomColor: "transparent",
     },
     activeTabButton: {
-        borderBottomColor: "#1DB954",
+        borderBottomColor: Colors.primary,
     },
     tabText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 15,
         fontWeight: "600",
     },
     activeTabText: {
-        color: "#FFFFFF",
+        color: Colors.textPrimary,
     },
     emptyContainer: {
         alignItems: "center",
@@ -177,7 +165,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 48,
     },
     emptyText: {
-        color: "#8c8c8c",
+        color: Colors.textSecondary,
         fontSize: 15,
         marginTop: 12,
     },

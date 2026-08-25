@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    KeyboardAvoidingView,
-    Platform,
-    Alert
-} from "react-native";
+import { useEffect } from "react";
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 
 import { useForgotPassword } from "../../hooks/auth/useForgotPassword";
+import { Colors } from "@/constants/colors";
 
 export default function ForgotPasswordScreen() {
-    const { email, setEmail, isLoading, error, handleForgotPassword } =
-        useForgotPassword();
+    const { email, setEmail, isLoading, error, handleForgotPassword } = useForgotPassword();
 
     useEffect(() => {
         if (isLoading) return;
@@ -25,10 +18,7 @@ export default function ForgotPasswordScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={styles.innerContainer}
-            >
+            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.innerContainer}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.logoText}>mensola</Text>
                 </View>
@@ -49,18 +39,18 @@ export default function ForgotPasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#121212" },
+    container: { flex: 1, backgroundColor: Colors.background },
     innerContainer: {
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: 24
+        paddingHorizontal: 24,
     },
     headerContainer: { alignItems: "center", marginBottom: 48 },
     logoText: {
         fontSize: 42,
         fontWeight: "bold",
-        color: "#ffffff",
-        letterSpacing: 1.5
+        color: Colors.textPrimary,
+        letterSpacing: 1.5,
     },
-    formContainer: { marginBottom: 24 }
+    formContainer: { marginBottom: 24 },
 });
