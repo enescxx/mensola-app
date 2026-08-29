@@ -10,6 +10,8 @@ export interface IUser {
     fullname?: string;
     avatar?: URL | string;
     bio?: string;
+    email?: string;
+    isPrivate?: boolean;
 }
 export type UserFavorites = { favoriteMovies: FavoriteMovies; favoriteTracks: FavoriteTracks };
 export type UserStats = Record<StatTypeKey, number>;
@@ -26,3 +28,4 @@ export type FollowUsersResponseDataItem = IUser & { isFollowing: boolean; isFoll
 export type FollowUsersResponseData = PaginationResponse & { items: FollowUsersResponseDataItem[] };
 export type FollowUsersResponse = ApiResponse<FollowUsersResponseData>;
 export type UpdateProfileResponse = ApiResponse<{ user: IUser }>;
+export type UpdateUsernameResponse = ApiResponse<{ user: { id: string; username: string; usernameChangedAt: string } }>;
