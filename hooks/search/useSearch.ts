@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useMovieSearch } from "./useMovieSearch";
 import { useTrackSearch } from "./useTrackSearch";
 import { useDebounce } from "../shared/useDebounce";
+import { usePreferences } from "../usePreferences";
 
 export type SearchTab = "movie" | "track";
 
 export const useSearch = () => {
-    const [activeTab, setActiveTab] = useState<SearchTab>("movie");
+    const defaultTab = usePreferences((state) => state["default-tab"]);
+    const [activeTab, setActiveTab] = useState<SearchTab>(defaultTab === "tracks" ? "track" : "movie");
     const [query, setQuery] = useState("");
     const debouncedQuery = useDebounce(query, 400);
 
