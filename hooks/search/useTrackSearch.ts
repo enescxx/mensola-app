@@ -15,8 +15,6 @@ export const useTrackSearch = (query: string) => {
                     limit: limit,
                 });
 
-                console.log(res.data?.items);
-
                 return res.data;
             },
             initialPageParam: 1,

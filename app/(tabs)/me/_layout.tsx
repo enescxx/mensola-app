@@ -9,7 +9,13 @@ export default function RootLayout() {
         <ProfileProvider userId="me">
             <StatusBar style="light" />
             <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="index" />
+                <Stack.Screen
+                    name="index"
+                    options={{
+                        headerShown: true,
+                        header: (props) => <PageHeader {...props} />,
+                    }}
+                />
                 <Stack.Screen
                     name="edit"
                     options={{

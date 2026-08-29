@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         color: Colors.textPrimary,
         fontSize: 18,
         fontWeight: "bold",
-        marginHorizontal: 16,
+        marginHorizontal: 24,
         marginTop: 12,
         marginBottom: 16,
     },
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     },
     seeAll: { color: Colors.primary, fontSize: 14, marginTop: 12 },
     horizontalContent: {
-        paddingHorizontal: 16,
+        paddingHorizontal: 24,
     },
     verticalContent: {
         paddingHorizontal: 16,

@@ -8,9 +8,9 @@ const queryClient = new QueryClient({
         queries: {
             staleTime: 1000 * 60 * 5,
             gcTime: 1000 * 60 * 10,
-            retry: 2
-        }
-    }
+            retry: 2,
+        },
+    },
 });
 
 export default function RootLayout() {
@@ -19,6 +19,7 @@ export default function RootLayout() {
             <AuthProvider>
                 <StatusBar style="light" />
                 <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="index" />
                     <Stack.Screen name="(auth)" />
                     <Stack.Screen name="(tabs)" />
                 </Stack>

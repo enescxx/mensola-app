@@ -22,7 +22,7 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
         currentQuery;
 
     const data = isMoviesTab ? movieQuery.movies : albumQuery.albums;
-    const title = isMoviesTab ? `Trendler (${totalResults}+ Film)` : `Yeni Çıkan Albümler (${totalResults})`;
+    const title = isMoviesTab ? `Trend Movies (${totalResults}+)` : `New Albums (${totalResults}+)`;
 
     const handleLoadMore = () => {
         if (isLoading || !hasNextPage || isFetchingNextPage) return;

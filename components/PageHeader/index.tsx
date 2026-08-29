@@ -32,8 +32,8 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
                 },
             ]}>
             <View style={styles.content}>
-                <View style={styles.buttonContainer}>
-                    {back && (
+                {back && (
+                    <View style={styles.buttonContainer}>
                         <View style={styles.headerButton}>
                             <TouchableOpacity
                                 onPress={() => navigation.goBack()}
@@ -43,8 +43,8 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
                                 <Ionicons name="chevron-back" size={24} color={Colors.textMuted} />
                             </TouchableOpacity>
                         </View>
-                    )}
-                </View>
+                    </View>
+                )}
                 {title && (
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleText} numberOfLines={1}>
@@ -54,7 +54,7 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
                 )}
 
                 {actions && actions.length > 0 ? (
-                    <View style={styles.buttonContainer}>
+                    <View style={[styles.buttonContainer, !title && { position: "absolute", right: 0 }]}>
                         {actions.map((action) => (
                             <View key={action.id} style={styles.headerButton}>
                                 <TouchableOpacity
@@ -64,7 +64,7 @@ export default function PageHeader({ options, navigation, back }: NativeStackHea
                                     <Ionicons
                                         name={action.icon}
                                         size={action.size || 24}
-                                        color={action.color || "#8c8c8c"}
+                                        color={action.color || Colors.textMuted}
                                     />
                                 </TouchableOpacity>
                             </View>

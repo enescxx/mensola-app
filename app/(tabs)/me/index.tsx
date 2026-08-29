@@ -3,12 +3,31 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import ProfileView from "../../../components/Profile";
 import { Colors } from "@/constants/colors";
+import { Stack, useRouter } from "expo-router";
 
 export default function Profile() {
+    const router = useRouter();
     return (
-        <SafeAreaView style={styles.container}>
-            <ProfileView />
-        </SafeAreaView>
+        <>
+            <Stack.Screen
+                options={
+                    {
+                        headerTransparent: true,
+                        headerRightActions: [
+                            {
+                                id: "settings",
+                                icon: "menu",
+                                size: 22,
+                                onPress: () => router.push("/settings"),
+                            },
+                        ],
+                    } as any
+                }
+            />
+            <SafeAreaView style={styles.container}>
+                <ProfileView />
+            </SafeAreaView>
+        </>
     );
 }
 
