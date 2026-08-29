@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 import { useGlobalUser } from "@/context/AuthContext";
 import { AuthService } from "@/services/auth.service";
@@ -51,6 +52,42 @@ const useLogin = () => {
         } catch (error) {
             console.log(error);
             if (isApiError(error)) {
+                if (error.error?.code === "ACCOUNT_SOFT_DELETED") {
+                    Alert.alert(
+                        "Hesap Silinme Sürecinde",
+                        "Hesabınız silinme sürecindedir. Yeniden etkinleştirmek istiyor musunuz?",
+                        [
+                            { text: "İptal", style: "cancel" },
+                            {
+                                text: "Yeniden Etkinleştir",
+                                onPress: async () => {
+                                    setIsLoading(true);
+                                    try {
+                                        const response = await AuthService.reactivate({ email, password });
+                                        if (!response.data?.accessToken || !response.data?.refreshToken || !response.data?.user) {
+                                            throw new Error("Yeniden etkinleştirme başarısız oldu.");
+                                        }
+                                        const { user, accessToken, refreshToken } = response.data;
+                                        setUser(user);
+                                        await AsyncStorage.multiSet([
+                                            ["token", accessToken],
+                                            ["refreshToken", refreshToken],
+                                        ]);
+                                        router.replace("/(tabs)/home");
+                                    } catch (reactivateError: any) {
+                                        Alert.alert(
+                                            "Hata",
+                                            reactivateError?.error?.message || reactivateError?.message || "Hesap etkinleştirilemedi."
+                                        );
+                                    } finally {
+                                        setIsLoading(false);
+                                    }
+                                }
+                            }
+                        ]
+                    );
+                    return;
+                }
                 const apiErrorMessage = error.error?.message || error?.message;
                 setError(apiErrorMessage || "Giriş yapılırken bir hatayla karşılaşıldı. Lütfen tekrar deneyiniz.");
             } else if (error instanceof Error) {

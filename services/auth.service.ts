@@ -35,6 +35,10 @@ const AuthService = {
     resetPassword: async (data: ResetPasswordRequest): Promise<ApiResponse> => {
         return await client.post<ApiResponse>("/v1/auth/reset-password", data, { auth: false });
     },
+
+    reactivate: async (data: LoginRequest): Promise<AuthResponse> => {
+        return await client.post<AuthResponse>("/v1/auth/reactivate", data, { auth: false });
+    },
 };
 
 export { AuthService };
