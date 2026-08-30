@@ -13,7 +13,7 @@ import {
     UpsertInteractionRequest,
     UpsertInteractionResponse,
 } from "@/types/interaction.types";
-import { AlbumId } from "@/types/common.types";
+import { AlbumId, SpotifyId } from "@/types/common.types";
 
 const AlbumService = {
     getLikedAlbums: async (data: LikedAlbumsRequest): Promise<LikedAlbumsResponse> => {
@@ -26,6 +26,10 @@ const AlbumService = {
 
     getAlbumDetails: async (albumId: AlbumId): Promise<AlbumDetailsResponse> => {
         return client.get<AlbumDetailsResponse>(`/v1/albums/${albumId}`, { auth: true });
+    },
+
+    findOrFetchSpotifyAlbum: async (spotifyId: SpotifyId): Promise<AlbumDetailsResponse> => {
+        return client.get<AlbumDetailsResponse>(`/v1/albums/by-spotify/${spotifyId}`, { auth: true });
     },
 
     getAlbumTracks: async (data: AlbumTracksRequest): Promise<AlbumTracksResponse> => {

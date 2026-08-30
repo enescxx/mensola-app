@@ -35,12 +35,15 @@ export default function AlbumDetailView({
     const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
 
     const renderTrackItem = ({ item }: { item: ITrack }) => {
+        const trackIdentifier = item.spotifyId || item.id;
+        const typeQuery = item.spotifyId ? "?type=spotify" : "?type=app";
+
         return (
             <MusicCard
                 type="track"
                 data={item}
                 style={{ width: "31%" }}
-                onPress={() => router.push(`/tracks/${item.id}` as any)}
+                onPress={() => router.push(`/tracks/${trackIdentifier}${typeQuery}` as any)}
             />
         );
     };
