@@ -5,7 +5,10 @@ import { useAlbumDetails } from "@/hooks/album/useAlbumDetails";
 import { AlbumId } from "@/types/common.types";
 
 export default function AlbumDetailPage() {
-    const { albumId } = useLocalSearchParams<{ albumId?: AlbumId }>();
+    const { albumId, type } = useLocalSearchParams<{ albumId?: string; type?: "spotify" | "app" }>();
+    const isSpotify = type === "spotify" || (typeof albumId === "string" && !albumId.match(/^[0-9a-fA-F-]{36}$/));
+    const effectiveType = isSpotify ? "spotify" : "app";
+
     const {
         albumDetails,
         tracks,
@@ -22,7 +25,7 @@ export default function AlbumDetailPage() {
         error,
         refetchAll,
         toggleLike,
-    } = useAlbumDetails(albumId);
+    } = useAlbumDetails(albumId as any, effectiveType);
 
     return (
         <>

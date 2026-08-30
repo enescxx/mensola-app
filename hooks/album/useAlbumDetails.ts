@@ -4,23 +4,30 @@ import { useInteracion } from "../shared/useInteraction";
 import { useDetailBase } from "../shared/useDetailBase";
 import { useListItems } from "../shared/useListItems";
 import { AlbumDetails, AlbumTracksResponseDataItem } from "@/types/album.types";
-import { AlbumId } from "@/types/common.types";
+import { AlbumId, SpotifyId } from "@/types/common.types";
 
-export const useAlbumDetails = (albumId?: AlbumId) => {
+export const useAlbumDetails = (albumId?: AlbumId | SpotifyId, type: "app" | "spotify" = "app") => {
     const {
         details: albumDetails,
         setDetails,
         fetchData,
         ...rest
-    } = useDetailBase<AlbumDetails, AlbumId>({
+    } = useDetailBase<AlbumDetails, AlbumId | SpotifyId>({
         id: albumId,
-        fetcher: (id) => AlbumService.getAlbumDetails(id),
-        onLike: (id) => AlbumService.likeAlbum(id),
-        onUnlike: (id) => AlbumService.unlikeAlbum(id),
+        fetcher: (id) => {
+            if (type === "spotify") {
+                return AlbumService.findOrFetchSpotifyAlbum(id as SpotifyId);
+            }
+            return AlbumService.getAlbumDetails(id as AlbumId);
+        },
+        onLike: (id) => AlbumService.likeAlbum(id as AlbumId),
+        onUnlike: (id) => AlbumService.unlikeAlbum(id as AlbumId),
         getIsLiked: (d) => !!d.isLiked,
         getLikesCount: (d) => d.likesCount ?? 0,
         updateLike: (d, isLiked, count) => ({ ...d, isLiked, likesCount: count }),
     });
+
+    const dbAlbumId = albumDetails?.id || (type === "app" ? (albumId as AlbumId) : undefined);
 
     const {
         items: tracks,
@@ -29,7 +36,7 @@ export const useAlbumDetails = (albumId?: AlbumId) => {
         hasNextPage: hasNextTrackPage,
         isFetchingNextPage: isFetchingNextTrackPage,
     } = useListItems<AlbumTracksResponseDataItem>({
-        listId: albumId,
+        listId: dbAlbumId,
         itemType: "track",
         getFn: async (id, page, limit) => await AlbumService.getAlbumTracks({ albumId: id as AlbumId, page, limit }),
         limit: 18,
@@ -43,7 +50,7 @@ export const useAlbumDetails = (albumId?: AlbumId) => {
         hasNextPage: hasNextInteractionsPage,
         isFetchingNextPage: isFetchingNextInteractionPage,
     } = useInteracion({
-        targetId: albumId,
+        targetId: dbAlbumId,
         targetType: "album",
         createOrUpdateInteraction: async (data) => {
             await AlbumService.createOrUpdateInteraction(data);

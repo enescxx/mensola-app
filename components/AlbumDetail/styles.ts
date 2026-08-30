@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
     },
     retryText: {
-        color: Colors.textSecondary,
+        color: Colors.textPrimary,
         fontWeight: "600",
     },
     rowWrapper: {
