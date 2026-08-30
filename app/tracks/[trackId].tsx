@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { View, Alert } from "react-native";
 import { TrackDetailView } from "@/components/TrackDetail";
-import { useTrackDetails } from "@/hooks/music/useTrackDetails";
+import { useTrackDetails } from "@/hooks/track/useTrackDetails";
 import { SpotifyId, TrackId } from "@/types/common.types";
 import { useFavoriteTracks } from "@/hooks/track/useFavoriteTracks";
 import { Colors } from "@/constants/colors";
@@ -45,7 +45,8 @@ export default function TrackDetailScreen() {
             if (error?.error?.code === "MAX_FAVORITES_TRACK_REACHED") {
                 setIsReplaceSheetVisible(true);
             } else {
-                const apiMessage = error?.error?.message || error?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
+                const apiMessage =
+                    error?.error?.message || error?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
                 Alert.alert("Hata", apiMessage);
             }
             setIsFavorite(previousState);

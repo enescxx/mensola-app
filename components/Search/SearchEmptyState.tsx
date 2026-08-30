@@ -1,6 +1,6 @@
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { useTrendingMovies } from "@/hooks/movie/useTrendingMovies";
-import { useNewAlbums } from "@/hooks/music/useNewAlbums";
+import { useNewAlbums } from "@/hooks/album/useNewAlbums";
 import DynamicList from "../DynamicList";
 import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
