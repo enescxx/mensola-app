@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 import { router } from "expo-router";
 
 interface RequestOptions extends RequestInit {
@@ -55,7 +55,7 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
     }
 
     if (options.auth) {
-        const token = await AsyncStorage.getItem("token");
+        const token = await SecureStore.getItemAsync("token");
         if (token) {
             (config.headers as Record<string, string>)["Authorization"] = `Bearer ${token}`;
         }
@@ -90,7 +90,7 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
             isRefreshing = true;
 
             try {
-                const storedRefreshToken = await AsyncStorage.getItem("refreshToken");
+                const storedRefreshToken = await SecureStore.getItemAsync("refreshToken");
 
                 const refreshResponse = await fetch(`${BASE_URL}/v1/auth/refresh`, {
                     method: "POST",
@@ -104,7 +104,7 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
 
                 if (refreshResponse.ok && refreshData.success) {
                     const newToken = refreshData.data.accessToken;
-                    await AsyncStorage.setItem("token", newToken);
+                    await SecureStore.setItemAsync("token", newToken);
 
                     isRefreshing = false;
                     processQueue(null, newToken);
@@ -120,8 +120,9 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
             }
 
             isRefreshing = false;
-            await AsyncStorage.removeItem("token");
-            await AsyncStorage.removeItem("refreshToken");
+            await SecureStore.deleteItemAsync("token");
+            await SecureStore.deleteItemAsync("refreshToken");
+            await SecureStore.deleteItemAsync("user_data");
 
             router.replace("/login");
 

@@ -1,7 +1,7 @@
 import { GetProfileRequest, GetProfileResponse, IUser, UpdateProfileResponse } from "@/types/user.types";
 import { client } from "../api/client";
 import { GetStatDetailsRequest, STAT_ENDPOINT_MAP, StatDetailsResponse, StatType } from "@/types/stat.types";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 import { uploadAsync, FileSystemUploadType } from "expo-file-system/legacy";
 import { ApiResponse } from "@/types/api";
 
@@ -21,7 +21,7 @@ const ProfileService = {
     },
 
     uploadAvatar: async (localImageUri: string): Promise<ApiResponse<{ avatarUrl: string }>> => {
-        const token = await AsyncStorage.getItem("token");
+        const token = await SecureStore.getItemAsync("token");
 
         const uploadResult = await uploadAsync(`${BASE_URL}/v1/storage/upload/avatar`, localImageUri, {
             fieldName: "avatar",

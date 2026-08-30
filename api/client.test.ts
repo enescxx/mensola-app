@@ -1,10 +1,10 @@
 import { client } from "./client";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
-jest.mock("@react-native-async-storage/async-storage", () => ({
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    removeItem: jest.fn()
+jest.mock("expo-secure-store", () => ({
+    getItemAsync: jest.fn(),
+    setItemAsync: jest.fn(),
+    deleteItemAsync: jest.fn()
 }));
 
 jest.mock("expo-router", () => ({
@@ -20,7 +20,7 @@ describe("HttpClient Infrastructure Tests", () => {
     });
 
     it("should append the Authorization header and return data on a successful authorized GET request", async () => {
-        (AsyncStorage.getItem as jest.Mock).mockResolvedValue(
+        (SecureStore.getItemAsync as jest.Mock).mockResolvedValue(
             "mock-access-token"
         );
 
@@ -55,7 +55,7 @@ describe("HttpClient Infrastructure Tests", () => {
     });
 
     it("should automatically refresh the token upon a 401 error and retry the original request with the new token", async () => {
-        (AsyncStorage.getItem as jest.Mock).mockImplementation(key => {
+        (SecureStore.getItemAsync as jest.Mock).mockImplementation(key => {
             if (key === "token") return Promise.resolve("old-token");
             if (key === "refreshToken") return Promise.resolve("refresh-token");
             return Promise.resolve(null);
@@ -93,7 +93,7 @@ describe("HttpClient Infrastructure Tests", () => {
 
         const result = await client.get("/profile", { auth: true });
 
-        expect(AsyncStorage.setItem).toHaveBeenCalledWith("token", "new-token");
+        expect(SecureStore.setItemAsync).toHaveBeenCalledWith("token", "new-token");
 
         expect(global.fetch).toHaveBeenLastCalledWith(
             expect.stringContaining("/profile"),
@@ -110,7 +110,7 @@ describe("HttpClient Infrastructure Tests", () => {
     it("should clear tokens and redirect to /login if the refresh token request fails", async () => {
         const { router } = require("expo-router");
 
-        (AsyncStorage.getItem as jest.Mock).mockResolvedValue("any-token");
+        (SecureStore.getItemAsync as jest.Mock).mockResolvedValue("any-token");
 
         (global.fetch as jest.Mock)
             .mockResolvedValueOnce({
@@ -134,14 +134,14 @@ describe("HttpClient Infrastructure Tests", () => {
             expect.objectContaining({ success: false })
         );
 
-        expect(AsyncStorage.removeItem).toHaveBeenCalledWith("token");
-        expect(AsyncStorage.removeItem).toHaveBeenCalledWith("refreshToken");
+        expect(SecureStore.deleteItemAsync).toHaveBeenCalledWith("token");
+        expect(SecureStore.deleteItemAsync).toHaveBeenCalledWith("refreshToken");
 
         expect(router.replace).toHaveBeenCalledWith("/login");
     });
 
     it("should queue subsequent requests while a refresh token request is in progress and resolve them after completion", async () => {
-        (AsyncStorage.getItem as jest.Mock).mockResolvedValue("old-token");
+        (SecureStore.getItemAsync as jest.Mock).mockResolvedValue("old-token");
 
         (global.fetch as jest.Mock)
             .mockResolvedValueOnce({

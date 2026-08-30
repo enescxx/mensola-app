@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import { useGlobalUser } from "../../context/AuthContext";
 import { AuthService } from "../../services/auth.service";
 import { isApiError } from "@/utils/api.utils";
 
 const useRegister = () => {
-    const { setUser } = useGlobalUser();
+    const { login } = useGlobalUser();
     const router = useRouter();
 
     const [username, setUsername] = useState<string>("");
@@ -52,12 +50,7 @@ const useRegister = () => {
 
             const { user, accessToken, refreshToken } = response.data;
 
-            setUser(user);
-
-            await AsyncStorage.multiSet([
-                ["token", accessToken],
-                ["refreshToken", refreshToken],
-            ]);
+            await login({ accessToken, refreshToken }, user);
 
             router.replace("/(tabs)/home");
         } catch (error) {

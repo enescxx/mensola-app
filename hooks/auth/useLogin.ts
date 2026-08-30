@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
-
 import { useGlobalUser } from "@/context/AuthContext";
 import { AuthService } from "@/services/auth.service";
 import { isApiError } from "@/utils/api.utils";
 
 const useLogin = () => {
-    const { setUser } = useGlobalUser();
+    const { login } = useGlobalUser();
     const router = useRouter();
 
     const [email, setEmail] = useState<string>("");
@@ -41,12 +39,7 @@ const useLogin = () => {
 
             const { user, accessToken, refreshToken } = response.data;
 
-            setUser(user);
-
-            await AsyncStorage.multiSet([
-                ["token", accessToken],
-                ["refreshToken", refreshToken],
-            ]);
+            await login({ accessToken, refreshToken }, user);
 
             router.replace("/(tabs)/home");
         } catch (error) {
@@ -68,11 +61,7 @@ const useLogin = () => {
                                             throw new Error("Yeniden etkinleştirme başarısız oldu.");
                                         }
                                         const { user, accessToken, refreshToken } = response.data;
-                                        setUser(user);
-                                        await AsyncStorage.multiSet([
-                                            ["token", accessToken],
-                                            ["refreshToken", refreshToken],
-                                        ]);
+                                        await login({ accessToken, refreshToken }, user);
                                         router.replace("/(tabs)/home");
                                     } catch (reactivateError: any) {
                                         Alert.alert(

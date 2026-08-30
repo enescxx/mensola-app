@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View, Text, TouchableOpacity, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 import { ListGroup } from "../ListGroup";
 import BottomSheet from "../BottomSheet";
@@ -124,7 +124,7 @@ export default function SettingsView() {
     const shelfLayout = usePreferences((state) => state["shelf-layout"]);
     const setPreference = usePreferences((state) => state.setPreference);
 
-    const { user, setUser } = useGlobalUser();
+    const { user, setUser, logout } = useGlobalUser();
     const router = useRouter();
 
     const [activeOptionsSetting, setActiveOptionsSetting] = useState<OptionsSetting | null>(null);
@@ -244,7 +244,7 @@ export default function SettingsView() {
                         style: "destructive",
                         onPress: async () => {
                             try {
-                                const refreshToken = await AsyncStorage.getItem("refreshToken");
+                                const refreshToken = await SecureStore.getItemAsync("refreshToken");
                                 if (refreshToken) {
                                     await AuthService.logout({ refreshToken });
                                 }
@@ -252,9 +252,7 @@ export default function SettingsView() {
                                 console.error("Backend logout failed:", e);
                             } finally {
                                 try {
-                                    await AsyncStorage.multiRemove(["token", "refreshToken"]);
-                                    setUser(undefined);
-                                    router.replace("/login");
+                                    await logout();
                                 } catch (e) {
                                     console.error("Error signing out locally:", e);
                                 }
@@ -275,9 +273,7 @@ export default function SettingsView() {
                         onPress: async () => {
                             try {
                                 await UserService.deleteAccount();
-                                await AsyncStorage.multiRemove(["token", "refreshToken"]);
-                                setUser(undefined);
-                                router.replace("/login");
+                                await logout();
                             } catch (e) {
                                 console.error("Error deleting account:", e);
                                 Alert.alert("Hata", "Hesap silinemedi. Lütfen daha sonra tekrar deneyiniz.");

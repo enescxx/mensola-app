@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { router } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 import { UserService } from "@/services/user.service";
 
@@ -37,10 +37,10 @@ export function useChangePassword({ onSuccess }: { onSuccess?: () => void }) {
             const { accessToken, refreshToken } = res.data;
 
             // Save new tokens
-            await AsyncStorage.multiSet([
-                ["token", accessToken],
-                ["refreshToken", refreshToken],
-            ]);
+            await SecureStore.setItemAsync("token", accessToken);
+            if (refreshToken) {
+                await SecureStore.setItemAsync("refreshToken", refreshToken);
+            }
 
             onSuccess?.();
             router.back();
