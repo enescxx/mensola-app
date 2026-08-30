@@ -127,6 +127,15 @@ const MovieService = {
     findOrFetchMovie: async (tmdbId: TmdbId): Promise<MovieDetailsResponse> => {
         return await client.get<MovieDetailsResponse>(`/v1/movies/by-tmdb/${tmdbId}`, { auth: true });
     },
+
+    createList: async (data: {
+        title: string;
+        description?: string;
+        image?: string | null;
+        isPrivate?: boolean;
+    }): Promise<ApiResponse> => {
+        return await client.post<ApiResponse>(`/v1/movies/lists`, data, { auth: true });
+    },
 };
 
 export { MovieService };
