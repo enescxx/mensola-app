@@ -64,6 +64,15 @@ const PlaylistService = {
     removeTrackFromPlaylist: async (playlistId: PlaylistId, trackId: TrackId): Promise<ApiResponse> => {
         return client.delete<ApiResponse>(`/v1/playlists/${playlistId}/items/${trackId}`, { auth: true });
     },
+
+    createPlaylist: async (data: {
+        title: string;
+        description?: string;
+        image?: string | null;
+        isPrivate?: boolean;
+    }): Promise<ApiResponse> => {
+        return client.post<ApiResponse>(`/v1/playlists`, data, { auth: true });
+    },
 };
 
 export { PlaylistService };

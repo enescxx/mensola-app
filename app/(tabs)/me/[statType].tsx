@@ -1,14 +1,18 @@
+import { useState } from "react";
 import { useLocalSearchParams, Stack } from "expo-router";
 import { useStatDetails } from "../../../hooks/profile/useStatDetails";
 import { useGlobalUser } from "../../../context/AuthContext";
 import { STAT_TITLES } from "../../../constants/pageTitles";
 import { StatDetailView } from "@/components/StatDetailView";
+import CreateListBottomSheet from "@/components/CreateListBottomSheet";
 import { StatType } from "@/types/stat.types";
 import { UserId } from "@/types/common.types";
+import { Colors } from "@/constants/colors";
 
 export default function StatDetailPage() {
     const { statType } = useLocalSearchParams<{ statType: StatType }>();
     const pageTitle = STAT_TITLES[statType] || "Detay";
+    const [isCreateSheetVisible, setIsCreateSheetVisible] = useState(false);
 
     const { user } = useGlobalUser();
 
@@ -18,12 +22,27 @@ export default function StatDetailPage() {
             userId: user?.id,
         });
 
+    const isCreatableType = statType === "playlists" || statType === "movie-lists";
+
     return (
         <>
             <Stack.Screen
-                options={{
-                    title: pageTitle,
-                }}
+                options={
+                    {
+                        title: pageTitle,
+                        headerRightActions: isCreatableType
+                            ? [
+                                  {
+                                      id: "add-list",
+                                      icon: "add",
+                                      size: 26,
+                                      color: Colors.textPrimary,
+                                      onPress: () => setIsCreateSheetVisible(true),
+                                  },
+                              ]
+                            : undefined,
+                    } as any
+                }
             />
             <StatDetailView
                 currentUserId={user?.id as UserId}
@@ -38,6 +57,15 @@ export default function StatDetailPage() {
                 refetch={refetch}
                 isOwnProfile={true}
             />
+
+            {isCreatableType && (
+                <CreateListBottomSheet
+                    isVisible={isCreateSheetVisible}
+                    onClose={() => setIsCreateSheetVisible(false)}
+                    type={statType as "movie-lists" | "playlists"}
+                    onSuccess={() => refetch()}
+                />
+            )}
         </>
     );
 }
