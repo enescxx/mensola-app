@@ -1,10 +1,13 @@
-import { StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, View, Alert } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 
 import MovieDetailView from "@/components/Movies/MovieDetailView";
 import { useMovie } from "@/hooks/movie/useMovie";
+import { useFavoriteMovies } from "@/hooks/movie/useFavoriteMovies";
 import { MovieId, TmdbId } from "@/types/common.types";
 import { Colors } from "@/constants/colors";
+import ReplaceFavoriteBottomSheet from "@/components/ReplaceFavoriteBottomSheet";
 
 export default function MoviePage() {
     const { movieId, type } = useLocalSearchParams<{
@@ -12,22 +15,77 @@ export default function MoviePage() {
         type?: "tmdb" | "app";
     }>();
 
-    const { movie, isLoading, error } = useMovie(
-        type === "tmdb" ? (Number(movieId) as TmdbId) : (movieId as MovieId),
-        type ?? "app",
-    );
+    const parsedMovieId = type === "tmdb" ? (Number(movieId) as TmdbId) : (movieId as MovieId);
+
+    const { movie, isLoading, error } = useMovie(parsedMovieId, type ?? "app");
+    const { addFavorite, removeFavorite, isLoading: isFavoriteLoading } = useFavoriteMovies();
+
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [isReplaceSheetVisible, setIsReplaceSheetVisible] = useState(false);
+
+    useEffect(() => {
+        if (movie?.isFavorite !== undefined) {
+            setIsFavorite(movie.isFavorite);
+        }
+    }, [movie?.isFavorite]);
+
+    const handleToggleFavorite = async () => {
+        if (!movie?.id) return;
+
+        const previousState = isFavorite;
+        setIsFavorite(!previousState);
+
+        try {
+            if (previousState) {
+                await removeFavorite(movie.id);
+            } else {
+                await addFavorite(movie.id);
+            }
+        } catch (error: any) {
+            if (error?.error?.code === "MAX_FAVORITES_FILM_REACHED") {
+                setIsReplaceSheetVisible(true);
+            } else {
+                const apiMessage =
+                    error?.error?.message || error?.message || "Film favorilere eklenirken bir hata oluştu.";
+                Alert.alert("Hata", apiMessage);
+            }
+            setIsFavorite(previousState);
+        }
+    };
 
     return (
         <>
             <Stack.Screen
-                options={{
-                    headerTransparent: true,
-                    title: movie?.title,
-                }}
+                options={
+                    {
+                        headerTransparent: true,
+                        title: movie?.title,
+                        headerRightActions: [
+                            {
+                                id: "add-favorite",
+                                icon: "sparkles",
+                                size: 22,
+                                color: isFavorite ? "#FFD700" : Colors.textMuted,
+                                onPress: handleToggleFavorite,
+                            },
+                        ],
+                    } as any
+                }
             />
             <View style={styles.container}>
                 <MovieDetailView movie={movie} isLoading={isLoading} error={error} />
             </View>
+            {movie?.id && (
+                <ReplaceFavoriteBottomSheet
+                    isVisible={isReplaceSheetVisible}
+                    onClose={() => setIsReplaceSheetVisible(false)}
+                    type="movie"
+                    newItemId={movie.id}
+                    onSuccess={() => {
+                        setIsFavorite(true);
+                    }}
+                />
+            )}
         </>
     );
 }

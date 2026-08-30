@@ -16,9 +16,16 @@ import {
     MovieListDetailsResponse,
     MovieListItemsResponse,
     MovieListLikeActionsResponse,
+    FavoriteMoviesResponse,
 } from "@/types/movie.types";
 import { ApiResponse } from "@/types/api";
 const MovieService = {
+    getFavoriteMovies: async (page = 1, limit = 3): Promise<FavoriteMoviesResponse> => {
+        return await client.get<FavoriteMoviesResponse>(`/v1/movies/favorites`, {
+            auth: true,
+            params: { page, limit },
+        });
+    },
     getMovie: async (movieId: MovieId): Promise<MovieDetailsResponse> => {
         return await client.get<MovieDetailsResponse>(`/v1/movies/${movieId}`, { auth: true });
     },
@@ -45,6 +52,18 @@ const MovieService = {
 
     removeFromWatchlist: async (movieId: MovieId): Promise<ApiResponse> => {
         return await client.delete<ApiResponse>(`/v1/movies/${movieId}/watchlist`, { auth: true });
+    },
+
+    addToFavorites: async (data: {
+        movieId?: MovieId;
+        tmdbId?: number;
+        replaceMovieId?: MovieId;
+    }): Promise<ApiResponse> => {
+        return await client.post<ApiResponse>(`/v1/movies/favorites`, data, { auth: true });
+    },
+
+    removeFromFavorites: async (movieId: MovieId): Promise<ApiResponse> => {
+        return await client.delete<ApiResponse>(`/v1/movies/${movieId}/favorites`, { auth: true });
     },
 
     addMovieToList: async (listId: MovieListId, movieId: MovieId): Promise<AddToListResponse> => {

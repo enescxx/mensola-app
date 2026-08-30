@@ -144,7 +144,7 @@ export default function PlaylistHero({
                         <View style={styles.actionBar}>
                             {/* Aktar */}
                             <ActionButton
-                                icon="sparkles-outline"
+                                icon="arrow-redo"
                                 isActive={false}
                                 activeColor={`${Colors.secondary}66`}
                                 onPress={() => {}}
