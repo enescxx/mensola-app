@@ -64,8 +64,6 @@ export default function StatDetailView<T extends StatType = StatType>({
         "liked-tracks",
         "liked-playlists",
         "liked-albums",
-        "favorite-tracks",
-        "favorite-movies",
     ].includes(statType);
 
     const renderItem = ({ item, index }: any) => {
@@ -88,8 +86,7 @@ export default function StatDetailView<T extends StatType = StatType>({
             case "playlists":
             case "liked-tracks":
             case "liked-playlists":
-            case "liked-albums":
-            case "favorite-tracks": {
+            case "liked-albums": {
                 let cardType: "track" | "playlist" | "album" = "track";
 
                 if (statType.includes("playlist")) {
@@ -125,7 +122,6 @@ export default function StatDetailView<T extends StatType = StatType>({
             case "watchlist":
             case "watched":
             case "liked-movies":
-            case "favorite-movies":
                 return (
                     <StatDetailItem
                         viewType="movie-card"

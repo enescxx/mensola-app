@@ -14,7 +14,7 @@ const ProfileService = {
 
     getStatDetails: async <T extends StatType>(data: GetStatDetailsRequest<T>): Promise<StatDetailsResponse<T>> => {
         const { statType, userId, page, limit } = data;
-        return await client.get<StatDetailsResponse<T>>(`/v1${STAT_ENDPOINT_MAP[statType]}`, {
+        return await client.get<StatDetailsResponse<T>>(`/v1${STAT_ENDPOINT_MAP[statType as StatType]}`, {
             auth: true,
             params: { userId, page, limit },
         });

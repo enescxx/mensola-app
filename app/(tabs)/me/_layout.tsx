@@ -1,12 +1,11 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { ProfileProvider } from "../../../context/ProfileContext";
 
 import PageHeader from "../../../components/PageHeader";
 
 export default function RootLayout() {
     return (
-        <ProfileProvider userId="me">
+        <>
             <StatusBar style="light" />
             <Stack screenOptions={{ headerShown: false }}>
                 <Stack.Screen
@@ -32,6 +31,6 @@ export default function RootLayout() {
                     }}
                 />
             </Stack>
-        </ProfileProvider>
+        </>
     );
 }

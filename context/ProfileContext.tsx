@@ -8,6 +8,7 @@ import { UserId } from "@/types/common.types";
 import { STAT_ROUTE_MAP, StatTypeKey } from "@/types/stat.types";
 import { IUser, UserFavorites, UserStats } from "@/types/user.types";
 import { Colors } from "@/constants/colors";
+import { useGlobalUser } from "@/context/AuthContext";
 
 export interface ProfileContextType {
     userId?: UserId | "me";
@@ -18,13 +19,13 @@ export interface ProfileContextType {
     footerData: { stats: Partial<UserStats> };
     isOwnProfile: boolean;
     handleStatPress: (statType: StatTypeKey) => void;
-    handleSeeAllPress: (type: "movies" | "tracks") => void;
     favorites: UserFavorites;
 }
 
 const ProfileContext = createContext<ProfileContextType | null>(null);
 
 export function ProfileProvider({ userId, children }: { userId: UserId | "me"; children: React.ReactNode }) {
+    const { user } = useGlobalUser();
     const { profile, fetchProfile, isLoading, error } = useProfile(userId);
     const router = useRouter();
 
@@ -44,19 +45,11 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         );
     }
 
-    const isOwnProfile = userId === "me";
+    const isOwnProfile = userId === "me" || userId === user?.id;
 
     const handleStatPress = (statType: StatTypeKey) => {
         const basePath = isOwnProfile ? "/me" : `/users/${userId}`;
         const fullPath = `${basePath}/${STAT_ROUTE_MAP[statType]}`;
-
-        router.push(fullPath as Href);
-    };
-
-    const handleSeeAllPress = (type: "movies" | "tracks") => {
-        const path = type === "movies" ? "/favorite-movies" : "/favorite-tracks";
-        const basePath = isOwnProfile ? "/me" : `/users/${userId}`;
-        const fullPath = `${basePath}${path}`;
 
         router.push(fullPath as Href);
     };
@@ -112,7 +105,6 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
                 footerData,
                 isOwnProfile,
                 handleStatPress,
-                handleSeeAllPress,
                 favorites,
             }}>
             {children}
