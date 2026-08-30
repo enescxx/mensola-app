@@ -1,8 +1,6 @@
 import { LikedAlbumsResponse, LikedAlbumsResponseDataItem } from "./album.types";
 import { PaginationQueries, UserId } from "./common.types";
 import {
-    FavoriteMovies,
-    FavoriteMoviesResponse,
     GetListsResponse,
     GetListsResponseDataItem,
     IMovie,
@@ -15,7 +13,7 @@ import {
     PlaylistItemsResponse,
     PlaylistItemsResponseDataItem,
 } from "./playlist.types";
-import { FavoriteTracks, FavoriteTracksResponse, ITrack } from "./track.types";
+import { ITrack } from "./track.types";
 import { FollowUsersResponse, FollowUsersResponseDataItem } from "./user.types";
 
 export type StatType =
@@ -29,9 +27,7 @@ export type StatType =
     | "liked-movie-lists"
     | "liked-albums"
     | "followers"
-    | "following"
-    | "favorite-movies"
-    | "favorite-tracks";
+    | "following";
 export type StatItem = { type: StatType; value: number };
 export type StatTypeKey =
     | "movieListCount"
@@ -62,8 +58,6 @@ export type StatDetailsResponseMap = {
     "liked-albums": LikedAlbumsResponse;
     followers: FollowUsersResponse;
     following: FollowUsersResponse;
-    "favorite-movies": FavoriteMoviesResponse;
-    "favorite-tracks": FavoriteTracksResponse;
 };
 export type StatDetailsItemMap = {
     "movie-lists": GetListsResponseDataItem;
@@ -77,8 +71,6 @@ export type StatDetailsItemMap = {
     "liked-albums": LikedAlbumsResponseDataItem;
     followers: FollowUsersResponseDataItem;
     following: FollowUsersResponseDataItem;
-    "favorite-movies": IMovie;
-    "favorite-tracks": ITrack;
 };
 
 export const STAT_KEY_MAP: Record<StatType, StatTypeKey | undefined> = {
@@ -93,9 +85,6 @@ export const STAT_KEY_MAP: Record<StatType, StatTypeKey | undefined> = {
     "liked-albums": "likedAlbumsCount",
     followers: "followersCount",
     following: "followingCount",
-
-    "favorite-movies": undefined,
-    "favorite-tracks": undefined,
 };
 export const STAT_ROUTE_MAP: Record<StatTypeKey, StatType> = {
     movieListCount: "movie-lists",
@@ -122,8 +111,6 @@ export const STAT_ENDPOINT_MAP: Record<StatType, string> = {
     "liked-albums": "/albums/likes",
     followers: "/users/followers",
     following: "/users/following",
-    "favorite-movies": "/movies/favorites",
-    "favorite-tracks": "/tracks/favorites",
 };
 export const STAT_KEY_ENDPOINT_MAP: Record<StatTypeKey, string> = {
     movieListCount: "/movies/lists",

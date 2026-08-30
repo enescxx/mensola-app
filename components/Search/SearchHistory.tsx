@@ -1,16 +1,56 @@
 import { SearchHistoryItem, useSearchHistory } from "@/hooks/search/useSearchHistory";
 import DynamicList from "../DynamicList";
 import { SearchHistoryProps } from "./types";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, Alert } from "react-native";
 import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
 import { SpotifyTrackItem } from "@/types/spotify.types";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./styles";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
+import { MovieService } from "@/services/movie.service";
+import { TrackService } from "@/services/track.service";
+import { TmdbId, SpotifyId } from "@/types/common.types";
 
 export default function SearchHistory({ history, addSearch, removeSearch, clearHistory }: SearchHistoryProps) {
     const router = useRouter();
+    const params = useLocalSearchParams();
+    const isFavoriteMode = params.mode === "favorite";
+
+    const handleSelectMovie = async (movie: any) => {
+        addSearch({ type: "movie", data: movie });
+        if (isFavoriteMode) {
+            try {
+                await MovieService.addToFavorites({ tmdbId: movie.tmdbId as TmdbId });
+                Alert.alert("Başarılı", `"${movie.title}" favori filmlerinize eklendi.`, [
+                    { text: "Tamam", onPress: () => router.push("/me") }
+                ]);
+            } catch (err: any) {
+                const apiErrorMessage = err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
+                Alert.alert("Hata", apiErrorMessage);
+            }
+        } else {
+            router.push(`/movies/${movie.tmdbId}?type=tmdb`);
+        }
+    };
+
+    const handleSelectTrack = async (track: any) => {
+        addSearch({ type: "track", data: track });
+        if (isFavoriteMode) {
+            try {
+                await TrackService.addToFavorites({ spotifyId: track.spotifyId as SpotifyId });
+                Alert.alert("Başarılı", `"${track.title}" favori şarkılarınıza eklendi.`, [
+                    { text: "Tamam", onPress: () => router.push("/me") }
+                ]);
+            } catch (err: any) {
+                const apiErrorMessage = err?.error?.message || err?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
+                Alert.alert("Hata", apiErrorMessage);
+            }
+        } else {
+            router.push(`/tracks/${track.spotifyId}?type=spotify`);
+        }
+    };
+
     const renderItem = ({ item }: { item: SearchHistoryItem }) => {
         const itemView = () => {
             switch (item.type) {
@@ -24,10 +64,7 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
                             poster={movie.poster}
                             releaseDate={movie.releaseDate}
                             genres={movie.genres}
-                            onPress={() => {
-                                addSearch({ type: "movie", data: movie });
-                                router.push(`/movies/${item.data.tmdbId}?type=tmdb`);
-                            }}
+                            onPress={() => handleSelectMovie(movie)}
                         />
                     );
                 }
@@ -38,10 +75,7 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
                             layout="horizontal"
                             type="track"
                             data={track}
-                            onPress={() => {
-                                addSearch({ type: "track", data: track });
-                                router.push(`/tracks/${item.data.spotifyId}?type=spotify`);
-                            }}
+                            onPress={() => handleSelectTrack(track)}
                         />
                     );
                 }
