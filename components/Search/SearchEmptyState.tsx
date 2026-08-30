@@ -1,4 +1,5 @@
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from "react-native";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { useTrendingMovies } from "@/hooks/movie/useTrendingMovies";
 import { useNewAlbums } from "@/hooks/album/useNewAlbums";
 import DynamicList from "../DynamicList";
@@ -9,8 +10,14 @@ import { styles } from "./styles";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { NewAlbumsItem } from "@/types/spotify.types";
 import { Colors } from "@/constants/colors";
+import { MovieService } from "@/services/movie.service";
+import { TmdbId } from "@/types/common.types";
 
 export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
+    const router = useRouter();
+    const params = useLocalSearchParams();
+    const isFavoriteMode = params.mode === "favorite";
+
     const isMoviesTab = activeTab === "movie";
     const isTrackTab = activeTab === "track";
 
@@ -27,6 +34,27 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
     const handleLoadMore = () => {
         if (isLoading || !hasNextPage || isFetchingNextPage) return;
         fetchNextPage();
+    };
+
+    const handleSelectMovie = async (movie: TmdbMovieItem) => {
+        if (isFavoriteMode) {
+            try {
+                await MovieService.addToFavorites({ tmdbId: movie.tmdbId as TmdbId });
+                Alert.alert("Başarılı", `"${movie.title}" favori filmlerinize eklendi.`, [
+                    { text: "Tamam", onPress: () => router.push("/me") },
+                ]);
+            } catch (err: any) {
+                const apiErrorMessage =
+                    err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
+                Alert.alert("Hata", apiErrorMessage);
+            }
+        } else {
+            router.push(`/movies/${movie.tmdbId}?type=tmdb`);
+        }
+    };
+
+    const handleSelectAlbum = (album: NewAlbumsItem) => {
+        router.push(`/albums/${album.spotifyId}`);
     };
 
     if (isError) {
@@ -51,9 +79,15 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
                         poster={(item as any).poster}
                         interactions={{ rating: (item as any).rating }}
                         style={{ width: "31%" }}
+                        onPress={() => handleSelectMovie(item as TmdbMovieItem)}
                     />
                 ) : (
-                    <MusicCard type="album" data={item} style={{ width: "31%" }} />
+                    <MusicCard
+                        type="album"
+                        data={item}
+                        style={{ width: "31%" }}
+                        onPress={() => handleSelectAlbum(item as NewAlbumsItem)}
+                    />
                 )
             }
             variant="vertical"
