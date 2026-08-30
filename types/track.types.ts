@@ -18,6 +18,7 @@ export type TrackDetails = ITrack & {
     isLiked?: boolean;
     likesCount?: number;
     commentsCount?: number;
+    isFavorite?: boolean;
     interactions?: InteractionItemResponse[];
     currentUserInteraction?: InteractionSummary;
 };

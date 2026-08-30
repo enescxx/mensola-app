@@ -1,9 +1,16 @@
 import { SpotifyId, TrackId } from "@/types/common.types";
 import { client } from "../api/client";
 import { UpsertInteractionRequest, UpsertInteractionResponse } from "@/types/interaction.types";
-import { TrackDetailsResponse, TrackLikeActionsResponse } from "@/types/track.types";
+import { TrackDetailsResponse, TrackLikeActionsResponse, FavoriteTracksResponse } from "@/types/track.types";
+import { ApiResponse } from "@/types/api";
 
 const TrackService = {
+    getFavoriteTracks: async (page = 1, limit = 3): Promise<FavoriteTracksResponse> => {
+        return await client.get<FavoriteTracksResponse>(`/v1/tracks/favorites`, {
+            auth: true,
+            params: { page, limit },
+        });
+    },
     getTrackDetails: async (trackId: TrackId): Promise<TrackDetailsResponse> => {
         return await client.get<TrackDetailsResponse>(`/v1/tracks/${trackId}`, { auth: true });
     },
@@ -14,6 +21,18 @@ const TrackService = {
 
     unlikeTrack: async (trackId: TrackId): Promise<TrackLikeActionsResponse> => {
         return await client.delete<TrackLikeActionsResponse>(`/v1/tracks/${trackId}/like`, { auth: true });
+    },
+
+    addToFavorites: async (data: {
+        trackId?: TrackId;
+        spotifyId?: string;
+        replaceTrackId?: TrackId;
+    }): Promise<ApiResponse> => {
+        return await client.post<ApiResponse>(`/v1/tracks/favorites`, data, { auth: true });
+    },
+
+    removeFromFavorites: async (trackId: TrackId): Promise<ApiResponse> => {
+        return await client.delete<ApiResponse>(`/v1/tracks/${trackId}/favorites`, { auth: true });
     },
 
     createOrUpdateInteraction: async (data: UpsertInteractionRequest): Promise<UpsertInteractionResponse> => {
