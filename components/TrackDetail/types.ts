@@ -1,4 +1,4 @@
-import { IPlaylistItemOption } from "@/hooks/music/useUserPlaylists";
+import { IPlaylistItemOption } from "@/hooks/playlist/useUserPlaylists";
 import { PlaylistId, TrackId } from "@/types/common.types";
 import { InteractionItemResponse, UpsertInteractionSummary } from "@/types/interaction.types";
 import { TrackDetails } from "@/types/track.types";

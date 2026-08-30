@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
 import BottomSheet from "@/components/BottomSheet";
-import { useUserPlaylists } from "@/hooks/music/useUserPlaylists";
+import { useUserPlaylists } from "@/hooks/playlist/useUserPlaylists";
 import AddToPlaylistSheetItem from "./AddToPlaylistSheetItem";
 
 import { styles } from "./styles";

@@ -1,7 +1,7 @@
 import { useLocalSearchParams, Stack } from "expo-router";
 
 import { PlaylistDetailView } from "@/components/PlaylistDetail";
-import { usePlaylistDetails } from "@/hooks/music/usePlaylistDetails";
+import { usePlaylistDetails } from "@/hooks/playlist/usePlaylistDetails";
 import { PlaylistId } from "@/types/common.types";
 import { PlaylistDetails } from "@/types/playlist.types";
 
