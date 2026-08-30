@@ -1,8 +1,6 @@
 import { StatType } from "@/types/stat.types";
 
 export const STAT_TITLES: Record<StatType, string> = {
-    "favorite-movies": "Favori Filmler",
-    "favorite-tracks": "Favori Şarkılar",
     watchlist: "İzleme Listesi",
     watched: "İzlenen Filmler",
     "liked-movies": "Beğenilen Filmler",

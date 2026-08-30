@@ -4,11 +4,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileView from "../../../components/Profile";
 import { Colors } from "@/constants/colors";
 import { Stack, useRouter } from "expo-router";
+import { ProfileProvider } from "../../../context/ProfileContext";
 
 export default function Profile() {
     const router = useRouter();
     return (
-        <>
+        <ProfileProvider userId="me">
             <Stack.Screen
                 options={
                     {
@@ -27,7 +28,7 @@ export default function Profile() {
             <SafeAreaView style={styles.container}>
                 <ProfileView />
             </SafeAreaView>
-        </>
+        </ProfileProvider>
     );
 }
 
