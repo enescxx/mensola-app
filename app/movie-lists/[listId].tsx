@@ -29,6 +29,7 @@ export default function MovieListDetailPage() {
         <>
             <Stack.Screen
                 options={{
+                    headerTransparent: true,
                     title: listDetails?.title || "Film Listesi",
                 }}
             />

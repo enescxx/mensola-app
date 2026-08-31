@@ -50,26 +50,28 @@ export default function AlbumDetailView({
 
     const renderCommentItem = ({ item }: { item: InteractionItemResponse }) => {
         return (
-            <InteractionView
-                data={{
-                    id: item.id,
-                    rating: typeof item.rating === "string" ? parseFloat(item.rating) : item.rating,
-                    isLiked: item.isLiked,
-                    user: {
-                        id: item.user.id,
-                        username: item.user.username,
-                        fullname: item.user.fullname || item.user.username,
-                        avatar: item.user.avatar || "",
-                    },
-                    comment: {
-                        id: item.comment.id,
-                        content: item.comment.content,
-                        date: item.comment.date,
-                    },
-                    likesCount: item.likesCount || 0,
-                    replyCount: item.replyCount || 0,
-                }}
-            />
+            <View style={{ paddingHorizontal: 16 }}>
+                <InteractionView
+                    data={{
+                        id: item.id,
+                        rating: typeof item.rating === "string" ? parseFloat(item.rating) : item.rating,
+                        isLiked: item.isLiked,
+                        user: {
+                            id: item.user.id,
+                            username: item.user.username,
+                            fullname: item.user.fullname || item.user.username,
+                            avatar: item.user.avatar || "",
+                        },
+                        comment: {
+                            id: item.comment.id,
+                            content: item.comment.content,
+                            date: item.comment.date,
+                        },
+                        likesCount: item.likesCount || 0,
+                        replyCount: item.replyCount || 0,
+                    }}
+                />
+            </View>
         );
     };
 
@@ -114,6 +116,7 @@ export default function AlbumDetailView({
     return (
         <View style={styles.container}>
             <DynamicList<ITrack | InteractionItemResponse>
+                style={{ paddingHorizontal: 0 }}
                 key={activeTab}
                 data={isTracksTab ? (tracks as ITrack[]) : (interactions as InteractionItemResponse[])}
                 variant="vertical"

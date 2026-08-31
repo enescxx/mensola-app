@@ -31,6 +31,7 @@ export default function AlbumDetailPage() {
         <>
             <Stack.Screen
                 options={{
+                    headerTransparent: true,
                     title: albumDetails?.title || "Albüm",
                 }}
             />
