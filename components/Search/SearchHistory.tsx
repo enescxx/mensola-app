@@ -26,10 +26,11 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
             try {
                 await MovieService.addToFavorites({ tmdbId: movie.tmdbId as TmdbId });
                 Alert.alert("Başarılı", `"${movie.title}" favori filmlerinize eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") }
+                    { text: "Tamam", onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
-                const apiErrorMessage = err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
+                const apiErrorMessage =
+                    err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
                 Alert.alert("Hata", apiErrorMessage);
             }
         } else {
@@ -43,10 +44,11 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
             try {
                 await TrackService.addToFavorites({ spotifyId: track.spotifyId as SpotifyId });
                 Alert.alert("Başarılı", `"${track.title}" favori şarkılarınıza eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") }
+                    { text: "Tamam", onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
-                const apiErrorMessage = err?.error?.message || err?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
+                const apiErrorMessage =
+                    err?.error?.message || err?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
                 Alert.alert("Hata", apiErrorMessage);
             }
         } else {
@@ -119,6 +121,14 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
         );
     };
     return (
-        <DynamicList variant="vertical" data={history} renderItem={renderItem} keyboardShouldPersistTaps="handled" />
+        <View style={styles.resultsContainer}>
+            <DynamicList
+                variant="vertical"
+                data={history}
+                renderItem={renderItem}
+                keyboardShouldPersistTaps="handled"
+                style={{ paddingBottom: 100 }}
+            />
+        </View>
     );
 }
