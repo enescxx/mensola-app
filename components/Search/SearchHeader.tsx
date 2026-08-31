@@ -9,6 +9,7 @@ import { SearchHeaderProps } from "./types";
 const SEARCH_OPTIONS: PillOption<SearchTab>[] = [
     { label: "Filmler", value: "movie", icon: "film" },
     { label: "Şarkılar", value: "track", icon: "musical-note" },
+    { label: "Kullanıcılar", value: "user", icon: "people" },
 ];
 
 export default function SearchHeader({

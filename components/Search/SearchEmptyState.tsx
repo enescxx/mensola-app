@@ -57,6 +57,16 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
         router.push(`/albums/${album.spotifyId}`);
     };
 
+    if (activeTab === "user") {
+        return (
+            <View style={[styles.errorContainer, { justifyContent: "center", flex: 1, alignItems: "center" }]}>
+                <Text style={[styles.errorText, { color: Colors.textSecondary }]}>
+                    Aramak istediğiniz kullanıcı adını girin.
+                </Text>
+            </View>
+        );
+    }
+
     if (isError) {
         return (
             <View style={styles.errorContainer}>

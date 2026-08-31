@@ -6,11 +6,14 @@ import { SpotifyTrackItem } from "@/types/spotify.types";
 import MovieCard from "../MovieCard";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { SearchResultListProps } from "./types";
+import UserCard from "../UserCard";
+import { UserService } from "@/services/user.service";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Colors } from "@/constants/colors";
 import { MovieService } from "@/services/movie.service";
 import { TrackService } from "@/services/track.service";
 import { TmdbId, SpotifyId } from "@/types/common.types";
+import { useGlobalUser } from "@/context/AuthContext";
 
 export default function SearchResultList({
     activeTab,
@@ -26,6 +29,7 @@ export default function SearchResultList({
 }: SearchResultListProps) {
     const router = useRouter();
     const params = useLocalSearchParams();
+    const { user: currentUser } = useGlobalUser();
     const isFavoriteMode = params.mode === "favorite";
 
     const handleSelectMovie = async (movie: TmdbMovieItem) => {
@@ -34,10 +38,11 @@ export default function SearchResultList({
             try {
                 await MovieService.addToFavorites({ tmdbId: movie.tmdbId as TmdbId });
                 Alert.alert("Başarılı", `"${movie.title}" favori filmlerinize eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") }
+                    { text: "Tamam", onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
-                const apiErrorMessage = err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
+                const apiErrorMessage =
+                    err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
                 Alert.alert("Hata", apiErrorMessage);
             }
         } else {
@@ -51,14 +56,36 @@ export default function SearchResultList({
             try {
                 await TrackService.addToFavorites({ spotifyId: track.spotifyId as unknown as SpotifyId });
                 Alert.alert("Başarılı", `"${track.title}" favori şarkılarınıza eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") }
+                    { text: "Tamam", onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
-                const apiErrorMessage = err?.error?.message || err?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
+                const apiErrorMessage =
+                    err?.error?.message || err?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
                 Alert.alert("Hata", apiErrorMessage);
             }
         } else {
             router.push(`/tracks/${track.spotifyId}?type=spotify`);
+        }
+    };
+
+    const handleSelectUser = (user: any) => {
+        addSearch({
+            type: "user",
+            data: { id: user.id, username: user.username, fullname: user.fullname, avatar: user.avatar },
+        });
+        router.push(`/users/${user.id}`);
+    };
+
+    const handleFollowUser = async (userId: string, isFollowing: boolean) => {
+        try {
+            if (isFollowing) {
+                await UserService.unfollow(userId as any);
+            } else {
+                await UserService.follow(userId as any);
+            }
+            refetch(); // Tabloyu yenilemek en temizi
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -85,6 +112,24 @@ export default function SearchResultList({
                         type="track"
                         data={track}
                         onPress={() => handleSelectTrack(track)}
+                    />
+                );
+            case "user":
+                const user = item as any;
+                return (
+                    <UserCard
+                        user={{
+                            id: user.id,
+                            username: user.username,
+                            fullname: user.fullname,
+                            avatar: user.avatar,
+                            isFollowing: user.isFollowingByMe,
+                        }}
+                        currentUserId={currentUser?.id as any}
+                        onCardPress={() => handleSelectUser(user)}
+                        onFollowPress={() => handleFollowUser(user.id, user.isFollowingByMe)}
+                        isFirst={true}
+                        isLast={true}
                     />
                 );
         }

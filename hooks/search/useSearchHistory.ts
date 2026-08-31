@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { SpotifyTrackItem } from "@/types/spotify.types";
+import { IUser } from "@/types/user.types";
 
 const STORAGE_KEY = "@search_history";
 const MAX_HISTORY_LIMIT = 10;
 
-export type NewSearchHistoryItem = { type: "movie"; data: TmdbMovieItem } | { type: "track"; data: SpotifyTrackItem };
+export type NewSearchHistoryItem =
+    | { type: "movie"; data: TmdbMovieItem }
+    | { type: "track"; data: SpotifyTrackItem }
+    | { type: "user"; data: IUser };
 export type SearchHistoryItem = NewSearchHistoryItem & { searchedAt: number };
 
 export const useSearchHistory = () => {
@@ -36,6 +40,9 @@ export const useSearchHistory = () => {
         }
         if (a.type === "track" && b.type === "track") {
             return a.data.spotifyId === b.data.spotifyId;
+        }
+        if (a.type === "user" && b.type === "user") {
+            return a.data.id === b.data.id;
         }
         return false;
     };

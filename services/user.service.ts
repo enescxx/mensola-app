@@ -38,6 +38,10 @@ const UserService = {
     deleteAccount: async (): Promise<any> => {
         return await client.delete("/v1/users/me", { auth: true });
     },
+
+    searchUsers: async (params: { q: string; page?: number; limit?: number }): Promise<any> => {
+        return await client.get("/v1/users/search", { params, auth: true });
+    },
 };
 
 export { UserService };

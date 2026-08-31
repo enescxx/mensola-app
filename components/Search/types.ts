@@ -13,7 +13,7 @@ export type SearchHeaderProps = {
 };
 export type SearchResultListProps = {
     activeTab: SearchTab;
-    results: TmdbMovieItem[] | SpotifyTrackItem[];
+    results: any[];
     fetchNextPage: () => void;
     isLoading: boolean;
     refetch: () => void;
