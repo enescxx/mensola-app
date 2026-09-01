@@ -156,6 +156,24 @@ const styles = StyleSheet.create({
         color: Colors.textMuted,
         fontSize: 14,
     },
+    privateContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 60,
+        gap: 12,
+    },
+    privateText: {
+        fontSize: 16,
+        color: Colors.textPrimary,
+        fontWeight: "600",
+    },
+    privateSubText: {
+        fontSize: 13,
+        color: Colors.textSecondary,
+        textAlign: "center",
+        paddingHorizontal: 32,
+    }
 });
 
 export { styles };

@@ -1,0 +1,177 @@
+{
+    "auth": {
+        "login": {
+            "emailLabel": "E-posta",
+            "emailPlaceholder": "ornek@email.com",
+            "passwordLabel": "Şifre",
+            "passwordPlaceholder": "••••••••",
+            "submitButton": "Giriş Yap",
+            "forgotPasswordText": "Şifremi unuttum",
+            "footerText": "Hesabınız yok mu?",
+            "registerLink": "Kayıt Ol"
+        },
+        "signup": {
+            "usernameLabel": "Kullanıcı Adı",
+            "usernamePlaceholder": "username",
+            "emailLabel": "E-posta",
+            "emailPlaceholder": "ornek@email.com",
+            "passwordLabel": "Şifre",
+            "passwordPlaceholder": "••••••••",
+            "confirmPasswordLabel": "Şifreyi Onayla",
+            "confirmPasswordPlaceholder": "••••••••",
+            "submitButton": "Hesap Oluştur",
+            "footerText": "Zaten hesabın var mı?",
+            "loginLink": "Giriş Yap"
+        },
+        "forgotPassword": {
+            "emailLabel": "E-posta",
+            "emailPlaceholder": "ornek@email.com",
+            "submitButton": "Kod Gönder"
+        },
+        "resetPassword": {
+            "newPasswordLabel": "Yeni Şifre",
+            "newPasswordPlaceholder": "••••••••",
+            "submitButton": "Şifreyi Sıfırla"
+        },
+        "verifyToken": {
+            "codeLabel": "Doğrulama Kodu",
+            "submitButton": "Kodu Doğrula"
+        }
+    },
+    "tabs": {},
+    "profile": {
+        "editProfile": {
+            "cancelButton": "İptal",
+            "saveButton": "Kaydet",
+            "deletePhotoButton": "Mevcut Fotoğrafı Sil",
+            "fullnameLabel": "Ad Soyad",
+            "fullnamePlaceholder": "Adınızı girin",
+            "bioLabel": "Biyografi",
+            "bioPlaceholder": "Kendinizden bahsedin",
+            "photoPermissionErrorTitle": "İzin Gerekli",
+            "photoPermissionErrorBody": "Fotoğraf seçebilmek için galeri izni vermelisiniz.",
+            "removePhotoConfirmTitle": "Fotoğrafı Kaldır",
+            "removePhotoConfirmBody": "Mevcut profil fotoğrafınızı kaldırmak istediğinize emin misiniz?",
+            "noChangesTitle": "Bilgi",
+            "noChangesBody": "Herhangi bir değişiklik yapmadınız.",
+            "successTitle": "Başarılı",
+            "successBody": "Profiliniz güncellendi.",
+            "errorTitle": "Hata",
+            "errorBody": "Bilgiler güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz."
+        },
+        "header": {
+            "editProfileButton": "Profili Düzenle",
+            "shareButton": "Paylaş"
+        },
+        "body": {
+            "favoriteMovies": "Favori Filmler",
+            "favoriteTracks": "Favori Şarkılar"
+        },
+        "private": {
+            "title": "Bu hesap gizli",
+            "subtitle": "Fotoğraflarını ve listelerini görmek için bu hesabı takip et."
+        }
+    },
+    "search": {
+        "history": {
+            "movieAddedSuccess": "\"{{title}}\" favori filmlerinize eklendi.",
+            "movieAddedError": "Film favorilere eklenirken bir hata oluştu.",
+            "trackAddedSuccess": "\"{{title}}\" favori şarkılarınıza eklendi.",
+            "trackAddedError": "Şarkı favorilere eklenirken bir hata oluştu."
+        }
+    },
+    "movies": {
+        "detail": {
+            "errorText": "Veriler çekilirken bir hata oluştu. Lütfen tekrar deneyiniz.",
+            "retryText": "Tekrar Deneyin",
+            "loadingText": "Film bilgileri yükleniyor",
+            "removeFromWatchedTitle": "İzlenenlerden Kaldır",
+            "removeFromWatchedBody": "Bu filmi izlediklerinizden çıkarmak istediğinize emin misiniz?",
+            "seeLess": "Daha az",
+            "seeMore": "Daha fazla",
+            "latestComments": "Son Yorumlar",
+            "seeAll": "Hepsini Gör"
+        }
+    },
+    "tracks": {
+        "detail": {
+            "errorText": "Veriler çekilirken bir hata oluştu. Lütfen tekrar deneyiniz.",
+            "retryText": "Tekrar Deneyin",
+            "noPlaylist": "Henüz playlistiniz bulunmuyor."
+        }
+    },
+    "lists": {
+        "detail": {
+            "errorText": "Veriler çekilirken bir hata oluştu. Lütfen tekrar deneyiniz.",
+            "retryText": "Tekrar Deneyin",
+            "seeLess": "Daha Az",
+            "seeMore": "Daha Fazla",
+            "unfollowTitle": "Takipten Çık",
+            "unfollowBody": "{{name}} adlı kişiyi takip etmeyi bırakmak istediğinize emin misiniz?"
+        },
+        "create": {
+            "nameLabel": "Liste Adı",
+            "namePlaceholderMovie": "Örn. Favori Bilim Kurgu Filmlerim",
+            "namePlaceholderTrack": "Örn. Gece Yolculuğu Şarkıları",
+            "descriptionLabel": "Açıklama (İsteğe bağlı)",
+            "descriptionPlaceholder": "Listeniz hakkında kısa bir açıklama yazın...",
+            "privateLabel": "Gizli Liste",
+            "submitButton": "Oluştur"
+        },
+        "replaceFavorite": {
+            "emptyText": "Henüz favori listeniz boş."
+        }
+    },
+    "interaction": {
+        "sheet": {
+            "ratingLabel": "Puanınız",
+            "noRating": "Puan Seçilmedi",
+            "addToLikes": "Beğenilerine Ekle",
+            "commentLabel": "Yorumunuz (İsteğe Bağlı)",
+            "commentPlaceholder": "Bu içerik hakkında düşüncelerinizi yazın...",
+            "submitButton": "Kaydet"
+        }
+    },
+    "settings": {
+        "changeEmail": {
+            "current": "Mevcut: {{email}}",
+            "newEmailLabel": "Yeni E-posta Adresi",
+            "newEmailPlaceholder": "yeni@email.com",
+            "currentPasswordLabel": "Mevcut Şifre",
+            "currentPasswordPlaceholder": "••••••••",
+            "securityWarning": "Güvenlik Uyarısı",
+            "codeLabel": "Doğrulama Kodu",
+            "codePlaceholder": "000000"
+        },
+        "changePassword": {
+            "currentPasswordLabel": "Mevcut Şifre",
+            "currentPasswordPlaceholder": "Mevcut Şifreniz",
+            "forgotPasswordText": "Şifremi Unuttum?",
+            "newPasswordLabel": "Yeni Şifre",
+            "newPasswordPlaceholder": "Yeni Şifreniz",
+            "newPasswordRepeatLabel": "Yeni Şifre Tekrar",
+            "newPasswordRepeatPlaceholder": "Yeni Şifreniz (Tekrar)",
+            "passwordMismatch": "Şifreler eşleşmiyor.",
+            "submitLoading": "Lütfen bekleyin...",
+            "submitButton": "Şifreyi Güncelle"
+        },
+        "changeUsername": {
+            "guidelinesTitle": "Kullanıcı Adı Kuralları",
+            "guideline1": "14 günde bir",
+            "guideline2": "(3–20 karakter)",
+            "submitLoading": "Kaydediliyor...",
+            "submitButton": "Kaydet"
+        },
+        "account": {
+            "exportSuccess": "Verileriniz başarıyla dışa aktarıldı.",
+            "deleteError": "Hesap silinemedi. Lütfen daha sonra tekrar deneyiniz."
+        }
+    },
+    "common": {
+        "error": "Hata",
+        "success": "Başarılı",
+        "ok": "Tamam",
+        "cancel": "İptal",
+        "seeAll": "Hepsini Gör"
+    }
+}

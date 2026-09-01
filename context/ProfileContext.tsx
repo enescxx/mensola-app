@@ -20,6 +20,8 @@ export interface ProfileContextType {
     isOwnProfile: boolean;
     handleStatPress: (statType: StatTypeKey) => void;
     favorites: UserFavorites;
+    hasAccess: boolean;
+    isPrivate: boolean;
 }
 
 const ProfileContext = createContext<ProfileContextType | null>(null);
@@ -64,6 +66,8 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         favoriteTracks,
         mutualFollowers,
         isFollowingByMe,
+        hasAccess = true,
+        isPrivate = false,
         ...stats
     } = profile;
 
@@ -106,6 +110,8 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
                 isOwnProfile,
                 handleStatPress,
                 favorites,
+                hasAccess,
+                isPrivate,
             }}>
             {children}
         </ProfileContext.Provider>

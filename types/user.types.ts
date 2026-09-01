@@ -12,6 +12,7 @@ export interface IUser {
     bio?: string;
     email?: string;
     isPrivate?: boolean;
+    hasAccess?: boolean;
 }
 export type UserFavorites = { favoriteMovies: FavoriteMovies; favoriteTracks: FavoriteTracks };
 export type UserStats = Record<StatTypeKey, number>;
