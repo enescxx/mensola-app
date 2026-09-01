@@ -77,7 +77,7 @@ describe("MovieCard Bileşeni Bütünsel Testleri", () => {
 
         expect(getByLabelText("Movie Name")).toBeTruthy();
 
-        expect(getByText("5.0")).toBeTruthy();
+        expect(getByText("5")).toBeTruthy();
         expect(queryByText("0")).toBeNull();
     });
 });

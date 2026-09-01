@@ -29,8 +29,8 @@ describe("LatestComments Component", () => {
     it("should render header and comments list when comments exist", () => {
         const { getByText } = render(<LatestComments interactions={mockInteractions as any} />);
 
-        expect(getByText("Son Yorumlar")).toBeTruthy();
-        expect(getByText("Hepsini Gör")).toBeTruthy();
+        expect(getByText("movies.detail.latestComments")).toBeTruthy();
+        expect(getByText("movies.detail.seeAll")).toBeTruthy();
         expect(getByText("Muhteşem bir görsel şölen!")).toBeTruthy();
     });
 
@@ -43,7 +43,7 @@ describe("LatestComments Component", () => {
     it("should navigate to all interactions page when 'Hepsini Gör' is pressed", () => {
         const { getByText } = render(<LatestComments interactions={mockInteractions as any} />);
 
-        fireEvent.press(getByText("Hepsini Gör"));
+        fireEvent.press(getByText("movies.detail.seeAll"));
 
         expect(mockRouterPush).toHaveBeenCalledWith({
             pathname: "/movies/[movieId]/interactions",

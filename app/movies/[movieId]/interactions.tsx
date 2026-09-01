@@ -1,16 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
 
 export default function MovieInteractionsPage() {
+    const { t } = useTranslation();
     const { movieId } = useLocalSearchParams<{ movieId?: string }>();
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
-                <Text style={styles.title}>Film Etkileşimleri</Text>
-                <Text style={styles.subtitle}>Film ID: {movieId}</Text>
+                <Text style={styles.title}>{t("movies.interactions.title")}</Text>
+                <Text style={styles.subtitle}>{t("movies.interactions.subtitle", { id: movieId })}</Text>
             </View>
         </SafeAreaView>
     );

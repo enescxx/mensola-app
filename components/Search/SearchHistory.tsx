@@ -13,11 +13,13 @@ import { MovieService } from "@/services/movie.service";
 import { TrackService } from "@/services/track.service";
 import { TmdbId, SpotifyId } from "@/types/common.types";
 import { useGlobalUser } from "@/context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 export default function SearchHistory({ history, addSearch, removeSearch, clearHistory }: SearchHistoryProps) {
     const router = useRouter();
     const params = useLocalSearchParams();
     const { user: currentUser } = useGlobalUser();
+    const { t } = useTranslation();
     const isFavoriteMode = params.mode === "favorite";
 
     const handleSelectMovie = async (movie: any) => {
@@ -25,13 +27,13 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
         if (isFavoriteMode) {
             try {
                 await MovieService.addToFavorites({ tmdbId: movie.tmdbId as TmdbId });
-                Alert.alert("Başarılı", `"${movie.title}" favori filmlerinize eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") },
+                Alert.alert(t("common.success"), t("search.history.movieAddedSuccess", { title: movie.title }), [
+                    { text: t("common.ok"), onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
                 const apiErrorMessage =
-                    err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
-                Alert.alert("Hata", apiErrorMessage);
+                    err?.error?.message || err?.message || t("search.history.movieAddedError");
+                Alert.alert(t("common.error"), apiErrorMessage);
             }
         } else {
             router.push(`/movies/${movie.tmdbId}?type=tmdb`);
@@ -43,13 +45,13 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
         if (isFavoriteMode) {
             try {
                 await TrackService.addToFavorites({ spotifyId: track.spotifyId as SpotifyId });
-                Alert.alert("Başarılı", `"${track.title}" favori şarkılarınıza eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") },
+                Alert.alert(t("common.success"), t("search.history.trackAddedSuccess", { title: track.title }), [
+                    { text: t("common.ok"), onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
                 const apiErrorMessage =
-                    err?.error?.message || err?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
-                Alert.alert("Hata", apiErrorMessage);
+                    err?.error?.message || err?.message || t("search.history.trackAddedError");
+                Alert.alert(t("common.error"), apiErrorMessage);
             }
         } else {
             router.push(`/tracks/${track.spotifyId}?type=spotify`);

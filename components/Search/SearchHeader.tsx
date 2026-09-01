@@ -6,11 +6,7 @@ import { SearchTab } from "@/hooks/search/useSearch";
 import { styles } from "./styles";
 import { SearchHeaderProps } from "./types";
 
-const SEARCH_OPTIONS: PillOption<SearchTab>[] = [
-    { label: "Filmler", value: "movie", icon: "film" },
-    { label: "Şarkılar", value: "track", icon: "musical-note" },
-    { label: "Kullanıcılar", value: "user", icon: "people" },
-];
+import { useTranslation } from "react-i18next";
 
 export default function SearchHeader({
     query,
@@ -20,6 +16,13 @@ export default function SearchHeader({
     isSearching,
     setIsSearching,
 }: SearchHeaderProps) {
+    const { t } = useTranslation();
+    const searchOptions: PillOption<SearchTab>[] = [
+        { label: t("search.header.movies"), value: "movie", icon: "film" },
+        { label: t("search.header.tracks"), value: "track", icon: "musical-note" },
+        { label: t("search.header.users"), value: "user", icon: "people" },
+    ];
+
     return (
         <View style={styles.header}>
             <View style={styles.searchContainer}>
@@ -43,6 +46,7 @@ export default function SearchHeader({
                     value={query}
                     onChangeText={setQuery}
                     returnKeyType="search"
+                    placeholder={t("search.header.placeholder")}
                 />
                 {isSearching && (
                     <TouchableOpacity onPress={() => setQuery("")}>
@@ -50,7 +54,7 @@ export default function SearchHeader({
                     </TouchableOpacity>
                 )}
             </View>
-            <PillGroup options={SEARCH_OPTIONS} selectedValue={activeTab} onSelect={setActiveTab} />
+            <PillGroup options={searchOptions} selectedValue={activeTab} onSelect={setActiveTab} />
         </View>
     );
 }

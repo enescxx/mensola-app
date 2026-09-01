@@ -7,13 +7,15 @@ import Button from "../../components/Button";
 
 import { useResetPassword } from "../../hooks/auth/useResetPassword";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function ResetPasswordScreen() {
     const { newPassword, setNewPassword, isLoading, error, handleResetPassword } = useResetPassword();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (isLoading) return;
-        if (error) return Alert.alert(error);
+        if (error) return Alert.alert(t("common.error"), error);
     }, [isLoading, error]);
 
     return (
@@ -25,13 +27,13 @@ export default function ResetPasswordScreen() {
 
                 <View style={styles.formContainer}>
                     <TextField
-                        label="Yeni Şifre"
+                        label={t("auth.resetPassword.newPasswordLabel")}
                         type="password"
-                        placeholder="••••••••"
+                        placeholder={t("auth.resetPassword.newPasswordPlaceholder")}
                         value={newPassword}
                         onChangeText={setNewPassword}
                     />
-                    <Button label="Şifreyi Sıfırla" onPress={handleResetPassword} />
+                    <Button label={t("auth.resetPassword.submitButton")} onPress={handleResetPassword} />
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>

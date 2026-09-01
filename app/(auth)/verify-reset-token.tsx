@@ -7,13 +7,15 @@ import Button from "../../components/Button";
 
 import { useVerifyResetCode } from "../../hooks/auth/useVerifyResetCode";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function VerifyResetTokenScreen() {
     const { code, setCode, isLoading, error, handleVerifyToken } = useVerifyResetCode();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (isLoading) return;
-        if (error) return Alert.alert(error);
+        if (error) return Alert.alert(t("common.error"), error);
     }, [isLoading, error]);
 
     return (
@@ -24,8 +26,8 @@ export default function VerifyResetTokenScreen() {
                 </View>
 
                 <View style={styles.formContainer}>
-                    <TextField label="Doğrulama Kodu" type="number" value={code} onChangeText={setCode} />
-                    <Button label="Kodu Doğrula" onPress={handleVerifyToken} />
+                    <TextField label={t("auth.verifyToken.codeLabel")} type="number" value={code} onChangeText={setCode} />
+                    <Button label={t("auth.verifyToken.submitButton")} onPress={handleVerifyToken} />
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>

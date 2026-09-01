@@ -1,12 +1,323 @@
 {
     "auth": {
+        "login": {
+            "emailLabel": "Email",
+            "emailPlaceholder": "example@email.com",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "••••••••",
+            "submitButton": "Login",
+            "forgotPasswordText": "Forgot password?",
+            "footerText": "Don't have an account?",
+            "registerLink": "Sign up"
+        },
+        "signup": {
+            "usernameLabel": "Username",
+            "usernamePlaceholder": "username",
+            "emailLabel": "Email",
+            "emailPlaceholder": "example@email.com",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "••••••••",
+            "confirmPasswordLabel": "Confirm Password",
+            "confirmPasswordPlaceholder": "••••••••",
+            "submitButton": "Create Account",
+            "footerText": "Already have an account?",
+            "loginLink": "Login"
+        },
+        "forgotPassword": {
+            "emailLabel": "Email",
+            "emailPlaceholder": "example@email.com",
+            "submitButton": "Send Code"
+        },
+        "resetPassword": {
+            "newPasswordLabel": "New Password",
+            "newPasswordPlaceholder": "••••••••",
+            "submitButton": "Reset Password"
+        },
+        "verifyToken": {
+            "codeLabel": "Verification Code",
+            "submitButton": "Verify Code"
+        }
     },
     "tabs": {
+        "home": "Home",
+        "search": "Search",
+        "notifications": "Notifications",
+        "profile": "Profile"
     },
     "profile": {
+        "editProfile": {
+            "cancelButton": "Cancel",
+            "saveButton": "Save",
+            "deletePhotoButton": "Delete Current Photo",
+            "cancelSelection": "Cancel Selection",
+            "changePhoto": "Change Photo",
+            "selectPhoto": "Select Photo",
+            "giveUp": "Give Up",
+            "remove": "Remove",
+            "fullnameLabel": "Full Name",
+            "fullnamePlaceholder": "Enter your name",
+            "bioLabel": "Bio",
+            "bioPlaceholder": "Tell about yourself",
+            "photoPermissionErrorTitle": "Permission Required",
+            "photoPermissionErrorBody": "You must grant gallery permission to select a photo.",
+            "removePhotoConfirmTitle": "Remove Photo",
+            "removePhotoConfirmBody": "Are you sure you want to remove your current profile photo?",
+            "noChangesTitle": "Info",
+            "noChangesBody": "You haven't made any changes.",
+            "successTitle": "Success",
+            "successBody": "Your profile has been updated.",
+            "errorTitle": "Error",
+            "errorBody": "An error occurred while updating info. Please try again."
+        },
+        "header": {
+            "editProfileButton": "Edit Profile",
+            "shareButton": "Share",
+            "followButton": "Follow",
+            "followingButton": "Following",
+            "unfollowConfirmTitle": "Unfollowing",
+            "unfollowConfirmBody": "Are you sure you want to unfollow {{name}}?",
+            "yes": "Yes",
+            "no": "No"
+        },
+        "body": {
+            "favoriteMovies": "Favorite Movies",
+            "favoriteTracks": "Favorite Tracks"
+        },
+        "footer": {
+            "moviesGroup": "Movies & Series",
+            "musicGroup": "Music",
+            "socialGroup": "Social"
+        },
+        "private": {
+            "title": "This account is private",
+            "subtitle": "Follow this account to see their photos and lists."
+        }
     },
     "search": {
+        "header": {
+            "movies": "Movies",
+            "tracks": "Tracks",
+            "users": "Users",
+            "placeholder": "Search..."
+        },
+        "emptyState": {
+            "userPrompt": "Enter the username you want to search.",
+            "trendMovies": "Trending Movies",
+            "newAlbums": "New Albums"
+        },
+        "history": {
+            "movieAddedSuccess": "\"{{title}}\" has been added to your favorite movies.",
+            "movieAddedError": "An error occurred while adding the movie to favorites.",
+            "trackAddedSuccess": "\"{{title}}\" has been added to your favorite tracks.",
+            "trackAddedError": "An error occurred while adding the track to favorites."
+        }
+    },
+    "movies": {
+        "detail": {
+            "errorText": "An error occurred while fetching data. Please try again.",
+            "retryText": "Try Again",
+            "loadingText": "Loading movie info",
+            "removeFromWatchedTitle": "Remove from Watched",
+            "removeFromWatchedBody": "Are you sure you want to remove this movie from your watched list?",
+            "seeLess": "See less",
+            "seeMore": "See more",
+            "latestComments": "Latest Comments",
+            "seeAll": "See All",
+            "emptyOverview": "No more information available for this movie.",
+            "addToList": "Add to Lists"
+        },
+        "interactions": {
+            "title": "Movie Interactions",
+            "rating": "Your Rating: {{rating}}",
+            "comment": "Your Comment",
+            "liked": "Liked",
+            "loading": "Loading...",
+            "empty": "No interactions yet.",
+            "sheet": {
+                "title": "Rate & Comment",
+                "ratingTitle": "Your Rating",
+                "noRating": "No Rating Selected",
+                "addToLikes": "Add to Likes",
+                "commentTitle": "Your Comment (Optional)",
+                "commentPlaceholder": "Write your thoughts about this content...",
+                "save": "Save"
+            }
+        }
+    },
+    "tracks": {
+        "detail": {
+            "errorText": "An error occurred while fetching data. Please try again.",
+            "retryText": "Try Again",
+            "latestComments": "Latest Comments",
+            "seeAll": "See All ({{count}})",
+            "emptyPlaylist": "You don't have a playlist yet.",
+            "addToPlaylist": "Add to Playlist"
+        }
+    },
+    "lists": {
+        "detail": {
+            "errorText": "An error occurred while fetching data. Please try again.",
+            "retryText": "Try Again",
+            "seeLess": "See Less",
+            "seeMore": "See More",
+            "unfollowTitle": "Unfollow",
+            "unfollowBody": "Are you sure you want to unfollow {{name}}?"
+        },
+        "create": {
+            "titleMovie": "Create New Movie List",
+            "titleTrack": "Create New Playlist",
+            "nameLabel": "List Name",
+            "namePlaceholderMovie": "e.g. My Favorite Sci-Fi Movies",
+            "namePlaceholderTrack": "e.g. Night Drive Songs",
+            "descriptionLabel": "Description (Optional)",
+            "descriptionPlaceholder": "Write a short description about your list...",
+            "privateLabel": "Private List",
+            "privateListDesc": "Private lists are only visible on your profile.",
+            "submitButton": "Create",
+            "errorTitleRequired": "Please enter a list name.",
+            "errorGeneral": "An error occurred while creating the list."
+        },
+        "replaceFavorite": {
+            "emptyText": "Your favorite list is currently empty."
+        }
+    },
+    "interaction": {
+        "sheet": {
+            "ratingLabel": "Your Rating",
+            "noRating": "No Rating Selected",
+            "addToLikes": "Add to Likes",
+            "commentLabel": "Your Comment (Optional)",
+            "commentPlaceholder": "Write your thoughts about this content...",
+            "submitButton": "Save"
+        }
+    },
+    "settings": {
+        "layout": {
+            "title": "Settings",
+            "updateUsername": "Change Username",
+            "updateEmail": "Update Email",
+            "updatePassword": "Change Password"
+        },
+        "changeEmail": {
+            "current": "Current: {{email}}",
+            "newEmailLabel": "New Email Address",
+            "newEmailPlaceholder": "new@email.com",
+            "currentPasswordLabel": "Current Password",
+            "currentPasswordPlaceholder": "••••••••",
+            "securityWarning": "Security Warning",
+            "securityWarningBody": "A 6-digit verification code will be sent to your new email address. Your current email will remain active until the code is verified.",
+            "codeLabel": "Verification Code",
+            "codePlaceholder": "000000",
+            "otpDescription": "Enter the 6-digit code sent to {{email}}.",
+            "submitLoading": "Please wait...",
+            "submitRequestCode": "Send Verification Code",
+            "submitVerifyCode": "Verify Email and Update"
+        },
+        "changePassword": {
+            "currentPasswordLabel": "Current Password",
+            "currentPasswordPlaceholder": "Your Current Password",
+            "forgotPasswordText": "Forgot Password?",
+            "newPasswordLabel": "New Password",
+            "newPasswordPlaceholder": "Your New Password",
+            "newPasswordRepeatLabel": "New Password Again",
+            "newPasswordRepeatPlaceholder": "Your New Password (Again)",
+            "reqMinLength": "At least 8 characters long",
+            "reqSpecialChar": "Contains a number or special character",
+            "reqNotSame": "Cannot be the same as current password",
+            "passwordMismatch": "Passwords do not match.",
+            "submitLoading": "Please wait...",
+            "submitButton": "Update Password"
+        },
+        "changeUsername": {
+            "statusAvailable": "Username is available",
+            "statusTaken": "This username is taken",
+            "statusInvalid": "3–20 chars, lowercase, numbers, _ or .",
+            "guidelinesTitle": "Username Guidelines",
+            "guidelineChangeFreqStart": "You can change your username ",
+            "guideline1": "once every 14 days",
+            "guidelineChangeFreqEnd": ".",
+            "guidelineAllowedChars": "Allowed: lowercase letters, numbers, underscore, and dot ",
+            "guideline2": "(3–20 characters)",
+            "submitLoading": "Saving...",
+            "submitButton": "Save"
+        },
+        "menu": {
+            "account": {
+                "title": "Account",
+                "update-username": "Username",
+                "update-email": "Email",
+                "update-password": "Password"
+            },
+            "preferences": {
+                "title": "Preferences",
+                "theme": "Appearance (Coming Soon)",
+                "theme-options": {
+                    "dark": "Dark",
+                    "light": "Light",
+                    "system": "System"
+                },
+                "default-tab": "Default Tab",
+                "default-tab-desc": "Select which tab is shown when the app opens",
+                "default-tab-options": {
+                    "movies": "Movies",
+                    "tracks": "Music"
+                },
+                "shelf-layout": "Shelf Layout (Coming Soon)",
+                "shelf-layout-desc": "Select how your content is displayed",
+                "shelf-layout-options": {
+                    "grid": "Grid",
+                    "list": "List"
+                }
+            },
+            "privacy": {
+                "title": "Privacy",
+                "is-private": "Private Profile",
+                "is-private-desc": "Only approved followers can see your lists"
+            },
+            "data-danger-zone": {
+                "title": "Account Actions",
+                "logout": "Log Out",
+                "logout-desc": "Log out from your account",
+                "delete-account": "Delete Account",
+                "delete-account-desc": "Permanently delete your account and all data"
+            }
+        },
+        "alerts": {
+            "exportData": {
+                "title": "Export Data",
+                "body": "Are you sure you want to export your data?",
+                "success": "Your data has been successfully exported."
+            },
+            "logout": {
+                "title": "Log Out",
+                "body": "Are you sure you want to log out?",
+                "button": "Log Out"
+            },
+            "deleteAccount": {
+                "title": "Delete Account",
+                "body": "Your account will be suspended for 30 days. You can reactivate it by logging back in during this time. After 30 days, your account and all data will be permanently deleted. Are you sure you want to delete your account?",
+                "button": "Delete",
+                "error": "Failed to delete account. Please try again later."
+            },
+            "privacyUpdate": {
+                "error": "Failed to update privacy settings. Please try again."
+            }
+        },
+        "account": {
+            "exportSuccess": "Your data has been successfully exported.",
+            "deleteError": "Failed to delete account. Please try again later."
+        }
     },
     "common": {
+        "error": "Error",
+        "success": "Success",
+        "ok": "OK",
+        "cancel": "Cancel",
+        "seeAll": "See All",
+        "retry": "Try Again",
+        "track": "Track",
+        "movie": "Movie",
+        "giveUp": "Give Up",
+        "remove": "Remove"
     }
 }

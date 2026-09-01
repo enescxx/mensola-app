@@ -5,12 +5,14 @@ import { styles } from "./styles";
 import { ITrack } from "@/types/track.types";
 import { IAlbum } from "@/types/album.types";
 import { IPlaylist } from "@/types/playlist.types";
+import { useTranslation } from "react-i18next";
 
 export default function MusicCard<
     TTrack extends Omit<ITrack, "id"> = Omit<ITrack, "id">,
     TAlbum extends Omit<IAlbum, "id"> = Omit<IAlbum, "id">,
     TPlaylist extends Omit<IPlaylist, "id"> = Omit<IPlaylist, "id">,
 >({ layout = "vertical", ...props }: IMusicCardProps<TTrack, TAlbum, TPlaylist>) {
+    const { t } = useTranslation();
     const { type, data, onPress, style } = props;
     const isHorizontal = layout === "horizontal";
     function formatDuration(ms: number) {
@@ -47,7 +49,7 @@ export default function MusicCard<
             const playlistProps = props as Extract<IMusicCardProps, { type: "playlist" }>;
             const playlistData = playlistProps.data;
             subtitle = playlistProps.hideCreator || !playlistData.creator ? "" : `@${playlistData.creator.username}`;
-            secondaryInfo = playlistData.songCount ? `${playlistData.songCount} Şarkı` : null;
+            secondaryInfo = playlistData.songCount ? `${playlistData.songCount} ${t("common.track")}` : null;
             break;
         }
     }

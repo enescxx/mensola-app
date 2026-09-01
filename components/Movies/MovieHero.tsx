@@ -13,6 +13,7 @@ import InteractionSheet from "../Interaction/InteractionSheet";
 import { MovieService } from "@/services/movie.service";
 import { MovieId } from "@/types/common.types";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 const formatReleaseYear = (releaseDate?: string | Date) => {
     if (!releaseDate) return "";
@@ -21,6 +22,7 @@ const formatReleaseYear = (releaseDate?: string | Date) => {
 };
 
 export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
+    const { t } = useTranslation();
     const releaseYear = formatReleaseYear(movie?.releaseDate);
     const durationText = movie?.duration ? `${movie.duration} dk` : "";
     const genreText = movie?.genres?.join(", ") ?? "";
@@ -97,13 +99,13 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
         if (!movie?.id) return;
 
         if (isWatched) {
-            Alert.alert("İzlenenlerden Kaldır", "Bu filmi izlediklerinizden çıkarmak istediğinize emin misiniz?", [
+            Alert.alert(t("movies.detail.removeFromWatchedTitle"), t("movies.detail.removeFromWatchedBody"), [
                 {
-                    text: "Vazgeç",
+                    text: t("common.giveUp"),
                     style: "cancel",
                 },
                 {
-                    text: "Kaldır",
+                    text: t("common.remove"),
                     style: "destructive",
                     onPress: async () => {
                         try {
@@ -170,7 +172,7 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
 
                 <View style={styles.infoContainer}>
                     <View style={styles.titleWrapper}>
-                        <Text style={styles.movieTitle}>{movie?.title ?? "Film bilgileri yükleniyor"}</Text>
+                        <Text style={styles.movieTitle}>{movie?.title ?? t("movies.detail.loadingText")}</Text>
                         <Text style={styles.releaseDate}>{releaseYear}</Text>
                     </View>
                     <View style={styles.metaWrapper}>
@@ -239,7 +241,7 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
                 targetType="movie"
                 targetId={movie?.id as MovieId}
                 mediaTitle={movie?.title ?? ""}
-                mediaTypeTitle="Film"
+                mediaTypeTitle={t("common.movie")}
                 mediaPoster={movie?.poster}
                 initialRating={userRating}
                 initialComment={userComment}

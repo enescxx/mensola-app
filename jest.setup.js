@@ -13,3 +13,18 @@ jest.mock("@expo/vector-icons", () => {
 jest.mock("@react-native-async-storage/async-storage", () =>
     require("@react-native-async-storage/async-storage/jest/async-storage-mock")
 );
+
+jest.mock("react-i18next", () => ({
+    useTranslation: () => ({
+        t: (key) => key,
+        i18n: {
+            changeLanguage: () => new Promise(() => {}),
+        },
+    }),
+}));
+
+jest.mock("expo-image", () => {
+    const React = require("react");
+    const { Image } = require("react-native");
+    return { Image: (props) => <Image {...props} /> };
+});

@@ -7,6 +7,7 @@ import AddToListSheetItem from "./AddToListSheetItem";
 import { styles } from "./styles";
 import { IAddToListBottomSheetProps } from "./types";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function AddToListBottomSheet({
     isVisible,
@@ -15,6 +16,7 @@ export default function AddToListBottomSheet({
     isWatchlisted,
     onStatusChange,
 }: IAddToListBottomSheetProps) {
+    const { t } = useTranslation();
     const {
         lists,
         isLoading,
@@ -40,7 +42,7 @@ export default function AddToListBottomSheet({
     }, [hasMore, isLoadingMore, loadMore]);
 
     return (
-        <BottomSheet isVisible={isVisible} onClose={onClose} title="Listelerime Ekle" showCloseButton>
+        <BottomSheet isVisible={isVisible} onClose={onClose} title={t("movies.detail.addToList")} showCloseButton>
             <View style={styles.listContainer}>
                 {error ? <Text style={styles.sheetError}>{error}</Text> : null}
 

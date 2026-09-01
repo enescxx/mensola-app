@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import TextField from "@/components/TextField";
 import { Colors } from "@/constants/colors";
 import { useChangeUsername } from "@/hooks/user/useChangeUsername";
+import { useTranslation } from "react-i18next";
 
 import { styles } from "./styles";
 import { IChangeUsernameProps, UsernameStatus } from "./types";
@@ -32,6 +33,7 @@ export default function ChangeUsername({
     userId,
     onSuccess,
 }: IChangeUsernameProps) {
+    const { t } = useTranslation();
     const {
         value,
         status,
@@ -45,11 +47,11 @@ export default function ChangeUsername({
 
     const helperMessage =
         status === "available"
-            ? "Kullanıcı adı uygun"
+            ? t("settings.changeUsername.statusAvailable")
             : status === "taken"
-              ? "Bu kullanıcı adı alınmış"
+              ? t("settings.changeUsername.statusTaken")
               : status === "invalid" && value.length > 0
-                ? "3–20 karakter, küçük harf, rakam, _ veya ."
+                ? t("settings.changeUsername.statusInvalid")
                 : null;
 
     return (
@@ -118,22 +120,22 @@ export default function ChangeUsername({
                 <View style={styles.guidelinesCard}>
                     <View style={styles.guidelinesHeader}>
                         <Ionicons name="information-circle-outline" size={16} color={Colors.primary} />
-                        <Text style={styles.guidelinesTitle}>Kullanıcı Adı Kuralları</Text>
+                        <Text style={styles.guidelinesTitle}>{t("settings.changeUsername.guidelinesTitle")}</Text>
                     </View>
 
                     <View style={styles.bulletRow}>
                         <View style={styles.bulletDot} />
                         <Text style={styles.bulletText}>
-                            Kullanıcı adınızı <Text style={styles.bulletHighlight}>14 günde bir</Text>{" "}
-                            değiştirebilirsiniz.
+                            {t("settings.changeUsername.guidelineChangeFreqStart")}<Text style={styles.bulletHighlight}>{t("settings.changeUsername.guideline1")}</Text>
+                            {t("settings.changeUsername.guidelineChangeFreqEnd")}
                         </Text>
                     </View>
 
                     <View style={styles.bulletRow}>
                         <View style={styles.bulletDot} />
                         <Text style={styles.bulletText}>
-                            İzin verilenler: küçük harfler, rakamlar, alt çizgi ve nokta{" "}
-                            <Text style={styles.bulletHighlight}>(3–20 karakter)</Text>
+                            {t("settings.changeUsername.guidelineAllowedChars")}
+                            <Text style={styles.bulletHighlight}>{t("settings.changeUsername.guideline2")}</Text>
                         </Text>
                     </View>
                 </View>
@@ -142,7 +144,7 @@ export default function ChangeUsername({
             {/* ── Pinned Save Button ── */}
             <View style={styles.footer}>
                 <Button
-                    label={isSaving ? "Kaydediliyor..." : "Kaydet"}
+                    label={isSaving ? t("settings.changeUsername.submitLoading") : t("settings.changeUsername.submitButton")}
                     onPress={handleSave}
                     disabled={!canSave}
                     style={[styles.saveButton, !canSave && styles.saveButtonDisabled]}

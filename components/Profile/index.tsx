@@ -8,9 +8,11 @@ import ProfileBody from "./ProfileBody";
 import ProfileFooter from "./ProfileFooter";
 import { useProfileContext } from "@/context/ProfileContext";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileView() {
     const { refetch, isLoading, hasAccess } = useProfileContext();
+    const { t } = useTranslation();
     return (
         <ScrollView
             style={{ backgroundColor: Colors.background }}
@@ -34,9 +36,9 @@ export default function ProfileView() {
             ) : (
                 <View style={styles.privateContainer}>
                     <Ionicons name="lock-closed-outline" size={48} color={Colors.textSecondary} />
-                    <Text style={styles.privateText}>Bu hesap gizli</Text>
+                    <Text style={styles.privateText}>{t("profile.private.title")}</Text>
                     <Text style={styles.privateSubText}>
-                        Fotoğraflarını ve listelerini görmek için bu hesabı takip et.
+                        {t("profile.private.subtitle")}
                     </Text>
                 </View>
             )}

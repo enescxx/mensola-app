@@ -1,12 +1,7 @@
 import React from "react";
-import {
-    RefreshControl,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
-import { router } from "expo-router";
+import { RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import { Colors } from "@/constants/colors";
 import { useHome } from "@/hooks/home/useHome";
@@ -21,6 +16,8 @@ import HomeSkeleton from "./HomeSkeleton";
 import { styles } from "./styles";
 
 export default function HomeScreen() {
+    const { t } = useTranslation();
+    const router = useRouter();
     const { data, isLoading, error, refetch } = useHome();
 
     const handleHeroPress = (movie: HeroMovie) => {
@@ -51,7 +48,7 @@ export default function HomeScreen() {
                 <View style={styles.errorWrapper}>
                     <Text style={styles.errorText}>{error}</Text>
                     <TouchableOpacity onPress={refetch} style={styles.retryBtn} activeOpacity={0.8}>
-                        <Text style={styles.retryText}>Tekrar Dene</Text>
+                        <Text style={styles.retryText}>{t("common.retry")}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -72,12 +69,8 @@ export default function HomeScreen() {
                         colors={[Colors.primary]}
                     />
                 }>
-
                 {data?.heroMovies && data.heroMovies.length > 0 && (
-                    <HeroCarousel
-                        movies={data.heroMovies}
-                        onMoviePress={handleHeroPress}
-                    />
+                    <HeroCarousel movies={data.heroMovies} onMoviePress={handleHeroPress} />
                 )}
 
                 {data?.nowPlayingMovies && data.nowPlayingMovies.length > 0 && (

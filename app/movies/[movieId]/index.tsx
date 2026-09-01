@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View, Alert } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import MovieDetailView from "@/components/Movies/MovieDetailView";
 import { useMovie } from "@/hooks/movie/useMovie";
@@ -10,6 +11,7 @@ import { Colors } from "@/constants/colors";
 import ReplaceFavoriteBottomSheet from "@/components/ReplaceFavoriteBottomSheet";
 
 export default function MoviePage() {
+    const { t } = useTranslation();
     const { movieId, type } = useLocalSearchParams<{
         movieId: string;
         type?: "tmdb" | "app";
@@ -46,8 +48,8 @@ export default function MoviePage() {
                 setIsReplaceSheetVisible(true);
             } else {
                 const apiMessage =
-                    error?.error?.message || error?.message || "Film favorilere eklenirken bir hata oluştu.";
-                Alert.alert("Hata", apiMessage);
+                    error?.error?.message || error?.message || t("search.history.movieAddedError");
+                Alert.alert(t("common.error"), apiMessage);
             }
             setIsFavorite(previousState);
         }

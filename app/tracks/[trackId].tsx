@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { View, Alert } from "react-native";
+import { useTranslation } from "react-i18next";
 import { TrackDetailView } from "@/components/TrackDetail";
 import { useTrackDetails } from "@/hooks/track/useTrackDetails";
 import { SpotifyId, TrackId } from "@/types/common.types";
@@ -9,6 +10,7 @@ import { Colors } from "@/constants/colors";
 import ReplaceFavoriteBottomSheet from "@/components/ReplaceFavoriteBottomSheet";
 
 export default function TrackDetailScreen() {
+    const { t } = useTranslation();
     const { trackId, type } = useLocalSearchParams<{
         trackId: string;
         type?: "spotify" | "app";
@@ -46,8 +48,8 @@ export default function TrackDetailScreen() {
                 setIsReplaceSheetVisible(true);
             } else {
                 const apiMessage =
-                    error?.error?.message || error?.message || "Şarkı favorilere eklenirken bir hata oluştu.";
-                Alert.alert("Hata", apiMessage);
+                    error?.error?.message || error?.message || t("search.history.trackAddedError");
+                Alert.alert(t("common.error"), apiMessage);
             }
             setIsFavorite(previousState);
         }

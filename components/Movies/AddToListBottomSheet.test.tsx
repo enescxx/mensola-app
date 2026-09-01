@@ -33,7 +33,7 @@ describe("AddToListBottomSheet Component", () => {
             />
         );
 
-        expect(getByText("Listelerime Ekle")).toBeTruthy();
+        expect(getByText("movies.detail.addToList")).toBeTruthy();
         expect(getByText("İzlenecekler")).toBeTruthy();
         expect(mockFetchUserLists).toHaveBeenCalled();
     });

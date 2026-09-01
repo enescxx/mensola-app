@@ -13,10 +13,10 @@ describe("ProfileFooter Component", () => {
         const mockHandleStatPress = jest.fn();
         (useProfileContext as jest.Mock).mockReturnValue({
             footerData: {
-                stats: [
-                    { type: "followerCount", value: 150 },
-                    { type: "followingCount", value: 200 }
-                ]
+                stats: {
+                    followersCount: 150,
+                    followingCount: 200
+                }
             },
             handleStatPress: mockHandleStatPress
         });

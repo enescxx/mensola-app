@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
-
 import { useGlobalUser } from "@/context/AuthContext";
+import { useTranslation } from "react-i18next";
 import { ProfileService } from "@/services/profile.service";
 
 export const useEditProfile = () => {
     const { user, setUser } = useGlobalUser();
+    const { t } = useTranslation();
 
     const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
     const [isAvatarRemoved, setIsAvatarRemoved] = useState(false);
@@ -22,7 +23,7 @@ export const useEditProfile = () => {
             const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
             if (!permissionResult.granted) {
-                Alert.alert("İzin Gerekli", "Fotoğraf seçebilmek için galeri izni vermelisiniz.");
+                Alert.alert(t("profile.editProfile.photoPermissionErrorTitle"), t("profile.editProfile.photoPermissionErrorBody"));
                 return;
             }
 
@@ -41,10 +42,10 @@ export const useEditProfile = () => {
     };
 
     const removeAvatarHandler = () => {
-        Alert.alert("Fotoğrafı Kaldır", "Mevcut profil fotoğrafınızı kaldırmak istediğinize emin misiniz?", [
-            { text: "Vazgeç", style: "cancel" },
+        Alert.alert(t("profile.editProfile.removePhotoConfirmTitle"), t("profile.editProfile.removePhotoConfirmBody"), [
+            { text: t("profile.editProfile.giveUp"), style: "cancel" },
             {
-                text: "Kaldır",
+                text: t("profile.editProfile.remove"),
                 style: "destructive",
                 onPress: () => {
                     setSelectedImageUri(null);
@@ -60,7 +61,7 @@ export const useEditProfile = () => {
         const hasNewImage = Boolean(selectedImageUri);
 
         if (!isNameChanged && !isBioChanged && !hasNewImage && !isAvatarRemoved) {
-            Alert.alert("Bilgi", "Herhangi bir değişiklik yapmadınız.");
+            Alert.alert(t("profile.editProfile.noChangesTitle"), t("profile.editProfile.noChangesBody"));
             return;
         }
 
@@ -86,9 +87,9 @@ export const useEditProfile = () => {
                 setUser({ ...user, ...response.data.user });
             }
 
-            Alert.alert("Başarılı", "Profiliniz güncellendi.", [{ text: "Tamam", onPress: () => router.back() }]);
+            Alert.alert(t("profile.editProfile.successTitle"), t("profile.editProfile.successBody"), [{ text: t("common.ok"), onPress: () => router.back() }]);
         } catch (error) {
-            Alert.alert("Hata", "Bilgiler güncellenirken bir hata oluştu. Lütfen tekrar deneyiniz.");
+            Alert.alert(t("profile.editProfile.errorTitle"), t("profile.editProfile.errorBody"));
         } finally {
             setIsLoading(false);
         }

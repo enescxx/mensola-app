@@ -8,11 +8,13 @@ import { useProfileContext } from "../../context/ProfileContext";
 import { useFollow } from "@/hooks/user/useFollow";
 import { shareUserProfile } from "@/utils/share";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import Avatar from "../Avatar";
 import { Colors } from "@/constants/colors";
 
 export default function ProfileHeader() {
     const router = useRouter();
+    const { t } = useTranslation();
     const { headerData, handleStatPress } = useProfileContext();
     const { followHandler, unfollowHandler, isLoading } = useFollow();
 
@@ -45,7 +47,7 @@ export default function ProfileHeader() {
                         activeOpacity={0.7}
                         onPress={() => router.push("/me/edit")}
                         style={styles.actionButton}>
-                        <Text style={styles.actionButtonText}>Profili Düzenle</Text>
+                        <Text style={styles.actionButtonText}>{t("profile.header.editProfileButton")}</Text>
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity
@@ -62,12 +64,12 @@ export default function ProfileHeader() {
                                 });
                             } else {
                                 Alert.alert(
-                                    "Takipten çıkılıyor",
-                                    `${headerData.fullname || headerData.username} adlı kişiyi takip etmeyi bırakmak istiyor musunuz?`,
+                                    t("profile.header.unfollowConfirmTitle"),
+                                    t("profile.header.unfollowConfirmBody", { name: headerData.fullname || headerData.username }),
                                     [
-                                        { text: "Hayır", style: "cancel" },
+                                        { text: t("profile.header.no"), style: "cancel" },
                                         {
-                                            text: "Evet",
+                                            text: t("profile.header.yes"),
                                             onPress: () =>
                                                 unfollowHandler(headerData.id, () => {
                                                     headerData.isFollowingByMe = false;
@@ -81,7 +83,7 @@ export default function ProfileHeader() {
                             <ActivityIndicator size="small" color={isFollowing ? Colors.primary : "#fff"} />
                         ) : (
                             <Text style={[styles.actionButtonText, !isFollowing && styles.actionButtonTextPrimary]}>
-                                {isFollowing ? "Takip Ediliyor" : "Takip Et"}
+                                {isFollowing ? t("profile.header.followingButton") : t("profile.header.followButton")}
                             </Text>
                         )}
                     </TouchableOpacity>
@@ -91,7 +93,7 @@ export default function ProfileHeader() {
                     activeOpacity={0.7}
                     onPress={async () => await shareUserProfile({ id: headerData.id, username: headerData.username })}
                     style={styles.actionButton}>
-                    <Text style={styles.actionButtonText}>Paylaş</Text>
+                    <Text style={styles.actionButtonText}>{t("profile.header.shareButton")}</Text>
                 </TouchableOpacity>
             </View>
         </View>

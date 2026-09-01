@@ -9,6 +9,7 @@ import { styles } from "./styles";
 import { ITrackDetailViewProps } from "./types";
 import { TrackId } from "@/types/common.types";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function TrackDetailView({
     trackDetails,
@@ -18,6 +19,7 @@ export default function TrackDetailView({
     toggleLike,
     submitInteraction,
 }: ITrackDetailViewProps) {
+    const { t } = useTranslation();
     const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
     const [isAddToPlaylistSheetOpen, setIsAddToPlaylistSheetOpen] = useState<boolean>(false);
 
@@ -35,7 +37,7 @@ export default function TrackDetailView({
             <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error}</Text>
                 <TouchableOpacity style={styles.retryButton} onPress={refetchAll}>
-                    <Text style={styles.retryText}>Tekrar Deneyin</Text>
+                    <Text style={styles.retryText}>{t("tracks.detail.retryText")}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -63,8 +65,8 @@ export default function TrackDetailView({
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="track"
                 targetId={trackDetails?.id as TrackId}
-                mediaTitle={trackDetails?.title || "Şarkı"}
-                mediaTypeTitle="Şarkı"
+                mediaTitle={trackDetails?.title || t("common.track")}
+                mediaTypeTitle={t("common.track")}
                 mediaPoster={trackDetails?.image}
                 initialRating={
                     trackDetails?.currentUserInteraction?.rating

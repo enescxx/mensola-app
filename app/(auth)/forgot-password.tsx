@@ -7,13 +7,15 @@ import Button from "../../components/Button";
 
 import { useForgotPassword } from "../../hooks/auth/useForgotPassword";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function ForgotPasswordScreen() {
     const { email, setEmail, isLoading, error, handleForgotPassword } = useForgotPassword();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (isLoading) return;
-        if (error) return Alert.alert(error);
+        if (error) return Alert.alert(t("common.error"), error);
     }, [isLoading, error]);
 
     return (
@@ -25,13 +27,13 @@ export default function ForgotPasswordScreen() {
 
                 <View style={styles.formContainer}>
                     <TextField
-                        label="E-posta"
+                        label={t("auth.forgotPassword.emailLabel")}
                         type="email"
-                        placeholder="ornek@email.com"
+                        placeholder={t("auth.forgotPassword.emailPlaceholder")}
                         value={email}
                         onChangeText={setEmail}
                     />
-                    <Button label="Kod Gönder" onPress={handleForgotPassword} />
+                    <Button label={t("auth.forgotPassword.submitButton")} onPress={handleForgotPassword} />
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>

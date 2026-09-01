@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
@@ -11,12 +12,13 @@ import { Colors } from "@/constants/colors";
 
 export default function LoginScreen() {
     const router = useRouter();
+    const { t } = useTranslation();
 
     const { email, setEmail, password, setPassword, isLoading, error, handleLogin } = useLogin();
 
     useEffect(() => {
         if (isLoading) return;
-        if (error) return Alert.alert(error);
+        if (error) return Alert.alert(t("common.error"), error);
     }, [isLoading, error]);
 
     return (
@@ -28,30 +30,30 @@ export default function LoginScreen() {
 
                 <View style={styles.formContainer}>
                     <TextField
-                        label="E-posta"
+                        label={t("auth.login.emailLabel")}
                         type="email"
-                        placeholder="ornek@email.com"
+                        placeholder={t("auth.login.emailPlaceholder")}
                         value={email}
                         onChangeText={setEmail}
                     />
                     <TextField
-                        label="Şifre"
+                        label={t("auth.login.passwordLabel")}
                         type="password"
-                        placeholder="••••••••"
+                        placeholder={t("auth.login.passwordPlaceholder")}
                         value={password}
                         onChangeText={setPassword}
                     />
-                    <Button label="Giriş Yap" onPress={handleLogin} />
+                    <Button label={t("auth.login.submitButton")} onPress={handleLogin} />
                     <TouchableOpacity
                         style={styles.forgotPasswordContainer}
                         onPress={() => router.push("/forgot-password")}>
-                        <Text style={styles.forgotPasswordText}>Şifremi unuttum</Text>
+                        <Text style={styles.forgotPasswordText}>{t("auth.login.forgotPasswordText")}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.footerContainer}>
-                    <Text style={styles.footerText}>Hesabınız yok mu? </Text>
+                    <Text style={styles.footerText}>{t("auth.login.footerText")} </Text>
                     <TouchableOpacity onPress={() => router.push("/signup")}>
-                        <Text style={styles.registerLink}>Kayıt Ol</Text>
+                        <Text style={styles.registerLink}>{t("auth.login.registerLink")}</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>

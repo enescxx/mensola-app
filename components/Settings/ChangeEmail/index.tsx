@@ -6,11 +6,13 @@ import Button from "@/components/Button";
 import TextField from "@/components/TextField";
 import { Colors } from "@/constants/colors";
 import { useChangeEmail } from "@/hooks/user/useChangeEmail";
+import { useTranslation } from "react-i18next";
 
 import { styles } from "./styles";
 import { IChangeEmailProps } from "./types";
 
 export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailProps) {
+    const { t } = useTranslation();
     const {
         email,
         setEmail,
@@ -38,14 +40,14 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                 {/* ── Current Email Badge ── */}
                 <View style={styles.currentBadge}>
                     <Ionicons name="lock-closed" size={16} color={Colors.textSecondary} />
-                    <Text style={styles.currentBadgeText}>Mevcut: {currentEmail}</Text>
+                    <Text style={styles.currentBadgeText}>{t("settings.changeEmail.current", { email: currentEmail })}</Text>
                 </View>
 
                 {step === 1 ? (
                     <>
                         {/* ── Step 1: Input Fields ── */}
                         <View>
-                            <Text style={styles.inputLabel}>Yeni E-posta Adresi</Text>
+                            <Text style={styles.inputLabel}>{t("settings.changeEmail.newEmailLabel")}</Text>
                             <View style={styles.inputContainer}>
                                 <Ionicons
                                     name="mail-outline"
@@ -55,7 +57,7 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                                 />
                                 <TextField
                                     style={styles.textFieldOverride}
-                                    placeholder="yeni@email.com"
+                                    placeholder={t("settings.changeEmail.newEmailPlaceholder")}
                                     value={email}
                                     onChangeText={setEmail}
                                     keyboardType="email-address"
@@ -67,7 +69,7 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                         </View>
 
                         <View>
-                            <Text style={styles.inputLabel}>Mevcut Şifre</Text>
+                            <Text style={styles.inputLabel}>{t("settings.changeEmail.currentPasswordLabel")}</Text>
                             <View style={styles.inputContainer}>
                                 <Ionicons
                                     name="key-outline"
@@ -77,7 +79,7 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                                 />
                                 <TextField
                                     style={styles.textFieldOverride}
-                                    placeholder="••••••••"
+                                    placeholder={t("settings.changeEmail.currentPasswordPlaceholder")}
                                     value={password}
                                     onChangeText={setPassword}
                                     secureTextEntry={secureTextEntry}
@@ -106,11 +108,10 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                                     size={16}
                                     color={Colors.primary}
                                 />
-                                <Text style={styles.noticeTitle}>Güvenlik Uyarısı</Text>
+                                <Text style={styles.noticeTitle}>{t("settings.changeEmail.securityWarning")}</Text>
                             </View>
                             <Text style={styles.noticeText}>
-                                Yeni e-posta adresinize 6 haneli bir doğrulama kodu gönderilecektir.
-                                Kod doğrulanana kadar mevcut e-posta adresiniz aktif kalmaya devam eder.
+                                {t("settings.changeEmail.securityWarningBody")}
                             </Text>
                         </View>
                     </>
@@ -118,14 +119,14 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                     <>
                         {/* ── Step 2: Verification Code Entry ── */}
                         <View>
-                            <Text style={styles.inputLabel}>Doğrulama Kodu</Text>
+                            <Text style={styles.inputLabel}>{t("settings.changeEmail.codeLabel")}</Text>
                             <Text style={styles.otpDescription}>
-                                {email} adresine gönderilen 6 haneli kodu girin.
+                                {t("settings.changeEmail.otpDescription", { email })}
                             </Text>
                             <View style={styles.inputContainer}>
                                 <TextField
                                     style={styles.otpInput}
-                                    placeholder="000000"
+                                    placeholder={t("settings.changeEmail.codePlaceholder")}
                                     value={code}
                                     onChangeText={(text) => setCode(text.replace(/[^0-9]/g, "").slice(0, 6))}
                                     keyboardType="number-pad"
@@ -147,10 +148,10 @@ export default function ChangeEmail({ currentEmail, onSuccess }: IChangeEmailPro
                 <Button
                     label={
                         isLoading
-                            ? "Lütfen bekleyin..."
+                            ? t("settings.changeEmail.submitLoading")
                             : step === 1
-                              ? "Doğrulama Kodu Gönder"
-                              : "E-postayı Doğrula ve Güncelle"
+                              ? t("settings.changeEmail.submitRequestCode")
+                              : t("settings.changeEmail.submitVerifyCode")
                     }
                     onPress={step === 1 ? handleRequestCode : handleVerifyCode}
                     disabled={!canSubmit || isLoading}

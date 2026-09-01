@@ -26,8 +26,8 @@ describe("ProfileBody Component", () => {
 
         const { getByText } = render(<ProfileBody />);
 
-        expect(getByText("Favori Filmler")).toBeTruthy();
-        expect(getByText("Favori Şarkılar")).toBeTruthy();
+        expect(getByText("profile.body.favoriteMovies")).toBeTruthy();
+        expect(getByText("profile.body.favoriteTracks")).toBeTruthy();
     });
 
     it("should not show lists if there is no favorite data", () => {

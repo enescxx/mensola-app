@@ -5,6 +5,14 @@ jest.mock("./ProfileHeader", () => "ProfileHeader");
 jest.mock("./ProfileBody", () => "ProfileBody");
 jest.mock("./ProfileFooter", () => "ProfileFooter");
 
+jest.mock("@/context/ProfileContext", () => ({
+    useProfileContext: () => ({
+        hasAccess: true,
+        isLoading: false,
+        refetch: jest.fn(),
+    }),
+}));
+
 describe("ProfileView Component", () => {
     it("should render all child components successfully", () => {
         const { UNSAFE_getByType } = render(<ProfileView />);

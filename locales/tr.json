@@ -38,12 +38,22 @@
             "submitButton": "Kodu Doğrula"
         }
     },
-    "tabs": {},
+    "tabs": {
+        "home": "Ana Sayfa",
+        "search": "Arama",
+        "notifications": "Bildirimler",
+        "profile": "Profil"
+    },
     "profile": {
         "editProfile": {
             "cancelButton": "İptal",
             "saveButton": "Kaydet",
             "deletePhotoButton": "Mevcut Fotoğrafı Sil",
+            "cancelSelection": "Seçimi İptal Et",
+            "changePhoto": "Fotoğrafı Değiştir",
+            "selectPhoto": "Fotoğraf Seç",
+            "giveUp": "Vazgeç",
+            "remove": "Kaldır",
             "fullnameLabel": "Ad Soyad",
             "fullnamePlaceholder": "Adınızı girin",
             "bioLabel": "Biyografi",
@@ -61,11 +71,22 @@
         },
         "header": {
             "editProfileButton": "Profili Düzenle",
-            "shareButton": "Paylaş"
+            "shareButton": "Paylaş",
+            "followButton": "Takip Et",
+            "followingButton": "Takip Ediliyor",
+            "unfollowConfirmTitle": "Takipten çıkılıyor",
+            "unfollowConfirmBody": "{{name}} adlı kişiyi takip etmeyi bırakmak istiyor musunuz?",
+            "yes": "Evet",
+            "no": "Hayır"
         },
         "body": {
             "favoriteMovies": "Favori Filmler",
             "favoriteTracks": "Favori Şarkılar"
+        },
+        "footer": {
+            "moviesGroup": "Film & Dizi",
+            "musicGroup": "Müzik",
+            "socialGroup": "Sosyal"
         },
         "private": {
             "title": "Bu hesap gizli",
@@ -73,6 +94,17 @@
         }
     },
     "search": {
+        "header": {
+            "movies": "Filmler",
+            "tracks": "Şarkılar",
+            "users": "Kullanıcılar",
+            "placeholder": "Ara..."
+        },
+        "emptyState": {
+            "userPrompt": "Aramak istediğiniz kullanıcı adını girin.",
+            "trendMovies": "Trend Filmler",
+            "newAlbums": "Yeni Albümler"
+        },
         "history": {
             "movieAddedSuccess": "\"{{title}}\" favori filmlerinize eklendi.",
             "movieAddedError": "Film favorilere eklenirken bir hata oluştu.",
@@ -90,14 +122,36 @@
             "seeLess": "Daha az",
             "seeMore": "Daha fazla",
             "latestComments": "Son Yorumlar",
-            "seeAll": "Hepsini Gör"
+            "seeAll": "Hepsini Gör",
+            "emptyOverview": "Bu film hakkında daha fazla bilgi yok.",
+            "addToList": "Listelerime Ekle"
+        },
+        "interactions": {
+            "title": "Film Etkileşimleri",
+            "rating": "Puanınız: {{rating}}",
+            "comment": "Yorumunuz",
+            "liked": "Beğenildi",
+            "loading": "Yükleniyor...",
+            "empty": "Henüz etkileşim yok.",
+            "sheet": {
+                "title": "Değerlendir & Yorum Yap",
+                "ratingTitle": "Puanınız",
+                "noRating": "Puan Seçilmedi",
+                "addToLikes": "Beğenilerine Ekle",
+                "commentTitle": "Yorumunuz (İsteğe Bağlı)",
+                "commentPlaceholder": "Bu içerik hakkında düşüncelerinizi yazın...",
+                "save": "Kaydet"
+            }
         }
     },
     "tracks": {
         "detail": {
             "errorText": "Veriler çekilirken bir hata oluştu. Lütfen tekrar deneyiniz.",
             "retryText": "Tekrar Deneyin",
-            "noPlaylist": "Henüz playlistiniz bulunmuyor."
+            "latestComments": "Son Yorumlar",
+            "seeAll": "Tümü ({{count}})",
+            "emptyPlaylist": "Henüz playlistiniz bulunmuyor.",
+            "addToPlaylist": "Playlist'e Ekle"
         }
     },
     "lists": {
@@ -110,13 +164,18 @@
             "unfollowBody": "{{name}} adlı kişiyi takip etmeyi bırakmak istediğinize emin misiniz?"
         },
         "create": {
+            "titleMovie": "Yeni Film Listesi Oluştur",
+            "titleTrack": "Yeni Çalma Listesi Oluştur",
             "nameLabel": "Liste Adı",
             "namePlaceholderMovie": "Örn. Favori Bilim Kurgu Filmlerim",
             "namePlaceholderTrack": "Örn. Gece Yolculuğu Şarkıları",
             "descriptionLabel": "Açıklama (İsteğe bağlı)",
             "descriptionPlaceholder": "Listeniz hakkında kısa bir açıklama yazın...",
             "privateLabel": "Gizli Liste",
-            "submitButton": "Oluştur"
+            "privateListDesc": "Gizli listeler sadece sizin profilinizde görünür.",
+            "submitButton": "Oluştur",
+            "errorTitleRequired": "Lütfen bir liste başlığı girin.",
+            "errorGeneral": "Liste oluşturulurken bir hata oluştu."
         },
         "replaceFavorite": {
             "emptyText": "Henüz favori listeniz boş."
@@ -133,6 +192,12 @@
         }
     },
     "settings": {
+        "layout": {
+            "title": "Ayarlar",
+            "updateUsername": "Kullanıcı Adı Değiştir",
+            "updateEmail": "E-posta Güncelle",
+            "updatePassword": "Şifre Değiştir"
+        },
         "changeEmail": {
             "current": "Mevcut: {{email}}",
             "newEmailLabel": "Yeni E-posta Adresi",
@@ -140,8 +205,13 @@
             "currentPasswordLabel": "Mevcut Şifre",
             "currentPasswordPlaceholder": "••••••••",
             "securityWarning": "Güvenlik Uyarısı",
+            "securityWarningBody": "Yeni e-posta adresinize 6 haneli bir doğrulama kodu gönderilecektir. Kod doğrulanana kadar mevcut e-posta adresiniz aktif kalmaya devam eder.",
             "codeLabel": "Doğrulama Kodu",
-            "codePlaceholder": "000000"
+            "codePlaceholder": "000000",
+            "otpDescription": "{{email}} adresine gönderilen 6 haneli kodu girin.",
+            "submitLoading": "Lütfen bekleyin...",
+            "submitRequestCode": "Doğrulama Kodu Gönder",
+            "submitVerifyCode": "E-postayı Doğrula ve Güncelle"
         },
         "changePassword": {
             "currentPasswordLabel": "Mevcut Şifre",
@@ -151,16 +221,87 @@
             "newPasswordPlaceholder": "Yeni Şifreniz",
             "newPasswordRepeatLabel": "Yeni Şifre Tekrar",
             "newPasswordRepeatPlaceholder": "Yeni Şifreniz (Tekrar)",
+            "reqMinLength": "En az 8 karakter uzunluğunda",
+            "reqSpecialChar": "Bir sayı veya özel karakter içeriyor",
+            "reqNotSame": "Mevcut şifrenizle aynı olamaz",
             "passwordMismatch": "Şifreler eşleşmiyor.",
             "submitLoading": "Lütfen bekleyin...",
             "submitButton": "Şifreyi Güncelle"
         },
         "changeUsername": {
+            "statusAvailable": "Kullanıcı adı uygun",
+            "statusTaken": "Bu kullanıcı adı alınmış",
+            "statusInvalid": "3–20 karakter, küçük harf, rakam, _ veya .",
             "guidelinesTitle": "Kullanıcı Adı Kuralları",
+            "guidelineChangeFreqStart": "Kullanıcı adınızı ",
             "guideline1": "14 günde bir",
+            "guidelineChangeFreqEnd": " değiştirebilirsiniz.",
+            "guidelineAllowedChars": "İzin verilenler: küçük harfler, rakamlar, alt çizgi ve nokta ",
             "guideline2": "(3–20 karakter)",
             "submitLoading": "Kaydediliyor...",
             "submitButton": "Kaydet"
+        },
+        "menu": {
+            "account": {
+                "title": "Hesap",
+                "update-username": "Kullanıcı Adı",
+                "update-email": "E-posta",
+                "update-password": "Şifre"
+            },
+            "preferences": {
+                "title": "Tercihler",
+                "theme": "Görünüm (Yakında)",
+                "theme-options": {
+                    "dark": "Koyu",
+                    "light": "Açık",
+                    "system": "Sistem"
+                },
+                "default-tab": "Açılış Sekmesi",
+                "default-tab-desc": "Uygulama açıldığında hangi sekmenin gösterileceğini seçin",
+                "default-tab-options": {
+                    "movies": "Filmler",
+                    "tracks": "Müzikler"
+                },
+                "shelf-layout": "Görünüm Düzeni (Yakında)",
+                "shelf-layout-desc": "İçeriklerinizin nasıl görüntüleneceğini seçin",
+                "shelf-layout-options": {
+                    "grid": "Izgara",
+                    "list": "Liste"
+                }
+            },
+            "privacy": {
+                "title": "Gizlilik",
+                "is-private": "Gizli Profil",
+                "is-private-desc": "Sadece onaylı takipçileriniz listelerinizi görebilir"
+            },
+            "data-danger-zone": {
+                "title": "Hesap İşlemleri",
+                "logout": "Çıkış Yap",
+                "logout-desc": "Hesabınızdan çıkış yapın",
+                "delete-account": "Hesabı Sil",
+                "delete-account-desc": "Hesabınızı ve tüm verilerinizi kalıcı olarak silin"
+            }
+        },
+        "alerts": {
+            "exportData": {
+                "title": "Verileri Dışa Aktar",
+                "body": "Verilerinizi dışa aktarmak istediğinize emin misiniz?",
+                "success": "Verileriniz başarıyla dışa aktarıldı."
+            },
+            "logout": {
+                "title": "Çıkış Yap",
+                "body": "Çıkış yapmak istediğinize emin misiniz?",
+                "button": "Çıkış Yap"
+            },
+            "deleteAccount": {
+                "title": "Hesabı Sil",
+                "body": "Hesabınız 30 gün boyunca askıya alınacaktır. Bu süre zarfında tekrar giriş yaparak hesabınızı yeniden etkinleştirebilirsiniz. 30 günün sonunda hesabınız ve tüm verileriniz kalıcı olarak silinecektir. Hesabınızı silmek istediğinize emin misiniz?",
+                "button": "Sil",
+                "error": "Hesap silinemedi. Lütfen daha sonra tekrar deneyiniz."
+            },
+            "privacyUpdate": {
+                "error": "Gizlilik ayarı güncellenemedi. Lütfen tekrar deneyin."
+            }
         },
         "account": {
             "exportSuccess": "Verileriniz başarıyla dışa aktarıldı.",
@@ -172,6 +313,11 @@
         "success": "Başarılı",
         "ok": "Tamam",
         "cancel": "İptal",
-        "seeAll": "Hepsini Gör"
+        "seeAll": "Hepsini Gör",
+        "retry": "Tekrar Deneyin",
+        "track": "Şarkı",
+        "movie": "Film",
+        "giveUp": "Vazgeç",
+        "remove": "Kaldır"
     }
 }

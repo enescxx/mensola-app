@@ -4,12 +4,14 @@ import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import BottomSheet from "@/components/BottomSheet";
 import { useUserPlaylists } from "@/hooks/playlist/useUserPlaylists";
 import AddToPlaylistSheetItem from "./AddToPlaylistSheetItem";
-
 import { styles } from "./styles";
+
 import { AddToPlaylistBottomSheetProps } from "./types";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function AddToPlaylistBottomSheet({ isVisible, onClose, trackId }: AddToPlaylistBottomSheetProps) {
+    const { t } = useTranslation();
     const {
         playlists,
         isLoading,
@@ -35,14 +37,14 @@ export default function AddToPlaylistBottomSheet({ isVisible, onClose, trackId }
     }, [hasMore, isLoadingMore, loadMore]);
 
     return (
-        <BottomSheet isVisible={isVisible} onClose={onClose} title="Playlistlerime Ekle" showCloseButton>
+        <BottomSheet isVisible={isVisible} onClose={onClose} title={t("tracks.detail.addToPlaylist")} showCloseButton>
             <View style={styles.listContainer}>
                 {error ? <Text style={styles.sheetError}>{error}</Text> : null}
 
                 {isLoading ? (
                     <ActivityIndicator size="large" color={Colors.primary} style={{ paddingVertical: 24 }} />
                 ) : playlists.length === 0 ? (
-                    <Text style={styles.bottomSheetEmptyText}>Henüz playlistiniz bulunmuyor.</Text>
+                    <Text style={styles.bottomSheetEmptyText}>{t("tracks.detail.emptyPlaylist")}</Text>
                 ) : (
                     <FlatList
                         data={playlists}

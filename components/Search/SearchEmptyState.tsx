@@ -12,10 +12,12 @@ import { NewAlbumsItem } from "@/types/spotify.types";
 import { Colors } from "@/constants/colors";
 import { MovieService } from "@/services/movie.service";
 import { TmdbId } from "@/types/common.types";
+import { useTranslation } from "react-i18next";
 
 export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
     const router = useRouter();
     const params = useLocalSearchParams();
+    const { t } = useTranslation();
     const isFavoriteMode = params.mode === "favorite";
 
     const isMoviesTab = activeTab === "movie";
@@ -29,7 +31,7 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
         currentQuery;
 
     const data = isMoviesTab ? movieQuery.movies : albumQuery.albums;
-    const title = isMoviesTab ? `Trend Movies (${totalResults}+)` : `New Albums (${totalResults}+)`;
+    const title = isMoviesTab ? `${t("search.emptyState.trendMovies")} (${totalResults}+)` : `${t("search.emptyState.newAlbums")} (${totalResults}+)`;
 
     const handleLoadMore = () => {
         if (isLoading || !hasNextPage || isFetchingNextPage) return;
@@ -40,13 +42,13 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
         if (isFavoriteMode) {
             try {
                 await MovieService.addToFavorites({ tmdbId: movie.tmdbId as TmdbId });
-                Alert.alert("Başarılı", `"${movie.title}" favori filmlerinize eklendi.`, [
-                    { text: "Tamam", onPress: () => router.push("/me") },
+                Alert.alert(t("common.success"), t("search.history.movieAddedSuccess", { title: movie.title }), [
+                    { text: t("common.ok"), onPress: () => router.push("/me") },
                 ]);
             } catch (err: any) {
                 const apiErrorMessage =
-                    err?.error?.message || err?.message || "Film favorilere eklenirken bir hata oluştu.";
-                Alert.alert("Hata", apiErrorMessage);
+                    err?.error?.message || err?.message || t("search.history.movieAddedError");
+                Alert.alert(t("common.error"), apiErrorMessage);
             }
         } else {
             router.push(`/movies/${movie.tmdbId}?type=tmdb`);
@@ -61,7 +63,7 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
         return (
             <View style={[styles.errorContainer, { justifyContent: "center", flex: 1, alignItems: "center" }]}>
                 <Text style={[styles.errorText, { color: Colors.textSecondary }]}>
-                    Aramak istediğiniz kullanıcı adını girin.
+                    {t("search.emptyState.userPrompt")}
                 </Text>
             </View>
         );
@@ -72,7 +74,7 @@ export default function SearchEmptyState({ activeTab }: SearchEmptyStateProps) {
             <View style={styles.errorContainer}>
                 <Text style={styles.errorText}>{error?.message}</Text>
                 <TouchableOpacity style={styles.retryButton} onPress={() => refetch()}>
-                    <Text style={styles.retryText}>Tekrar Deneyin</Text>
+                    <Text style={styles.retryText}>{t("common.retry")}</Text>
                 </TouchableOpacity>
             </View>
         );

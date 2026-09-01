@@ -1,8 +1,10 @@
 import { Stack } from "expo-router";
+import { useTranslation } from "react-i18next";
 import PageHeader from "@/components/PageHeader";
 import { Colors } from "@/constants/colors";
 
 export default function TracksLayout() {
+    const { t } = useTranslation();
     return (
         <Stack
             screenOptions={{
@@ -12,7 +14,7 @@ export default function TracksLayout() {
                 contentStyle: { backgroundColor: Colors.background },
                 animation: "slide_from_right",
             }}>
-            <Stack.Screen name="[trackId]" options={{ title: "Şarkı" }} />
+            <Stack.Screen name="[trackId]" options={{ title: t("common.track", "Şarkı") }} />
         </Stack>
     );
 }

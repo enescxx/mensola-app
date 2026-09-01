@@ -7,11 +7,13 @@ import Button from "@/components/Button";
 import TextField from "@/components/TextField";
 import { Colors } from "@/constants/colors";
 import { useChangePassword } from "@/hooks/user/useChangePassword";
+import { useTranslation } from "react-i18next";
 
 import { styles } from "./styles";
 import { IChangePasswordProps } from "./types";
 
 export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
+    const { t } = useTranslation();
     const {
         currentPassword,
         setCurrentPassword,
@@ -41,7 +43,7 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
                 showsVerticalScrollIndicator={false}>
                 {/* ── Current Password Input ── */}
                 <View>
-                    <Text style={styles.inputLabel}>Mevcut Şifre</Text>
+                    <Text style={styles.inputLabel}>{t("settings.changePassword.currentPasswordLabel")}</Text>
                     <View style={styles.inputContainer}>
                         <Ionicons
                             name="lock-closed-outline"
@@ -51,7 +53,7 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
                         />
                         <TextField
                             style={styles.textFieldOverride}
-                            placeholder="Mevcut Şifreniz"
+                            placeholder={t("settings.changePassword.currentPasswordPlaceholder")}
                             value={currentPassword}
                             onChangeText={setCurrentPassword}
                             secureTextEntry={secureCurrent}
@@ -76,17 +78,17 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
                     onPress={() => router.push("/(auth)/forgot-password")}
                     style={styles.forgotPasswordContainer}
                     activeOpacity={0.7}>
-                    <Text style={styles.forgotPasswordText}>Şifremi Unuttum?</Text>
+                    <Text style={styles.forgotPasswordText}>{t("settings.changePassword.forgotPasswordText")}</Text>
                 </TouchableOpacity>
 
                 {/* ── New Password Input ── */}
                 <View>
-                    <Text style={styles.inputLabel}>Yeni Şifre</Text>
+                    <Text style={styles.inputLabel}>{t("settings.changePassword.newPasswordLabel")}</Text>
                     <View style={styles.inputContainer}>
                         <Ionicons name="key-outline" size={18} color={Colors.textMuted} style={styles.inputIconLeft} />
                         <TextField
                             style={styles.textFieldOverride}
-                            placeholder="Yeni Şifreniz"
+                            placeholder={t("settings.changePassword.newPasswordPlaceholder")}
                             value={newPassword}
                             onChangeText={setNewPassword}
                             secureTextEntry={secureNew}
@@ -108,12 +110,12 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
 
                 {/* ── Confirm New Password Input ── */}
                 <View>
-                    <Text style={styles.inputLabel}>Yeni Şifre Tekrar</Text>
+                    <Text style={styles.inputLabel}>{t("settings.changePassword.newPasswordRepeatLabel")}</Text>
                     <View style={styles.inputContainer}>
                         <Ionicons name="key-outline" size={18} color={Colors.textMuted} style={styles.inputIconLeft} />
                         <TextField
                             style={styles.textFieldOverride}
-                            placeholder="Yeni Şifreniz (Tekrar)"
+                            placeholder={t("settings.changePassword.newPasswordRepeatPlaceholder")}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
                             secureTextEntry={secureConfirm}
@@ -142,7 +144,7 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
                             color={isMinLength ? Colors.primary : Colors.textMuted}
                         />
                         <Text style={[styles.requirementText, isMinLength && styles.requirementTextSuccess]}>
-                            En az 8 karakter uzunluğunda
+                            {t("settings.changePassword.reqMinLength")}
                         </Text>
                     </View>
                     <View style={styles.requirementRow}>
@@ -152,7 +154,7 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
                             color={hasNumberOrSpecial ? Colors.primary : Colors.textMuted}
                         />
                         <Text style={[styles.requirementText, hasNumberOrSpecial && styles.requirementTextSuccess]}>
-                            Bir sayı veya özel karakter içeriyor
+                            {t("settings.changePassword.reqSpecialChar")}
                         </Text>
                     </View>
                     <View style={styles.requirementRow}>
@@ -162,14 +164,14 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
                             color={isNotSameAsCurrent ? Colors.primary : Colors.textMuted}
                         />
                         <Text style={[styles.requirementText, isNotSameAsCurrent && styles.requirementTextSuccess]}>
-                            Mevcut şifrenizle aynı olamaz
+                            {t("settings.changePassword.reqNotSame")}
                         </Text>
                     </View>
                 </View>
 
                 {/* ── Error & Match Alert Message ── */}
                 {confirmPassword.length > 0 && !doPasswordsMatch && (
-                    <Text style={styles.helperText}>Şifreler eşleşmiyor.</Text>
+                    <Text style={styles.helperText}>{t("settings.changePassword.passwordMismatch")}</Text>
                 )}
                 {errorMessage && <Text style={styles.helperText}>{errorMessage}</Text>}
             </ScrollView>
@@ -177,7 +179,7 @@ export default function ChangePassword({ onSuccess }: IChangePasswordProps) {
             {/* ── Pinned Action Button ── */}
             <View style={styles.footer}>
                 <Button
-                    label={isLoading ? "Lütfen bekleyin..." : "Şifreyi Güncelle"}
+                    label={isLoading ? t("settings.changePassword.submitLoading") : t("settings.changePassword.submitButton")}
                     onPress={handleUpdatePassword}
                     disabled={!canSubmit || isLoading}
                     style={[styles.saveButton, (!canSubmit || isLoading) && styles.saveButtonDisabled]}

@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
@@ -33,10 +34,11 @@ export default function SignupScreen() {
         error,
         handleRegister,
     } = useRegister();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (isLoading) return;
-        if (error) return Alert.alert(error);
+        if (error) return Alert.alert(t("common.error"), error);
     }, [isLoading, error]);
 
     return (
@@ -49,40 +51,40 @@ export default function SignupScreen() {
 
                     <View style={styles.formContainer}>
                         <TextField
-                            label="Kullanıcı Adı"
+                            label={t("auth.signup.usernameLabel")}
                             type="text"
-                            placeholder="username"
+                            placeholder={t("auth.signup.usernamePlaceholder")}
                             value={username}
                             onChangeText={setUsername}
                         />
                         <TextField
-                            label="E-posta"
+                            label={t("auth.signup.emailLabel")}
                             type="email"
-                            placeholder="ornek@email.com"
+                            placeholder={t("auth.signup.emailPlaceholder")}
                             value={email}
                             onChangeText={setEmail}
                         />
                         <TextField
-                            label="Şifre"
+                            label={t("auth.signup.passwordLabel")}
                             type="password"
-                            placeholder="••••••••"
+                            placeholder={t("auth.signup.passwordPlaceholder")}
                             value={password}
                             onChangeText={setPassword}
                         />
                         <TextField
-                            label="Şifreyi Onayla"
+                            label={t("auth.signup.confirmPasswordLabel")}
                             type="password"
-                            placeholder="••••••••"
+                            placeholder={t("auth.signup.confirmPasswordPlaceholder")}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
                         />
-                        <Button label="Hesap Oluştur" onPress={handleRegister} />
+                        <Button label={t("auth.signup.submitButton")} onPress={handleRegister} />
                     </View>
 
                     <View style={styles.footerContainer}>
-                        <Text style={styles.footerText}>Zaten hesabın var mı? </Text>
+                        <Text style={styles.footerText}>{t("auth.signup.footerText")} </Text>
                         <TouchableOpacity onPress={() => router.push("/login")}>
-                            <Text style={styles.loginLink}>Giriş Yap</Text>
+                            <Text style={styles.loginLink}>{t("auth.signup.loginLink")}</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>

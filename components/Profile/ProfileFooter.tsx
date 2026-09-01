@@ -6,6 +6,7 @@ import FooterItem from "./ProfileFooterItem";
 import { useProfileContext } from "../../context/ProfileContext";
 import { StatTypeKey } from "@/types/stat.types";
 import { ListGroup } from "../ListGroup";
+import { useTranslation } from "react-i18next";
 
 const MOVIE_KEYS: StatTypeKey[] = [
     "watchedMoviesCount",
@@ -25,6 +26,7 @@ const MUSIC_KEYS: StatTypeKey[] = [
 const SOCIAL_KEYS: StatTypeKey[] = ["followersCount", "followingCount"];
 
 export default function ProfileFooter() {
+    const { t } = useTranslation();
     const { footerData, handleStatPress } = useProfileContext();
     const { stats } = footerData;
 
@@ -50,9 +52,9 @@ export default function ProfileFooter() {
 
     return (
         <View style={styles.profileFooter}>
-            {renderGroup(MOVIE_KEYS, "Film & Dizi")}
-            {renderGroup(MUSIC_KEYS, "Müzik")}
-            {renderGroup(SOCIAL_KEYS, "Sosyal")}
+            {renderGroup(MOVIE_KEYS, t("profile.footer.moviesGroup"))}
+            {renderGroup(MUSIC_KEYS, t("profile.footer.musicGroup"))}
+            {renderGroup(SOCIAL_KEYS, t("profile.footer.socialGroup"))}
         </View>
     );
 }

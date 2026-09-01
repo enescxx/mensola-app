@@ -6,6 +6,7 @@ import BottomSheet from "@/components/BottomSheet";
 import { styles } from "./styles";
 import { IInteractionSheetProps } from "./types";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 export default function InteractionSheet({
     isVisible,
@@ -21,6 +22,7 @@ export default function InteractionSheet({
     onSubmit,
     isLoading = false,
 }: IInteractionSheetProps) {
+    const { t } = useTranslation();
     const [rating, setRating] = useState<number>(initialRating);
     const [comment, setComment] = useState<string>(initialComment);
     const [isLiked, setIsLiked] = useState<boolean>(initialIsLiked);
@@ -66,9 +68,9 @@ export default function InteractionSheet({
     const displayType =
         mediaTypeTitle ||
         (targetType === "movie"
-            ? "Film"
+            ? t("common.movie")
             : targetType === "track"
-              ? "Şarkı"
+              ? t("common.track")
               : targetType === "playlist"
                 ? "Çalma Listesi"
                 : targetType === "album"
@@ -78,7 +80,7 @@ export default function InteractionSheet({
     const posterStyle = isPortraitMedia ? styles.poster2x3 : styles.posterSquare;
 
     return (
-        <BottomSheet isVisible={isVisible} onClose={onClose} title="Değerlendir & Yorum Yap" showCloseButton>
+        <BottomSheet isVisible={isVisible} onClose={onClose} title={t("interactions.sheet.title")} showCloseButton>
             <View style={styles.container}>
                 {/* Media Header */}
                 <View style={styles.headerRow}>
@@ -96,8 +98,8 @@ export default function InteractionSheet({
                 {/* Rating Section (10 Stars) */}
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
-                        <Text style={styles.sectionTitle}>Puanınız</Text>
-                        <Text style={styles.ratingValue}>{rating > 0 ? `${rating} / 10` : "Puan Seçilmedi"}</Text>
+                        <Text style={styles.sectionTitle}>{t("interactions.sheet.ratingTitle")}</Text>
+                        <Text style={styles.ratingValue}>{rating > 0 ? `${rating} / 10` : t("interactions.sheet.noRating")}</Text>
                     </View>
                     <View style={styles.starsContainer}>
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((starIndex) => (
@@ -124,7 +126,7 @@ export default function InteractionSheet({
                             size={22}
                             color={isLiked ? "#FF3B30" : "#A7A7A7"}
                         />
-                        <Text style={styles.likeText}>Beğenilerine Ekle</Text>
+                        <Text style={styles.likeText}>{t("interactions.sheet.addToLikes")}</Text>
                     </View>
                     <Ionicons
                         name={isLiked ? "checkmark-circle" : "ellipse-outline"}
@@ -135,10 +137,10 @@ export default function InteractionSheet({
 
                 {/* Comment Section */}
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Yorumunuz (İsteğe Bağlı)</Text>
+                    <Text style={styles.sectionTitle}>{t("interactions.sheet.commentTitle")}</Text>
                     <TextInput
                         style={styles.commentInput}
-                        placeholder="Bu içerik hakkında düşüncelerinizi yazın..."
+                        placeholder={t("interactions.sheet.commentPlaceholder")}
                         placeholderTextColor="#777777"
                         multiline
                         numberOfLines={3}
@@ -156,7 +158,7 @@ export default function InteractionSheet({
                     {isLoading || isSubmitting ? (
                         <ActivityIndicator color="#FFFFFF" />
                     ) : (
-                        <Text style={styles.submitButtonText}>Kaydet</Text>
+                        <Text style={styles.submitButtonText}>{t("interactions.sheet.save")}</Text>
                     )}
                 </TouchableOpacity>
             </View>

@@ -3,12 +3,14 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import InteractionView from "../Interaction";
 import { InteractionItemResponse } from "@/types/interaction.types";
 import { Colors } from "@/constants/colors";
+import { useTranslation } from "react-i18next";
 
 interface LatestCommentsProps {
     interactions: InteractionItemResponse[];
 }
 
 export default function LatestComments({ interactions }: LatestCommentsProps) {
+    const { t } = useTranslation();
     const router = useRouter();
     const { movieId } = useLocalSearchParams<{ movieId?: string }>();
 
@@ -27,9 +29,9 @@ export default function LatestComments({ interactions }: LatestCommentsProps) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.title}>Son Yorumlar</Text>
+                <Text style={styles.title}>{t("movies.detail.latestComments")}</Text>
                 <TouchableOpacity onPress={handleSeeAllPress}>
-                    <Text style={styles.seeAll}>Hepsini Gör</Text>
+                    <Text style={styles.seeAll}>{t("movies.detail.seeAll")}</Text>
                 </TouchableOpacity>
             </View>
 

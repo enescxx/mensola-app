@@ -14,103 +14,104 @@ import { usePreferences } from "@/hooks/usePreferences";
 import { useGlobalUser } from "@/context/AuthContext";
 import { UserService } from "@/services/user.service";
 import { AuthService } from "@/services/auth.service";
+import { useTranslation } from "react-i18next";
 
-export const SETTINGS_CONFIG: SettingSection[] = [
+const getSettingsConfig = (t: any): SettingSection[] => [
     {
         id: "account",
-        title: "Account",
+        title: t("settings.menu.account.title"),
         items: [
             {
                 id: "update-username",
                 type: "route",
-                label: "Username",
+                label: t("settings.menu.account.update-username"),
                 route: "/settings/account/update-username",
                 value: "enescxx",
             },
             {
                 id: "update-email",
                 type: "route",
-                label: "Email",
+                label: t("settings.menu.account.update-email"),
                 route: "/settings/account/update-email",
                 value: "enescx54@gmail.com",
             },
             {
                 id: "update-password",
                 type: "route",
-                label: "Password",
+                label: t("settings.menu.account.update-password"),
                 route: "/settings/account/update-password",
             },
         ],
     },
     {
         id: "preferences",
-        title: "Preferences",
+        title: t("settings.menu.preferences.title"),
         items: [
             {
                 id: "theme",
                 type: "options",
-                label: "Appearance (Coming Soon)",
+                label: t("settings.menu.preferences.theme"),
                 value: "dark",
                 options: [
-                    { label: "Dark", value: "dark" },
-                    { label: "Light", value: "light" },
-                    { label: "System", value: "system" },
+                    { label: t("settings.menu.preferences.theme-options.dark"), value: "dark" },
+                    { label: t("settings.menu.preferences.theme-options.light"), value: "light" },
+                    { label: t("settings.menu.preferences.theme-options.system"), value: "system" },
                 ],
             },
             {
                 id: "default-tab",
                 type: "options",
-                label: "Landing Tab",
-                description: "Choose which shelf to show on app launch",
+                label: t("settings.menu.preferences.default-tab"),
+                description: t("settings.menu.preferences.default-tab-desc"),
                 value: "movies",
                 options: [
-                    { label: "Films", value: "movies" },
-                    { label: "Music", value: "tracks" },
+                    { label: t("settings.menu.preferences.default-tab-options.movies"), value: "movies" },
+                    { label: t("settings.menu.preferences.default-tab-options.tracks"), value: "tracks" },
                 ],
             },
             {
                 id: "shelf-layout",
                 type: "options",
-                label: "Display Layout (Coming Soon)",
-                description: "How your shelves are presented",
+                label: t("settings.menu.preferences.shelf-layout"),
+                description: t("settings.menu.preferences.shelf-layout-desc"),
                 value: "grid",
                 options: [
-                    { label: "Grid", value: "grid" },
-                    { label: "List", value: "list" },
+                    { label: t("settings.menu.preferences.shelf-layout-options.grid"), value: "grid" },
+                    { label: t("settings.menu.preferences.shelf-layout-options.list"), value: "list" },
                 ],
             },
         ],
     },
     {
         id: "privacy",
-        title: "Privacy",
+        title: t("settings.menu.privacy.title"),
         items: [
             {
                 id: "is-private",
                 type: "toggle",
-                label: "Private Profile",
-                description: "Only approved followers can see your shelves",
+                label: t("settings.menu.privacy.is-private"),
+                description: t("settings.menu.privacy.is-private-desc"),
                 value: false,
             },
         ],
     },
     {
         id: "data-danger-zone",
-        title: "Account Actions",
+        title: t("settings.menu.data-danger-zone.title"),
         items: [
             {
                 id: "logout",
                 type: "action",
-                label: "Sign Out",
-                description: "Log out of your account",
+                label: t("settings.menu.data-danger-zone.logout"),
+                description: t("settings.menu.data-danger-zone.logout-desc"),
                 actionKey: "LOGOUT",
                 variant: "default",
             },
             {
                 id: "delete-account",
                 type: "action",
-                label: "Delete Account",
-                description: "Permanently remove your account and all shelves",
+                label: t("settings.menu.data-danger-zone.delete-account"),
+                description: t("settings.menu.data-danger-zone.delete-account-desc"),
                 actionKey: "DELETE_USER_ACCOUNT",
                 variant: "danger",
             },
@@ -127,11 +128,12 @@ export default function SettingsView() {
     const { user, setUser, logout } = useGlobalUser();
     const router = useRouter();
 
+    const { t } = useTranslation();
     const [activeOptionsSetting, setActiveOptionsSetting] = useState<OptionsSetting | null>(null);
     const [isSheetVisible, setIsSheetVisible] = useState(false);
 
     // Compute sections configurations dynamically using state, global user, and Zustand store values
-    const sections: SettingSection[] = SETTINGS_CONFIG.map((section) => {
+    const sections: SettingSection[] = getSettingsConfig(t).map((section) => {
         if (section.id === "account") {
             return {
                 ...section,
@@ -191,8 +193,8 @@ export default function SettingsView() {
                 setUser({ ...user, isPrivate: !newValue });
 
                 Alert.alert(
-                    "Hata",
-                    "Gizlilik ayarı güncellenemedi. Lütfen tekrar deneyin."
+                    t("common.error"),
+                    t("settings.alerts.privacyUpdate.error")
                 );
             }
         } else {
@@ -221,26 +223,26 @@ export default function SettingsView() {
     const handleActionPress = (actionKey: string) => {
         if (actionKey === "EXPORT_USER_DATA") {
             Alert.alert(
-                "Export Data",
-                "Are you sure you want to export your data?",
+                t("settings.alerts.exportData.title"),
+                t("settings.alerts.exportData.body"),
                 [
-                    { text: "Cancel", style: "cancel" },
+                    { text: t("common.cancel"), style: "cancel" },
                     {
-                        text: "Export",
+                        text: t("common.ok"),
                         onPress: () => {
-                            Alert.alert("Success", "Your data has been exported successfully.");
+                            Alert.alert(t("common.success"), t("settings.alerts.exportData.success"));
                         },
                     },
                 ]
             );
         } else if (actionKey === "LOGOUT") {
             Alert.alert(
-                "Sign Out",
-                "Are you sure you want to sign out?",
+                t("settings.alerts.logout.title"),
+                t("settings.alerts.logout.body"),
                 [
-                    { text: "Cancel", style: "cancel" },
+                    { text: t("common.cancel"), style: "cancel" },
                     {
-                        text: "Sign Out",
+                        text: t("settings.alerts.logout.button"),
                         style: "destructive",
                         onPress: async () => {
                             try {
@@ -263,12 +265,12 @@ export default function SettingsView() {
             );
         } else if (actionKey === "DELETE_USER_ACCOUNT") {
             Alert.alert(
-                "Hesabı Sil",
-                "Hesabınız 30 gün boyunca askıya alınacaktır. Bu süre zarfında tekrar giriş yaparak hesabınızı yeniden etkinleştirebilirsiniz. 30 günün sonunda hesabınız ve tüm verileriniz kalıcı olarak silinecektir. Hesabınızı silmek istediğinize emin misiniz?",
+                t("settings.alerts.deleteAccount.title"),
+                t("settings.alerts.deleteAccount.body"),
                 [
-                    { text: "İptal", style: "cancel" },
+                    { text: t("common.cancel"), style: "cancel" },
                     {
-                        text: "Sil",
+                        text: t("settings.alerts.deleteAccount.button"),
                         style: "destructive",
                         onPress: async () => {
                             try {
@@ -276,7 +278,7 @@ export default function SettingsView() {
                                 await logout();
                             } catch (e) {
                                 console.error("Error deleting account:", e);
-                                Alert.alert("Hata", "Hesap silinemedi. Lütfen daha sonra tekrar deneyiniz.");
+                                Alert.alert(t("common.error"), t("settings.alerts.deleteAccount.error"));
                             }
                         },
                     },

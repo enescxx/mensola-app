@@ -7,7 +7,7 @@ const mockSongProps: Omit<IMusicCardProps, "type"> = {
     title: "Music Title",
     artists: [{ name: "Artist 1" }, { name: "Artist 2" }],
     image: "https://example.com/cover.jpg",
-    duration: 197,
+    duration: 197000,
 };
 
 const mockAlbumProps: Omit<IMusicCardProps, "type"> = {
@@ -51,7 +51,7 @@ describe("MusicCard Component", () => {
     it("should display song count when type is 'playlist'", () => {
         const { getByText } = render(<MusicCard type="playlist" data={mockPlaylistProps} />);
 
-        expect(getByText("@enescxx • 50 Şarkı")).toBeTruthy();
+        expect(getByText("@enescxx • 50 common.track")).toBeTruthy();
     });
 
     it("should trigger onPress when the card is pressed", () => {

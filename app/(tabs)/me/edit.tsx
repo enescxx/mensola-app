@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import Avatar from "@/components/Avatar";
 import TextField from "@/components/TextField";
@@ -21,6 +22,7 @@ export default function EditProfileScreen() {
         removeAvatarHandler,
         submitEdit,
     } = useEditProfile();
+    const { t } = useTranslation();
     const previewAvatarUrl = selectedImageUri || (!isAvatarRemoved ? user?.avatar : null);
 
     return (
@@ -31,7 +33,7 @@ export default function EditProfileScreen() {
                     style={styles.cancelButton}
                     onPress={() => router.back()}
                     disabled={isLoading}>
-                    <Text style={styles.cancelButtonText}>İptal</Text>
+                    <Text style={styles.cancelButtonText}>{t("profile.editProfile.cancelButton")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -42,7 +44,7 @@ export default function EditProfileScreen() {
                     {isLoading ? (
                         <ActivityIndicator size="small" color={Colors.textPrimary} />
                     ) : (
-                        <Text style={styles.saveButtonText}>Kaydet</Text>
+                        <Text style={styles.saveButtonText}>{t("profile.editProfile.saveButton")}</Text>
                     )}
                 </TouchableOpacity>
             </View>
@@ -59,10 +61,10 @@ export default function EditProfileScreen() {
                         <TouchableOpacity activeOpacity={0.7} onPress={pickImageHandler} style={styles.actionButton}>
                             <Text style={styles.actionButtonText}>
                                 {selectedImageUri
-                                    ? "Seçimi İptal Et"
+                                    ? t("profile.editProfile.cancelSelection")
                                     : user?.avatar && !isAvatarRemoved
-                                      ? "Fotoğrafı Değiştir"
-                                      : "Fotoğraf Seç"}
+                                      ? t("profile.editProfile.changePhoto")
+                                      : t("profile.editProfile.selectPhoto")}
                             </Text>
                         </TouchableOpacity>
 
@@ -71,23 +73,23 @@ export default function EditProfileScreen() {
                                 activeOpacity={0.7}
                                 onPress={removeAvatarHandler}
                                 style={[styles.actionButton, styles.deleteButton]}>
-                                <Text style={styles.deleteButtonText}>Mevcut Fotoğrafı Sil</Text>
+                                <Text style={styles.deleteButtonText}>{t("profile.editProfile.deletePhotoButton")}</Text>
                             </TouchableOpacity>
                         )}
                     </View>
                 </View>
                 <View style={styles.formContainer}>
                     <TextField
-                        label="Ad Soyad"
+                        label={t("profile.editProfile.fullnameLabel")}
                         value={fullname}
                         onChangeText={setFullname}
-                        placeholder="Adınızı girin"
+                        placeholder={t("profile.editProfile.fullnamePlaceholder")}
                     />
                     <TextField
-                        label="Biyografi"
+                        label={t("profile.editProfile.bioLabel")}
                         value={bio}
                         onChangeText={setBio}
-                        placeholder="Kendinizden bahsedin"
+                        placeholder={t("profile.editProfile.bioPlaceholder")}
                         multiline
                     />
                 </View>

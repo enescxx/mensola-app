@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import { Colors } from "@/constants/colors";
 import { MovieService } from "@/services/movie.service";
 import { PlaylistService } from "@/services/playlist.service";
+import { useTranslation } from "react-i18next";
 import { styles } from "./styles";
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function CreateListBottomSheet({ isVisible, onClose, type, onSuccess }: Props) {
+    const { t } = useTranslation();
     const isMovie = type === "movie-lists";
 
     const [title, setTitle] = useState("");
@@ -26,7 +28,7 @@ export default function CreateListBottomSheet({ isVisible, onClose, type, onSucc
 
     const handleCreate = async () => {
         if (!title.trim()) {
-            setError("Lütfen bir liste başlığı girin.");
+            setError(t("lists.create.errorTitleRequired"));
             return;
         }
 
@@ -54,7 +56,7 @@ export default function CreateListBottomSheet({ isVisible, onClose, type, onSucc
             onSuccess();
             onClose();
         } catch (err: any) {
-            const msg = err?.error?.message || err?.message || "Liste oluşturulurken bir hata oluştu.";
+            const msg = err?.error?.message || err?.message || t("lists.create.errorGeneral");
             setError(msg);
         } finally {
             setIsLoading(false);
@@ -65,11 +67,11 @@ export default function CreateListBottomSheet({ isVisible, onClose, type, onSucc
         <BottomSheet
             isVisible={isVisible}
             onClose={onClose}
-            title={isMovie ? "Yeni Film Listesi Oluştur" : "Yeni Çalma Listesi Oluştur"}>
+            title={isMovie ? t("lists.create.titleMovie") : t("lists.create.titleTrack")}>
             <View style={styles.container}>
                 <TextField
-                    label="Liste Adı"
-                    placeholder={isMovie ? "Örn. Favori Bilim Kurgu Filmlerim" : "Örn. Gece Yolculuğu Şarkıları"}
+                    label={t("lists.create.nameLabel")}
+                    placeholder={isMovie ? t("lists.create.namePlaceholderMovie") : t("lists.create.namePlaceholderTrack")}
                     value={title}
                     onChangeText={(text) => {
                         setTitle(text);
@@ -78,8 +80,8 @@ export default function CreateListBottomSheet({ isVisible, onClose, type, onSucc
                 />
 
                 <TextField
-                    label="Açıklama (İsteğe bağlı)"
-                    placeholder="Listeniz hakkında kısa bir açıklama yazın..."
+                    label={t("lists.create.descriptionLabel")}
+                    placeholder={t("lists.create.descriptionPlaceholder")}
                     value={description}
                     onChangeText={setDescription}
                     multiline
@@ -88,9 +90,9 @@ export default function CreateListBottomSheet({ isVisible, onClose, type, onSucc
 
                 <View style={styles.switchRow}>
                     <View style={styles.switchLabelGroup}>
-                        <Text style={styles.switchLabel}>Gizli Liste</Text>
+                        <Text style={styles.switchLabel}>{t("lists.create.privateLabel")}</Text>
                         <Text style={styles.switchDesc}>
-                            Gizli listeler sadece sizin profilinizde görünür.
+                            {t("lists.create.privateListDesc")}
                         </Text>
                     </View>
                     <Switch
@@ -104,7 +106,7 @@ export default function CreateListBottomSheet({ isVisible, onClose, type, onSucc
                 {error && <Text style={styles.errorText}>{error}</Text>}
 
                 <Button
-                    label="Oluştur"
+                    label={t("lists.create.submitButton")}
                     onPress={handleCreate}
                     disabled={isLoading}
                     style={styles.submitBtn}

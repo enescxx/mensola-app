@@ -10,13 +10,13 @@ const resources = {
     en: { translation: en },
 };
 
-const deviceLanguage = getLocales()[0]?.languageCode ?? "tr";
+const deviceLanguage = getLocales()[0]?.languageCode ?? "en";
 
 i18n.use(initReactI18next).init({
     resources,
-    compatibilityJSON: "v3",
+    compatibilityJSON: "v4",
     lng: deviceLanguage,
-    fallbackLng: "tr",
+    fallbackLng: "en",
     interpolation: {
         escapeValue: false, // react already safes from xss
     },

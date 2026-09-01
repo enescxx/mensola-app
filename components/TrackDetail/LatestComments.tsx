@@ -1,11 +1,13 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { useTranslation } from "react-i18next";
 import InteractionView from "../Interaction";
 
 import { LatestCommentsProps } from "./types";
 import { styles } from "./styles";
 
 export default function LatestComments({ interactions, commentsCount }: LatestCommentsProps) {
+    const { t } = useTranslation();
     const router = useRouter();
     const { trackId } = useLocalSearchParams<{ trackId?: string }>();
 
@@ -24,9 +26,9 @@ export default function LatestComments({ interactions, commentsCount }: LatestCo
     return (
         <View style={styles.commentsContainer}>
             <View style={styles.commentsHeader}>
-                <Text style={styles.commentsTitle}>Son Yorumlar</Text>
+                <Text style={styles.commentsTitle}>{t("tracks.detail.latestComments")}</Text>
                 <TouchableOpacity onPress={handleSeeAllPress}>
-                    <Text style={styles.seeAll}>Tümü ({commentsCount || 0})</Text>
+                    <Text style={styles.seeAll}>{t("tracks.detail.seeAll", { count: commentsCount || 0 })}</Text>
                 </TouchableOpacity>
             </View>
 

@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { Ionicons } from "@expo/vector-icons";
 import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
@@ -13,6 +14,7 @@ const ITEM_WIDTH = (width - 48 - 24) / 3; // Horizontal padding (24 * 2) and gap
 
 export default function ProfileBody() {
     const { bodyData, isOwnProfile } = useProfileContext();
+    const { t } = useTranslation();
     const { favoriteMovies, favoriteTracks } = bodyData;
     const router = useRouter();
 
@@ -35,7 +37,7 @@ export default function ProfileBody() {
             {showMovieSection ? (
                 <View style={styles.section}>
                     <View style={styles.listHeader}>
-                        <Text style={styles.listTitle}>Favori Filmler</Text>
+                        <Text style={styles.listTitle}>{t("profile.body.favoriteMovies")}</Text>
                     </View>
                     <View style={styles.gridRow}>
                         {moviesList.slice(0, 3).map((item) => (
@@ -66,7 +68,7 @@ export default function ProfileBody() {
             {showTrackSection ? (
                 <View style={styles.section}>
                     <View style={styles.listHeader}>
-                        <Text style={styles.listTitle}>Favori Şarkılar</Text>
+                        <Text style={styles.listTitle}>{t("profile.body.favoriteTracks")}</Text>
                     </View>
                     <View style={styles.gridRow}>
                         {tracksList.slice(0, 3).map((item) => (
