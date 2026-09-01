@@ -42,15 +42,17 @@ const mmkvStorage: StateStorage = {
 
 export interface PreferencesState {
     theme: "dark" | "light" | "system";
+    language: "en" | "tr" | "system";
     "default-tab": "movies" | "tracks";
     "shelf-layout": "grid" | "list";
-    setPreference: (key: "theme" | "default-tab" | "shelf-layout", value: any) => void;
+    setPreference: (key: "theme" | "language" | "default-tab" | "shelf-layout", value: any) => void;
 }
 
 export const usePreferences = create<PreferencesState>()(
     persist(
         (set: any): PreferencesState => ({
             theme: "dark",
+            language: "system",
             "default-tab": "movies",
             "shelf-layout": "grid",
             setPreference: (key, value) => {

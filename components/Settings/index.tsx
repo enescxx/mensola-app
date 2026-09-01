@@ -3,6 +3,7 @@ import { ScrollView, View, Text, TouchableOpacity, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
+import { getLocales } from "expo-localization";
 
 import { ListGroup } from "../ListGroup";
 import BottomSheet from "../BottomSheet";
@@ -56,6 +57,17 @@ const getSettingsConfig = (t: any): SettingSection[] => [
                     { label: t("settings.menu.preferences.theme-options.dark"), value: "dark" },
                     { label: t("settings.menu.preferences.theme-options.light"), value: "light" },
                     { label: t("settings.menu.preferences.theme-options.system"), value: "system" },
+                ],
+            },
+            {
+                id: "language",
+                type: "options",
+                label: t("settings.menu.preferences.language"),
+                value: "system",
+                options: [
+                    { label: t("settings.menu.preferences.language-options.system"), value: "system" },
+                    { label: t("settings.menu.preferences.language-options.en"), value: "en" },
+                    { label: t("settings.menu.preferences.language-options.tr"), value: "tr" },
                 ],
             },
             {
@@ -121,6 +133,7 @@ const getSettingsConfig = (t: any): SettingSection[] => [
 
 export default function SettingsView() {
     const theme = usePreferences((state) => state.theme);
+    const language = usePreferences((state) => state.language);
     const defaultTab = usePreferences((state) => state["default-tab"]);
     const shelfLayout = usePreferences((state) => state["shelf-layout"]);
     const setPreference = usePreferences((state) => state.setPreference);
@@ -128,7 +141,7 @@ export default function SettingsView() {
     const { user, setUser, logout } = useGlobalUser();
     const router = useRouter();
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [activeOptionsSetting, setActiveOptionsSetting] = useState<OptionsSetting | null>(null);
     const [isSheetVisible, setIsSheetVisible] = useState(false);
 
@@ -154,6 +167,9 @@ export default function SettingsView() {
                 items: section.items.map((item) => {
                     if (item.id === "theme" && item.type === "options") {
                         return { ...item, value: theme };
+                    }
+                    if (item.id === "language" && item.type === "options") {
+                        return { ...item, value: language };
                     }
                     if (item.id === "default-tab" && item.type === "options") {
                         return { ...item, value: defaultTab };
@@ -204,6 +220,11 @@ export default function SettingsView() {
 
     const handleOptionSelect = (itemId: string, newValue: string) => {
         setPreference(itemId as any, newValue);
+        if (itemId === "language") {
+            const deviceLanguage = getLocales()[0]?.languageCode ?? "en";
+            const langToSet = newValue === "system" ? deviceLanguage : newValue;
+            i18n.changeLanguage(langToSet);
+        }
     };
 
     const handleOptionPress = (item: OptionsSetting) => {

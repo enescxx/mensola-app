@@ -256,6 +256,12 @@
                     "light": "Açık",
                     "system": "Sistem"
                 },
+                "language": "Dil",
+                "language-options": {
+                    "system": "Sistem",
+                    "en": "English",
+                    "tr": "Türkçe"
+                },
                 "default-tab": "Açılış Sekmesi",
                 "default-tab-desc": "Uygulama açıldığında hangi sekmenin gösterileceğini seçin",
                 "default-tab-options": {

@@ -4,6 +4,7 @@ import { getLocales } from "expo-localization";
 
 import tr from "../locales/tr.json";
 import en from "../locales/en.json";
+import { usePreferences } from "../hooks/usePreferences";
 
 const resources = {
     tr: { translation: tr },
@@ -11,11 +12,13 @@ const resources = {
 };
 
 const deviceLanguage = getLocales()[0]?.languageCode ?? "en";
+const savedLanguage = usePreferences.getState().language;
+const initialLanguage = savedLanguage === "system" ? deviceLanguage : savedLanguage;
 
 i18n.use(initReactI18next).init({
     resources,
     compatibilityJSON: "v4",
-    lng: deviceLanguage,
+    lng: initialLanguage,
     fallbackLng: "en",
     interpolation: {
         escapeValue: false, // react already safes from xss

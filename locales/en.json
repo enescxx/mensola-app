@@ -256,6 +256,12 @@
                     "light": "Light",
                     "system": "System"
                 },
+                "language": "Language",
+                "language-options": {
+                    "system": "System",
+                    "en": "English",
+                    "tr": "Türkçe"
+                },
                 "default-tab": "Default Tab",
                 "default-tab-desc": "Select which tab is shown when the app opens",
                 "default-tab-options": {
