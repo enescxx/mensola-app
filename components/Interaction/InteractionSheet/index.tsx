@@ -72,10 +72,10 @@ export default function InteractionSheet({
             : targetType === "track"
               ? t("common.track")
               : targetType === "playlist"
-                ? "Çalma Listesi"
+                ? t("common.playlist")
                 : targetType === "album"
-                  ? "Albüm"
-                  : "İçerik");
+                  ? t("common.album")
+                  : t("common.content"));
     const isPortraitMedia = targetType === "movie" || targetType === "movieList";
     const posterStyle = isPortraitMedia ? styles.poster2x3 : styles.posterSquare;
 

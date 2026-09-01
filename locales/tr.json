@@ -323,7 +323,53 @@
         "retry": "Tekrar Deneyin",
         "track": "Şarkı",
         "movie": "Film",
+        "album": "Albüm",
+        "playlist": "Çalma Listesi",
+        "content": "İçerik",
+        "user": "kullanıcı",
         "giveUp": "Vazgeç",
         "remove": "Kaldır"
+    },
+    "home": {
+        "nowPlaying": "Vizyondakiler",
+        "newTracks": "Yeni Çıkan Parçalar"
+    },
+    "userCard": {
+        "following": "Takip Ediliyor",
+        "followBack": "Sen de Takip Et",
+        "follow": "Takip Et"
+    },
+    "owners": {
+        "title": "Yöneticiler",
+        "unfollowTitle": "Takipten Çık",
+        "unfollowBody": "{{name}} adlı kişiyi takip etmeyi bırakmak istediğinize emin misiniz?",
+        "cancel": "Vazgeç",
+        "unfollow": "Takipten Çık",
+        "errorTitle": "Hata"
+    },
+    "replaceFavorite": {
+        "movieTitle": "Favori Filmini Değiştir",
+        "trackTitle": "Favori Şarkını Değiştir",
+        "infoText": "En fazla 3 favori ekleyebilirsiniz. Yeni favoriyi eklemek için aşağıdakilerden değiştirmek istediğiniz birini seçin:",
+        "emptyText": "Henüz favori listeniz boş.",
+        "loadError": "Favoriler yüklenirken bir hata oluştu.",
+        "confirmTitle": "Favoriyi Değiştir",
+        "confirmBody": "\"{{title}}\" favorilerden çıkarılıp yerine bu yeni öğe eklenecek. Onaylıyor musunuz?",
+        "cancel": "Vazgeç",
+        "confirm": "Değiştir",
+        "replaceError": "Değiştirme işlemi başarısız oldu."
+    },
+    "stats": {
+        "movieListCount": "Oluşturulan Film Listeleri",
+        "playlistCount": "Oluşturulan Playlistler",
+        "watchlistMoviesCount": "İzleme Listesi",
+        "watchedMoviesCount": "İzlendi",
+        "likedMoviesCount": "Beğenilen Filmler",
+        "likedTracksCount": "Beğenilen Şarkılar",
+        "likedPlaylistsCount": "Beğenilen Playlistler",
+        "likedMovieListsCount": "Beğenilen Film Listeleri",
+        "likedAlbumsCount": "Beğenilen Albümler",
+        "followersCount": "Takipçi",
+        "followingCount": "Takip"
     }
 }

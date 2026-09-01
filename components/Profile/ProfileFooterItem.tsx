@@ -1,8 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import { IFooterItemProps } from "./types";
-import { StatLabels, StatTypeKey } from "@/types/stat.types";
+import { StatTypeKey, getStatLabels } from "@/types/stat.types";
 import { Colors } from "@/constants/colors";
 import { ListGroupItem } from "../ListGroup";
 import { styles } from "./styles";
@@ -32,13 +33,14 @@ interface GroupedFooterItemProps extends IFooterItemProps {
 }
 
 export default function ProfileFooterItem({ statType, statValue, onPress, isFirst, isLast }: GroupedFooterItemProps) {
+    const { t } = useTranslation();
     const cfg = STAT_CONFIG[statType] ?? { icon: "stats-chart-outline" as const, color: Colors.textMuted };
 
     return (
         <ListGroupItem isFirst={isFirst} isLast={isLast} onPress={() => onPress?.(statType)}>
             <View style={styles.footerItemLeft}>
                 <Ionicons name={cfg.icon} size={17} color={cfg.color} />
-                <Text style={styles.footerItemLabel}>{StatLabels[statType]}</Text>
+                <Text style={styles.footerItemLabel}>{getStatLabels(t)[statType]}</Text>
             </View>
             <View style={styles.footerItemRight}>
                 <Text style={styles.footerItemValue}>{statValue}</Text>

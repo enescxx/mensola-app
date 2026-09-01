@@ -56,7 +56,7 @@ describe("MovieListOwnersBottomSheet Component", () => {
             />
         );
 
-        expect(getByText("Yöneticiler")).toBeTruthy();
+        expect(getByText("owners.title")).toBeTruthy();
         expect(getByText("Kurucu Kullanıcı")).toBeTruthy();
         expect(getByText("Editör Kullanıcı")).toBeTruthy();
     });

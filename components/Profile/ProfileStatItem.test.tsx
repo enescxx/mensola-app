@@ -1,6 +1,5 @@
 import { render, fireEvent } from "@testing-library/react-native";
 import ProfileStatItem from "./ProfileStatItem";
-import { StatLabels } from "@/types/stat.types";
 
 describe("ProfileStatItem Component", () => {
     it("should render stat value, correct label, and forward the press event", () => {
@@ -11,7 +10,7 @@ describe("ProfileStatItem Component", () => {
         );
 
         expect(getByText("1500")).toBeTruthy();
-        expect(getByText(StatLabels["followersCount"])).toBeTruthy();
+        expect(getByText("stats.followersCount")).toBeTruthy();
 
         fireEvent.press(getByText("1500"));
         expect(mockOnPress).toHaveBeenCalledTimes(1);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import BottomSheet from "@/components/BottomSheet";
 import { MovieService } from "@/services/movie.service";
@@ -34,6 +35,7 @@ export default function ReplaceFavoriteBottomSheet({
     const [isLoading, setIsLoading] = useState(false);
     const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
     const [error, setError] = useState<string>("");
+    const { t } = useTranslation();
 
     const fetchFavorites = async () => {
         setIsLoading(true);
@@ -59,7 +61,7 @@ export default function ReplaceFavoriteBottomSheet({
                 setFavorites(mapped);
             }
         } catch (err: any) {
-            setError("Favoriler yüklenirken bir hata oluştu.");
+            setError(t("replaceFavorite.loadError"));
         } finally {
             setIsLoading(false);
         }
@@ -73,12 +75,12 @@ export default function ReplaceFavoriteBottomSheet({
 
     const handleReplace = async (oldItemId: string, oldItemTitle: string) => {
         Alert.alert(
-            "Favoriyi Değiştir",
-            `"${oldItemTitle}" favorilerden çıkarılıp yerine bu yeni öğe eklenecek. Onaylıyor musunuz?`,
+            t("replaceFavorite.confirmTitle"),
+            t("replaceFavorite.confirmBody", { title: oldItemTitle }),
             [
-                { text: "Vazgeç", style: "cancel" },
+                { text: t("replaceFavorite.cancel"), style: "cancel" },
                 {
-                    text: "Değiştir",
+                    text: t("replaceFavorite.confirm"),
                     onPress: async () => {
                         setActionLoadingId(oldItemId);
                         try {
@@ -97,8 +99,8 @@ export default function ReplaceFavoriteBottomSheet({
                             onClose();
                         } catch (err: any) {
                             const apiErrorMessage =
-                                err?.error?.message || err?.message || "Değiştirme işlemi başarısız oldu.";
-                            Alert.alert("Hata", apiErrorMessage);
+                                err?.error?.message || err?.message || t("replaceFavorite.replaceError");
+                            Alert.alert(t("common.error"), apiErrorMessage);
                         } finally {
                             setActionLoadingId(null);
                         }
@@ -112,12 +114,11 @@ export default function ReplaceFavoriteBottomSheet({
         <BottomSheet
             isVisible={isVisible}
             onClose={onClose}
-            title={type === "movie" ? "Favori Filmini Değiştir" : "Favori Şarkını Değiştir"}
+            title={type === "movie" ? t("replaceFavorite.movieTitle") : t("replaceFavorite.trackTitle")}
             showCloseButton>
             <View style={styles.container}>
                 <Text style={styles.infoText}>
-                    En fazla 3 favori ekleyebilirsiniz. Yeni favoriyi eklemek için aşağıdakilerden değiştirmek
-                    istediğiniz birini seçin:
+                    {t("replaceFavorite.infoText")}
                 </Text>
 
                 {error ? <Text style={styles.errorText}>{error}</Text> : null}
@@ -158,7 +159,7 @@ export default function ReplaceFavoriteBottomSheet({
                             </TouchableOpacity>
                         )}
                         ListEmptyComponent={
-                            !isLoading ? <Text style={styles.emptyText}>Henüz favori listeniz boş.</Text> : null
+                            !isLoading ? <Text style={styles.emptyText}>{t("replaceFavorite.emptyText")}</Text> : null
                         }
                     />
                 )}

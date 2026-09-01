@@ -75,14 +75,14 @@ export default function HomeScreen() {
 
                 {data?.nowPlayingMovies && data.nowPlayingMovies.length > 0 && (
                     <View style={styles.section}>
-                        <SectionHeader title="Vizyondakiler" />
+                        <SectionHeader title={t("home.nowPlaying")} />
                         <NowPlayingList movies={data.nowPlayingMovies} onPress={handleNowPlayingPress} />
                     </View>
                 )}
 
                 {data?.newTracks && data.newTracks.length > 0 && (
                     <View style={styles.section}>
-                        <SectionHeader title="Yeni Çıkan Parçalar" />
+                        <SectionHeader title={t("home.newTracks")} />
                         <NewTracksList tracks={data.newTracks} onPress={handleTrackPress} />
                     </View>
                 )}

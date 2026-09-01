@@ -43,12 +43,12 @@ describe("UserCard component", () => {
             />,
         );
 
-        expect(queryByText("Takip Et")).toBeNull();
-        expect(queryByText("Sen de Takip Et")).toBeNull();
-        expect(queryByText("Takip Ediliyor")).toBeNull();
+        expect(queryByText("userCard.follow")).toBeNull();
+        expect(queryByText("userCard.followBack")).toBeNull();
+        expect(queryByText("userCard.following")).toBeNull();
     });
 
-    it("renders 'Takip Et' button when not following the user", () => {
+    it("renders 'Follow' button when not following the user", () => {
         const { getByText } = render(
             <UserCard
                 user={{ ...mockUser, isFollowing: false, isFollower: false }}
@@ -58,10 +58,10 @@ describe("UserCard component", () => {
             />,
         );
 
-        expect(getByText("Takip Et")).toBeTruthy();
+        expect(getByText("userCard.follow")).toBeTruthy();
     });
 
-    it("renders 'Sen de Takip Et' button when the user follows current user back", () => {
+    it("renders 'Follow Back' button when the user follows current user back", () => {
         const { getByText } = render(
             <UserCard
                 user={{ ...mockUser, isFollowing: false, isFollower: true }}
@@ -71,10 +71,10 @@ describe("UserCard component", () => {
             />,
         );
 
-        expect(getByText("Sen de Takip Et")).toBeTruthy();
+        expect(getByText("userCard.followBack")).toBeTruthy();
     });
 
-    it("renders 'Takip Ediliyor' button when already following the user", () => {
+    it("renders 'Following' button when already following the user", () => {
         const { getByText } = render(
             <UserCard
                 user={{ ...mockUser, isFollowing: true }}
@@ -84,7 +84,7 @@ describe("UserCard component", () => {
             />,
         );
 
-        expect(getByText("Takip Ediliyor")).toBeTruthy();
+        expect(getByText("userCard.following")).toBeTruthy();
     });
 
     it("calls onCardPress with user.id when the card is pressed", () => {
@@ -113,7 +113,7 @@ describe("UserCard component", () => {
             />,
         );
 
-        fireEvent.press(getByText("Takip Ediliyor"));
+        fireEvent.press(getByText("userCard.following"));
 
         expect(mockOnFollowPress).toHaveBeenCalledTimes(1);
         expect(mockOnFollowPress).toHaveBeenCalledWith("user-123", true);

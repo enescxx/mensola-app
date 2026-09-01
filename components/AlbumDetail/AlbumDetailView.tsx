@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import DynamicList from "@/components/DynamicList";
 import MusicCard from "@/components/MusicCard";
@@ -31,6 +32,7 @@ export default function AlbumDetailView({
     toggleLike,
 }: IAlbumDetailViewProps) {
     const router = useRouter();
+    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState<"tracks" | "comments">("tracks");
     const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
 
@@ -184,8 +186,8 @@ export default function AlbumDetailView({
                 onClose={() => setIsInteractionSheetOpen(false)}
                 targetType="album"
                 targetId={albumDetails?.id as AlbumId}
-                mediaTitle={albumDetails?.title || "Albüm"}
-                mediaTypeTitle="Albüm"
+                mediaTitle={albumDetails?.title || t("common.album")}
+                mediaTypeTitle={t("common.album")}
                 mediaPoster={albumDetails?.image}
                 initialRating={
                     albumDetails?.currentUserInteraction?.rating

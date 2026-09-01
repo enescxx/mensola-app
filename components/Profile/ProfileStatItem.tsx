@@ -1,11 +1,13 @@
 import { TouchableOpacity, Text } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import { styles } from "./styles";
 import { IHeaderStatItemProps } from "./types";
-import { StatLabels } from "@/types/stat.types";
+import { getStatLabels } from "@/types/stat.types";
 
 export default function ProfileStatItem({ statType, statValue, onPress }: IHeaderStatItemProps) {
-    const statLabel = StatLabels[statType];
+    const { t } = useTranslation();
+    const statLabel = getStatLabels(t)[statType];
 
     return (
         <TouchableOpacity

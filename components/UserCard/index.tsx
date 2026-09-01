@@ -6,9 +6,11 @@ import { IUserCardProps, FollowState } from "./types";
 import Button from "../Button";
 import Avatar from "../Avatar";
 import { ListGroupItem } from "../ListGroup";
+import { useTranslation } from "react-i18next";
 
 export default function UserCard({ user, currentUserId, onFollowPress, onCardPress, isFirst, isLast }: IUserCardProps) {
     const isSelf = user.id === currentUserId;
+    const { t } = useTranslation();
 
     let followState: FollowState;
 
@@ -26,17 +28,17 @@ export default function UserCard({ user, currentUserId, onFollowPress, onCardPre
         switch (followState) {
             case "FOLLOWING":
                 return {
-                    text: "Takip Ediliyor",
+                    text: t("userCard.following"),
                     style: styles.btnFollowing,
                 };
             case "FOLLOW_BACK":
                 return {
-                    text: "Sen de Takip Et",
+                    text: t("userCard.followBack"),
                     style: styles.btnFollow,
                 };
             case "FOLLOW":
                 return {
-                    text: "Takip Et",
+                    text: t("userCard.follow"),
                     style: styles.btnFollow,
                 };
             default:

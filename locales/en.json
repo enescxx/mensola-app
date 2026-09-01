@@ -323,7 +323,53 @@
         "retry": "Try Again",
         "track": "Track",
         "movie": "Movie",
+        "album": "Album",
+        "playlist": "Playlist",
+        "content": "Content",
+        "user": "user",
         "giveUp": "Give Up",
         "remove": "Remove"
+    },
+    "home": {
+        "nowPlaying": "Now Playing",
+        "newTracks": "New Releases"
+    },
+    "userCard": {
+        "following": "Following",
+        "followBack": "Follow Back",
+        "follow": "Follow"
+    },
+    "owners": {
+        "title": "Admins",
+        "unfollowTitle": "Unfollow",
+        "unfollowBody": "Are you sure you want to unfollow {{name}}?",
+        "cancel": "Cancel",
+        "unfollow": "Unfollow",
+        "errorTitle": "Error"
+    },
+    "replaceFavorite": {
+        "movieTitle": "Replace Favorite Movie",
+        "trackTitle": "Replace Favorite Track",
+        "infoText": "You can add up to 3 favorites. To add a new favorite, select one to replace from the list below:",
+        "emptyText": "Your favorites list is empty.",
+        "loadError": "An error occurred while loading favorites.",
+        "confirmTitle": "Replace Favorite",
+        "confirmBody": "\"{{title}}\" will be removed from favorites and replaced with the new item. Confirm?",
+        "cancel": "Cancel",
+        "confirm": "Replace",
+        "replaceError": "Failed to replace favorite."
+    },
+    "stats": {
+        "movieListCount": "Created Movie Lists",
+        "playlistCount": "Created Playlists",
+        "watchlistMoviesCount": "Watchlist",
+        "watchedMoviesCount": "Watched",
+        "likedMoviesCount": "Liked Movies",
+        "likedTracksCount": "Liked Tracks",
+        "likedPlaylistsCount": "Liked Playlists",
+        "likedMovieListsCount": "Liked Movie Lists",
+        "likedAlbumsCount": "Liked Albums",
+        "followersCount": "Followers",
+        "followingCount": "Following"
     }
 }

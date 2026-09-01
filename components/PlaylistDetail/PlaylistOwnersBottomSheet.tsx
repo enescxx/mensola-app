@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FlatList, Alert, View } from "react-native";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import BottomSheet from "@/components/BottomSheet";
 import UserCard from "@/components/UserCard";
@@ -17,6 +18,7 @@ export default function PlaylistOwnersBottomSheet({
 }: IPlaylistOwnersBottomSheetProps) {
     const router = useRouter();
     const { user: currentUser } = useGlobalUser();
+    const { t } = useTranslation();
     const { followHandler, unfollowHandler, error: followError } = useFollow();
     const [owners, setOwners] = useState<FollowUsersResponseDataItem[]>(initialOwners);
 
@@ -26,7 +28,7 @@ export default function PlaylistOwnersBottomSheet({
 
     useEffect(() => {
         if (followError) {
-            Alert.alert("Hata", followError);
+            Alert.alert(t("owners.errorTitle"), followError);
         }
     }, [followError]);
 
@@ -38,13 +40,13 @@ export default function PlaylistOwnersBottomSheet({
 
     const handleFollowPress = (targetUserId: UserId, isFollowing?: boolean) => {
         const targetUser = owners.find((o) => o.id === targetUserId);
-        const name = targetUser?.fullname || targetUser?.username || "kullanıcı";
+        const name = targetUser?.fullname || targetUser?.username || t("common.user");
 
         if (isFollowing) {
-            Alert.alert("Takipten Çık", `${name} adlı kişiyi takip etmeyi bırakmak istediğinize emin misiniz?`, [
-                { text: "Vazgeç", style: "cancel" },
+            Alert.alert(t("owners.unfollowTitle"), t("owners.unfollowBody", { name }), [
+                { text: t("owners.cancel"), style: "cancel" },
                 {
-                    text: "Takipten Çık",
+                    text: t("owners.unfollow"),
                     style: "destructive",
                     onPress: () => {
                         unfollowHandler(targetUserId, () => toggleFollowState(targetUserId));
@@ -62,7 +64,7 @@ export default function PlaylistOwnersBottomSheet({
     };
 
     return (
-        <BottomSheet isVisible={isVisible} onClose={onClose} title="Yöneticiler">
+        <BottomSheet isVisible={isVisible} onClose={onClose} title={t("owners.title")}>
             <FlatList
                 data={owners}
                 keyExtractor={(item) => item.id}

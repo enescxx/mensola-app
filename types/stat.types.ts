@@ -125,6 +125,23 @@ export const STAT_KEY_ENDPOINT_MAP: Record<StatTypeKey, string> = {
     followersCount: "/users/followers",
     followingCount: "/users/following",
 };
+export const getStatLabels = (t: (key: string) => string): Record<StatTypeKey, string> => {
+    return {
+        movieListCount: t("stats.movieListCount"),
+        playlistCount: t("stats.playlistCount"),
+        watchlistMoviesCount: t("stats.watchlistMoviesCount"),
+        watchedMoviesCount: t("stats.watchedMoviesCount"),
+        likedMoviesCount: t("stats.likedMoviesCount"),
+        likedTracksCount: t("stats.likedTracksCount"),
+        likedPlaylistsCount: t("stats.likedPlaylistsCount"),
+        likedMovieListsCount: t("stats.likedMovieListsCount"),
+        likedAlbumsCount: t("stats.likedAlbumsCount"),
+        followersCount: t("stats.followersCount"),
+        followingCount: t("stats.followingCount"),
+    };
+};
+
+/** @deprecated use getStatLabels() instead */
 export const StatLabels: Record<StatTypeKey, string> = {
     movieListCount: "Oluşturulan Film Listeleri",
     playlistCount: "Oluşturulan Playlistler",
