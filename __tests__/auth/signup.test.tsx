@@ -1,11 +1,11 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { Linking, Alert } from "react-native";
-import SignupScreen from "./signup";
+import SignupScreen from "@/app/(auth)/signup";
 
 const mockHandleRegister = jest.fn();
 
-jest.mock("../../hooks/auth/useRegister", () => ({
+jest.mock("@/hooks/auth/useRegister", () => ({
     useRegister: () => ({
         username: "testuser",
         setUsername: jest.fn(),
