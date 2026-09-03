@@ -53,6 +53,7 @@ const getSettingsConfig = (t: any): SettingSection[] => [
                 type: "options",
                 label: t("settings.menu.preferences.theme"),
                 value: "dark",
+                disabled: true,
                 options: [
                     { label: t("settings.menu.preferences.theme-options.dark"), value: "dark" },
                     { label: t("settings.menu.preferences.theme-options.light"), value: "light" },
@@ -87,6 +88,7 @@ const getSettingsConfig = (t: any): SettingSection[] => [
                 label: t("settings.menu.preferences.shelf-layout"),
                 description: t("settings.menu.preferences.shelf-layout-desc"),
                 value: "grid",
+                disabled: true,
                 options: [
                     { label: t("settings.menu.preferences.shelf-layout-options.grid"), value: "grid" },
                     { label: t("settings.menu.preferences.shelf-layout-options.list"), value: "list" },

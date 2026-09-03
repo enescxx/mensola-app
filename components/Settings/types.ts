@@ -3,6 +3,7 @@ export interface BaseSetting {
     label: string;
     description?: string;
     icon?: string;
+    disabled?: boolean;
 }
 
 export interface RouteSetting extends BaseSetting {

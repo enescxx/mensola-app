@@ -71,4 +71,7 @@ export const styles = StyleSheet.create({
         color: Colors.primary,
         fontWeight: "600",
     },
+    disabledItem: {
+        opacity: 0.5,
+    },
 });

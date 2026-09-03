@@ -19,7 +19,14 @@ export default function SettingsItem({
 }: SettingsItemProps) {
     const router = useRouter();
 
+    const isDisabled =
+        !!item.disabled ||
+        item.label.toLowerCase().includes("coming soon") ||
+        item.label.toLowerCase().includes("yakında");
+
     const handlePress = () => {
+        if (isDisabled) return;
+
         if (item.type === "route") {
             router.push(item.route as any);
         } else if (item.type === "options") {
@@ -41,7 +48,11 @@ export default function SettingsItem({
                                 {item.value}
                             </Text>
                         ) : null}
-                        <Ionicons name="chevron-forward" size={18} color={Colors.textMuted} />
+                        <Ionicons
+                            name="chevron-forward"
+                            size={18}
+                            color={isDisabled ? Colors.border : Colors.textMuted}
+                        />
                     </>
                 );
             case "options":
@@ -52,7 +63,11 @@ export default function SettingsItem({
                         <Text style={styles.valueText} numberOfLines={1}>
                             {displayLabel}
                         </Text>
-                        <Ionicons name="chevron-forward" size={18} color={Colors.textMuted} />
+                        <Ionicons
+                            name="chevron-forward"
+                            size={18}
+                            color={isDisabled ? Colors.border : Colors.textMuted}
+                        />
                     </>
                 );
             case "toggle":
@@ -60,6 +75,7 @@ export default function SettingsItem({
                     <Toggle
                         value={item.value}
                         onValueChange={(newValue) => onToggle?.(item.id, newValue)}
+                        disabled={isDisabled}
                     />
                 );
             case "action":
@@ -72,7 +88,13 @@ export default function SettingsItem({
     const isDangerAction = item.type === "action" && item.variant === "danger";
 
     return (
-        <ListGroupItem isFirst={isFirst} isLast={isLast} onPress={handlePress}>
+        <ListGroupItem
+            isFirst={isFirst}
+            isLast={isLast}
+            onPress={isDisabled ? undefined : handlePress}
+            disabled={isDisabled}
+            style={isDisabled ? styles.disabledItem : undefined}
+            testID={`settings-item-${item.id}`}>
             <View style={styles.leftContainer}>
                 {item.icon ? (
                     <Ionicons
