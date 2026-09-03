@@ -1,12 +1,16 @@
 import React from "react";
 import { View, Text, Image, ScrollView, Linking } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import Constants from "expo-constants";
 
 import { ListGroup, ListGroupItem } from "@/components/ListGroup";
 import { Colors } from "@/constants/colors";
 import { styles } from "./styles";
+
+const MENSOLA_X_URL = "https://x.com/mensolaapp";
+const MENSOLA_INSTAGRAM_URL = "https://instagram.com/mensola.app";
+const DEVELOPER_PROFILE_URL = "https://x.com/enescxx";
 
 export default function AboutView() {
     const { t } = useTranslation();
@@ -81,9 +85,42 @@ export default function AboutView() {
                 </ListGroupItem>
             </ListGroup>
 
+            {/* Community & Social Group */}
+            <ListGroup title={t("settings.about.communityTitle")}>
+                <ListGroupItem
+                    isFirst
+                    onPress={() => handleOpenUrl(MENSOLA_X_URL)}
+                    testID="about-social-x">
+                    <View style={styles.itemWithIconLeft}>
+                        <FontAwesome6 name="x-twitter" size={17} color={Colors.textPrimary} style={styles.socialIcon} />
+                        <Text style={styles.itemTitle}>{t("settings.about.followTwitter")}</Text>
+                    </View>
+                    <Ionicons name="open-outline" size={18} color={Colors.textMuted} />
+                </ListGroupItem>
+
+                <ListGroupItem
+                    isLast
+                    onPress={() => handleOpenUrl(MENSOLA_INSTAGRAM_URL)}
+                    testID="about-social-instagram">
+                    <View style={styles.itemWithIconLeft}>
+                        <Ionicons name="logo-instagram" size={18} color={Colors.textPrimary} style={styles.socialIcon} />
+                        <Text style={styles.itemTitle}>{t("settings.about.followInstagram")}</Text>
+                    </View>
+                    <Ionicons name="open-outline" size={18} color={Colors.textMuted} />
+                </ListGroupItem>
+            </ListGroup>
+
             {/* Footer */}
             <View style={styles.footerContainer}>
-                <Text style={styles.footerText}>{t("settings.about.footerText")}</Text>
+                <Text style={styles.footerText}>
+                    {t("settings.about.craftedBy")}{" "}
+                    <Text
+                        style={styles.developerLink}
+                        onPress={() => handleOpenUrl(DEVELOPER_PROFILE_URL)}
+                        testID="about-developer-link">
+                        Enes Can
+                    </Text>
+                </Text>
                 <Text style={styles.copyrightText}>{t("settings.about.copyright")}</Text>
             </View>
         </ScrollView>

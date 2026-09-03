@@ -15,7 +15,10 @@ jest.mock("react-i18next", () => ({
                 "settings.about.tmdbTitle": "Movie & TV data provided by TMDb.",
                 "settings.about.tmdbDesc": "This product uses the TMDB API but is not endorsed or certified by TMDB.",
                 "settings.about.spotifyTitle": "Music metadata powered by Spotify Web API.",
-                "settings.about.footerText": "Built with passion by indie developers",
+                "settings.about.communityTitle": "COMMUNITY & SOCIAL",
+                "settings.about.followTwitter": "Follow on X",
+                "settings.about.followInstagram": "Follow on Instagram",
+                "settings.about.craftedBy": "Crafted with passion by",
                 "settings.about.copyright": "© 2026 mensola. All rights reserved.",
             };
             return translations[key] || key;
@@ -36,6 +39,9 @@ describe("AboutView Component", () => {
         expect(getByText(/Version/)).toBeTruthy();
         expect(getByText("LEGAL")).toBeTruthy();
         expect(getByText("DATA & ATTRIBUTIONS")).toBeTruthy();
+        expect(getByText("COMMUNITY & SOCIAL")).toBeTruthy();
+        expect(getByText("Follow on X")).toBeTruthy();
+        expect(getByText("Follow on Instagram")).toBeTruthy();
     });
 
     it("opens Privacy Policy URL when clicked", () => {
@@ -70,10 +76,32 @@ describe("AboutView Component", () => {
         expect(Linking.openURL).toHaveBeenCalledWith("https://www.spotify.com");
     });
 
-    it("renders footer and copyright text", () => {
-        const { getByText } = render(<AboutView />);
+    it("opens X (Twitter) URL when clicked", () => {
+        const { getByTestId } = render(<AboutView />);
+        const xItem = getByTestId("about-social-x");
 
-        expect(getByText("Built with passion by indie developers")).toBeTruthy();
+        fireEvent.press(xItem);
+        expect(Linking.openURL).toHaveBeenCalledWith("https://x.com/mensolaapp");
+    });
+
+    it("opens Instagram URL when clicked", () => {
+        const { getByTestId } = render(<AboutView />);
+        const instaItem = getByTestId("about-social-instagram");
+
+        fireEvent.press(instaItem);
+        expect(Linking.openURL).toHaveBeenCalledWith("https://instagram.com/mensola.app");
+    });
+
+    it("renders developer attribution and opens developer profile URL when clicked", () => {
+        const { getByText, getByTestId } = render(<AboutView />);
+
+        expect(getByText(/Crafted with passion by/)).toBeTruthy();
+        const developerLink = getByTestId("about-developer-link");
+        expect(developerLink).toBeTruthy();
+
+        fireEvent.press(developerLink);
+        expect(Linking.openURL).toHaveBeenCalledWith("https://x.com/enescxx");
+
         expect(getByText("© 2026 mensola. All rights reserved.")).toBeTruthy();
     });
 });

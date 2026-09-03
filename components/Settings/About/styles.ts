@@ -42,6 +42,17 @@ export const styles = StyleSheet.create({
         flex: 1,
         marginRight: 12,
     },
+    itemWithIconLeft: {
+        flexDirection: "row",
+        alignItems: "center",
+        flex: 1,
+        marginRight: 12,
+    },
+    socialIcon: {
+        marginRight: 12,
+        width: 20,
+        textAlign: "center",
+    },
     itemTitle: {
         fontSize: 15,
         fontWeight: "500",
@@ -66,6 +77,11 @@ export const styles = StyleSheet.create({
         color: Colors.textSecondary,
         textAlign: "center",
         marginBottom: 6,
+    },
+    developerLink: {
+        color: Colors.primary,
+        fontWeight: "600",
+        textDecorationLine: "underline",
     },
     copyrightText: {
         fontSize: 12,

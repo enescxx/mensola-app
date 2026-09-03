@@ -323,7 +323,10 @@
             "tmdbTitle": "Movie & TV data provided by TMDb.",
             "tmdbDesc": "This product uses the TMDB API but is not endorsed or certified by TMDB.",
             "spotifyTitle": "Music metadata powered by Spotify Web API.",
-            "footerText": "Built with passion by indie developers",
+            "communityTitle": "COMMUNITY & SOCIAL",
+            "followTwitter": "Follow on X",
+            "followInstagram": "Follow on Instagram",
+            "craftedBy": "Crafted with passion by",
             "copyright": "© 2026 mensola. All rights reserved."
         },
         "alerts": {

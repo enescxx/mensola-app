@@ -323,7 +323,10 @@
             "tmdbTitle": "Film ve dizi verileri TMDb tarafından sağlanmaktadır.",
             "tmdbDesc": "Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmamış veya onaylı değildir.",
             "spotifyTitle": "Müzik meta verileri Spotify Web API tarafından sağlanmaktadır.",
-            "footerText": "Bağımsız geliştiriciler tarafından tutkuyla geliştirildi",
+            "communityTitle": "TOPLULUK & SOSYAL",
+            "followTwitter": "X'te Takip Et",
+            "followInstagram": "Instagram'da Takip Et",
+            "craftedBy": "Crafted with passion by",
             "copyright": "© 2026 mensola. Tüm hakları saklıdır."
         },
         "alerts": {
