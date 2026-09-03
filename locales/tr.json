@@ -199,7 +199,8 @@
             "title": "Ayarlar",
             "updateUsername": "Kullanıcı Adı Değiştir",
             "updateEmail": "E-posta Güncelle",
-            "updatePassword": "Şifre Değiştir"
+            "updatePassword": "Şifre Değiştir",
+            "about": "Hakkında"
         },
         "changeEmail": {
             "current": "Mevcut: {{email}}",
@@ -283,6 +284,11 @@
                 "is-private": "Gizli Profil",
                 "is-private-desc": "Sadece onaylı takipçileriniz listelerinizi görebilir"
             },
+            "about": {
+                "title": "YASAL & HAKKINDA",
+                "aboutMensola": "mensola Hakkında",
+                "aboutMensolaDesc": "Sürüm, atıflar ve yasal politikalar"
+            },
             "data-danger-zone": {
                 "title": "Hesap İşlemleri",
                 "logout": "Çıkış Yap",
@@ -290,6 +296,18 @@
                 "delete-account": "Hesabı Sil",
                 "delete-account-desc": "Hesabınızı ve tüm verilerinizi kalıcı olarak silin"
             }
+        },
+        "about": {
+            "version": "Sürüm {{version}} (Beta)",
+            "legalTitle": "YASAL",
+            "privacyPolicy": "Gizlilik Politikası",
+            "termsOfService": "Kullanım Koşulları",
+            "attributionsTitle": "VERİ VE ATIFLAR",
+            "tmdbTitle": "Film ve dizi verileri TMDb tarafından sağlanmaktadır.",
+            "tmdbDesc": "Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmamış veya onaylı değildir.",
+            "spotifyTitle": "Müzik meta verileri Spotify Web API tarafından sağlanmaktadır.",
+            "footerText": "Bağımsız geliştiriciler tarafından tutkuyla geliştirildi",
+            "copyright": "© 2026 mensola. Tüm hakları saklıdır."
         },
         "alerts": {
             "exportData": {

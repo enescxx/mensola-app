@@ -13,6 +13,7 @@ export default function SettingsLayout() {
             <Stack.Screen name="account/update-username" options={{ title: t("settings.layout.updateUsername") }} />
             <Stack.Screen name="account/update-email" options={{ title: t("settings.layout.updateEmail") }} />
             <Stack.Screen name="account/update-password" options={{ title: t("settings.layout.updatePassword") }} />
+            <Stack.Screen name="about" options={{ title: t("settings.layout.about") }} />
         </Stack>
     );
 }

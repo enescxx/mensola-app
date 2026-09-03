@@ -108,6 +108,19 @@ const getSettingsConfig = (t: any): SettingSection[] => [
         ],
     },
     {
+        id: "about",
+        title: t("settings.menu.about.title"),
+        items: [
+            {
+                id: "about-mensola",
+                type: "route",
+                label: t("settings.menu.about.aboutMensola"),
+                description: t("settings.menu.about.aboutMensolaDesc"),
+                route: "/settings/about",
+            },
+        ],
+    },
+    {
         id: "data-danger-zone",
         title: t("settings.menu.data-danger-zone.title"),
         items: [

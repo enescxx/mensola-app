@@ -199,7 +199,8 @@
             "title": "Settings",
             "updateUsername": "Change Username",
             "updateEmail": "Update Email",
-            "updatePassword": "Change Password"
+            "updatePassword": "Change Password",
+            "about": "About"
         },
         "changeEmail": {
             "current": "Current: {{email}}",
@@ -283,6 +284,11 @@
                 "is-private": "Private Profile",
                 "is-private-desc": "Only approved followers can see your lists"
             },
+            "about": {
+                "title": "LEGAL & ABOUT",
+                "aboutMensola": "About mensola",
+                "aboutMensolaDesc": "Version, attributions and legal policies"
+            },
             "data-danger-zone": {
                 "title": "Account Actions",
                 "logout": "Log Out",
@@ -290,6 +296,18 @@
                 "delete-account": "Delete Account",
                 "delete-account-desc": "Permanently delete your account and all data"
             }
+        },
+        "about": {
+            "version": "Version {{version}} (Beta)",
+            "legalTitle": "LEGAL",
+            "privacyPolicy": "Privacy Policy",
+            "termsOfService": "Terms of Service",
+            "attributionsTitle": "DATA & ATTRIBUTIONS",
+            "tmdbTitle": "Movie & TV data provided by TMDb.",
+            "tmdbDesc": "This product uses the TMDB API but is not endorsed or certified by TMDB.",
+            "spotifyTitle": "Music metadata powered by Spotify Web API.",
+            "footerText": "Built with passion by indie developers",
+            "copyright": "© 2026 mensola. All rights reserved."
         },
         "alerts": {
             "exportData": {
