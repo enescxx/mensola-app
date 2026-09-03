@@ -8,12 +8,12 @@ const useFollow = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const followHandler = async (targetId: UserId, onSuccess?: () => void) => {
+    const followHandler = async (targetId: UserId, onSuccess?: (data?: any) => void) => {
         setIsLoading(true);
         setError("");
         try {
-            await UserService.follow(targetId);
-            onSuccess?.();
+            const response = await UserService.follow(targetId);
+            onSuccess?.(response?.data);
         } catch (error) {
             if (isApiError(error)) {
                 const apiErrorMessage = error.error?.message || error?.message;

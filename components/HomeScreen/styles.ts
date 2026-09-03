@@ -54,28 +54,12 @@ export const headerStyles = StyleSheet.create({
     logoGroup: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 6,
     },
     logoText: {
         color: Colors.textPrimary,
         fontSize: 22,
         fontWeight: "800",
         letterSpacing: -0.8,
-    },
-    logoDot: {
-        width: 7,
-        height: 7,
-        borderRadius: 3.5,
-        backgroundColor: Colors.primary,
-        marginBottom: 8,
-    },
-    iconBtn: {
-        width: 38,
-        height: 38,
-        borderRadius: 19,
-        backgroundColor: Colors.surface,
-        justifyContent: "center",
-        alignItems: "center",
     },
 });
 

@@ -19,6 +19,7 @@ export default function ProfileHeader() {
     const { followHandler, unfollowHandler, isLoading } = useFollow();
 
     const isFollowing = headerData.isFollowingByMe;
+    const isPending = headerData.isPendingByMe;
 
     return (
         <View style={styles.headerWrapper}>
@@ -54,15 +55,26 @@ export default function ProfileHeader() {
                         activeOpacity={0.7}
                         style={[
                             styles.actionButton,
-                            isFollowing ? styles.actionButtonFollowing : styles.actionButtonPrimary,
+                            (isFollowing || isPending) ? styles.actionButtonFollowing : styles.actionButtonPrimary,
                         ]}
                         onPress={async () => {
                             if (isLoading) return;
-                            if (!isFollowing) {
-                                await followHandler(headerData.id, () => {
-                                    headerData.isFollowingByMe = true;
-                                });
-                            } else {
+                            if (isPending) {
+                                Alert.alert(
+                                    t("profile.header.cancelRequestTitle"),
+                                    t("profile.header.cancelRequestBody", { name: headerData.fullname || headerData.username }),
+                                    [
+                                        { text: t("profile.header.no"), style: "cancel" },
+                                        {
+                                            text: t("profile.header.yes"),
+                                            onPress: () =>
+                                                unfollowHandler(headerData.id, () => {
+                                                    headerData.isPendingByMe = false;
+                                                }),
+                                        },
+                                    ],
+                                );
+                            } else if (isFollowing) {
                                 Alert.alert(
                                     t("profile.header.unfollowConfirmTitle"),
                                     t("profile.header.unfollowConfirmBody", { name: headerData.fullname || headerData.username }),
@@ -77,13 +89,25 @@ export default function ProfileHeader() {
                                         },
                                     ],
                                 );
+                            } else {
+                                await followHandler(headerData.id, (data) => {
+                                    if (data?.status === "pending" || headerData.isPrivate) {
+                                        headerData.isPendingByMe = true;
+                                    } else {
+                                        headerData.isFollowingByMe = true;
+                                    }
+                                });
                             }
                         }}>
                         {isLoading ? (
-                            <ActivityIndicator size="small" color={isFollowing ? Colors.primary : "#fff"} />
+                            <ActivityIndicator size="small" color={(isFollowing || isPending) ? Colors.primary : "#fff"} />
                         ) : (
-                            <Text style={[styles.actionButtonText, !isFollowing && styles.actionButtonTextPrimary]}>
-                                {isFollowing ? t("profile.header.followingButton") : t("profile.header.followButton")}
+                            <Text style={[styles.actionButtonText, !(isFollowing || isPending) && styles.actionButtonTextPrimary]}>
+                                {isFollowing
+                                    ? t("profile.header.followingButton")
+                                    : isPending
+                                      ? t("profile.header.requestedButton")
+                                      : t("profile.header.followButton")}
                             </Text>
                         )}
                     </TouchableOpacity>

@@ -38,23 +38,49 @@ export default function MovieListOwnersBottomSheet({
         );
     };
 
-    const handleFollowPress = (targetUserId: UserId, isFollowing?: boolean) => {
+    const handleFollowPress = (targetUserId: UserId, isFollowing?: boolean, isPending?: boolean) => {
         const targetUser = owners.find((o) => o.id === targetUserId);
         const name = targetUser?.fullname || targetUser?.username || t("common.user");
 
-        if (isFollowing) {
-            Alert.alert(t("owners.unfollowTitle"), t("owners.unfollowBody", { name }), [
-                { text: t("owners.cancel"), style: "cancel" },
-                {
-                    text: t("owners.unfollow"),
-                    style: "destructive",
-                    onPress: () => {
-                        unfollowHandler(targetUserId, () => toggleFollowState(targetUserId));
+        if (isFollowing || isPending) {
+            Alert.alert(
+                isPending ? t("profile.header.cancelRequestTitle") : t("owners.unfollowTitle"),
+                isPending
+                    ? t("profile.header.cancelRequestBody", { name })
+                    : t("owners.unfollowBody", { name }),
+                [
+                    { text: t("owners.cancel"), style: "cancel" },
+                    {
+                        text: isPending ? t("owners.cancel") : t("owners.unfollow"),
+                        style: "destructive",
+                        onPress: () => {
+                            unfollowHandler(targetUserId, () =>
+                                setOwners((prev) =>
+                                    prev.map((item) =>
+                                        item.id === targetUserId
+                                            ? { ...item, isFollowing: false, isPending: false }
+                                            : item,
+                                    ),
+                                ),
+                            );
+                        },
                     },
-                },
-            ]);
+                ],
+            );
         } else {
-            followHandler(targetUserId, () => toggleFollowState(targetUserId));
+            followHandler(targetUserId, (data) =>
+                setOwners((prev) =>
+                    prev.map((item) =>
+                        item.id === targetUserId
+                            ? {
+                                  ...item,
+                                  isFollowing: data?.status === "accepted" || (!item.isPrivate && data?.status !== "pending"),
+                                  isPending: data?.status === "pending" || item.isPrivate,
+                              }
+                            : item,
+                    ),
+                ),
+            );
         }
     };
 
@@ -75,6 +101,7 @@ export default function MovieListOwnersBottomSheet({
                         user={{
                             ...item,
                             avatar: item.avatar ?? undefined,
+                            isPending: item.isPending,
                         }}
                         currentUserId={currentUser?.id as UserId}
                         onFollowPress={handleFollowPress}

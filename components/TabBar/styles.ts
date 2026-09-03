@@ -36,6 +36,20 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         height: 40,
     },
+    badge: {
+        position: "absolute",
+        top: 2,
+        right: -3,
+        width: 12,
+        height: 12,
+        borderRadius: 6,
+        backgroundColor: Colors.accentPink,
+        borderWidth: 1.5,
+        borderColor: Colors.surface,
+    },
+    activeBadge: {
+        borderColor: Colors.primary,
+    },
 });
 
 export { styles };

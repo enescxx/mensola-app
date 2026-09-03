@@ -74,8 +74,11 @@
             "shareButton": "Share",
             "followButton": "Follow",
             "followingButton": "Following",
+            "requestedButton": "Requested",
             "unfollowConfirmTitle": "Unfollowing",
             "unfollowConfirmBody": "Are you sure you want to unfollow {{name}}?",
+            "cancelRequestTitle": "Cancel Request",
+            "cancelRequestBody": "Are you sure you want to cancel the follow request sent to {{name}}?",
             "yes": "Yes",
             "no": "No"
         },
@@ -336,6 +339,7 @@
     },
     "userCard": {
         "following": "Following",
+        "requested": "Requested",
         "followBack": "Follow Back",
         "follow": "Follow"
     },

@@ -74,8 +74,11 @@
             "shareButton": "Paylaş",
             "followButton": "Takip Et",
             "followingButton": "Takip Ediliyor",
+            "requestedButton": "İstek Gönderildi",
             "unfollowConfirmTitle": "Takipten çıkılıyor",
             "unfollowConfirmBody": "{{name}} adlı kişiyi takip etmeyi bırakmak istiyor musunuz?",
+            "cancelRequestTitle": "İsteği İptal Et",
+            "cancelRequestBody": "{{name}} adlı kişiye gönderilen takip isteğini iptal etmek istiyor musunuz?",
             "yes": "Evet",
             "no": "Hayır"
         },
@@ -336,6 +339,7 @@
     },
     "userCard": {
         "following": "Takip Ediliyor",
+        "requested": "İstek Gönderildi",
         "followBack": "Sen de Takip Et",
         "follow": "Takip Et"
     },

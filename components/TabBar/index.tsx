@@ -6,7 +6,7 @@ import { TABS_CONFIG } from "../../constants/tabs";
 import TabBarItem from "./TabBarItem";
 import { styles } from "./styles";
 
-export default function TabBar({ state, navigation }: BottomTabBarProps) {
+export default function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
     const insets = useSafeAreaInsets();
 
     const dynamicBottomSpace = insets.bottom > 0 ? insets.bottom + 12 : 24;
@@ -15,6 +15,8 @@ export default function TabBar({ state, navigation }: BottomTabBarProps) {
         <View style={[styles.tabBarContainer, { bottom: dynamicBottomSpace }]}>
             {state.routes.map((route, index) => {
                 const isFocused = state.index === index;
+                const options = descriptors ? descriptors[route.key]?.options : undefined;
+                const hasBadge = Boolean(options?.tabBarBadge);
 
                 const onPress = () => {
                     const event = navigation.emit({
@@ -34,6 +36,7 @@ export default function TabBar({ state, navigation }: BottomTabBarProps) {
                         routeName={route.name as keyof typeof TABS_CONFIG}
                         onPress={onPress}
                         isFocused={isFocused}
+                        hasBadge={hasBadge}
                     />
                 );
             })}

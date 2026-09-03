@@ -56,4 +56,17 @@ describe("TabBarItem Bileşeni", () => {
 
         expect(getByText("home-outline")).toBeTruthy();
     });
+
+    it("hasBadge true olduğunda rozet noktasını render etmeli", () => {
+        const { getByTestId } = render(
+            <TabBarItem
+                routeName="Home"
+                onPress={mockOnPress}
+                isFocused={false}
+                hasBadge={true}
+            />
+        );
+
+        expect(getByTestId("tab-badge-Home")).toBeTruthy();
+    });
 });

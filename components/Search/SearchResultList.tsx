@@ -78,9 +78,9 @@ export default function SearchResultList({
         router.push(`/users/${user.id}`);
     };
 
-    const handleFollowUser = async (userId: string, isFollowing: boolean) => {
+    const handleFollowUser = async (userId: string, isFollowing: boolean, isPending?: boolean) => {
         try {
-            if (isFollowing) {
+            if (isFollowing || isPending) {
                 await UserService.unfollow(userId as any);
             } else {
                 await UserService.follow(userId as any);
@@ -126,10 +126,11 @@ export default function SearchResultList({
                             fullname: user.fullname,
                             avatar: user.avatar,
                             isFollowing: user.isFollowingByMe,
+                            isPending: user.isPendingByMe,
                         }}
                         currentUserId={currentUser?.id as any}
                         onCardPress={() => handleSelectUser(user)}
-                        onFollowPress={() => handleFollowUser(user.id, user.isFollowingByMe)}
+                        onFollowPress={() => handleFollowUser(user.id, user.isFollowingByMe, user.isPendingByMe)}
                         isFirst={true}
                         isLast={true}
                     />

@@ -80,4 +80,20 @@ describe("TabBar Component", () => {
         expect(mockEmit).toHaveBeenCalled();
         expect(mockNavigate).not.toHaveBeenCalled();
     });
+
+    it("tabBarBadge olduğunda rozeti render etmeli", () => {
+        const propsWithBadge = {
+            ...mockProps,
+            descriptors: {
+                "settings-key": {
+                    options: {
+                        tabBarBadge: true,
+                    },
+                },
+            },
+        } as unknown as BottomTabBarProps;
+
+        const { getByTestId } = render(<TabBar {...propsWithBadge} />);
+        expect(getByTestId("tab-badge-Settings")).toBeTruthy();
+    });
 });
