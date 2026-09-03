@@ -50,6 +50,19 @@
         "notifications": "Notifications",
         "profile": "Profile"
     },
+    "notifications": {
+        "title": "Notifications",
+        "emptyTitle": "No notifications yet",
+        "emptySubtitle": "When you have follow requests or interactions, they will appear here.",
+        "accept": "Accept",
+        "decline": "Decline",
+        "accepted": "Accepted",
+        "declined": "Declined",
+        "wantsToFollow": "wants to follow you",
+        "startedFollowing": "started following you",
+        "likedYourReview": "liked your review",
+        "reviewedContent": "left a review on your content"
+    },
     "profile": {
         "editProfile": {
             "cancelButton": "Cancel",

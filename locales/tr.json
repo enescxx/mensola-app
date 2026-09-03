@@ -46,9 +46,22 @@
     },
     "tabs": {
         "home": "Ana Sayfa",
-        "search": "Arama",
+        "search": "Ara",
         "notifications": "Bildirimler",
         "profile": "Profil"
+    },
+    "notifications": {
+        "title": "Bildirimler",
+        "emptyTitle": "Henüz bildiriminiz yok",
+        "emptySubtitle": "Takip istekleri veya etkileşimler aldığınızda burada görünecektir.",
+        "accept": "Kabul Et",
+        "decline": "Reddet",
+        "accepted": "Kabul Edildi",
+        "declined": "Reddedildi",
+        "wantsToFollow": "seni takip etmek istiyor",
+        "startedFollowing": "seni takip etmeye başladı",
+        "likedYourReview": "incelemeni beğendi",
+        "reviewedContent": "içeriğine bir inceleme bıraktı"
     },
     "profile": {
         "editProfile": {
