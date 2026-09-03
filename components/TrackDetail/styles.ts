@@ -220,4 +220,43 @@ export const styles = StyleSheet.create({
     commentItem: {
         marginBottom: 8,
     },
+    emptyCommentsContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 28,
+        paddingHorizontal: 24,
+        marginHorizontal: 16,
+        marginTop: 14,
+        backgroundColor: Colors.surface,
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: Colors.border,
+    },
+    emptyIcon: {
+        marginBottom: 10,
+        opacity: 0.8,
+    },
+    emptyCommentsText: {
+        fontSize: 14,
+        color: Colors.textSecondary,
+        textAlign: "center",
+        lineHeight: 20,
+        marginBottom: 16,
+    },
+    rateButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 6,
+        backgroundColor: "rgba(255, 204, 0, 0.12)",
+        paddingVertical: 10,
+        paddingHorizontal: 18,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "rgba(255, 204, 0, 0.3)",
+    },
+    rateButtonText: {
+        fontSize: 14,
+        fontWeight: "600",
+        color: "#FFCC00",
+    },
 });

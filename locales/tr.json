@@ -127,7 +127,9 @@
             "latestComments": "Son Yorumlar",
             "seeAll": "Hepsini Gör",
             "emptyOverview": "Bu film hakkında daha fazla bilgi yok.",
-            "addToList": "Listelerime Ekle"
+            "addToList": "Listelerime Ekle",
+            "emptyReviewsText": "Henüz inceleme yok. Bu film hakkındaki düşüncelerini ilk paylaşan sen ol!",
+            "rateAndReview": "Puanla & İncele"
         },
         "interactions": {
             "title": "Film Etkileşimleri",
@@ -154,7 +156,15 @@
             "latestComments": "Son Yorumlar",
             "seeAll": "Tümü ({{count}})",
             "emptyPlaylist": "Henüz playlistiniz bulunmuyor.",
-            "addToPlaylist": "Playlist'e Ekle"
+            "addToPlaylist": "Playlist'e Ekle",
+            "emptyReviewsText": "Henüz inceleme yok. Bu şarkı hakkındaki düşüncelerini ilk paylaşan sen ol!",
+            "rateAndReview": "Puanla & İncele"
+        }
+    },
+    "albums": {
+        "detail": {
+            "emptyReviewsText": "Henüz inceleme yok. Bu albüm hakkındaki düşüncelerini ilk paylaşan sen ol!",
+            "emptyTracksText": "Bu albümde henüz şarkı bulunmuyor."
         }
     },
     "lists": {

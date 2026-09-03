@@ -21,7 +21,13 @@ const formatReleaseYear = (releaseDate?: string | Date) => {
     return Number.isNaN(date.getTime()) ? "" : `(${date.getFullYear()})`;
 };
 
-export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
+export default function MovieHero({
+    movie,
+    isLoading,
+    error,
+    isInteractionSheetOpen: externalSheetOpen,
+    onInteractionSheetOpenChange,
+}: MovieHeroProps) {
     const { t } = useTranslation();
     const releaseYear = formatReleaseYear(movie?.releaseDate);
     const durationText = movie?.duration ? `${movie.duration} dk` : "";
@@ -38,7 +44,9 @@ export default function MovieHero({ movie, isLoading, error }: MovieHeroProps) {
     const [likesCount, setLikesCount] = useState<number>(movie?.likesCount ?? 0);
 
     const [isAddToListOpen, setIsAddToListOpen] = useState<boolean>(false);
-    const [isInteractionSheetOpen, setIsInteractionSheetOpen] = useState<boolean>(false);
+    const [internalSheetOpen, setInternalSheetOpen] = useState<boolean>(false);
+    const isInteractionSheetOpen = externalSheetOpen ?? internalSheetOpen;
+    const setIsInteractionSheetOpen = onInteractionSheetOpenChange ?? setInternalSheetOpen;
 
     const [isInList, setIsInList] = useState<boolean>(movie?.isInList ?? false);
     const [isWatchlisted, setIsWatchlisted] = useState<boolean>(movie?.isWatchlisted ?? false);

@@ -1,12 +1,14 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import InteractionView from "../Interaction";
+import { Colors } from "@/constants/colors";
 
 import { LatestCommentsProps } from "./types";
 import { styles } from "./styles";
 
-export default function LatestComments({ interactions, commentsCount }: LatestCommentsProps) {
+export default function LatestComments({ interactions, commentsCount, onRateReviewPress }: LatestCommentsProps) {
     const { t } = useTranslation();
     const router = useRouter();
     const { trackId } = useLocalSearchParams<{ trackId?: string }>();
@@ -20,7 +22,24 @@ export default function LatestComments({ interactions, commentsCount }: LatestCo
     const commentInteractions = interactions.filter((item) => !!item.comment?.content);
 
     if (commentInteractions.length === 0) {
-        return null;
+        return (
+            <View style={styles.emptyCommentsContainer} testID="tracks-empty-reviews">
+                <Ionicons name="chatbubble-ellipses-outline" size={32} color={Colors.textMuted} style={styles.emptyIcon} />
+                <Text style={styles.emptyCommentsText}>
+                    {t("tracks.detail.emptyReviewsText")}
+                </Text>
+                {onRateReviewPress && (
+                    <TouchableOpacity
+                        style={styles.rateButton}
+                        onPress={onRateReviewPress}
+                        activeOpacity={0.8}
+                        testID="tracks-rate-review-button">
+                        <Ionicons name="star" size={16} color="#FFCC00" />
+                        <Text style={styles.rateButtonText}>{t("tracks.detail.rateAndReview")}</Text>
+                    </TouchableOpacity>
+                )}
+            </View>
+        );
     }
 
     return (

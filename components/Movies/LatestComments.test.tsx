@@ -34,10 +34,17 @@ describe("LatestComments Component", () => {
         expect(getByText("Muhteşem bir görsel şölen!")).toBeTruthy();
     });
 
-    it("should return null when interaction array is empty", () => {
-        const { queryByText } = render(<LatestComments interactions={[]} />);
+    it("should render empty state and trigger onRateReviewPress when interaction array is empty", () => {
+        const onRateReviewPress = jest.fn();
+        const { getByText, getByTestId } = render(
+            <LatestComments interactions={[]} onRateReviewPress={onRateReviewPress} />
+        );
 
-        expect(queryByText("Son Yorumlar")).toBeNull();
+        expect(getByText("movies.detail.emptyReviewsText")).toBeTruthy();
+        expect(getByText("movies.detail.rateAndReview")).toBeTruthy();
+
+        fireEvent.press(getByTestId("movies-rate-review-button"));
+        expect(onRateReviewPress).toHaveBeenCalledTimes(1);
     });
 
     it("should navigate to all interactions page when 'Hepsini Gör' is pressed", () => {

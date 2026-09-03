@@ -168,12 +168,24 @@ export default function AlbumDetailView({
                     <View style={styles.emptyContainer}>
                         <Ionicons
                             name={isTracksTab ? "disc-outline" : "chatbubble-ellipses-outline"}
-                            size={48}
+                            size={isTracksTab ? 48 : 32}
                             color="#444"
                         />
                         <Text style={styles.emptyText}>
-                            {isTracksTab ? "Bu albümde henüz şarkı bulunmuyor." : "Bu albüme henüz yorum yapılmamış."}
+                            {isTracksTab
+                                ? t("albums.detail.emptyTracksText", { defaultValue: "Bu albümde henüz şarkı bulunmuyor." })
+                                : t("albums.detail.emptyReviewsText", { defaultValue: "No reviews yet. Be the first to share your thoughts on this album!" })}
                         </Text>
+                        {!isTracksTab && (
+                            <TouchableOpacity
+                                style={styles.rateButton}
+                                onPress={() => setIsInteractionSheetOpen(true)}
+                                activeOpacity={0.8}
+                                testID="albums-rate-review-button">
+                                <Ionicons name="star" size={16} color="#FFCC00" />
+                                <Text style={styles.rateButtonText}>{t("movies.detail.rateAndReview")}</Text>
+                            </TouchableOpacity>
+                        )}
                     </View>
                 }
                 onEndReached={handleLoadMore}

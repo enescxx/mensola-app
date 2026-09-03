@@ -57,6 +57,7 @@ export default function TrackDetailView({
                 <LatestComments
                     interactions={trackDetails?.interactions ?? []}
                     commentsCount={trackDetails?.commentsCount}
+                    onRateReviewPress={() => setIsInteractionSheetOpen(true)}
                 />
             </ScrollView>
 

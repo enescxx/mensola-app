@@ -22,6 +22,8 @@ export interface MovieHeroProps {
     movie: MovieDetails | null;
     isLoading: boolean;
     error: string;
+    isInteractionSheetOpen?: boolean;
+    onInteractionSheetOpenChange?: (open: boolean) => void;
 }
 
 export interface MovieOverviewProps {

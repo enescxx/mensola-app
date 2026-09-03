@@ -35,4 +35,5 @@ export interface AddToPlaylistSheetItemProps {
 export interface LatestCommentsProps {
     interactions: InteractionItemResponse[];
     commentsCount?: number;
+    onRateReviewPress?: () => void;
 }
