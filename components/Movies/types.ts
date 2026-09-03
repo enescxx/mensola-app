@@ -4,12 +4,15 @@ import { MovieId, MovieListId } from "@/types/common.types";
 import { MovieDetails } from "@/types/movie.types";
 
 export interface IActionBtnProps {
-    icon: keyof typeof Ionicons.glyphMap;
+    icon?: keyof typeof Ionicons.glyphMap;
+    iconComponent?: React.ReactNode;
     isActive: boolean;
     activeColor: string;
     onPress?: () => void;
     disabled?: boolean;
     isLoading?: boolean;
+    style?: any;
+    testID?: string;
 }
 
 export interface MovieDetailViewProps {

@@ -29,4 +29,18 @@ describe("ActionButton Component", () => {
 
         expect(queryByText("star")).toBeNull();
     });
+
+    it("should render custom iconComponent when provided", () => {
+        const { getByTestId } = render(
+            <ActionButton
+                iconComponent={<></>}
+                isActive={false}
+                activeColor="#FF8000"
+                onPress={() => {}}
+                testID="custom-action-btn"
+            />
+        );
+
+        expect(getByTestId("custom-action-btn")).toBeTruthy();
+    });
 });

@@ -7,9 +7,10 @@ import {
     TouchableOpacity,
     NativeSyntheticEvent,
     TextLayoutEventData,
+    Linking,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 import ActionButton from "@/components/Movies/ActionButton";
 import Badge from "@/components/Badge";
@@ -40,6 +41,17 @@ export default function AlbumHero({
         : 0;
     const userComment = albumDetails?.currentUserInteraction?.comment?.content || "";
     const hasUserInteraction = userRating > 0 || (typeof userComment === "string" && userComment.trim().length > 0);
+
+    const spotifyId = albumDetails.spotifyId;
+    const handleSpotifyPress = () => {
+        if (spotifyId) {
+            Linking.openURL(`https://open.spotify.com/album/${spotifyId}`).catch((err) => {
+                console.error("Failed to open Spotify album:", err);
+            });
+        } else if (onPlayPress) {
+            onPlayPress();
+        }
+    };
 
     const handleTextLayout = (e: NativeSyntheticEvent<TextLayoutEventData>) => {
         if (e.nativeEvent.lines.length > 2 && !isDescriptionTruncated) {
@@ -135,12 +147,14 @@ export default function AlbumHero({
                         </View>
 
                         <View style={styles.actionBar}>
-                            {/* 1. Dinle */}
+                            {/* 1. Dinle (Spotify) */}
                             <ActionButton
-                                icon="play"
+                                iconComponent={<FontAwesome name="spotify" size={20} color="#1DB954" />}
                                 isActive={false}
-                                activeColor={`${Colors.primary}66`}
-                                onPress={onPlayPress || (() => {})}
+                                activeColor="rgba(29, 185, 84, 0.2)"
+                                onPress={handleSpotifyPress}
+                                disabled={!spotifyId && !onPlayPress}
+                                testID="album-spotify-button"
                             />
 
                             {/* 2. Paylaş */}
