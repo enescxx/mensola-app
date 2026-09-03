@@ -21,6 +21,4 @@ export interface ISectionHeaderProps {
     seeAllLabel?: string;
 }
 
-export interface IHomeHeaderProps {
-    onNotificationPress?: () => void;
-}
+export interface IHomeHeaderProps {}

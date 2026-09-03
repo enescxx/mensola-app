@@ -48,7 +48,7 @@ export type StatDetailItemProps<T extends StatType = StatType> = { viewType?: Vi
           data: FollowUsersResponseDataItem;
           currentUserId: UserId;
           onCardPress?: (userId: UserId) => void;
-          onFollowPress?: (userId: UserId, isFollowing: boolean) => void;
+          onFollowPress?: (userId: UserId, isFollowing: boolean, isPending?: boolean) => void;
           isFirst?: boolean;
           isLast?: boolean;
       }

@@ -30,13 +30,14 @@ export interface HomeData {
     heroMovies: HeroMovie[];
     nowPlayingMovies: NowPlayingMovie[];
     newTracks: NewTrack[];
+    hasPendingFollowRequest: boolean;
 }
 
 export type HomeResponse = ApiResponse<HomeData>;
 
 const HomeService = {
     getHomeData: async (): Promise<HomeResponse> => {
-        return await client.get<HomeResponse>("/v1/home");
+        return await client.get<HomeResponse>("/v1/home", { auth: true });
     },
 };
 

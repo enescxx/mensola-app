@@ -13,19 +13,21 @@ export interface IUser {
     email?: string;
     isPrivate?: boolean;
     hasAccess?: boolean;
+    isPending?: boolean;
 }
 export type UserFavorites = { favoriteMovies: FavoriteMovies; favoriteTracks: FavoriteTracks };
 export type UserStats = Record<StatTypeKey, number>;
 export type UserRelationships = {
     mutualFollowers?: Pick<IUser, "id" | "username" | "fullname">[];
     isFollowingByMe?: boolean;
+    isPendingByMe?: boolean;
 };
 export type UserProfile = IUser & UserStats & UserFavorites & UserRelationships;
 export type GetProfileRequest = { userId: UserId | "me" };
 export type GetProfileResponse = ApiResponse<{ profile: UserProfile }>;
-export type FollowActionResponseData = { userId: UserId; isFollowing: boolean };
+export type FollowActionResponseData = { userId: UserId; isFollowing: boolean; isPending?: boolean; status?: "pending" | "accepted" };
 export type FollowActionResponse = ApiResponse<FollowActionResponseData>;
-export type FollowUsersResponseDataItem = IUser & { isFollowing: boolean; isFollower: boolean };
+export type FollowUsersResponseDataItem = IUser & { isFollowing: boolean; isFollower: boolean; isPending?: boolean };
 export type FollowUsersResponseData = PaginationResponse & { items: FollowUsersResponseDataItem[] };
 export type FollowUsersResponse = ApiResponse<FollowUsersResponseData>;
 export type UpdateProfileResponse = ApiResponse<{ user: IUser }>;

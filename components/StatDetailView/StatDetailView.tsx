@@ -145,21 +145,48 @@ export default function StatDetailView<T extends StatType = StatType>({
                     });
                 };
 
-                const handleFollowPress = (targetId: UserId, isFollowing: boolean) => {
-                    if (isFollowing) {
+                const handleFollowPress = (targetId: UserId, isFollowing: boolean, isPending?: boolean) => {
+                    if (isFollowing || isPending) {
                         Alert.alert(
-                            "Takipten çıkılıyor",
-                            `${item.fullname || item.username} adlı kişiyi takip etmeyi bırakmak istiyor musunuz?`,
+                            isPending ? "İsteği İptal Et" : "Takipten çıkılıyor",
+                            isPending
+                                ? `${item.fullname || item.username} adlı kişiye gönderilen takip isteğini iptal etmek istiyor musunuz?`
+                                : `${item.fullname || item.username} adlı kişiyi takip etmeyi bırakmak istiyor musunuz?`,
                             [
                                 { text: "Hayır", onPress: () => {}, style: "cancel" },
                                 {
                                     text: "Evet",
-                                    onPress: () => unfollowHandler(targetId, () => toggleFollowStateInList(targetId)),
+                                    onPress: () =>
+                                        unfollowHandler(targetId, () => {
+                                            setStatDetailItems((prev) => {
+                                                const typedPrev = prev as FollowUsersResponseDataItem[];
+                                                const mapped = typedPrev?.map((userItem) =>
+                                                    userItem.id === targetId
+                                                        ? { ...userItem, isFollowing: false, isPending: false }
+                                                        : userItem,
+                                                );
+                                                return mapped as StatDetailsItemMap[T][];
+                                            });
+                                        }),
                                 },
                             ],
                         );
                     } else {
-                        followHandler(targetId, () => toggleFollowStateInList(targetId));
+                        followHandler(targetId, (data) => {
+                            setStatDetailItems((prev) => {
+                                const typedPrev = prev as FollowUsersResponseDataItem[];
+                                const mapped = typedPrev?.map((userItem) =>
+                                    userItem.id === targetId
+                                        ? {
+                                              ...userItem,
+                                              isFollowing: data?.status === "accepted" || (!userItem.isPrivate && data?.status !== "pending"),
+                                              isPending: data?.status === "pending" || userItem.isPrivate,
+                                          }
+                                        : userItem,
+                                );
+                                return mapped as StatDetailsItemMap[T][];
+                            });
+                        });
                     }
                 };
                 return (

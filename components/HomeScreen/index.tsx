@@ -57,7 +57,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.container}>
-            <HomeHeader onNotificationPress={() => router.push("/(tabs)/notifications")} />
+            <HomeHeader />
             <ScrollView
                 style={styles.scroll}
                 showsVerticalScrollIndicator={false}

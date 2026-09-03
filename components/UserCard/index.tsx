@@ -18,6 +18,8 @@ export default function UserCard({ user, currentUserId, onFollowPress, onCardPre
         followState = "SELF";
     } else if (user.isFollowing) {
         followState = "FOLLOWING";
+    } else if (user.isPending) {
+        followState = "REQUESTED";
     } else if (user.isFollower) {
         followState = "FOLLOW_BACK";
     } else {
@@ -29,6 +31,11 @@ export default function UserCard({ user, currentUserId, onFollowPress, onCardPre
             case "FOLLOWING":
                 return {
                     text: t("userCard.following"),
+                    style: styles.btnFollowing,
+                };
+            case "REQUESTED":
+                return {
+                    text: t("userCard.requested"),
                     style: styles.btnFollowing,
                 };
             case "FOLLOW_BACK":
@@ -60,7 +67,7 @@ export default function UserCard({ user, currentUserId, onFollowPress, onCardPre
             {!isSelf && buttonConfig && (
                 <Button
                     label={buttonConfig.text}
-                    onPress={() => onFollowPress?.(user.id, user.isFollowing ?? false)}
+                    onPress={() => onFollowPress?.(user.id, user.isFollowing ?? false, user.isPending ?? false)}
                     style={buttonConfig.style}
                     labelStyle={styles.btnText}
                     activeOpacity={0.7}

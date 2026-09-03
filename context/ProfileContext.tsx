@@ -14,7 +14,7 @@ export interface ProfileContextType {
     userId?: UserId | "me";
     refetch: () => Promise<void>;
     isLoading: boolean;
-    headerData: IUser & { stats: Partial<UserStats>; isOwnProfile: boolean; isFollowingByMe?: boolean };
+    headerData: IUser & { stats: Partial<UserStats>; isOwnProfile: boolean; isFollowingByMe?: boolean; isPendingByMe?: boolean };
     bodyData: UserFavorites;
     footerData: { stats: Partial<UserStats> };
     isOwnProfile: boolean;
@@ -66,6 +66,7 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         favoriteTracks,
         mutualFollowers,
         isFollowingByMe,
+        isPendingByMe,
         hasAccess = true,
         isPrivate = false,
         ...stats
@@ -86,6 +87,7 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         stats: headerStats,
         isOwnProfile,
         isFollowingByMe,
+        isPendingByMe,
     };
     const bodyData = {
         favoriteMovies: favoriteMovies?.slice(0, 3),

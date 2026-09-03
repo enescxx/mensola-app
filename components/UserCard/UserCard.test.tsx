@@ -46,6 +46,7 @@ describe("UserCard component", () => {
         expect(queryByText("userCard.follow")).toBeNull();
         expect(queryByText("userCard.followBack")).toBeNull();
         expect(queryByText("userCard.following")).toBeNull();
+        expect(queryByText("userCard.requested")).toBeNull();
     });
 
     it("renders 'Follow' button when not following the user", () => {
@@ -59,6 +60,19 @@ describe("UserCard component", () => {
         );
 
         expect(getByText("userCard.follow")).toBeTruthy();
+    });
+
+    it("renders 'Requested' button when follow request is pending", () => {
+        const { getByText } = render(
+            <UserCard
+                user={{ ...mockUser, isFollowing: false, isPending: true }}
+                currentUserId="current-user"
+                onFollowPress={mockOnFollowPress}
+                onCardPress={mockOnCardPress}
+            />,
+        );
+
+        expect(getByText("userCard.requested")).toBeTruthy();
     });
 
     it("renders 'Follow Back' button when the user follows current user back", () => {
@@ -103,7 +117,7 @@ describe("UserCard component", () => {
         expect(mockOnCardPress).toHaveBeenCalledWith("user-123");
     });
 
-    it("calls onFollowPress with (id, isFollowing) when the follow button is pressed", () => {
+    it("calls onFollowPress with (id, isFollowing, isPending) when the follow button is pressed", () => {
         const { getByText } = render(
             <UserCard
                 user={{ ...mockUser, isFollowing: true }}
@@ -116,6 +130,6 @@ describe("UserCard component", () => {
         fireEvent.press(getByText("userCard.following"));
 
         expect(mockOnFollowPress).toHaveBeenCalledTimes(1);
-        expect(mockOnFollowPress).toHaveBeenCalledWith("user-123", true);
+        expect(mockOnFollowPress).toHaveBeenCalledWith("user-123", true, false);
     });
 });
