@@ -173,7 +173,69 @@ const styles = StyleSheet.create({
         color: Colors.textSecondary,
         textAlign: "center",
         paddingHorizontal: 32,
-    }
+    },
+    followRequestBanner: {
+        width: "100%",
+        backgroundColor: Colors.surface,
+        borderWidth: 1,
+        borderColor: Colors.border,
+        borderRadius: 14,
+        padding: 14,
+        gap: 12,
+        marginBottom: 8,
+    },
+    followRequestBannerContent: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
+    followRequestBannerIconWrapper: {
+        width: 34,
+        height: 34,
+        borderRadius: 17,
+        backgroundColor: "rgba(255, 128, 0, 0.12)",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    followRequestBannerText: {
+        flex: 1,
+        fontSize: 13,
+        fontWeight: "600",
+        color: Colors.textPrimary,
+        lineHeight: 18,
+    },
+    followRequestBannerActions: {
+        flexDirection: "row",
+        gap: 10,
+    },
+    followRequestAcceptButton: {
+        flex: 1,
+        backgroundColor: Colors.primary,
+        paddingVertical: 9,
+        borderRadius: 8,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    followRequestAcceptButtonText: {
+        color: "#FFFFFF",
+        fontSize: 13,
+        fontWeight: "600",
+    },
+    followRequestDeclineButton: {
+        flex: 1,
+        backgroundColor: Colors.surface,
+        borderWidth: 1,
+        borderColor: Colors.border,
+        paddingVertical: 9,
+        borderRadius: 8,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    followRequestDeclineButtonText: {
+        color: Colors.textSecondary,
+        fontSize: 13,
+        fontWeight: "600",
+    },
 });
 
 export { styles };

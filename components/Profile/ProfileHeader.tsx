@@ -1,5 +1,8 @@
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { styles } from "./styles";
 import ProfileStats from "./ProfileStats";
@@ -11,18 +14,94 @@ import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import Avatar from "../Avatar";
 import { Colors } from "@/constants/colors";
+import { notificationService } from "@/services/notification.service";
 
 export default function ProfileHeader() {
     const router = useRouter();
     const { t } = useTranslation();
-    const { headerData, handleStatPress } = useProfileContext();
+    const queryClient = useQueryClient();
+    const { headerData, handleStatPress, refetch } = useProfileContext();
     const { followHandler, unfollowHandler, isLoading } = useFollow();
+    const [isHandlingRequest, setIsHandlingRequest] = useState(false);
 
     const isFollowing = headerData.isFollowingByMe;
     const isPending = headerData.isPendingByMe;
 
+    const handleAcceptFollowRequest = async () => {
+        try {
+            setIsHandlingRequest(true);
+            await notificationService.acceptFollowRequest(headerData.id);
+            headerData.hasPendingRequestFromUser = false;
+            queryClient.invalidateQueries({ queryKey: ["notifications"] });
+            queryClient.invalidateQueries({ queryKey: ["homeData"] });
+            await refetch();
+        } catch (error) {
+            console.error("Failed to accept follow request", error);
+        } finally {
+            setIsHandlingRequest(false);
+        }
+    };
+
+    const handleDeclineFollowRequest = async () => {
+        try {
+            setIsHandlingRequest(true);
+            await notificationService.declineFollowRequest(headerData.id);
+            headerData.hasPendingRequestFromUser = false;
+            queryClient.invalidateQueries({ queryKey: ["notifications"] });
+            queryClient.invalidateQueries({ queryKey: ["homeData"] });
+            await refetch();
+        } catch (error) {
+            console.error("Failed to decline follow request", error);
+        } finally {
+            setIsHandlingRequest(false);
+        }
+    };
+
     return (
         <View style={styles.headerWrapper}>
+            {headerData.hasPendingRequestFromUser ? (
+                <View style={styles.followRequestBanner} testID="profile-follow-request-banner">
+                    <View style={styles.followRequestBannerContent}>
+                        <View style={styles.followRequestBannerIconWrapper}>
+                            <Ionicons name="person-add" size={18} color={Colors.primary} />
+                        </View>
+                        <Text style={styles.followRequestBannerText} numberOfLines={2}>
+                            {t("profile.followRequest.banner", {
+                                name: headerData.fullname || headerData.username,
+                            })}
+                        </Text>
+                    </View>
+
+                    <View style={styles.followRequestBannerActions}>
+                        <TouchableOpacity
+                            style={styles.followRequestAcceptButton}
+                            onPress={handleAcceptFollowRequest}
+                            disabled={isHandlingRequest}
+                            activeOpacity={0.8}
+                            testID="profile-accept-follow-request">
+                            {isHandlingRequest ? (
+                                <ActivityIndicator size="small" color="#FFFFFF" />
+                            ) : (
+                                <Text style={styles.followRequestAcceptButtonText}>
+                                    {t("notifications.accept")}
+                                </Text>
+                            )}
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.followRequestDeclineButton}
+                            onPress={handleDeclineFollowRequest}
+                            disabled={isHandlingRequest}
+                            activeOpacity={0.8}
+                            testID="profile-decline-follow-request">
+                            <Text style={styles.followRequestDeclineButtonText}>
+                                {t("notifications.decline")}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            ) : null}
+
             <LinearGradient
                 colors={[Colors.primary, Colors.secondary, Colors.accentPink]}
                 start={{ x: 0, y: 0 }}

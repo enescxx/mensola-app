@@ -64,6 +64,9 @@
         "reviewedContent": "içeriğine bir inceleme bıraktı"
     },
     "profile": {
+        "followRequest": {
+            "banner": "{{name}} sana takip isteği gönderdi"
+        },
         "editProfile": {
             "cancelButton": "İptal",
             "saveButton": "Kaydet",

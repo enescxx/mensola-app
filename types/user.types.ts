@@ -21,6 +21,7 @@ export type UserRelationships = {
     mutualFollowers?: Pick<IUser, "id" | "username" | "fullname">[];
     isFollowingByMe?: boolean;
     isPendingByMe?: boolean;
+    hasPendingRequestFromUser?: boolean;
 };
 export type UserProfile = IUser & UserStats & UserFavorites & UserRelationships;
 export type GetProfileRequest = { userId: UserId | "me" };

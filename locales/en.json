@@ -64,6 +64,9 @@
         "reviewedContent": "left a review on your content"
     },
     "profile": {
+        "followRequest": {
+            "banner": "{{name}} sent you a follow request"
+        },
         "editProfile": {
             "cancelButton": "Cancel",
             "saveButton": "Save",
