@@ -21,7 +21,13 @@
             "confirmPasswordPlaceholder": "••••••••",
             "submitButton": "Hesap Oluştur",
             "footerText": "Zaten hesabın var mı?",
-            "loginLink": "Giriş Yap"
+            "loginLink": "Giriş Yap",
+            "consentPrefix": "Kayıt olarak",
+            "termsOfService": "Kullanım Koşulları",
+            "consentAnd": "ve",
+            "privacyPolicy": "Gizlilik Politikası",
+            "consentSuffix": "'nı kabul etmiş sayılırsınız.",
+            "termsRequired": "Devam etmek için Kullanım Koşulları ve Gizlilik Politikasını kabul etmelisiniz."
         },
         "forgotPassword": {
             "emailLabel": "E-posta",

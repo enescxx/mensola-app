@@ -21,7 +21,13 @@
             "confirmPasswordPlaceholder": "••••••••",
             "submitButton": "Create Account",
             "footerText": "Already have an account?",
-            "loginLink": "Login"
+            "loginLink": "Login",
+            "consentPrefix": "By signing up, you agree to our",
+            "termsOfService": "Terms of Service",
+            "consentAnd": "and",
+            "privacyPolicy": "Privacy Policy",
+            "consentSuffix": "",
+            "termsRequired": "Please accept the Terms of Service and Privacy Policy to continue."
         },
         "forgotPassword": {
             "emailLabel": "Email",

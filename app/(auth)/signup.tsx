@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     StyleSheet,
     Text,
@@ -8,10 +8,12 @@ import {
     Platform,
     Alert,
     ScrollView,
+    Linking,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { Ionicons } from "@expo/vector-icons";
 
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
@@ -35,11 +37,20 @@ export default function SignupScreen() {
         handleRegister,
     } = useRegister();
     const { t } = useTranslation();
+    const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 
     useEffect(() => {
         if (isLoading) return;
         if (error) return Alert.alert(t("common.error"), error);
     }, [isLoading, error]);
+
+    const handleSubmit = () => {
+        if (!hasAcceptedTerms) {
+            Alert.alert(t("common.warning"), t("auth.signup.termsRequired"));
+            return;
+        }
+        handleRegister();
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -78,7 +89,46 @@ export default function SignupScreen() {
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
                         />
-                        <Button label={t("auth.signup.submitButton")} onPress={handleRegister} />
+
+                        {/* Terms & Privacy Consent */}
+                        <View style={styles.consentContainer}>
+                            <TouchableOpacity
+                                style={styles.checkboxTouch}
+                                onPress={() => setHasAcceptedTerms(!hasAcceptedTerms)}
+                                activeOpacity={0.7}
+                                testID="signup-terms-checkbox">
+                                <Ionicons
+                                    name={hasAcceptedTerms ? "checkbox" : "square-outline"}
+                                    size={20}
+                                    color={hasAcceptedTerms ? Colors.primary : Colors.textMuted}
+                                />
+                            </TouchableOpacity>
+                            <Text style={styles.consentText}>
+                                {t("auth.signup.consentPrefix")}{" "}
+                                <Text
+                                    style={styles.consentLink}
+                                    onPress={() => Linking.openURL("https://mensola.app/terms")}
+                                    testID="signup-terms-link">
+                                    {t("auth.signup.termsOfService")}
+                                </Text>{" "}
+                                {t("auth.signup.consentAnd")}{" "}
+                                <Text
+                                    style={styles.consentLink}
+                                    onPress={() => Linking.openURL("https://mensola.app/privacy-policy")}
+                                    testID="signup-privacy-link">
+                                    {t("auth.signup.privacyPolicy")}
+                                </Text>
+                                {t("auth.signup.consentSuffix") ? ` ${t("auth.signup.consentSuffix")}` : "."}
+                            </Text>
+                        </View>
+
+                        <Button
+                            label={t("auth.signup.submitButton")}
+                            onPress={handleSubmit}
+                            disabled={!hasAcceptedTerms || isLoading}
+                            style={!hasAcceptedTerms ? { opacity: 0.5 } : undefined}
+                            testID="signup-submit-button"
+                        />
                     </View>
 
                     <View style={styles.footerContainer}>
@@ -109,6 +159,28 @@ const styles = StyleSheet.create({
         letterSpacing: 1.5,
     },
     formContainer: { marginBottom: 24 },
+    consentContainer: {
+        flexDirection: "row",
+        alignItems: "flex-start",
+        gap: 10,
+        marginTop: 10,
+        marginBottom: 20,
+        paddingHorizontal: 2,
+    },
+    checkboxTouch: {
+        paddingTop: 1,
+    },
+    consentText: {
+        flex: 1,
+        fontSize: 13,
+        color: Colors.textSecondary,
+        lineHeight: 18,
+    },
+    consentLink: {
+        color: Colors.primary,
+        fontWeight: "600",
+        textDecorationLine: "underline",
+    },
     footerContainer: {
         flexDirection: "row",
         justifyContent: "center",
