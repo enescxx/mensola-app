@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { FollowRequestRowProps } from "./types";
 import { styles } from "./styles";
+import { formatRelativeTime } from "@/utils/date.utils";
 
 export default function FollowRequestRow({
     item,
@@ -13,8 +14,9 @@ export default function FollowRequestRow({
     onPressActor,
     isLoading = false,
 }: FollowRequestRowProps) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { actor, createdAt, status = "pending" } = item;
+    const formattedTime = formatRelativeTime(createdAt, i18n.language);
 
     const handleActorPress = () => {
         onPressActor?.(actor.id);
@@ -29,9 +31,13 @@ export default function FollowRequestRow({
     };
 
     return (
-        <View style={styles.row} testID={`follow-request-row-${item.id}`}>
+        <TouchableOpacity
+            style={styles.row}
+            onPress={handleActorPress}
+            activeOpacity={0.7}
+            testID={`follow-request-row-${item.id}`}>
             {/* Avatar with Request Badge */}
-            <TouchableOpacity onPress={handleActorPress} activeOpacity={0.7} style={styles.avatarContainer}>
+            <View style={styles.avatarContainer}>
                 {actor.avatar ? (
                     <Image source={{ uri: actor.avatar }} style={styles.avatar} />
                 ) : (
@@ -44,21 +50,18 @@ export default function FollowRequestRow({
                 <View style={[styles.badgeIcon, styles.badgeRequest]}>
                     <Ionicons name="person-add" size={10} color="#FFFFFF" />
                 </View>
-            </TouchableOpacity>
+            </View>
 
             {/* Content info */}
-            <TouchableOpacity
-                onPress={handleActorPress}
-                activeOpacity={0.7}
-                style={styles.contentContainer}>
+            <View style={styles.contentContainer}>
                 <Text style={styles.actorName} numberOfLines={1}>
                     {actor.fullName || actor.username}
                 </Text>
                 <Text style={styles.messageText} numberOfLines={1}>
                     {t("notifications.wantsToFollow")}
                 </Text>
-                {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
-            </TouchableOpacity>
+                {formattedTime ? <Text style={styles.timeText}>{formattedTime}</Text> : null}
+            </View>
 
             {/* Actions / Status */}
             <View style={styles.actionsContainer}>
@@ -92,6 +95,6 @@ export default function FollowRequestRow({
                     </>
                 )}
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }

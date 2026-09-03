@@ -56,4 +56,14 @@ describe("FollowRequestRow Component", () => {
         expect(getByText("notifications.declined")).toBeTruthy();
         expect(queryByTestId("decline-request-req-1")).toBeNull();
     });
+
+    it("triggers onPressActor when the row is pressed", () => {
+        const onPressActor = jest.fn();
+        const { getByTestId } = render(
+            <FollowRequestRow item={mockItem} onPressActor={onPressActor} />
+        );
+
+        fireEvent.press(getByTestId("follow-request-row-req-1"));
+        expect(onPressActor).toHaveBeenCalledWith("user-123");
+    });
 });

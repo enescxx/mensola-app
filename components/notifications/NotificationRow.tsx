@@ -5,10 +5,12 @@ import { useTranslation } from "react-i18next";
 
 import { NotificationRowProps } from "./types";
 import { styles } from "./styles";
+import { formatRelativeTime } from "@/utils/date.utils";
 
 export default function NotificationRow({ item, onPress, onPressActor }: NotificationRowProps) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { actor, type, createdAt, isRead, target, message } = item;
+    const formattedTime = formatRelativeTime(createdAt, i18n.language);
 
     const handlePress = () => {
         onPress?.(item);
@@ -89,7 +91,7 @@ export default function NotificationRow({ item, onPress, onPressActor }: Notific
                     <Text style={styles.actorName}>{actor.fullName || actor.username} </Text>
                     {getDefaultMessage()}
                 </Text>
-                {createdAt ? <Text style={styles.timeText}>{createdAt}</Text> : null}
+                {formattedTime ? <Text style={styles.timeText}>{formattedTime}</Text> : null}
             </View>
 
             {/* Target Media Thumbnail (if applicable) */}
