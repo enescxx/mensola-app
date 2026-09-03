@@ -200,14 +200,15 @@
             "emptyText": "Henüz favori listeniz boş."
         }
     },
-    "interaction": {
+    "interactions": {
         "sheet": {
-            "ratingLabel": "Puanınız",
+            "title": "Değerlendir & Yorum Yap",
+            "ratingTitle": "Puanınız",
             "noRating": "Puan Seçilmedi",
             "addToLikes": "Beğenilerine Ekle",
-            "commentLabel": "Yorumunuz (İsteğe Bağlı)",
+            "commentTitle": "Yorumunuz (İsteğe Bağlı)",
             "commentPlaceholder": "Bu içerik hakkında düşüncelerinizi yazın...",
-            "submitButton": "Kaydet"
+            "save": "Kaydet"
         }
     },
     "settings": {

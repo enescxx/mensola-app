@@ -200,14 +200,15 @@
             "emptyText": "Your favorite list is currently empty."
         }
     },
-    "interaction": {
+    "interactions": {
         "sheet": {
-            "ratingLabel": "Your Rating",
+            "title": "Rate & Comment",
+            "ratingTitle": "Your Rating",
             "noRating": "No Rating Selected",
             "addToLikes": "Add to Likes",
-            "commentLabel": "Your Comment (Optional)",
+            "commentTitle": "Your Comment (Optional)",
             "commentPlaceholder": "Write your thoughts about this content...",
-            "submitButton": "Save"
+            "save": "Save"
         }
     },
     "settings": {
