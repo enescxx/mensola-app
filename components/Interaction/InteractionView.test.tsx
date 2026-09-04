@@ -55,8 +55,16 @@ describe("InteractionView Component", () => {
         });
     });
 
-    it("should navigate to interaction detail when interaction card is pressed", () => {
+    it("should not navigate to interaction detail when interaction card is pressed by default (disabled for beta)", () => {
         const { getByText } = render(<InteractionView data={mockData} />);
+
+        fireEvent.press(getByText("Bu gerçekten harika bir filmdi!"));
+
+        expect(mockRouterPush).not.toHaveBeenCalled();
+    });
+
+    it("should navigate to interaction detail when disabled is explicitly false", () => {
+        const { getByText } = render(<InteractionView data={mockData} disabled={false} />);
 
         fireEvent.press(getByText("Bu gerçekten harika bir filmdi!"));
 

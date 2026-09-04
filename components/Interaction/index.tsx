@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 import Avatar from "../Avatar";
 import { Colors } from "@/constants/colors";
 
-export default function InteractionView({ data }: IInteractionViewProps) {
+export default function InteractionView({ data, disabled = true }: IInteractionViewProps) {
     const { user, comment, likesCount, replyCount, ...interaction } = data;
     const router = useRouter();
 
@@ -32,6 +32,7 @@ export default function InteractionView({ data }: IInteractionViewProps) {
     };
 
     const handleInteractionPress = () => {
+        if (disabled) return;
         router.push({ pathname: "/interactions/[interactionId]", params: { interactionId: data.id } });
     };
 
@@ -47,8 +48,9 @@ export default function InteractionView({ data }: IInteractionViewProps) {
         <View style={styles.container}>
             <Pressable
                 style={styles.cardContent}
-                onPress={handleInteractionPress}
-                android_ripple={{ color: "rgba(74, 158, 255, 0.2)" }}>
+                disabled={disabled}
+                onPress={disabled ? undefined : handleInteractionPress}
+                android_ripple={disabled ? undefined : { color: "rgba(74, 158, 255, 0.2)" }}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.userInfoContainer} onPress={handleUserPress} activeOpacity={0.8}>
                         <Avatar size={38} user={user} />
@@ -77,8 +79,9 @@ export default function InteractionView({ data }: IInteractionViewProps) {
 
                 <Pressable
                     style={styles.commentContainer}
-                    onPress={handleInteractionPress}
-                    android_ripple={{ color: "rgba(74, 158, 255, 0.2)" }}>
+                    disabled={disabled}
+                    onPress={disabled ? undefined : handleInteractionPress}
+                    android_ripple={disabled ? undefined : { color: "rgba(74, 158, 255, 0.2)" }}>
                     <Text style={styles.comment}>{comment.content}</Text>
                 </Pressable>
 
