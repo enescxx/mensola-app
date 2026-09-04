@@ -62,4 +62,18 @@ describe("SearchResultList Component", () => {
         expect(getByText("Something went wrong")).toBeTruthy();
         expect(getByText("Tekrar Deneyin")).toBeTruthy();
     });
+
+    test("renders SearchUserRow without follow button when activeTab is user", () => {
+        const mockUsers = [
+            { id: "user-1", username: "alice", fullname: "Alice Smith", avatar: null },
+        ];
+        const { getByText, queryByText } = render(
+            <SearchResultList {...defaultProps} activeTab="user" results={mockUsers} />
+        );
+
+        expect(getByText("Alice Smith")).toBeTruthy();
+        expect(getByText("@alice")).toBeTruthy();
+        expect(queryByText("Takip Et")).toBeNull();
+        expect(queryByText("Takip")).toBeNull();
+    });
 });
