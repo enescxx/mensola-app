@@ -112,7 +112,9 @@
         "emptyState": {
             "userPrompt": "Enter the username you want to search.",
             "trendMovies": "Trending Movies",
-            "newAlbums": "New Albums"
+            "newAlbums": "New Albums",
+            "noResultsTitle": "No Results Found",
+            "noResultsDescription": "We couldn't find any content matching your search criteria. You can try searching with different words."
         },
         "history": {
             "movieAddedSuccess": "\"{{title}}\" has been added to your favorite movies.",

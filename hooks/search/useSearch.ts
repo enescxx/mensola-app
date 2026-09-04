@@ -40,6 +40,9 @@ export const useSearch = () => {
 
     const activeState = getActiveState();
 
+    const isDebouncing = query.trim().length > 0 && query.trim() !== debouncedQuery.trim();
+    const isSearching = isDebouncing || activeState.isLoading || activeState.isFetching;
+
     return {
         query,
         setQuery,
@@ -47,7 +50,7 @@ export const useSearch = () => {
         setActiveTab,
         results:
             activeTab === "movie" ? movieState.movies : activeTab === "track" ? trackState.tracks : userState.users,
-        isLoading: activeState.isLoading,
+        isLoading: isSearching,
         fetchNextPage: activeState.fetchNextPage,
         refetch: activeState.refetch,
         hasNextPage: activeState.hasNextPage,

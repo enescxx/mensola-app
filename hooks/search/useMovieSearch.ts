@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 export const useMovieSearch = (query: string) => {
     const trimmedQuery = query.trim();
 
-    const { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, error } =
+    const { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isFetching, isLoading, isError, error } =
         useInfiniteQuery({
             queryKey: ["movies", "search", trimmedQuery],
             queryFn: async ({ pageParam = 1 }) => {
@@ -22,11 +22,11 @@ export const useMovieSearch = (query: string) => {
                 return allPages.length + 1;
             },
 
-            enabled: trimmedQuery.length >= 2,
+            enabled: trimmedQuery.length >= 1,
         });
 
     const movies = data?.pages.flatMap((page) => page?.items ?? []) ?? [];
     const totalResults = data?.pages[0]?.totalResults ?? 0;
 
-    return { movies, totalResults, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, error };
+    return { movies, totalResults, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isFetching, isLoading, isError, error };
 };

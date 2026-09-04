@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 export const useUserSearch = (query: string) => {
     const trimmedQuery = query.trim();
 
-    const { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, error } =
+    const { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isFetching, isLoading, isError, error } =
         useInfiniteQuery({
             queryKey: ["users", "search", trimmedQuery],
             queryFn: async ({ pageParam = 1 }) => {
@@ -21,10 +21,10 @@ export const useUserSearch = (query: string) => {
                 }
                 return allPages.length + 1;
             },
-            enabled: trimmedQuery.length >= 2,
+            enabled: trimmedQuery.length >= 1,
         });
 
     const users = data?.pages.flatMap((page) => page?.items ?? []) ?? [];
 
-    return { users, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, error };
+    return { users, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isFetching, isLoading, isError, error };
 };

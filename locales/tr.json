@@ -112,7 +112,9 @@
         "emptyState": {
             "userPrompt": "Aramak istediğiniz kullanıcı adını girin.",
             "trendMovies": "Trend Filmler",
-            "newAlbums": "Yeni Albümler"
+            "newAlbums": "Yeni Albümler",
+            "noResultsTitle": "Sonuç Bulunamadı",
+            "noResultsDescription": "Aradığınız kriterlere uygun içerik bulamadık. Farklı kelimelerle aramayı deneyebilirsiniz."
         },
         "history": {
             "movieAddedSuccess": "\"{{title}}\" favori filmlerinize eklendi.",
