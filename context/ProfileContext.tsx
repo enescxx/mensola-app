@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from "react";
-import { ActivityIndicator, Text, StyleSheet } from "react-native";
+import { ActivityIndicator, Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Href, useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import { useProfile } from "../hooks/profile/useProfile";
 import { UserId } from "@/types/common.types";
@@ -26,7 +27,8 @@ export interface ProfileContextType {
 
 const ProfileContext = createContext<ProfileContextType | null>(null);
 
-export function ProfileProvider({ userId, children }: { userId: UserId | "me"; children: React.ReactNode }) {
+export function ProfileProvider({ children, userId = "me" }: { children: React.ReactNode; userId?: UserId | "me" }) {
+    const { t } = useTranslation();
     const { user } = useGlobalUser();
     const { profile, fetchProfile, isLoading, error } = useProfile(userId);
     const router = useRouter();
@@ -39,10 +41,25 @@ export function ProfileProvider({ userId, children }: { userId: UserId | "me"; c
         );
     }
 
-    if (error || !profile) {
+    if (error) {
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={{ color: Colors.textPrimary }}>Kullanıcı bulunamadı.</Text>
+                <View style={styles.errorWrapper}>
+                    <Text style={styles.errorText}>{error}</Text>
+                    <TouchableOpacity onPress={fetchProfile} style={styles.retryBtn} activeOpacity={0.8}>
+                        <Text style={styles.retryText}>{t("common.retry", { defaultValue: "Tekrar Deneyin" })}</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
+        );
+    }
+
+    if (!profile) {
+        return (
+            <SafeAreaView style={styles.container}>
+                <Text style={{ color: Colors.textPrimary }}>
+                    {t("common.userNotFound", { defaultValue: "Kullanıcı bulunamadı." })}
+                </Text>
             </SafeAreaView>
         );
     }
@@ -134,5 +151,26 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.background,
         justifyContent: "center",
         alignItems: "center",
+    },
+    errorWrapper: {
+        alignItems: "center",
+        paddingHorizontal: 24,
+    },
+    errorText: {
+        color: Colors.textSecondary,
+        fontSize: 15,
+        textAlign: "center",
+        marginBottom: 16,
+    },
+    retryBtn: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: Colors.primary,
+        borderRadius: 8,
+    },
+    retryText: {
+        color: "#fff",
+        fontWeight: "600",
+        fontSize: 14,
     },
 });

@@ -1,9 +1,14 @@
 import * as SecureStore from "expo-secure-store";
 import { router } from "expo-router";
+import { Alert } from "react-native";
+import i18n from "i18next";
+import { usePreferences } from "@/hooks/usePreferences";
 
-interface RequestOptions extends RequestInit {
+export interface RequestOptions extends RequestInit {
     auth?: boolean;
     params?: Record<string, string | number | boolean | undefined>;
+    timeout?: number;
+    silentNetworkError?: boolean;
 }
 
 interface RefreshQueueItem {
@@ -12,6 +17,78 @@ interface RefreshQueueItem {
     url: string;
     config: RequestInit;
 }
+
+export class NetworkError extends Error {
+    success: false = false;
+    isNetworkError: true = true;
+    error: { code: string; message: string };
+
+    constructor(message: string) {
+        super(message);
+        this.name = "NetworkError";
+        this.error = {
+            code: "NETWORK_ERROR",
+            message,
+        };
+        Object.setPrototypeOf(this, NetworkError.prototype);
+    }
+}
+
+export const getActiveLanguage = (): string => {
+    try {
+        if (i18n && i18n.language) {
+            return i18n.language.split("-")[0];
+        }
+        const prefLang = usePreferences.getState().language;
+        if (prefLang && prefLang !== "system") {
+            return prefLang;
+        }
+    } catch {
+        // fallback
+    }
+    return "tr";
+};
+
+let lastNetworkAlertTimestamp = 0;
+const ALERT_THROTTLE_MS = 4000;
+
+export const resetNetworkAlertThrottle = () => {
+    lastNetworkAlertTimestamp = 0;
+};
+
+export const notifyNetworkError = (message?: string) => {
+    const now = Date.now();
+    if (now - lastNetworkAlertTimestamp > ALERT_THROTTLE_MS) {
+        lastNetworkAlertTimestamp = now;
+        const title =
+            (typeof i18n.t === "function" && i18n.t("common.networkErrorTitle", { defaultValue: "Bağlantı Hatası" })) ||
+            "Bağlantı Hatası";
+        const body =
+            message ||
+            (typeof i18n.t === "function" &&
+                i18n.t("common.networkErrorMessage", {
+                    defaultValue: "Lütfen internet bağlantınızı kontrol edin.",
+                })) ||
+            "Lütfen internet bağlantınızı kontrol edin.";
+        Alert.alert(title, body);
+    }
+};
+
+export const isNetworkFailure = (error: any): boolean => {
+    if (!error) return false;
+    if (error.name === "AbortError" || error.name === "TimeoutError") return true;
+    if (error instanceof TypeError) return true;
+    const msg = String(error.message || "").toLowerCase();
+    return (
+        msg.includes("network") ||
+        msg.includes("fetch") ||
+        msg.includes("failed to fetch") ||
+        msg.includes("connection") ||
+        msg.includes("offline") ||
+        msg.includes("timeout") ||
+        msg.includes("aborted")
+    );
+};
 
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
@@ -40,9 +117,13 @@ const processQueue = (error: any, token: string | null = null) => {
 };
 
 async function httpClient<T = any>(url: string, options: RequestOptions = {}): Promise<T> {
+    const activeLang = getActiveLanguage();
     const config: RequestInit = {
         method: options.method || "GET",
-        headers: { ...(options.headers as Record<string, string>) },
+        headers: {
+            "Accept-Language": activeLang,
+            ...(options.headers as Record<string, string>),
+        },
     };
 
     if (options.body) {
@@ -75,8 +156,18 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
         }
     }
 
+    const timeoutMs = options.timeout ?? 15000;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+    if (options.signal) {
+        options.signal.addEventListener("abort", () => controller.abort());
+    }
+    config.signal = controller.signal;
+
     try {
         const response = await fetch(`${BASE_URL}${targetUrl}`, config);
+        clearTimeout(timeoutId);
         const isJson = response.headers.get("content-type")?.includes("application/json");
         const responseData = isJson ? await response.json() : null;
 
@@ -94,7 +185,10 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
 
                 const refreshResponse = await fetch(`${BASE_URL}/v1/auth/refresh`, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept-Language": activeLang,
+                    },
                     body: JSON.stringify({
                         refreshToken: storedRefreshToken,
                     }),
@@ -145,6 +239,19 @@ async function httpClient<T = any>(url: string, options: RequestOptions = {}): P
 
         return responseData;
     } catch (error) {
+        clearTimeout(timeoutId);
+        if (isNetworkFailure(error)) {
+            const localizedMessage =
+                (typeof i18n.t === "function" &&
+                    i18n.t("common.networkErrorMessage", {
+                        defaultValue: "Lütfen internet bağlantınızı kontrol edin.",
+                    })) ||
+                "Lütfen internet bağlantınızı kontrol edin.";
+            if (!options.silentNetworkError) {
+                notifyNetworkError(localizedMessage);
+            }
+            throw new NetworkError(localizedMessage);
+        }
         throw error;
     }
 }

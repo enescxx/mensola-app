@@ -30,3 +30,16 @@ jest.mock("expo-image", () => {
     const { Image } = require("react-native");
     return { Image: (props) => <Image {...props} /> };
 });
+
+jest.mock("react-native-mmkv", () => ({
+    createMMKV: () => ({
+        set: jest.fn(),
+        getString: jest.fn(),
+        getNumber: jest.fn(),
+        getBoolean: jest.fn(),
+        delete: jest.fn(),
+        clearAll: jest.fn(),
+        contains: jest.fn(),
+        getAllKeys: jest.fn(() => []),
+    }),
+}));

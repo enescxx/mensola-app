@@ -369,7 +369,9 @@
         "content": "Content",
         "user": "user",
         "giveUp": "Give Up",
-        "remove": "Remove"
+        "remove": "Remove",
+        "networkErrorTitle": "Connection Error",
+        "networkErrorMessage": "Please check your internet connection."
     },
     "home": {
         "nowPlaying": "Now Playing",

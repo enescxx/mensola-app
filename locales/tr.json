@@ -369,7 +369,9 @@
         "content": "İçerik",
         "user": "kullanıcı",
         "giveUp": "Vazgeç",
-        "remove": "Kaldır"
+        "remove": "Kaldır",
+        "networkErrorTitle": "Bağlantı Hatası",
+        "networkErrorMessage": "Lütfen internet bağlantınızı kontrol edin."
     },
     "home": {
         "nowPlaying": "Vizyondakiler",
