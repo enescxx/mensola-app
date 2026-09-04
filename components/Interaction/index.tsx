@@ -85,7 +85,8 @@ export default function InteractionView({ data, disabled = true }: IInteractionV
                     <Text style={styles.comment}>{comment.content}</Text>
                 </Pressable>
 
-                <View style={styles.actionButtons}>
+                {/* Temporarily hidden for beta release */}
+                {/* <View style={styles.actionButtons}>
                     <TouchableOpacity style={styles.actionButton} activeOpacity={0.8} onPress={handleLikePress}>
                         <Ionicons name="heart-outline" size={14} color={Colors.primary} />
                         <Text style={styles.actionButtonText}>{likesCount}</Text>
@@ -94,7 +95,7 @@ export default function InteractionView({ data, disabled = true }: IInteractionV
                         <Ionicons name="chatbubble-outline" size={14} color={Colors.primary} />
                         <Text style={styles.actionButtonText}>{replyCount}</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </Pressable>
         </View>
     );

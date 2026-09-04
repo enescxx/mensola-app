@@ -34,14 +34,14 @@ describe("InteractionView Component", () => {
         mockRouterPush.mockClear();
     });
 
-    it("should render user info, comment content, and interaction metrics correctly", () => {
-        const { getByText } = render(<InteractionView data={mockData} />);
+    it("should render user info and comment content correctly", () => {
+        const { getByText, queryByText } = render(<InteractionView data={mockData} />);
 
         expect(getByText("John Doe")).toBeTruthy();
         expect(getByText("@johndoe")).toBeTruthy();
         expect(getByText("Bu gerçekten harika bir filmdi!")).toBeTruthy();
-        expect(getByText("15")).toBeTruthy();
-        expect(getByText("3")).toBeTruthy();
+        expect(queryByText("15")).toBeNull();
+        expect(queryByText("3")).toBeNull();
     });
 
     it("should navigate to user profile when user card is pressed", () => {
