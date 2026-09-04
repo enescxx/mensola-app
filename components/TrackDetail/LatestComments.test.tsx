@@ -28,4 +28,25 @@ describe("TrackDetail LatestComments Component", () => {
         fireEvent.press(getByTestId("tracks-rate-review-button"));
         expect(onRateReviewPress).toHaveBeenCalledTimes(1);
     });
+
+    it("should render comments and have See All button hidden for beta release", () => {
+        const mockInteractions = [
+            {
+                id: "int-1",
+                user: { id: "user-1", username: "bob", fullname: "Bob", avatar: "https://example.com/avatar.jpg" },
+                comment: { id: "c-1", content: "Harika bir parça!", date: "2026-08-11T10:00:00Z" },
+                rating: 8,
+                isLiked: true,
+            },
+        ];
+
+        const { getByText, queryByText } = render(
+            <LatestComments interactions={mockInteractions as any} commentsCount={1} />
+        );
+
+        expect(getByText("tracks.detail.latestComments")).toBeTruthy();
+        expect(getByText("Harika bir parça!")).toBeTruthy();
+        expect(queryByText("tracks.detail.seeAll")).toBeNull();
+        expect(mockRouterPush).not.toHaveBeenCalled();
+    });
 });

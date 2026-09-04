@@ -4,7 +4,7 @@ import { SearchHistoryProps } from "./types";
 import { TouchableOpacity, View, Alert } from "react-native";
 import MovieCard from "../MovieCard";
 import MusicCard from "../MusicCard";
-import UserCard from "../UserCard";
+import SearchUserRow from "./SearchUserRow";
 import { SpotifyTrackItem } from "@/types/spotify.types";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "./styles";
@@ -12,13 +12,11 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { MovieService } from "@/services/movie.service";
 import { TrackService } from "@/services/track.service";
 import { TmdbId, SpotifyId } from "@/types/common.types";
-import { useGlobalUser } from "@/context/AuthContext";
 import { useTranslation } from "react-i18next";
 
 export default function SearchHistory({ history, addSearch, removeSearch, clearHistory }: SearchHistoryProps) {
     const router = useRouter();
     const params = useLocalSearchParams();
-    const { user: currentUser } = useGlobalUser();
     const { t } = useTranslation();
     const isFavoriteMode = params.mode === "favorite";
 
@@ -94,17 +92,14 @@ export default function SearchHistory({ history, addSearch, removeSearch, clearH
                 case "user": {
                     const user = item.data;
                     return (
-                        <UserCard
+                        <SearchUserRow
                             user={{
                                 id: user.id,
                                 username: user.username,
                                 fullname: user.fullname,
                                 avatar: user.avatar,
                             }}
-                            currentUserId={currentUser?.id as any}
-                            onCardPress={() => handleSelectUser(user)}
-                            isFirst={true}
-                            isLast={true}
+                            onPress={() => handleSelectUser(user)}
                         />
                     );
                 }

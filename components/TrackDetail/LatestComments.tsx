@@ -46,9 +46,10 @@ export default function LatestComments({ interactions, commentsCount, onRateRevi
         <View style={styles.commentsContainer}>
             <View style={styles.commentsHeader}>
                 <Text style={styles.commentsTitle}>{t("tracks.detail.latestComments")}</Text>
-                <TouchableOpacity onPress={handleSeeAllPress}>
+                {/* Temporarily disabled for beta release */}
+                {/* <TouchableOpacity onPress={handleSeeAllPress}>
                     <Text style={styles.seeAll}>{t("tracks.detail.seeAll", { count: commentsCount || 0 })}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
             {commentInteractions.map((item) => (

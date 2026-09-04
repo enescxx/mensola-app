@@ -5,7 +5,7 @@ export const useTrackSearch = (query: string) => {
     const limit = 10;
     const trimmedQuery = query.trim();
 
-    const { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, error } =
+    const { data, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isFetching, isLoading, isError, error } =
         useInfiniteQuery({
             queryKey: ["tracks", "search", trimmedQuery],
             queryFn: async ({ pageParam = 1 }) => {
@@ -25,11 +25,11 @@ export const useTrackSearch = (query: string) => {
                 return allPages.length + 1;
             },
 
-            enabled: trimmedQuery.length >= 2,
+            enabled: trimmedQuery.length >= 1,
         });
 
     const tracks = data?.pages.flatMap((page) => page?.items ?? []) ?? [];
     const totalResults = data?.pages[0]?.totalResults ?? 0;
 
-    return { tracks, totalResults, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isLoading, isError, error };
+    return { tracks, totalResults, fetchNextPage, refetch, hasNextPage, isFetchingNextPage, isFetching, isLoading, isError, error };
 };

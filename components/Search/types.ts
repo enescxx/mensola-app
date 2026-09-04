@@ -33,3 +33,8 @@ export type SearchHistoryProps = {
     removeSearch: (item: SearchHistoryItem) => void;
     clearHistory: () => void;
 };
+export type SearchNoResultsProps = {
+    onRefresh?: () => void;
+    refreshing?: boolean;
+};
+

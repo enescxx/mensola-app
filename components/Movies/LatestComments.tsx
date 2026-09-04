@@ -49,9 +49,10 @@ export default function LatestComments({ interactions, onRateReviewPress }: Late
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>{t("movies.detail.latestComments")}</Text>
-                <TouchableOpacity onPress={handleSeeAllPress}>
+                {/* Temporarily disabled for beta release */}
+                {/* <TouchableOpacity onPress={handleSeeAllPress}>
                     <Text style={styles.seeAll}>{t("movies.detail.seeAll")}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
             {commentInteractions.map((item) => (

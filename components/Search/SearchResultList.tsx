@@ -6,15 +6,14 @@ import { SpotifyTrackItem } from "@/types/spotify.types";
 import MovieCard from "../MovieCard";
 import { TmdbMovieItem } from "@/types/tmdb.types";
 import { SearchResultListProps } from "./types";
-import UserCard from "../UserCard";
-import { UserService } from "@/services/user.service";
+import SearchUserRow from "./SearchUserRow";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Colors } from "@/constants/colors";
 import { MovieService } from "@/services/movie.service";
 import { TrackService } from "@/services/track.service";
 import { TmdbId, SpotifyId } from "@/types/common.types";
-import { useGlobalUser } from "@/context/AuthContext";
 import { useTranslation } from "react-i18next";
+import SearchNoResults from "./SearchNoResults";
 
 export default function SearchResultList({
     activeTab,
@@ -30,7 +29,6 @@ export default function SearchResultList({
 }: SearchResultListProps) {
     const router = useRouter();
     const params = useLocalSearchParams();
-    const { user: currentUser } = useGlobalUser();
     const { t } = useTranslation();
     const isFavoriteMode = params.mode === "favorite";
 
@@ -78,19 +76,6 @@ export default function SearchResultList({
         router.push(`/users/${user.id}`);
     };
 
-    const handleFollowUser = async (userId: string, isFollowing: boolean, isPending?: boolean) => {
-        try {
-            if (isFollowing || isPending) {
-                await UserService.unfollow(userId as any);
-            } else {
-                await UserService.follow(userId as any);
-            }
-            refetch(); // Tabloyu yenilemek en temizi
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     const renderSearchResults = ({ item }: { item: any }) => {
         switch (activeTab) {
             case "movie":
@@ -119,20 +104,14 @@ export default function SearchResultList({
             case "user":
                 const user = item as any;
                 return (
-                    <UserCard
+                    <SearchUserRow
                         user={{
                             id: user.id,
                             username: user.username,
                             fullname: user.fullname,
                             avatar: user.avatar,
-                            isFollowing: user.isFollowingByMe,
-                            isPending: user.isPendingByMe,
                         }}
-                        currentUserId={currentUser?.id as any}
-                        onCardPress={() => handleSelectUser(user)}
-                        onFollowPress={() => handleFollowUser(user.id, user.isFollowingByMe, user.isPendingByMe)}
-                        isFirst={true}
-                        isLast={true}
+                        onPress={() => handleSelectUser(user)}
                     />
                 );
         }
@@ -161,6 +140,18 @@ export default function SearchResultList({
                 </TouchableOpacity>
             </View>
         );
+    }
+
+    if (isLoading && results.length === 0) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={Colors.primary} />
+            </View>
+        );
+    }
+
+    if (!isLoading && results.length === 0) {
+        return <SearchNoResults onRefresh={refetch} refreshing={isLoading} />;
     }
 
     return (
